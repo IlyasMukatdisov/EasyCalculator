@@ -6,18 +6,16 @@ import android.content.Intent
 import android.content.res.ColorStateList
 import android.content.res.Configuration
 import android.graphics.Color
+import android.graphics.Insets
 import android.graphics.Point
 import android.os.Build
 import android.os.Bundle
 import android.text.SpannableStringBuilder
 import android.util.DisplayMetrics
+import android.util.Log
 import android.util.TypedValue
-import android.view.Display
-import android.view.View
-import android.view.ViewGroup
-import android.view.WindowManager
+import android.view.*
 import android.widget.*
-import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.cardview.widget.CardView
 import androidx.constraintlayout.widget.ConstraintLayout
@@ -32,10 +30,18 @@ import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.math.pow
 import kotlin.math.sqrt
+import android.view.WindowInsets
+
+import android.view.WindowMetrics
 
 
-class MainActivity : AppCompatActivity(), View.OnClickListener
-{
+class MainActivity : AppCompatActivity(), View.OnClickListener {
+
+    companion object {
+        private const val TAG = "MainActivity"
+    }
+
+
     private lateinit var llMain: LinearLayout
     private lateinit var llExpression: LinearLayout
     private lateinit var llButtons: LinearLayout
@@ -97,8 +103,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener
 
     private var currentNumDigits = 0
 
-    override fun onCreate(savedInstanceState: Bundle?)
-    {
+    override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
@@ -110,14 +115,10 @@ class MainActivity : AppCompatActivity(), View.OnClickListener
         setTextSizes()
         initPopUpMenu()
 
-        if (!isEmptyCustomization())
-        {
+        if (!isEmptyCustomization()) {
             customization()
-        }
-        else
-        {
-            if (isDarkThemeOn())
-            {
+        } else {
+            if (isDarkThemeOn()) {
                 btnZero.backgroundTintList =
                     ColorStateList.valueOf(ContextCompat.getColor(this, R.color.dark_gray))
                 btnOne.backgroundTintList =
@@ -190,8 +191,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener
             }
         }
 
-        if (isDarkThemeOn())
-        {
+        if (isDarkThemeOn()) {
             edtPrevExp.backgroundTintList =
                 ColorStateList.valueOf(ContextCompat.getColor(this, R.color.dark_gray))
             edtResult.backgroundTintList =
@@ -206,15 +206,36 @@ class MainActivity : AppCompatActivity(), View.OnClickListener
                 ColorStateList.valueOf(ContextCompat.getColor(this, R.color.dark_gray))
             clExp.backgroundTintList =
                 ColorStateList.valueOf(ContextCompat.getColor(this, R.color.dark_gray))
-            llButtons.backgroundTintList=
+            llButtons.backgroundTintList =
                 ColorStateList.valueOf(ContextCompat.getColor(this, R.color.black))
-            btnMenu.backgroundTintList=
+            btnMenu.backgroundTintList =
                 ColorStateList.valueOf(ContextCompat.getColor(this, R.color.dark_gray))
             btnMenu.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.ic_more_vert_white))
 
-            edtResult.setTextColor(ColorStateList.valueOf(ContextCompat.getColor(this, R.color.white)))
-            edtTempResult.setTextColor(ColorStateList.valueOf(ContextCompat.getColor(this, R.color.white)))
-            edtPrevExp.setTextColor(ColorStateList.valueOf(ContextCompat.getColor(this, R.color.white)))
+            edtResult.setTextColor(
+                ColorStateList.valueOf(
+                    ContextCompat.getColor(
+                        this,
+                        R.color.white
+                    )
+                )
+            )
+            edtTempResult.setTextColor(
+                ColorStateList.valueOf(
+                    ContextCompat.getColor(
+                        this,
+                        R.color.white
+                    )
+                )
+            )
+            edtPrevExp.setTextColor(
+                ColorStateList.valueOf(
+                    ContextCompat.getColor(
+                        this,
+                        R.color.white
+                    )
+                )
+            )
 
         }
 
@@ -222,9 +243,8 @@ class MainActivity : AppCompatActivity(), View.OnClickListener
         edtPrevExp.showSoftInputOnFocus = false
         edtTempResult.showSoftInputOnFocus = false
 
-        if (resources.configuration.orientation == Configuration.ORIENTATION_LANDSCAPE)
-        {
-           hideSystemUI()
+        if (resources.configuration.orientation == Configuration.ORIENTATION_LANDSCAPE) {
+            hideSystemUI()
         }
 
         getPrevTextSize()
@@ -232,31 +252,25 @@ class MainActivity : AppCompatActivity(), View.OnClickListener
 
     }
 
-    override fun onBackPressed()
-    {
+    override fun onBackPressed() {
         moveTaskToBack(true)
     }
 
-    private fun isAvailableToCalculate(): Boolean
-    {
+    private fun isAvailableToCalculate(): Boolean {
         var userExp = edtResult.text.toString()
 
         val textLength = userExp.length
         var openBracketCount = 0
         var closeBracketCount = 0
-        for (i in 0 until textLength)
-        {
-            if (userExp.substring(i, i + 1) == "(")
-            {
+        for (i in 0 until textLength) {
+            if (userExp.substring(i, i + 1) == "(") {
                 openBracketCount++
             }
-            if (userExp.substring(i, i + 1) == ")")
-            {
+            if (userExp.substring(i, i + 1) == ")") {
                 closeBracketCount++
             }
         }
-        while (openBracketCount > closeBracketCount)
-        {
+        while (openBracketCount > closeBracketCount) {
             userExp = "$userExp)"
             closeBracketCount++
         }
@@ -271,32 +285,23 @@ class MainActivity : AppCompatActivity(), View.OnClickListener
         val expression = Expression(userExp)
         val value = expression.calculate()
 
-        return if (value.isNaN())
-        {
+        return if (value.isNaN()) {
             edtTempResult.visibility = View.GONE
             false
-        }
-        else
-        {
+        } else {
             var temp = value.toString()
-            try
-            {
-                if (BigDecimal.valueOf(value).scale() > 8)
-                {
+            try {
+                if (BigDecimal.valueOf(value).scale() > 8) {
                     temp = String.format("%.7f", value)
                 }
 
-                if (!checkForDot(temp))
-                {
+                if (!checkForDot(temp)) {
                     temp = value.toInt().toString()
                 }
-                if (temp[temp.length - 1] == '0' && temp[temp.length - 2] == '.')
-                {
+                if (temp[temp.length - 1] == '0' && temp[temp.length - 2] == '.') {
                     temp = temp.removeRange(temp.length - 2, temp.length)
                 }
-            }
-            catch (e: java.lang.Exception)
-            {
+            } catch (e: java.lang.Exception) {
                 return false
             }
 
@@ -315,24 +320,21 @@ class MainActivity : AppCompatActivity(), View.OnClickListener
         }
     }
 
-    private fun isEmptyCustomization(): Boolean
-    {
+    private fun isEmptyCustomization(): Boolean {
         val dbHelper = CustomModelDatabaseHelper(this)
         return dbHelper.isCustomizationEmpty()
     }
 
-    private fun customization()
-    {
+    private fun customization() {
         val list = CustomModelDatabaseHelper(this).getAll()
         val numbersColor = list[0].numberButtonsColor
         val actionsColor = list[0].actionButtonsColor
         val acColor = list[0].acButtonColor
         val equalColor = list[0].equalButtonColor
-        val textColor=list[0].textColor
+        val textColor = list[0].textColor
         val shape = list[0].shape
 
-        if (numbersColor.isNotEmpty())
-        {
+        if (numbersColor.isNotEmpty()) {
             btnZero.backgroundTintList = ColorStateList.valueOf(Color.parseColor(numbersColor))
             btnOne.backgroundTintList = ColorStateList.valueOf(Color.parseColor(numbersColor))
             btnTwo.backgroundTintList = ColorStateList.valueOf(Color.parseColor(numbersColor))
@@ -348,8 +350,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener
                 ColorStateList.valueOf(Color.parseColor(numbersColor))
         }
 
-        if (actionsColor.isNotEmpty())
-        {
+        if (actionsColor.isNotEmpty()) {
             btnPlus.backgroundTintList = ColorStateList.valueOf(Color.parseColor(actionsColor))
             btnMinus.backgroundTintList = ColorStateList.valueOf(Color.parseColor(actionsColor))
             btnMulti.backgroundTintList = ColorStateList.valueOf(Color.parseColor(actionsColor))
@@ -378,22 +379,17 @@ class MainActivity : AppCompatActivity(), View.OnClickListener
         if (equalColor.isNotEmpty()) btnEqual.backgroundTintList =
             ColorStateList.valueOf(Color.parseColor(equalColor))
 
-        if(textColor.isNotEmpty()) setButtonsTextColor(textColor)
+        if (textColor.isNotEmpty()) setButtonsTextColor(textColor)
 
-        if (shape.isNotEmpty())
-        {
-            when (shape)
-            {
-                SHAPE_ROUNDED   ->
-                {
+        if (shape.isNotEmpty()) {
+            when (shape) {
+                SHAPE_ROUNDED -> {
                     setButtonsRounded()
                 }
-                SHAPE_RECTANGLE ->
-                {
+                SHAPE_RECTANGLE -> {
                     setButtonsRectangle()
                 }
-                SHAPE_CIRCLE    ->
-                {
+                SHAPE_CIRCLE -> {
                     setButtonsCircle()
                 }
             }
@@ -402,8 +398,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener
 
     }
 
-    private fun setButtonsTextColor(textColor : String)
-    {
+    private fun setButtonsTextColor(textColor: String) {
         btnZero.setTextColor(ColorStateList.valueOf(Color.parseColor(textColor)))
         btnOne.setTextColor(ColorStateList.valueOf(Color.parseColor(textColor)))
         btnTwo.setTextColor(ColorStateList.valueOf(Color.parseColor(textColor)))
@@ -424,7 +419,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener
         btnExp.setTextColor(ColorStateList.valueOf(Color.parseColor(textColor)))
         btnPi.setTextColor(ColorStateList.valueOf(Color.parseColor(textColor)))
         btnFact.setTextColor(ColorStateList.valueOf(Color.parseColor(textColor)))
-        btnSquareRoot.setTextColor( ColorStateList.valueOf(Color.parseColor(textColor)))
+        btnSquareRoot.setTextColor(ColorStateList.valueOf(Color.parseColor(textColor)))
         btnBrackets.setTextColor(ColorStateList.valueOf(Color.parseColor(textColor)))
         btnMore.setTextColor(ColorStateList.valueOf(Color.parseColor(textColor)))
         btnSin.setTextColor(ColorStateList.valueOf(Color.parseColor(textColor)))
@@ -441,8 +436,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener
 
     }
 
-    private fun setButtonsCircle()
-    {
+    private fun setButtonsCircle() {
         btnZero.background = ContextCompat.getDrawable(this, R.drawable.buttons_circle)
         btnOne.background = ContextCompat.getDrawable(this, R.drawable.buttons_circle)
         btnTwo.background = ContextCompat.getDrawable(this, R.drawable.buttons_circle)
@@ -480,8 +474,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener
         btnEqual.background = ContextCompat.getDrawable(this, R.drawable.buttons_circle)
     }
 
-    private fun setButtonsRectangle()
-    {
+    private fun setButtonsRectangle() {
         btnZero.background = ContextCompat.getDrawable(this, R.drawable.buttons_rectangle)
         btnOne.background = ContextCompat.getDrawable(this, R.drawable.buttons_rectangle)
         btnTwo.background = ContextCompat.getDrawable(this, R.drawable.buttons_rectangle)
@@ -519,8 +512,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener
         btnEqual.background = ContextCompat.getDrawable(this, R.drawable.buttons_rectangle)
     }
 
-    private fun setButtonsRounded()
-    {
+    private fun setButtonsRounded() {
         btnZero.background = ContextCompat.getDrawable(this, R.drawable.buttons_round)
         btnOne.background = ContextCompat.getDrawable(this, R.drawable.buttons_round)
         btnTwo.background = ContextCompat.getDrawable(this, R.drawable.buttons_round)
@@ -560,51 +552,45 @@ class MainActivity : AppCompatActivity(), View.OnClickListener
     }
 
     @SuppressLint("DiscouragedPrivateApi")
-    private fun initPopUpMenu()
-    {
+    private fun initPopUpMenu() {
         val popupMenu2 = PopupMenu(this, btnMenu)
         popupMenu2.inflate(R.menu.menu_main)
 
         popupMenu2.setOnMenuItemClickListener {
-            when (it.itemId)
-            {
-                R.id.menu_to_history      ->
-                {
+            when (it.itemId) {
+                R.id.menu_to_history -> {
                     val intent = Intent(this, HistoryActivity::class.java)
                     startActivity(intent)
                 }
-                R.id.menu_to_about        ->
-                {
+                R.id.menu_to_about -> {
                     val cdd = CustomDialog(this)
                     val lp = WindowManager.LayoutParams()
                     lp.copyFrom(cdd.window?.attributes)
                     lp.width = WindowManager.LayoutParams.MATCH_PARENT
                     lp.height = WindowManager.LayoutParams.WRAP_CONTENT
                     cdd.show()
-                    cdd.window?.attributes=lp
-                   /* AlertDialog.Builder(this).setTitle(resources.getString(R.string.app_name)).setMessage(
-                        resources.getString(R.string.about_text)+ BuildConfig.VERSION_NAME
-                    ).setPositiveButton(
-                        resources.getString(R.string.write_me)
-                    ) { _, _ ->
-                        val intent2 = Intent(
-                            this,
-                            WebViewActivity()::class.java
-                        )
-                        intent2.putExtra(EXTRA_URL, getString(R.string.my_telegram))
-                        startActivity(intent2)
-                    }.setNegativeButton(
-                        getString(R.string.btn_close)
-                    ) { _, _ -> }.show()*/
+                    cdd.window?.attributes = lp
+                    /* AlertDialog.Builder(this).setTitle(resources.getString(R.string.app_name)).setMessage(
+                         resources.getString(R.string.about_text)+ BuildConfig.VERSION_NAME
+                     ).setPositiveButton(
+                         resources.getString(R.string.write_me)
+                     ) { _, _ ->
+                         val intent2 = Intent(
+                             this,
+                             WebViewActivity()::class.java
+                         )
+                         intent2.putExtra(EXTRA_URL, getString(R.string.my_telegram))
+                         startActivity(intent2)
+                     }.setNegativeButton(
+                         getString(R.string.btn_close)
+                     ) { _, _ -> }.show()*/
                 }
-                R.id.menu_to_custom_color ->
-                {
+                R.id.menu_to_custom_color -> {
                     val intent = Intent(this, CustomizationActivity::class.java)
                     intent.putExtra(MAIN_TEXT_SIZE, btnTextSize)
                     startActivity(intent)
                 }
-                R.id.menu_to_graph        ->
-                {
+                R.id.menu_to_graph -> {
                     val intent = Intent(this, GraphActivity::class.java)
                     intent.putExtra(MAIN_TEXT_SIZE, btnTextSize)
                     startActivity(intent)
@@ -613,22 +599,16 @@ class MainActivity : AppCompatActivity(), View.OnClickListener
             false
         }
 
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q)
-        {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
             popupMenu2.setForceShowIcon(true)
-        }
-        else
-        {
-            try
-            {
+        } else {
+            try {
                 val popup = PopupMenu::class.java.getDeclaredField("mPopup")
                 popup.isAccessible = true
                 val menu = popup.get(popupMenu2)
                 menu.javaClass.getDeclaredMethod("setForceShowIcon", Boolean::class.java)
                     .invoke(menu, true)
-            }
-            catch (e: Exception)
-            {
+            } catch (e: Exception) {
 
             }
         }
@@ -640,8 +620,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener
     }
 
 
-    private fun getPrevTextSize()
-    {
+    private fun getPrevTextSize() {
         edtResultTextSize = edtResult.textSize / resources.displayMetrics.scaledDensity
         edtPrevTextSize = edtPrevExp.textSize / resources.displayMetrics.scaledDensity
     }
@@ -651,7 +630,8 @@ class MainActivity : AppCompatActivity(), View.OnClickListener
         WindowCompat.setDecorFitsSystemWindows(window, false)
         WindowInsetsControllerCompat(window, llMain).let { controller ->
             controller.hide(WindowInsetsCompat.Type.systemBars())
-            controller.systemBarsBehavior = WindowInsetsControllerCompat.BEHAVIOR_SHOW_TRANSIENT_BARS_BY_SWIPE
+            controller.systemBarsBehavior =
+                WindowInsetsControllerCompat.BEHAVIOR_SHOW_TRANSIENT_BARS_BY_SWIPE
         }
     }
 
@@ -666,42 +646,33 @@ class MainActivity : AppCompatActivity(), View.OnClickListener
                 or View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY)
     }*/
 
-    private fun setTextSizes()
-    {
+    private fun setTextSizes() {
         val dm = DisplayMetrics()
         windowManager.defaultDisplay.getMetrics(dm)
         val x = (mWidthPixels / dm.xdpi).toDouble().pow(2.0)
         val y = (mHeightPixels / dm.ydpi).toDouble().pow(2.0)
         val screenInches = sqrt(x + y)
 
-        if (screenInches < 5.0)
-        {
-            if (resources.configuration.orientation == Configuration.ORIENTATION_LANDSCAPE)
-            {
+        if (screenInches < 5.0) {
+            if (resources.configuration.orientation == Configuration.ORIENTATION_LANDSCAPE) {
                 if (mWidthPixels in 0..480) btnTextSize = 14 * resources.displayMetrics.density
                 if (mWidthPixels in 481..720) btnTextSize = 12 * resources.displayMetrics.density
                 if (mWidthPixels in 721..1080) btnTextSize = 10 * resources.displayMetrics.density
-            }
-            else
-            {
+            } else {
                 if (mWidthPixels in 0..480) btnTextSize = 12 * resources.displayMetrics.density
                 if (mWidthPixels in 481..720) btnTextSize = 10 * resources.displayMetrics.density
                 if (mWidthPixels in 721..1080) btnTextSize = 8 * resources.displayMetrics.density
             }
         }
 
-        if (screenInches in 5.0..7.0)
-        {
-            if (resources.configuration.orientation == Configuration.ORIENTATION_LANDSCAPE)
-            {
+        if (screenInches in 5.0..7.0) {
+            if (resources.configuration.orientation == Configuration.ORIENTATION_LANDSCAPE) {
                 if (mWidthPixels in 0..480) btnTextSize = 30 * resources.displayMetrics.density
-                if (mWidthPixels in 481..720) btnTextSize = 20 * resources.displayMetrics.density
-                if (mWidthPixels in 721..1080) btnTextSize = 13 * resources.displayMetrics.density
-                if (mWidthPixels in 1081..1600) btnTextSize = 11 * resources.displayMetrics.density
-                if (mWidthPixels in 1601..2560) btnTextSize = 9 * resources.displayMetrics.density
-            }
-            else
-            {
+                if (mWidthPixels in 481..720) btnTextSize = 22 * resources.displayMetrics.density
+                if (mWidthPixels in 721..1080) btnTextSize = 15 * resources.displayMetrics.density
+                if (mWidthPixels in 1081..1600) btnTextSize = 13 * resources.displayMetrics.density
+                if (mWidthPixels in 1601..2560) btnTextSize = 10 * resources.displayMetrics.density
+            } else {
                 if (mWidthPixels in 0..480) btnTextSize = 26 * resources.displayMetrics.density
                 if (mWidthPixels in 481..720) btnTextSize = 16 * resources.displayMetrics.density
                 if (mWidthPixels in 721..1080) btnTextSize = 10 * resources.displayMetrics.density
@@ -710,19 +681,15 @@ class MainActivity : AppCompatActivity(), View.OnClickListener
             }
         }
 
-        if (screenInches > 7.0)
-        {
-            if (resources.configuration.orientation == Configuration.ORIENTATION_LANDSCAPE)
-            {
+        if (screenInches > 7.0) {
+            if (resources.configuration.orientation == Configuration.ORIENTATION_LANDSCAPE) {
                 if (mWidthPixels in 0..480) btnTextSize = 28 * resources.displayMetrics.density
                 if (mWidthPixels in 481..720) btnTextSize = 22 * resources.displayMetrics.density
                 if (mWidthPixels in 721..1080) btnTextSize = 19 * resources.displayMetrics.density
                 if (mWidthPixels in 1081..1600) btnTextSize = 16 * resources.displayMetrics.density
                 if (mWidthPixels in 1601..2160) btnTextSize = 13 * resources.displayMetrics.density
                 if (mWidthPixels in 2560..4000) btnTextSize = 10 * resources.displayMetrics.density
-            }
-            else
-            {
+            } else {
                 if (mWidthPixels in 0..480) btnTextSize = 24 * resources.displayMetrics.density
                 if (mWidthPixels in 481..720) btnTextSize = 20 * resources.displayMetrics.density
                 if (mWidthPixels in 721..1080) btnTextSize = 16 * resources.displayMetrics.density
@@ -765,14 +732,11 @@ class MainActivity : AppCompatActivity(), View.OnClickListener
         btnLg.textSize = btnTextSize
         btnLn.textSize = btnTextSize
         btnRad.textSize = btnTextSize
-        if (resources.configuration.orientation == Configuration.ORIENTATION_LANDSCAPE)
-        {
+        if (resources.configuration.orientation == Configuration.ORIENTATION_LANDSCAPE) {
             edtResult.textSize = btnTextSize * 13 / 8
             edtPrevExp.textSize = btnTextSize * 4 / 3
             edtTempResult.textSize = btnTextSize * 4 / 3
-        }
-        else
-        {
+        } else {
             edtResult.textSize = btnTextSize * 5 / 2
             edtPrevExp.textSize = btnTextSize * 3 / 2
             edtTempResult.textSize = btnTextSize * 3 / 2
@@ -780,8 +744,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener
 
     }
 
-    private fun initViews()
-    {
+    private fun initViews() {
         btnAc = findViewById(R.id.btn_ac)
         btnBrackets = findViewById(R.id.btn_brackets)
         btnPercent = findViewById(R.id.btn_percent)
@@ -826,11 +789,10 @@ class MainActivity : AppCompatActivity(), View.OnClickListener
         llExpression = findViewById(R.id.ll_expression)
         cardView = findViewById(R.id.cardView)
         clExp = findViewById(R.id.cl_exp)
-        llButtons=findViewById(R.id.ll_buttons)
+        llButtons = findViewById(R.id.ll_buttons)
     }
 
-    private fun setOnClickListeners()
-    {
+    private fun setOnClickListeners() {
         btnZero.setOnClickListener(this)
         btnOne.setOnClickListener(this)
         btnTwo.setOnClickListener(this)
@@ -869,8 +831,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener
     }
 
 
-    private fun getRealDeviceSizeInPixels()
-    {
+    private fun getRealDeviceSizeInPixels() {
         val windowManager: WindowManager = windowManager
         val display: Display = windowManager.defaultDisplay
         val displayMetrics = DisplayMetrics()
@@ -882,36 +843,27 @@ class MainActivity : AppCompatActivity(), View.OnClickListener
         mHeightPixels = displayMetrics.heightPixels
 
         // includes window decorations (statusBar bar/menu bar)
-        try
-        {
+        try {
             mWidthPixels = Display::class.java.getMethod("getRawWidth").invoke(display) as Int
             mHeightPixels = Display::class.java.getMethod("getRawHeight").invoke(display) as Int
-        }
-        catch (ignored: java.lang.Exception)
-        {
+        } catch (ignored: java.lang.Exception) {
         }
 
         // includes window decorations (statusBar bar/menu bar)
-        try
-        {
+        try {
             val realSize = Point()
             Display::class.java.getMethod("getRealSize", Point::class.java)
                 .invoke(display, realSize)
             mWidthPixels = realSize.x
             mHeightPixels = realSize.y
-        }
-        catch (ignored: java.lang.Exception)
-        {
+        } catch (ignored: java.lang.Exception) {
         }
     }
 
 
-    override fun onClick(v: View?)
-    {
-        when (v?.id)
-        {
-            R.id.btn_zero        ->
-            {
+    override fun onClick(v: View?) {
+        when (v?.id) {
+            R.id.btn_zero -> {
                 if (isPrevEqual) clear()
                 updateEdtResult("0")
                 isPrevEqual = false
@@ -920,8 +872,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener
                 currentNumDigits++
             }
 
-            R.id.btn_one         ->
-            {
+            R.id.btn_one -> {
                 if (isPrevEqual) clear()
                 updateEdtResult("1")
                 isPrevEqual = false
@@ -930,8 +881,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener
                 currentNumDigits++
             }
 
-            R.id.btn_two         ->
-            {
+            R.id.btn_two -> {
                 if (isPrevEqual) clear()
                 updateEdtResult("2")
                 isPrevEqual = false
@@ -940,8 +890,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener
                 currentNumDigits++
             }
 
-            R.id.btn_three       ->
-            {
+            R.id.btn_three -> {
                 if (isPrevEqual) clear()
                 updateEdtResult("3")
                 isPrevEqual = false
@@ -950,8 +899,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener
                 currentNumDigits++
             }
 
-            R.id.btn_four        ->
-            {
+            R.id.btn_four -> {
                 if (isPrevEqual) clear()
                 updateEdtResult("4")
                 isPrevEqual = false
@@ -960,8 +908,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener
                 currentNumDigits++
             }
 
-            R.id.btn_five        ->
-            {
+            R.id.btn_five -> {
                 if (isPrevEqual) clear()
                 updateEdtResult("5")
                 isPrevEqual = false
@@ -970,8 +917,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener
                 currentNumDigits++
             }
 
-            R.id.btn_six         ->
-            {
+            R.id.btn_six -> {
                 if (isPrevEqual) clear()
                 updateEdtResult("6")
                 isPrevEqual = false
@@ -980,8 +926,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener
                 currentNumDigits++
             }
 
-            R.id.btn_seven       ->
-            {
+            R.id.btn_seven -> {
                 if (isPrevEqual) clear()
                 updateEdtResult("7")
                 isPrevEqual = false
@@ -990,8 +935,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener
                 currentNumDigits++
             }
 
-            R.id.btn_eight       ->
-            {
+            R.id.btn_eight -> {
                 if (isPrevEqual) clear()
                 updateEdtResult("8")
                 isPrevEqual = false
@@ -1000,8 +944,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener
                 currentNumDigits++
             }
 
-            R.id.btn_nine        ->
-            {
+            R.id.btn_nine -> {
                 if (isPrevEqual) clear()
                 updateEdtResult("9")
                 isPrevEqual = false
@@ -1010,10 +953,8 @@ class MainActivity : AppCompatActivity(), View.OnClickListener
                 currentNumDigits++
             }
 
-            R.id.btn_percent     ->
-            {
-                if (checkForOperator())
-                {
+            R.id.btn_percent -> {
+                if (checkForOperator()) {
                     backspaceFun()
                 }
                 updateEdtResult("%")
@@ -1024,10 +965,8 @@ class MainActivity : AppCompatActivity(), View.OnClickListener
                 currentNumDigits = 0
             }
 
-            R.id.btn_division    ->
-            {
-                if (checkForOperator())
-                {
+            R.id.btn_division -> {
+                if (checkForOperator()) {
                     backspaceFun()
                 }
                 updateEdtResult("÷")
@@ -1039,10 +978,8 @@ class MainActivity : AppCompatActivity(), View.OnClickListener
                 currentNumDigits = 0
             }
 
-            R.id.btn_multi       ->
-            {
-                if (checkForOperator())
-                {
+            R.id.btn_multi -> {
+                if (checkForOperator()) {
                     backspaceFun()
                 }
                 updateEdtResult("×")
@@ -1054,10 +991,8 @@ class MainActivity : AppCompatActivity(), View.OnClickListener
                 currentNumDigits = 0
             }
 
-            R.id.btn_plus        ->
-            {
-                if (checkForOperator())
-                {
+            R.id.btn_plus -> {
+                if (checkForOperator()) {
                     backspaceFun()
                 }
                 updateEdtResult("+")
@@ -1069,10 +1004,8 @@ class MainActivity : AppCompatActivity(), View.OnClickListener
                 currentNumDigits = 0
             }
 
-            R.id.btn_minus       ->
-            {
-                if (checkForOperator())
-                {
+            R.id.btn_minus -> {
+                if (checkForOperator()) {
                     backspaceFun()
                 }
                 updateEdtResult("-")
@@ -1084,8 +1017,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener
                 currentNumDigits = 0
             }
 
-            R.id.btn_dot         ->
-            {
+            R.id.btn_dot -> {
                 if (!checkForDot()) updateEdtResult(".")
                 isPrevEqual = false
                 isAvailableToCalculate()
@@ -1093,8 +1025,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener
             }
 
 
-            R.id.btn_ac          ->
-            {
+            R.id.btn_ac -> {
                 clear()
 
                 isPrevEqual = false
@@ -1103,8 +1034,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener
                 currentNumDigits = 0
             }
 
-            R.id.btn_backspace   ->
-            {
+            R.id.btn_backspace -> {
 
                 backspaceFun()
                 isPrevEqual = false
@@ -1113,8 +1043,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener
 
             }
 
-            R.id.btn_brackets    ->
-            {
+            R.id.btn_brackets -> {
                 if (isPrevEqual) clear()
                 addBrackets()
                 isPrevEqual = false
@@ -1123,25 +1052,17 @@ class MainActivity : AppCompatActivity(), View.OnClickListener
                 currentNumDigits = 0
             }
 
-            R.id.btn_equal       ->
-            {
-                if (edtPrevExp.text.toString() == "")
-                {
+            R.id.btn_equal -> {
+                if (edtPrevExp.text.toString() == "") {
                     updateEdtPrevExp(edtResult.text.toString())
-                }
-                else
-                {
-                    if (isPrevEqual && prevOperator != "")
-                    {
+                } else {
+                    if (isPrevEqual && prevOperator != "") {
                         prevOperatorIndex = edtPrevExp.length() - 2
                         val tvText = edtPrevExp.text.toString().substring(prevOperatorIndex)
                         updateEdtPrevExp(tvText)
                         updateEdtResult(tvText)
-                    }
-                    else
-                    {
-                        if (checkForOperator())
-                        {
+                    } else {
+                        if (checkForOperator()) {
                             val temp = edtResult.text.toString().substring(prevEqualIndex)
                             updateEdtPrevExp(temp)
                         }
@@ -1154,8 +1075,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener
                 isPrevEqual = true
             }
 
-            R.id.btn_square_root ->
-            {
+            R.id.btn_square_root -> {
                 if (isPrevEqual) clear()
                 updateEdtResult("√(")
                 prevOperator = ""
@@ -1165,10 +1085,8 @@ class MainActivity : AppCompatActivity(), View.OnClickListener
                 currentNumDigits = 0
             }
 
-            R.id.btn_exp         ->
-            {
-                if (checkForOperator())
-                {
+            R.id.btn_exp -> {
+                if (checkForOperator()) {
                     backspaceFun()
                 }
                 updateEdtResult("^")
@@ -1179,11 +1097,9 @@ class MainActivity : AppCompatActivity(), View.OnClickListener
                 currentNumDigits = 0
             }
 
-            R.id.btn_pi          ->
-            {
+            R.id.btn_pi -> {
                 if (isPrevEqual) clear()
-                if (edtResult.text.isNotEmpty())
-                {
+                if (edtResult.text.isNotEmpty()) {
                     if (edtResult.text[edtResult.text.toString().length - 1] == 'e'
                         || edtResult.text[edtResult.text.toString().length - 1] == 'π'
                     ) return
@@ -1195,10 +1111,8 @@ class MainActivity : AppCompatActivity(), View.OnClickListener
                 currentNumDigits = 0
             }
 
-            R.id.btn_fact        ->
-            {
-                if (checkForOperator())
-                {
+            R.id.btn_fact -> {
+                if (checkForOperator()) {
                     backspaceFun()
                 }
                 updateEdtResult("!")
@@ -1209,15 +1123,13 @@ class MainActivity : AppCompatActivity(), View.OnClickListener
                 currentNumDigits = 0
             }
 
-            R.id.btn_more        ->
-            {
+            R.id.btn_more -> {
                 isExpanded = !isExpanded
                 expand()
                 isPrevEqual = false
 
             }
-            R.id.btn_sin         ->
-            {
+            R.id.btn_sin -> {
                 if (isPrevEqual) clear()
                 updateEdtResult("sin(")
                 prevOperator = ""
@@ -1227,8 +1139,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener
                 currentNumDigits = 0
             }
 
-            R.id.btn_cos         ->
-            {
+            R.id.btn_cos -> {
                 if (isPrevEqual) clear()
                 updateEdtResult("cos(")
                 prevOperator = ""
@@ -1238,8 +1149,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener
                 currentNumDigits = 0
             }
 
-            R.id.btn_tan         ->
-            {
+            R.id.btn_tan -> {
                 if (isPrevEqual) clear()
                 updateEdtResult("tan(")
                 prevOperator = ""
@@ -1249,12 +1159,10 @@ class MainActivity : AppCompatActivity(), View.OnClickListener
                 currentNumDigits = 0
             }
 
-            R.id.btn_e           ->
-            {
+            R.id.btn_e -> {
                 if (isPrevEqual) clear()
 
-                if (edtResult.text.isNotEmpty())
-                {
+                if (edtResult.text.isNotEmpty()) {
                     if (edtResult.text[edtResult.text.toString().length - 1] == 'e'
                         || edtResult.text[edtResult.text.toString().length - 1] == 'π'
                     ) return
@@ -1266,8 +1174,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener
                 currentNumDigits = 0
             }
 
-            R.id.btn_log2        ->
-            {
+            R.id.btn_log2 -> {
                 if (isPrevEqual) clear()
                 updateEdtResult("log2(")
                 prevOperator = ""
@@ -1277,8 +1184,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener
                 currentNumDigits = 0
             }
 
-            R.id.btn_log10       ->
-            {
+            R.id.btn_log10 -> {
                 if (isPrevEqual) clear()
                 updateEdtResult("log10(")
                 prevOperator = ""
@@ -1288,8 +1194,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener
                 currentNumDigits = 0
             }
 
-            R.id.btn_ln          ->
-            {
+            R.id.btn_ln -> {
                 if (isPrevEqual) clear()
                 updateEdtResult("ln(")
                 prevOperator = ""
@@ -1299,8 +1204,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener
                 currentNumDigits = 0
             }
 
-            R.id.btn_rad         ->
-            {
+            R.id.btn_rad -> {
                 if (isPrevEqual) clear()
                 updateEdtResult("rad(")
                 prevOperator = ""
@@ -1313,8 +1217,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener
         }
     }
 
-    private fun clear()
-    {
+    private fun clear() {
         edtResult.setText("")
         edtPrevExp.setText("")
         edtTempResult.setText("")
@@ -1324,19 +1227,15 @@ class MainActivity : AppCompatActivity(), View.OnClickListener
     }
 
 
-    private fun expand()
-    {
+    private fun expand() {
         /*val transition = TransitionInflater.from(this).inflateTransition(R.transition.transition)*/
-        if (isExpanded)
-        {
+        if (isExpanded) {
             btnMore.text = getString(R.string.btn_more_expanded)
             /*TransitionManager.beginDelayedTransition(sinLinLay, transition)
             TransitionManager.beginDelayedTransition(logLinLay, transition)*/
             sinLinLay.visibility = View.VISIBLE
             logLinLay.visibility = View.VISIBLE
-        }
-        else
-        {
+        } else {
             btnMore.text = getString(R.string.btn_more_not_expanded)
             /*TransitionManager.beginDelayedTransition(sinLinLay, transition)
             TransitionManager.beginDelayedTransition(logLinLay, transition)*/
@@ -1345,8 +1244,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener
         }
     }
 
-    private fun calculateFun()
-    {
+    private fun calculateFun() {
         edtTempResult.visibility = View.GONE
         checkForClosedBrackets()
         var userExp = edtResult.text.toString()
@@ -1364,87 +1262,69 @@ class MainActivity : AppCompatActivity(), View.OnClickListener
 
         var result = value.toString()
 
-        try
-        {
-            if (BigDecimal.valueOf(value).scale() > 8)
-            {
+        try {
+            if (BigDecimal.valueOf(value).scale() > 8) {
                 result = String.format("%.7f", value)
             }
-        }
-        catch (e: Exception)
-        {
+        } catch (e: Exception) {
 
         }
 
-        if (result[result.length - 1] == '0' && result[result.length - 2] == '.')
-        {
+        if (result[result.length - 1] == '0' && result[result.length - 2] == '.') {
             result = result.removeRange(result.length - 2, result.length)
         }
         edtResult.setText(result)
         edtResult.setSelection(result.length)
         prevEqualIndex = edtResult.text.lastIndex
 
-        if (result != "Infinity" && result != "NaN")
-        {
+        if (result != "Infinity" && result != "NaN") {
             val sdf = SimpleDateFormat("yyyy-MM-dd", Locale.US)
             val date: String = sdf.format(Date())
             dbHelper.addOne(dbPrevExp, result, date)
         }
     }
 
-    private fun checkForClosedBrackets()
-    {
+    private fun checkForClosedBrackets() {
         val textLength = edtResult.text.length
         var openBracketCount = 0
         var closeBracketCount = 0
-        for (i in 0 until textLength)
-        {
-            if (edtResult.text.toString().substring(i, i + 1) == "(")
-            {
+        for (i in 0 until textLength) {
+            if (edtResult.text.toString().substring(i, i + 1) == "(") {
                 openBracketCount++
             }
-            if (edtResult.text.toString().substring(i, i + 1) == ")")
-            {
+            if (edtResult.text.toString().substring(i, i + 1) == ")") {
                 closeBracketCount++
             }
         }
-        while (openBracketCount > closeBracketCount)
-        {
+        while (openBracketCount > closeBracketCount) {
             updateEdtResult(")")
             closeBracketCount++
         }
     }
 
-    private fun checkForDot(): Boolean
-    {
-        for (element in edtResult.text.toString())
-        {
+    private fun checkForDot(): Boolean {
+        for (element in edtResult.text.toString()) {
             if (element == '.') return true
         }
         return false
     }
 
 
-    private fun checkForDot(s: String): Boolean
-    {
-        for (element in s)
-        {
+    private fun checkForDot(s: String): Boolean {
+        for (element in s) {
             if (element == '.') return true
         }
         return false
     }
 
 
-    private fun checkForOperator(): Boolean
-    {
+    private fun checkForOperator(): Boolean {
         val cursor = edtResult.selectionStart
-        if (cursor == 0)
-        {
+        if (cursor == 0) {
             return false
         }
         var needToChange = false
-        when (edtResult.text.toString()[cursor - 1])
-        {
+        when (edtResult.text.toString()[cursor - 1]) {
             '+' -> needToChange = true
             '-' -> needToChange = true
             '×' -> needToChange = true
@@ -1456,10 +1336,8 @@ class MainActivity : AppCompatActivity(), View.OnClickListener
         return needToChange
     }
 
-    private fun checkForOperator(c: Char): Boolean
-    {
-        when (c)
-        {
+    private fun checkForOperator(c: Char): Boolean {
+        when (c) {
             '+' -> return true
             '-' -> return true
             '×' -> return true
@@ -1476,15 +1354,13 @@ class MainActivity : AppCompatActivity(), View.OnClickListener
         return false
     }
 
-    private fun addBrackets()
-    {
+    private fun addBrackets() {
         val cursorPos = edtResult.selectionStart
         val textLength = edtResult.text.length
         var openBracketCount = 0
         var closeBracketCount = 0
 
-        if (textLength == 0)
-        {
+        if (textLength == 0) {
             updateEdtResult("(")
             edtResult.setSelection(cursorPos + 1)
             return
@@ -1494,63 +1370,65 @@ class MainActivity : AppCompatActivity(), View.OnClickListener
             edtResult.text.toString()[cursorPos - 1] == '×' || edtResult.text.toString()[cursorPos - 1] == '÷' ||
             edtResult.text.toString()[cursorPos - 1] == '^' || edtResult.text.toString()[cursorPos - 1] == '!' ||
             edtResult.text.toString()[cursorPos - 1] == '√'
-        )
-        {
+        ) {
             updateEdtResult("(")
             edtResult.setSelection(cursorPos + 1)
             return
         }
 
-        for (i in 0 until cursorPos)
-        {
-            if (edtResult.text.toString().substring(i, i + 1) == "(")
-            {
+        for (i in 0 until cursorPos) {
+            if (edtResult.text.toString().substring(i, i + 1) == "(") {
                 openBracketCount++
             }
-            if (edtResult.text.toString().substring(i, i + 1) == ")")
-            {
+            if (edtResult.text.toString().substring(i, i + 1) == ")") {
                 closeBracketCount++
             }
         }
 
         if (openBracketCount == closeBracketCount || edtResult.text.toString()
                 .substring(textLength - 1, textLength) == "("
-        )
-        {
+        ) {
             if (updateEdtResult("(")) edtResult.setSelection(cursorPos + 1)
-        }
-        else if (closeBracketCount < openBracketCount && edtResult.text.toString()
+        } else if (closeBracketCount < openBracketCount && edtResult.text.toString()
                 .substring(textLength - 1, textLength) != "("
-        )
-        {
+        ) {
             if (updateEdtResult(")")) edtResult.setSelection(cursorPos + 1)
         }
 
     }
 
-    private fun updateEdtResult(strToAdd: String): Boolean
-    {
+    private fun updateEdtResult(strToAdd: String): Boolean {
 
         if (strToAdd.length == 1 && !checkForOperator(
                 strToAdd[0]
             ) && currentNumDigits >= MAX_DIGITS
-        )
-        {
-            return false
-        }
-        /*if (edtResult.length() + strToAdd.length >= 32 && resources.configuration.orientation == android.content.res.Configuration.ORIENTATION_LANDSCAPE)
-        {
+        ) {
             return false
         }
 
-        if (edtResult.length() + strToAdd.length >= 24 && resources.configuration.orientation == android.content.res.Configuration.ORIENTATION_PORTRAIT)
-        {
-            return false
-        }*/
+        var textSize = edtResult.textSize / resources.displayMetrics.scaledDensity
+
+        Log.i(
+            TAG,
+            "updateEdtResult: ${(edtResult.text.length + strToAdd.length) * edtResult.textSize}"
+        )
+
+        if ((edtResult.text.length + strToAdd.length) * textSize > cardView.width && textSize > 22) {
+            for (i in 0..strToAdd.length) {
+                textSize -= if (resources.configuration.orientation == Configuration.ORIENTATION_PORTRAIT) 2
+                else 1
+                edtResult.setTextSize(TypedValue.COMPLEX_UNIT_SP, textSize)
+                if (textSize < 22) {
+                    break
+                }
+            }
+        } else {
+            if ((edtResult.text.length) * textSize > cardView.width) return false
+        }
+
         var prevString = edtResult.text.toString()
 
-        if (prevString == "NaN" || prevString == "Infinity")
-        {
+        if (prevString == "NaN" || prevString == "Infinity") {
             prevString = ""
             clear()
         }
@@ -1590,8 +1468,19 @@ class MainActivity : AppCompatActivity(), View.OnClickListener
 
     }
 
-    private fun updateEdtPrevExp(S: String)
-    {
+    private fun updateEdtPrevExp(S: String) {
+
+        var textSize = edtPrevExp.textSize / resources.displayMetrics.scaledDensity
+
+        Log.i(TAG, "updateEdtResult: ${(edtPrevExp.text.length + S.length) * edtPrevExp.textSize}")
+
+        if ((edtPrevExp.text.length + S.length) * textSize > cardView.width) {
+            for (i in 0..S.length) {
+                textSize -= 2
+                edtPrevExp.setTextSize(TypedValue.COMPLEX_UNIT_SP, textSize)
+            }
+        }
+
         var prevStr = edtPrevExp.text.toString()
         prevStr += S
         edtPrevExp.setText(prevStr)
@@ -1605,10 +1494,8 @@ class MainActivity : AppCompatActivity(), View.OnClickListener
     }
 
 
-    private fun backspaceFun()
-    {
-        if (edtResult.length() == 0)
-        {
+    private fun backspaceFun() {
+        if (edtResult.length() == 0) {
             return
         }
 
@@ -1617,43 +1504,35 @@ class MainActivity : AppCompatActivity(), View.OnClickListener
 
         val lastChar = edtResult.text.toString()[textLength - 1]
 
-        if (edtResult.length() >= 3)
-        {
+        if (edtResult.length() >= 3) {
             val a = edtResult.text.toString().substring(edtResult.text.lastIndex - 2)
-            if (a == "ln(")
-            {
+            if (a == "ln(") {
                 edtResult.text.replace(edtResult.text.lastIndex - 2, edtResult.text.length, "")
                 edtResult.setSelection(cursorPos - 3)
                 cursorPos -= 3
             }
 
-            if (edtResult.length() >= 4)
-            {
+            if (edtResult.length() >= 4) {
                 val b = edtResult.text.toString().substring(edtResult.text.lastIndex - 3)
-                if (b == "sin(" || b == "cos(" || b == "tan(" || b == "rad(")
-                {
+                if (b == "sin(" || b == "cos(" || b == "tan(" || b == "rad(") {
                     edtResult.text.replace(edtResult.text.lastIndex - 3, edtResult.text.length, "")
                     edtResult.setSelection(cursorPos - 4)
                     cursorPos -= 4
                 }
             }
 
-            if (textLength >= 5)
-            {
+            if (textLength >= 5) {
                 val b = edtResult.text.toString().substring(edtResult.text.lastIndex - 4)
-                if ("log2(" in b)
-                {
+                if ("log2(" in b) {
                     edtResult.text.replace(edtResult.text.lastIndex - 4, edtResult.text.length, "")
                     edtResult.setSelection(cursorPos - 5)
                     cursorPos -= 5
                 }
             }
 
-            if (textLength >= 6)
-            {
+            if (textLength >= 6) {
                 val c = edtResult.text.toString().substring(edtResult.text.lastIndex - 5)
-                if ("log10(" in c)
-                {
+                if ("log10(" in c) {
                     edtResult.text.replace(edtResult.text.lastIndex - 5, edtResult.text.length, "")
                     edtResult.setSelection(cursorPos - 6)
                     cursorPos -= 6
@@ -1667,13 +1546,11 @@ class MainActivity : AppCompatActivity(), View.OnClickListener
 
 
 
-        if (cursorPos != 0 && textLength != 0)
-        {
+        if (cursorPos != 0 && textLength != 0) {
             val selection: SpannableStringBuilder =
                 edtResult.text as SpannableStringBuilder
             selection.replace(cursorPos - 1, cursorPos, "")
-            if (!checkForOperator(lastChar))
-            {
+            if (!checkForOperator(lastChar)) {
                 currentNumDigits--
             }
             edtResult.text = selection
@@ -1701,8 +1578,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener
     }
 
 
-    private fun Context.isDarkThemeOn(): Boolean
-    {
+    private fun Context.isDarkThemeOn(): Boolean {
         return resources.configuration.uiMode and
                 Configuration.UI_MODE_NIGHT_MASK == Configuration.UI_MODE_NIGHT_YES
     }
