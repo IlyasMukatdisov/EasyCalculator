@@ -1,0 +1,237 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/cc_parent"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".CustomizationActivity">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/cc_content"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_cc_title"
+        app:layout_constraintVertical_bias="0.01999998">
+
+        <TextView
+            android:id="@+id/tv_cc_numbers_color"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="32dp"
+            android:text="@string/number_buttons_color"
+            android:textColor="@color/black"
+            android:textSize="16sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <Button
+            android:id="@+id/btn_numbers_color"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="50dp"
+            android:background="@drawable/buttons_round"
+            android:text="@string/btn_zero"
+            android:textColor="@color/black"
+            app:layout_constraintBottom_toBottomOf="@+id/tv_cc_numbers_color"
+            app:layout_constraintStart_toEndOf="@+id/tv_cc_numbers_color"
+            app:layout_constraintTop_toTopOf="@+id/tv_cc_numbers_color" />
+
+        <Button
+            android:id="@+id/btn_ac_color"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/buttons_round"
+            android:text="@string/btn_ac"
+            android:textColor="@color/black"
+            app:layout_constraintBottom_toBottomOf="@+id/tv_cc_ac_color"
+            app:layout_constraintEnd_toEndOf="@+id/btn_actions_color"
+            app:layout_constraintStart_toStartOf="@+id/btn_actions_color"
+            app:layout_constraintTop_toTopOf="@+id/tv_cc_ac_color" />
+
+        <Button
+            android:id="@+id/btn_equal_color"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/buttons_round"
+            android:text="@string/btn_equal"
+            android:textColor="@color/black"
+            app:layout_constraintBottom_toBottomOf="@+id/tv_cc_equal_color"
+            app:layout_constraintEnd_toEndOf="@+id/btn_ac_color"
+            app:layout_constraintStart_toStartOf="@+id/btn_ac_color"
+            app:layout_constraintTop_toTopOf="@+id/tv_cc_equal_color" />
+
+        <TextView
+            android:id="@+id/tv_cc_actions_color"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="50dp"
+            android:text="@string/action_buttons_color"
+            android:textColor="@color/black"
+            android:textSize="16sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_cc_numbers_color" />
+
+        <TextView
+            android:id="@+id/tv_cc_equal_color"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="50dp"
+            android:text="@string/equal_button_color"
+            android:textColor="@color/black"
+            android:textSize="16sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_cc_ac_color" />
+
+        <Button
+            android:id="@+id/btn_actions_color"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/buttons_round"
+            android:text="@string/btn_plus"
+            android:textColor="@color/black"
+            app:layout_constraintBottom_toBottomOf="@+id/tv_cc_actions_color"
+            app:layout_constraintEnd_toEndOf="@+id/btn_numbers_color"
+            app:layout_constraintStart_toStartOf="@+id/btn_numbers_color"
+            app:layout_constraintTop_toTopOf="@+id/tv_cc_actions_color" />
+
+        <TextView
+            android:id="@+id/tv_cc_ac_color"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="50dp"
+            android:text="@string/ac_button_color"
+            android:textColor="@color/black"
+            android:textSize="16sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_cc_actions_color" />
+
+
+        <TextView
+            android:id="@+id/tv_buttons_text_color"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="50dp"
+            android:text="@string/buttons_text_color"
+            android:textColor="@color/black"
+            android:textSize="16sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_cc_equal_color" />
+
+        <Button
+            android:id="@+id/btn_text_color"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/buttons_round"
+            android:text=""
+            android:textColor="@color/black"
+            app:layout_constraintBottom_toBottomOf="@+id/tv_buttons_text_color"
+            app:layout_constraintEnd_toEndOf="@+id/btn_ac_color"
+            app:layout_constraintStart_toStartOf="@+id/btn_ac_color"
+            app:layout_constraintTop_toTopOf="@+id/tv_buttons_text_color" />
+
+        <RadioGroup
+            android:id="@+id/radio_group_shapes"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="50dp"
+            android:orientation="horizontal"
+            app:layout_constraintEnd_toEndOf="@+id/btn_equal_color"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_buttons_text_color">
+
+            <com.google.android.material.radiobutton.MaterialRadioButton
+                android:id="@+id/radio_rounded"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="-10dp"
+                android:gravity="center" />
+
+            <Button
+                android:id="@+id/btn_rounded"
+                android:layout_width="50dp"
+                android:layout_height="match_parent"
+                android:background="@drawable/buttons_round"
+                android:clickable="false"
+                android:text="@string/btn_zero"
+                android:textColor="@color/black" />
+
+            <com.google.android.material.radiobutton.MaterialRadioButton
+                android:id="@+id/radio_rectangle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="5dp"
+                android:layout_marginEnd="-10dp" />
+
+            <Button
+                android:id="@+id/btn_rectangle"
+                android:layout_width="50dp"
+                android:layout_height="wrap_content"
+                android:background="@drawable/buttons_rectangle"
+                android:clickable="false"
+                android:text="@string/btn_zero"
+                android:textColor="@color/black" />
+
+            <com.google.android.material.radiobutton.MaterialRadioButton
+                android:id="@+id/radio_circle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="5dp"
+                android:layout_marginEnd="-10dp" />
+
+            <Button
+                android:id="@+id/btn_circle"
+                android:layout_width="50dp"
+                android:layout_height="wrap_content"
+                android:background="@drawable/buttons_circle"
+                android:clickable="false"
+                android:text="@string/btn_zero"
+                android:textColor="@color/black" />
+
+        </RadioGroup>
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <TextView
+        android:id="@+id/tv_cc_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/your_custom_theme"
+        android:textColor="@color/black"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.100000024" />
+
+    <Button
+        android:id="@+id/btn_cc_save"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="24dp"
+        android:alpha="0.5"
+        android:background="@drawable/buttons_round"
+        android:enabled="false"
+        android:text="@string/btn_save"
+        android:textAllCaps="false"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <ImageButton
+        android:id="@+id/btn_cc_more"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/white"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/ic_more_vert_black"
+        android:contentDescription="@string/btn_menu" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

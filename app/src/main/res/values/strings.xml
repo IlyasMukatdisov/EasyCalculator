@@ -1,0 +1,87 @@
+<resources>
+    <string name="app_name">Easy Calculator</string>
+    <string name="btn_ac">AC</string>
+    <string name="btn_brackets">( )</string>
+    <string name="btn_percent">%</string>
+    <string name="btn_division">÷</string>
+    <string name="btn_seven">7</string>
+    <string name="btn_eight">8</string>
+    <string name="btn_nine">9</string>
+    <string name="btn_multi">×</string>
+    <string name="btn_four">4</string>
+    <string name="btn_five">5</string>
+    <string name="btn_six">6</string>
+    <string name="btn_minus">−</string>
+    <string name="btn_one">1</string>
+    <string name="btn_two">2</string>
+    <string name="btn_three">3</string>
+    <string name="btn_plus">+</string>
+    <string name="btn_zero">0</string>
+    <string name="btn_dot">.</string>
+    <string name="btn_equal">=</string>
+    <string name="btn_square_root">√</string>
+    <string name="btn_pi">π</string>
+    <string name="btn_x">x</string>
+    <string name="btn_exp">^</string>
+    <string name="btn_more_not_expanded">↓</string>
+    <string name="btn_more_expanded">↑</string>
+    <string name="btn_fact">!</string>
+    <string name="cant_calculate">Can\'t calculate</string>
+    <string name="btn_sin">sin</string>
+    <string name="btn_cos">cos</string>
+    <string name="btn_tan">tan</string>
+    <string name="btn_e">e</string>
+    <string name="btn_lg">lg</string>
+    <string name="btn_ln">ln</string>
+    <string name="btn_rad">rad</string>
+    <string name="btn_log2">log2</string>
+    <string name="btn_backspace"><![CDATA[<−]]></string>
+    <string name="no_history">No History</string>
+    <string name="my_telegram">https://t.me/MainActivity_kt</string>
+    <string name="btn_arc_sin">asin</string>
+    <string name="btn_arc_cos">acos</string>
+    <string name="btn_arc_tan">atan</string>
+    <string name="number_buttons_color">Number buttons color:</string>
+    <string name="action_buttons_color">Action buttons color:</string>
+    <string name="equal_button_color">\'=\' button color:</string>
+    <string name="ac_button_color">\'AC\' button color:</string>
+    <string name="buttons_text_color">Buttons text color:</string>
+    <string name="your_custom_theme">Your custom theme</string>
+    <string name="btn_save">Save</string>
+    <string name="btn_menu">Menu</string>
+    <string name="f_x_equal">f(x)=</string>
+    <string name="cos_x">cos(x)</string>
+    <string name="clear_input">Clear Input</string>
+    <string name="btn_build">Build</string>
+    <string name="x_values_start">x{</string>
+    <string name="hint_start_range">-10</string>
+    <string name="semicolon">;</string>
+    <string name="hint_x_end">10</string>
+    <string name="tv_x_step">} x+=</string>
+    <string name="hint_x_step">0.1</string>
+    <string name="empty_history">Empty History</string>
+    <string name="delete_graph">Delete Graph</string>
+    <string name="restore_theme">Restore theme</string>
+    <string name="clear_graphs">Clear graphs</string>
+    <string name="delete_history">Delete History</string>
+    <string name="history">History</string>
+    <string name="create_custom_theme">Create custom theme</string>
+    <string name="build_a_graph">Build a graph</string>
+    <string name="about">About</string>
+
+
+    <string name="about_text">
+        "Hi! My name is Ilyas.\nI'm the beginner junior developer and this is my first serious app.\nPlease rate this app, no matter it likes to you are or not. Your reviews are very important for me.
+    \nFor all suggestions and founded bugs please contact me via Telegram\nApp is absolutely free and without adds.\n\nEasy Calculator v"
+    </string>
+    <string name="write_me">Write me</string>
+    <string name="btn_close">Close</string>
+    <string name="confirm_delete">Confirm delete</string>
+    <string name="delete_confirmation">Are you sure want to clean history?</string>
+    <string name="history_deleted">History successfully deleted!</string>
+    <string name="yes">Yes</string>
+    <string name="fail_deleting_history">Something went wrong. Please try again later!</string>
+    <string name="btn_contact">contact</string>
+
+
+</resources>

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="btn_text_size">32sp</dimen>
+    <dimen name="btn_text_size_large">40sp</dimen>
+    <dimen name="btn_text_size_large_land">35sp</dimen>
+    <dimen name="btn_text_size_land">28sp</dimen>
+    <dimen name="btn_expandable_text_size">32sp</dimen>
+    <dimen name="btn_text_size_xlarge">50sp</dimen>
+    <dimen name="btn_text_size_xlarge_land">42sp</dimen>
+
+    <string-array name="shapes">
+        <item>Rounded</item>
+        <item>Rectangle</item>
+        <item>Circle</item>
+    </string-array>
+
+
+</resources>

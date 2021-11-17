@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/menu_to_history"
+        android:icon="@drawable/ic_history_black"
+        android:textColor="@color/black"
+        android:title="@string/history" />
+
+    <item
+        android:id="@+id/menu_to_custom_color"
+        android:icon="@drawable/ic_custom_color_black"
+        android:textColor="@color/black"
+        android:title="@string/create_custom_theme" />
+
+
+    <item
+        android:id="@+id/menu_to_graph"
+        android:icon="@drawable/ic_graph_black"
+        android:textColor="@color/black"
+        android:title="@string/build_a_graph" />
+
+    <item
+        android:id="@+id/menu_to_about"
+        android:icon="@drawable/ic_info_black"
+        android:textColor="@color/black"
+        android:title="@string/about" />
+
+
+</menu>
