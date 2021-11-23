@@ -1808,6 +1808,7 @@ class GraphActivity : AppCompatActivity(), View.OnClickListener
         btnDot.setTextColor(ColorStateList.valueOf(Color.parseColor(textColor)))
 
         btnX.setTextColor(ColorStateList.valueOf(Color.parseColor(textColor)))
+        btnKeyboard.setTextColor(ColorStateList.valueOf(Color.parseColor(textColor)))
 
         btnPlus.setTextColor(ColorStateList.valueOf(Color.parseColor(textColor)))
         btnMinus.setTextColor(ColorStateList.valueOf(Color.parseColor(textColor)))
@@ -1856,6 +1857,8 @@ class GraphActivity : AppCompatActivity(), View.OnClickListener
         btnNine.background = ContextCompat.getDrawable(this, R.drawable.buttons_circle)
         btnDot.background = ContextCompat.getDrawable(this, R.drawable.buttons_circle)
         btnBackSpace.background = ContextCompat.getDrawable(this, R.drawable.buttons_circle)
+        btnKeyboard.background = ContextCompat.getDrawable(this, R.drawable.buttons_circle)
+
 
         btnPlus.background = ContextCompat.getDrawable(this, R.drawable.buttons_circle)
         btnMinus.background = ContextCompat.getDrawable(this, R.drawable.buttons_circle)
@@ -1907,6 +1910,7 @@ class GraphActivity : AppCompatActivity(), View.OnClickListener
         btnNine.background = ContextCompat.getDrawable(this, R.drawable.buttons_rectangle)
         btnDot.background = ContextCompat.getDrawable(this, R.drawable.buttons_rectangle)
         btnBackSpace.background = ContextCompat.getDrawable(this, R.drawable.buttons_rectangle)
+        btnKeyboard.background = ContextCompat.getDrawable(this, R.drawable.buttons_rectangle)
 
         btnPlus.background = ContextCompat.getDrawable(this, R.drawable.buttons_rectangle)
         btnMinus.background = ContextCompat.getDrawable(this, R.drawable.buttons_rectangle)
@@ -1970,6 +1974,8 @@ class GraphActivity : AppCompatActivity(), View.OnClickListener
         btnNine.background = ContextCompat.getDrawable(this, R.drawable.buttons_round)
         btnDot.background = ContextCompat.getDrawable(this, R.drawable.buttons_round)
         btnBackSpace.background = ContextCompat.getDrawable(this, R.drawable.buttons_round)
+        btnKeyboard.background = ContextCompat.getDrawable(this, R.drawable.buttons_round)
+
 
         btnPlus.background = ContextCompat.getDrawable(this, R.drawable.buttons_round)
         btnMinus.background = ContextCompat.getDrawable(this, R.drawable.buttons_round)

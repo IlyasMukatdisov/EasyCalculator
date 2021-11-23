@@ -79,6 +79,7 @@ class CustomizationActivity : AppCompatActivity(), View.OnClickListener
             btnMenu.backgroundTintList =
                 ColorStateList.valueOf(ContextCompat.getColor(this, R.color.black))
             btnMenu.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.ic_more_vert_white))
+            btnNumbersColor.setTextColor(ContextCompat.getColor(this, R.color.white))
             tvTitle.setTextColor(
                 ColorStateList.valueOf(ContextCompat.getColor(this, R.color.white)))
             tvNumbers.setTextColor(
@@ -268,6 +269,7 @@ class CustomizationActivity : AppCompatActivity(), View.OnClickListener
                 R.id.radio_circle    -> shape = SHAPE_CIRCLE
             }
             shapePicked = true
+            shouldEnableBtnSave()
         }
 
     }

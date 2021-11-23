@@ -11,6 +11,8 @@ import android.graphics.Point
 import android.os.Build
 import android.os.Bundle
 import android.text.SpannableStringBuilder
+import android.transition.TransitionInflater
+import android.transition.TransitionManager
 import android.util.DisplayMetrics
 import android.util.Log
 import android.util.TypedValue
@@ -1229,17 +1231,16 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
 
 
     private fun expand() {
-        /*val transition = TransitionInflater.from(this).inflateTransition(R.transition.transition)*/
         if (isExpanded) {
             btnMore.text = getString(R.string.btn_more_expanded)
-            /*TransitionManager.beginDelayedTransition(sinLinLay, transition)
-            TransitionManager.beginDelayedTransition(logLinLay, transition)*/
+            TransitionManager.beginDelayedTransition(sinLinLay)
+            TransitionManager.beginDelayedTransition(logLinLay)
             sinLinLay.visibility = View.VISIBLE
             logLinLay.visibility = View.VISIBLE
         } else {
             btnMore.text = getString(R.string.btn_more_not_expanded)
-            /*TransitionManager.beginDelayedTransition(sinLinLay, transition)
-            TransitionManager.beginDelayedTransition(logLinLay, transition)*/
+            TransitionManager.beginDelayedTransition(sinLinLay)
+            TransitionManager.beginDelayedTransition(logLinLay)
             sinLinLay.visibility = View.GONE
             logLinLay.visibility = View.GONE
         }
