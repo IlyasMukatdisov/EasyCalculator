@@ -409,7 +409,8 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         btnSeven.setTextColor(ColorStateList.valueOf(Color.parseColor(textColor)))
         btnEight.setTextColor(ColorStateList.valueOf(Color.parseColor(textColor)))
         btnNine.setTextColor(ColorStateList.valueOf(Color.parseColor(textColor)))
-
+        btnDot.setTextColor(ColorStateList.valueOf(Color.parseColor(textColor)))
+        btnBackSpace.setTextColor(ColorStateList.valueOf(Color.parseColor(textColor)))
 
         btnPlus.setTextColor(ColorStateList.valueOf(Color.parseColor(textColor)))
         btnMinus.setTextColor(ColorStateList.valueOf(Color.parseColor(textColor)))

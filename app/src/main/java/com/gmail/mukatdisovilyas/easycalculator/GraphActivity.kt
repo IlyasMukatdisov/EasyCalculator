@@ -1804,6 +1804,8 @@ class GraphActivity : AppCompatActivity(), View.OnClickListener
         btnSeven.setTextColor(ColorStateList.valueOf(Color.parseColor(textColor)))
         btnEight.setTextColor(ColorStateList.valueOf(Color.parseColor(textColor)))
         btnNine.setTextColor(ColorStateList.valueOf(Color.parseColor(textColor)))
+        btnBackSpace.setTextColor(ColorStateList.valueOf(Color.parseColor(textColor)))
+        btnDot.setTextColor(ColorStateList.valueOf(Color.parseColor(textColor)))
 
         btnX.setTextColor(ColorStateList.valueOf(Color.parseColor(textColor)))
 
@@ -1833,7 +1835,7 @@ class GraphActivity : AppCompatActivity(), View.OnClickListener
         btnSevenKeyboard.setTextColor(ColorStateList.valueOf(Color.parseColor(textColor)))
         btnEightKeyboard.setTextColor(ColorStateList.valueOf(Color.parseColor(textColor)))
         btnNineKeyboard.setTextColor(ColorStateList.valueOf(Color.parseColor(textColor)))
-        btnDot.setTextColor(ColorStateList.valueOf(Color.parseColor(textColor)))
+        btnDotKeyboard.setTextColor(ColorStateList.valueOf(Color.parseColor(textColor)))
         btnMinusKeyboard.setTextColor(ColorStateList.valueOf(Color.parseColor(textColor)))
         btnBackspaceKeyboard.setTextColor(ColorStateList.valueOf(Color.parseColor(textColor)))
 

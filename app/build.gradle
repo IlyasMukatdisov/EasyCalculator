@@ -2,6 +2,7 @@ plugins {
     id 'com.android.application'
     id 'kotlin-android'
 }
+apply plugin: 'kotlin-android'
 
 android {
     signingConfigs {
@@ -56,5 +57,10 @@ dependencies {
     implementation 'com.azeesoft.lib.colorpicker:colorpicker:1.0.8@aar'
 
     implementation 'com.github.PhilJay:MPAndroidChart:v3.1.0'
+    implementation "androidx.core:core-ktx:+"
+    implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
 
+}
+repositories {
+    mavenCentral()
 }
