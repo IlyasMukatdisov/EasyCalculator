@@ -21,6 +21,9 @@ import com.gmail.mukatdisovilyas.easycalculator.utils.*
 
 class CustomizationActivity : AppCompatActivity(), View.OnClickListener
 {
+
+    private lateinit var llMenu : LinearLayout
+
     private lateinit var btnNumbersColor: Button
     private lateinit var btnActionsColor: Button
     private lateinit var btnAcColor: Button
@@ -232,12 +235,14 @@ class CustomizationActivity : AppCompatActivity(), View.OnClickListener
     private fun initViews()
     {
 
+        llMenu=findViewById(R.id.ll_menu)
+
         btnNumbersColor = findViewById(R.id.btn_numbers_color)
         btnActionsColor = findViewById(R.id.btn_actions_color)
         btnAcColor = findViewById(R.id.btn_ac_color)
         btnEqualColor = findViewById(R.id.btn_equal_color)
         btnSave = findViewById(R.id.btn_cc_save)
-        btnMenu = findViewById(R.id.btn_cc_more)
+        btnMenu = findViewById(R.id.btn_menu)
         btnTextColor = findViewById(R.id.btn_text_color)
 
         btnRounded = findViewById(R.id.btn_rounded)
@@ -413,6 +418,10 @@ class CustomizationActivity : AppCompatActivity(), View.OnClickListener
             {
 
             }
+        }
+
+        llMenu.setOnClickListener {
+            popupMenu.show()
         }
 
         btnMenu.setOnClickListener {

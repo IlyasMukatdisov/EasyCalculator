@@ -7,15 +7,28 @@
     android:layout_height="match_parent"
     tools:context=".HistoryActivity">
 
-    <ImageButton
-        android:id="@+id/btn_menu_history"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:backgroundTint="@color/white"
-        android:contentDescription="@string/btn_menu"
-        android:src="@drawable/ic_more_vert_black"
+    <LinearLayout
+        android:id="@+id/ll_menu"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        android:gravity="end">
+
+        <ImageButton
+            android:id="@+id/btn_menu"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:src="@drawable/ic_more_vert_black"
+            android:background="@color/white"
+            android:backgroundTint="@color/white"
+            android:contentDescription="@string/btn_menu"
+            android:layout_marginEnd="10dp"
+            android:layout_marginTop="10dp"/>
+
+    </LinearLayout>
 
     <ImageView
         android:id="@+id/iv_history"
@@ -49,5 +62,5 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btn_menu_history" />
+        app:layout_constraintTop_toBottomOf="@+id/ll_menu" />
 </androidx.constraintlayout.widget.ConstraintLayout>

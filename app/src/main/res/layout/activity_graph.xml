@@ -13,15 +13,30 @@
         android:layout_height="0dp"
         android:layout_weight="0.5">
 
-        <ImageButton
-            android:id="@+id/btn_menu"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+        <LinearLayout
+            android:id="@+id/ll_menu"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/ic_more_vert_black"
-            android:backgroundTint="@color/white"
-            android:contentDescription="@string/btn_menu" />
+            android:gravity="end">
+
+            <ImageButton
+                android:id="@+id/btn_menu"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                android:src="@drawable/ic_more_vert_black"
+                android:background="@color/white"
+                android:backgroundTint="@color/white"
+                android:contentDescription="@string/btn_menu"
+                android:layout_marginEnd="10dp"
+                android:layout_marginTop="10dp"/>
+
+        </LinearLayout>
+
+
 
         <com.github.mikephil.charting.charts.LineChart
             android:id="@+id/line_chart"
@@ -30,7 +45,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/btn_menu" />
+            app:layout_constraintTop_toBottomOf="@+id/ll_menu" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 

@@ -10,7 +10,8 @@ import android.os.Bundle
 import android.text.InputFilter
 import android.text.InputFilter.LengthFilter
 import android.text.SpannableStringBuilder
-import android.view.View
+    import android.transition.TransitionManager
+    import android.view.View
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
@@ -34,6 +35,8 @@ class GraphActivity : AppCompatActivity(), View.OnClickListener
     }
 
     private var isExpanded = true
+
+    private lateinit var llMenu : LinearLayout
 
     private lateinit var linearLayoutButtons: LinearLayout
     private lateinit var llParent: LinearLayout
@@ -380,6 +383,7 @@ class GraphActivity : AppCompatActivity(), View.OnClickListener
 
     private fun initViews()
     {
+        llMenu=findViewById(R.id.ll_menu)
         linearLayoutButtons = findViewById(R.id.ll_buttons)
         llKeyboard = findViewById(R.id.ll_keyboard)
         llParent = findViewById(R.id.ll_parent)
@@ -453,13 +457,17 @@ class GraphActivity : AppCompatActivity(), View.OnClickListener
             {
                 btnKeyboard.text = getString(R.string.btn_more_expanded)
                 isExpanded = true
+                TransitionManager.beginDelayedTransition(linearLayoutButtons)
                 linearLayoutButtons.visibility = View.VISIBLE
+                TransitionManager.beginDelayedTransition(llKeyboard)
                 llKeyboard.visibility = View.GONE
             }
             else
             {
                 btnKeyboard.text = getString(R.string.btn_more_not_expanded)
                 isExpanded = false
+                TransitionManager.beginDelayedTransition(linearLayoutButtons)
+                TransitionManager.beginDelayedTransition(llKeyboard)
                 linearLayoutButtons.visibility = View.GONE
                 llKeyboard.visibility = View.GONE
             }
@@ -470,6 +478,8 @@ class GraphActivity : AppCompatActivity(), View.OnClickListener
             {
                 btnKeyboard.text = getString(R.string.btn_more_expanded)
                 isExpanded = true
+                TransitionManager.beginDelayedTransition(linearLayoutButtons)
+                TransitionManager.beginDelayedTransition(llKeyboard)
                 llKeyboard.visibility = View.VISIBLE
                 linearLayoutButtons.visibility = View.GONE
             }
@@ -477,6 +487,8 @@ class GraphActivity : AppCompatActivity(), View.OnClickListener
             {
                 btnKeyboard.text = getString(R.string.btn_more_not_expanded)
                 isExpanded = false
+                TransitionManager.beginDelayedTransition(linearLayoutButtons)
+                TransitionManager.beginDelayedTransition(llKeyboard)
                 llKeyboard.visibility = View.GONE
                 linearLayoutButtons.visibility = View.GONE
             }
@@ -486,6 +498,8 @@ class GraphActivity : AppCompatActivity(), View.OnClickListener
             {
                 btnKeyboard.text = getString(R.string.btn_more_expanded)
                 isExpanded = true
+                TransitionManager.beginDelayedTransition(linearLayoutButtons)
+                TransitionManager.beginDelayedTransition(llKeyboard)
                 llKeyboard.visibility = View.VISIBLE
                 linearLayoutButtons.visibility = View.GONE
             }
@@ -493,6 +507,8 @@ class GraphActivity : AppCompatActivity(), View.OnClickListener
             {
                 btnKeyboard.text = getString(R.string.btn_more_not_expanded)
                 isExpanded = false
+                TransitionManager.beginDelayedTransition(linearLayoutButtons)
+                TransitionManager.beginDelayedTransition(llKeyboard)
                 llKeyboard.visibility = View.GONE
                 linearLayoutButtons.visibility = View.GONE
             }
@@ -500,8 +516,11 @@ class GraphActivity : AppCompatActivity(), View.OnClickListener
         edtXStep.setOnFocusChangeListener { _, hasFocus ->
             if (hasFocus)
             {
+
                 btnKeyboard.text = getString(R.string.btn_more_expanded)
                 isExpanded = true
+                TransitionManager.beginDelayedTransition(linearLayoutButtons)
+                TransitionManager.beginDelayedTransition(llKeyboard)
                 llKeyboard.visibility = View.VISIBLE
                 linearLayoutButtons.visibility = View.GONE
             }
@@ -509,6 +528,8 @@ class GraphActivity : AppCompatActivity(), View.OnClickListener
             {
                 btnKeyboard.text = getString(R.string.btn_more_not_expanded)
                 isExpanded = false
+                TransitionManager.beginDelayedTransition(linearLayoutButtons)
+                TransitionManager.beginDelayedTransition(llKeyboard)
                 llKeyboard.visibility = View.GONE
                 linearLayoutButtons.visibility = View.GONE
             }
@@ -758,6 +779,8 @@ class GraphActivity : AppCompatActivity(), View.OnClickListener
             {
                 if (isExpanded)
                 {
+                    TransitionManager.beginDelayedTransition(linearLayoutButtons)
+                    TransitionManager.beginDelayedTransition(llKeyboard)
                     linearLayoutButtons.visibility = View.GONE
                     llKeyboard.visibility = View.GONE
                     btnKeyboard.text = getString(R.string.btn_more_not_expanded)
@@ -768,11 +791,15 @@ class GraphActivity : AppCompatActivity(), View.OnClickListener
 
                     if (edtExp.isFocused || (!edtXStart.isFocused && !edtXEnd.isFocused && !edtXStep.isFocused && !edtExp.isFocused))
                     {
+                        TransitionManager.beginDelayedTransition(linearLayoutButtons)
+                        TransitionManager.beginDelayedTransition(llKeyboard)
                         linearLayoutButtons.visibility = View.VISIBLE
                         llKeyboard.visibility = View.GONE
                     }
                     if (edtXStart.isFocused || edtXEnd.isFocused || edtXStep.isFocused)
                     {
+                        TransitionManager.beginDelayedTransition(linearLayoutButtons)
+                        TransitionManager.beginDelayedTransition(llKeyboard)
                         llKeyboard.visibility = View.VISIBLE
                         linearLayoutButtons.visibility = View.GONE
                     }
@@ -1182,12 +1209,13 @@ class GraphActivity : AppCompatActivity(), View.OnClickListener
                     chart.invalidate()
                 }
                 buildClickCount++
-                linearLayoutButtons.visibility = View.GONE
                 if (edtExp.text.isEmpty() || edtXStep.text.isEmpty() || edtXStart.text.isEmpty() || edtXEnd.text.isEmpty())
                 {
                     Snackbar.make(llParent, "Please fill all fields!", Snackbar.LENGTH_SHORT).show()
                     return
                 }
+                TransitionManager.beginDelayedTransition(linearLayoutButtons)
+                linearLayoutButtons.visibility = View.GONE
                 try
                 {
                     buildGraph(edtExp.text.toString())

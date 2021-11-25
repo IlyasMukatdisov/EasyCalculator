@@ -19,6 +19,7 @@ import com.gmail.mukatdisovilyas.easycalculator.utils.HistoryDatabaseHelper
 
 class HistoryActivity : AppCompatActivity()
 {
+    private lateinit var llMenu : LinearLayout
     private lateinit var recyclerView: RecyclerView
     private lateinit var adapter: HistoryAdapter
     private lateinit var tv: TextView
@@ -35,8 +36,9 @@ class HistoryActivity : AppCompatActivity()
 
         recyclerView = findViewById(R.id.history_rv)
         tv = findViewById(R.id.tv_no_history)
+        llMenu=findViewById(R.id.ll_menu)
         img = findViewById(R.id.iv_history)
-        btnMenu = findViewById(R.id.btn_menu_history)
+        btnMenu = findViewById(R.id.btn_menu)
 
         if (isDarkThemeOn())
         {
@@ -129,6 +131,9 @@ class HistoryActivity : AppCompatActivity()
             }
         }
 
+        llMenu.setOnClickListener {
+            popupMenu.show()
+        }
         btnMenu.setOnClickListener {
             popupMenu.show()
         }

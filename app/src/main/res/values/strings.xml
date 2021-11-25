@@ -53,7 +53,7 @@
     <string name="cos_x">cos(x)</string>
     <string name="clear_input">Clear Input</string>
     <string name="btn_build">Build</string>
-    <string name="x_values_start">x{</string>
+    <string name="x_values_start">x {</string>
     <string name="hint_start_range">-10</string>
     <string name="semicolon">;</string>
     <string name="hint_x_end">10</string>
