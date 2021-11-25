@@ -4,8 +4,10 @@ import android.annotation.SuppressLint
 import android.content.Context
 import android.content.res.ColorStateList
 import android.content.res.Configuration
+import android.graphics.Color
 import android.os.Build
 import android.os.Bundle
+import android.view.MotionEvent
 import android.view.View
 import android.widget.*
 import androidx.appcompat.app.AlertDialog
@@ -17,7 +19,7 @@ import com.gmail.mukatdisovilyas.easycalculator.utils.Expression
 import com.gmail.mukatdisovilyas.easycalculator.utils.HistoryAdapter
 import com.gmail.mukatdisovilyas.easycalculator.utils.HistoryDatabaseHelper
 
-class HistoryActivity : AppCompatActivity()
+class HistoryActivity : AppCompatActivity(), View.OnTouchListener
 {
     private lateinit var llMenu : LinearLayout
     private lateinit var recyclerView: RecyclerView
@@ -39,6 +41,8 @@ class HistoryActivity : AppCompatActivity()
         llMenu=findViewById(R.id.ll_menu)
         img = findViewById(R.id.iv_history)
         btnMenu = findViewById(R.id.btn_menu)
+        btnMenu.setOnTouchListener(this)
+        llMenu.setOnTouchListener(this)
 
         if (isDarkThemeOn())
         {
@@ -65,6 +69,52 @@ class HistoryActivity : AppCompatActivity()
 
     }
 
+    override fun onTouch(view: View, motionEvent: MotionEvent): Boolean {
+        when (view.id) {
+            R.id.btn_menu -> {
+                when (motionEvent.action) {
+                    MotionEvent.ACTION_DOWN -> {
+                        if(isDarkThemeOn())
+                            btnMenu.backgroundTintList =
+                                ColorStateList.valueOf(ContextCompat.getColor(this, R.color.dark_gray))
+                        else btnMenu.backgroundTintList =
+                            ColorStateList.valueOf(Color.GRAY)
+                    }
+                    MotionEvent.ACTION_UP -> {
+                        if(isDarkThemeOn())
+                            btnMenu.backgroundTintList =
+                                ColorStateList.valueOf(ContextCompat.getColor(this, R.color.black))
+                        else btnMenu.backgroundTintList =
+                            ColorStateList.valueOf(ContextCompat.getColor(this, R.color.white))
+                        view.performClick()
+                    }
+                }
+            }
+
+            R.id.ll_menu -> {
+                when (motionEvent.action) {
+                    MotionEvent.ACTION_DOWN -> {
+                        if(isDarkThemeOn())
+                            btnMenu.backgroundTintList =
+                                ColorStateList.valueOf(ContextCompat.getColor(this, R.color.dark_gray))
+                        else btnMenu.backgroundTintList =
+                            ColorStateList.valueOf(Color.GRAY)
+                    }
+                    MotionEvent.ACTION_UP -> {
+                        if(isDarkThemeOn())
+                            btnMenu.backgroundTintList =
+                                ColorStateList.valueOf(ContextCompat.getColor(this, R.color.black))
+                        else btnMenu.backgroundTintList =
+                            ColorStateList.valueOf(ContextCompat.getColor(this, R.color.white))
+                        view.performClick()
+                    }
+                }
+            }
+
+        }
+        return true
+    }
+
     private fun setVisibility()
     {
         if (list.isEmpty())
@@ -72,6 +122,7 @@ class HistoryActivity : AppCompatActivity()
             tv.visibility = View.VISIBLE
             img.visibility = View.VISIBLE
             btnMenu.visibility = View.GONE
+            llMenu.visibility=View.GONE
         }
     }
 

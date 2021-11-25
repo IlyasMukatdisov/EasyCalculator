@@ -9,6 +9,7 @@ import android.content.res.Configuration.UI_MODE_NIGHT_YES
 import android.graphics.Color
 import android.os.Build
 import android.os.Bundle
+import android.view.MotionEvent
 import android.view.View
 import android.widget.*
 import androidx.appcompat.app.AlertDialog
@@ -19,7 +20,7 @@ import com.azeesoft.lib.colorpicker.ColorPickerDialog
 import com.gmail.mukatdisovilyas.easycalculator.utils.*
 
 
-class CustomizationActivity : AppCompatActivity(), View.OnClickListener
+class CustomizationActivity : AppCompatActivity(), View.OnClickListener, View.OnTouchListener
 {
 
     private lateinit var llMenu : LinearLayout
@@ -112,6 +113,53 @@ class CustomizationActivity : AppCompatActivity(), View.OnClickListener
 
 
     }
+
+    override fun onTouch(view: View, motionEvent: MotionEvent): Boolean {
+        when (view.id) {
+            R.id.btn_menu -> {
+                when (motionEvent.action) {
+                    MotionEvent.ACTION_DOWN -> {
+                        if(isDarkThemeOn())
+                            btnMenu.backgroundTintList =
+                                ColorStateList.valueOf(ContextCompat.getColor(this, R.color.dark_gray))
+                        else btnMenu.backgroundTintList =
+                            ColorStateList.valueOf(Color.GRAY)
+                    }
+                    MotionEvent.ACTION_UP -> {
+                        if(isDarkThemeOn())
+                            btnMenu.backgroundTintList =
+                                ColorStateList.valueOf(ContextCompat.getColor(this, R.color.black))
+                        else btnMenu.backgroundTintList =
+                            ColorStateList.valueOf(ContextCompat.getColor(this, R.color.white))
+                        view.performClick()
+                    }
+                }
+            }
+
+            R.id.ll_menu -> {
+                when (motionEvent.action) {
+                    MotionEvent.ACTION_DOWN -> {
+                        if(isDarkThemeOn())
+                            btnMenu.backgroundTintList =
+                                ColorStateList.valueOf(ContextCompat.getColor(this, R.color.dark_gray))
+                        else btnMenu.backgroundTintList =
+                            ColorStateList.valueOf(Color.GRAY)
+                    }
+                    MotionEvent.ACTION_UP -> {
+                        if(isDarkThemeOn())
+                            btnMenu.backgroundTintList =
+                                ColorStateList.valueOf(ContextCompat.getColor(this, R.color.black))
+                        else btnMenu.backgroundTintList =
+                            ColorStateList.valueOf(ContextCompat.getColor(this, R.color.white))
+                        view.performClick()
+                    }
+                }
+            }
+
+        }
+        return true
+    }
+
 
     private fun setTextSizes(textSize : Float)
     {
@@ -276,6 +324,9 @@ class CustomizationActivity : AppCompatActivity(), View.OnClickListener
             shapePicked = true
             shouldEnableBtnSave()
         }
+
+        btnMenu.setOnTouchListener(this)
+        llMenu.setOnTouchListener(this)
 
     }
 

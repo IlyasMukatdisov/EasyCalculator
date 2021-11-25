@@ -37,14 +37,14 @@ import android.view.WindowInsets
 import android.view.WindowMetrics
 
 
-class MainActivity : AppCompatActivity(), View.OnClickListener {
+class MainActivity : AppCompatActivity(), View.OnClickListener, View.OnTouchListener {
 
     companion object {
         private const val TAG = "MainActivity"
     }
 
 
-    private lateinit var llMenu : LinearLayout
+    private lateinit var llMenu: LinearLayout
     private lateinit var llMain: LinearLayout
     private lateinit var llExpression: LinearLayout
     private lateinit var llButtons: LinearLayout
@@ -620,11 +620,61 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         btnMenu.setOnClickListener {
             popupMenu2.show()
         }
+
+        btnMenu.setOnTouchListener(this)
+        llMenu.setOnTouchListener(this)
+
         llMenu.setOnClickListener {
             popupMenu2.show()
         }
     }
 
+
+    override fun onTouch(view: View, motionEvent: MotionEvent): Boolean {
+        when (view.id) {
+            R.id.btn_menu -> {
+                when (motionEvent.action) {
+                    MotionEvent.ACTION_DOWN -> {
+                        if(isDarkThemeOn())
+                            btnMenu.backgroundTintList =
+                                ColorStateList.valueOf(ContextCompat.getColor(this, R.color.alpha))
+                        else btnMenu.backgroundTintList =
+                            ColorStateList.valueOf(Color.GRAY)
+                    }
+                    MotionEvent.ACTION_UP -> {
+                        if(isDarkThemeOn())
+                        btnMenu.backgroundTintList =
+                            ColorStateList.valueOf(ContextCompat.getColor(this, R.color.dark_gray))
+                        else btnMenu.backgroundTintList =
+                            ColorStateList.valueOf(ContextCompat.getColor(this, R.color.light_gray))
+                        view.performClick()
+                    }
+                }
+            }
+
+            R.id.ll_menu -> {
+                when (motionEvent.action) {
+                    MotionEvent.ACTION_DOWN -> {
+                        if(isDarkThemeOn())
+                            btnMenu.backgroundTintList =
+                                ColorStateList.valueOf(ContextCompat.getColor(this, R.color.alpha))
+                        else btnMenu.backgroundTintList =
+                            ColorStateList.valueOf(Color.GRAY)
+                    }
+                    MotionEvent.ACTION_UP -> {
+                        if(isDarkThemeOn())
+                            btnMenu.backgroundTintList =
+                                ColorStateList.valueOf(ContextCompat.getColor(this, R.color.dark_gray))
+                        else btnMenu.backgroundTintList =
+                            ColorStateList.valueOf(ContextCompat.getColor(this, R.color.light_gray))
+                        view.performClick()
+                    }
+                }
+            }
+
+        }
+        return true
+    }
 
     private fun getPrevTextSize() {
         edtResultTextSize = edtResult.textSize / resources.displayMetrics.scaledDensity
@@ -751,7 +801,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
     }
 
     private fun initViews() {
-        llMenu=findViewById(R.id.ll_menu)
+        llMenu = findViewById(R.id.ll_menu)
 
         btnAc = findViewById(R.id.btn_ac)
         btnBrackets = findViewById(R.id.btn_brackets)
@@ -1238,14 +1288,12 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
     private fun expand() {
         if (isExpanded) {
             btnMore.text = getString(R.string.btn_more_expanded)
-            TransitionManager.beginDelayedTransition(sinLinLay)
-            TransitionManager.beginDelayedTransition(logLinLay)
+            TransitionManager.beginDelayedTransition(llMain)
             sinLinLay.visibility = View.VISIBLE
             logLinLay.visibility = View.VISIBLE
         } else {
             btnMore.text = getString(R.string.btn_more_not_expanded)
-            TransitionManager.beginDelayedTransition(sinLinLay)
-            TransitionManager.beginDelayedTransition(logLinLay)
+            TransitionManager.beginDelayedTransition(llMain)
             sinLinLay.visibility = View.GONE
             logLinLay.visibility = View.GONE
         }
@@ -1420,7 +1468,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
             "updateEdtResult: ${(edtResult.text.length + strToAdd.length) * edtResult.textSize}"
         )
 
-        if ((edtResult.text.length + strToAdd.length) * textSize > cardView.width && textSize > 22 && resources.configuration.orientation==Configuration.ORIENTATION_PORTRAIT) {
+        if ((edtResult.text.length + strToAdd.length) * textSize > cardView.width && textSize > 22 && resources.configuration.orientation == Configuration.ORIENTATION_PORTRAIT) {
             for (i in 0..strToAdd.length) {
                 textSize -= if (resources.configuration.orientation == Configuration.ORIENTATION_PORTRAIT) 2
                 else 1
