@@ -44,6 +44,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
     }
 
 
+    private lateinit var llMenu : LinearLayout
     private lateinit var llMain: LinearLayout
     private lateinit var llExpression: LinearLayout
     private lateinit var llButtons: LinearLayout
@@ -245,9 +246,9 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         edtPrevExp.showSoftInputOnFocus = false
         edtTempResult.showSoftInputOnFocus = false
 
-        if (resources.configuration.orientation == Configuration.ORIENTATION_LANDSCAPE) {
+        /*if (resources.configuration.orientation == Configuration.ORIENTATION_LANDSCAPE) {
             hideSystemUI()
-        }
+        }*/
 
         getPrevTextSize()
 
@@ -616,8 +617,10 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
             }
         }
 
-
         btnMenu.setOnClickListener {
+            popupMenu2.show()
+        }
+        llMenu.setOnClickListener {
             popupMenu2.show()
         }
     }
@@ -629,14 +632,14 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
     }
 
 
-    private fun hideSystemUI() {
+    /*private fun hideSystemUI() {
         WindowCompat.setDecorFitsSystemWindows(window, false)
         WindowInsetsControllerCompat(window, llMain).let { controller ->
             controller.hide(WindowInsetsCompat.Type.systemBars())
             controller.systemBarsBehavior =
                 WindowInsetsControllerCompat.BEHAVIOR_SHOW_TRANSIENT_BARS_BY_SWIPE
         }
-    }
+    }*/
 
     /*private fun setFullScreen()
     {
@@ -689,16 +692,16 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
                 if (mWidthPixels in 0..480) btnTextSize = 28 * resources.displayMetrics.density
                 if (mWidthPixels in 481..720) btnTextSize = 22 * resources.displayMetrics.density
                 if (mWidthPixels in 721..1080) btnTextSize = 19 * resources.displayMetrics.density
-                if (mWidthPixels in 1081..1600) btnTextSize = 16 * resources.displayMetrics.density
-                if (mWidthPixels in 1601..2160) btnTextSize = 13 * resources.displayMetrics.density
-                if (mWidthPixels in 2560..4000) btnTextSize = 10 * resources.displayMetrics.density
+                if (mWidthPixels in 1081..1600) btnTextSize = 18 * resources.displayMetrics.density
+                if (mWidthPixels in 1601..2160) btnTextSize = 15 * resources.displayMetrics.density
+                if (mWidthPixels in 2560..4000) btnTextSize = 12 * resources.displayMetrics.density
             } else {
                 if (mWidthPixels in 0..480) btnTextSize = 24 * resources.displayMetrics.density
                 if (mWidthPixels in 481..720) btnTextSize = 20 * resources.displayMetrics.density
                 if (mWidthPixels in 721..1080) btnTextSize = 16 * resources.displayMetrics.density
-                if (mWidthPixels in 1081..1600) btnTextSize = 13 * resources.displayMetrics.density
-                if (mWidthPixels in 1601..2160) btnTextSize = 10 * resources.displayMetrics.density
-                if (mWidthPixels in 2560..4000) btnTextSize = 8 * resources.displayMetrics.density
+                if (mWidthPixels in 1081..1600) btnTextSize = 15 * resources.displayMetrics.density
+                if (mWidthPixels in 1601..2160) btnTextSize = 13 * resources.displayMetrics.density
+                if (mWidthPixels in 2560..4000) btnTextSize = 11 * resources.displayMetrics.density
             }
         }
 
@@ -748,6 +751,8 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
     }
 
     private fun initViews() {
+        llMenu=findViewById(R.id.ll_menu)
+
         btnAc = findViewById(R.id.btn_ac)
         btnBrackets = findViewById(R.id.btn_brackets)
         btnPercent = findViewById(R.id.btn_percent)

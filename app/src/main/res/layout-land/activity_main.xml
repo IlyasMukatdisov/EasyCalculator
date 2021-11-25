@@ -33,17 +33,28 @@
                 android:gravity="bottom"
                 android:orientation="vertical">
 
-                <ImageButton
-                    android:id="@+id/btn_menu"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="end"
-                    android:background="@color/light_gray"
-                    android:backgroundTint="@color/light_gray"
-                    android:contentDescription="@string/btn_menu"
-                    android:src="@drawable/ic_more_vert_black"
+                <LinearLayout
+                    android:id="@+id/ll_menu"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    app:layout_constraintTop_toTopOf="parent"
+                    android:gravity="end">
+
+                    <ImageButton
+                        android:id="@+id/btn_menu"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="end"
+                        android:background="@color/light_gray"
+                        android:backgroundTint="@color/light_gray"
+                        android:contentDescription="@string/btn_menu"
+                        android:src="@drawable/ic_more_vert_black"
+                        />
+
+                </LinearLayout>
+
+
 
                 <EditText
                     android:id="@+id/tv_prev_expression"
@@ -131,7 +142,7 @@
                 android:layout_weight="1"
                 android:background="@drawable/buttons_round"
                 android:gravity="center"
-
+                style="?android:attr/borderlessButtonStyle"
                 android:text="@string/btn_sin"
                 android:textAllCaps="false"
                 android:textColor="@color/black"
@@ -148,7 +159,7 @@
                 android:layout_weight="1"
                 android:background="@drawable/buttons_round"
                 android:gravity="center"
-
+                style="?android:attr/borderlessButtonStyle"
                 android:text="@string/btn_cos"
                 android:textAllCaps="false"
                 android:textColor="@color/black"
@@ -164,7 +175,7 @@
                 android:layout_weight="1"
                 android:background="@drawable/buttons_round"
                 android:gravity="center"
-
+                style="?android:attr/borderlessButtonStyle"
                 android:text="@string/btn_tan"
                 android:textAllCaps="false"
                 android:textColor="@color/black"
@@ -180,7 +191,7 @@
                 android:layout_weight="1"
                 android:background="@drawable/buttons_round"
                 android:gravity="center"
-
+                style="?android:attr/borderlessButtonStyle"
                 android:text="@string/btn_seven"
                 android:textColor="@color/black"
                 android:textSize="@dimen/btn_text_size_land"
@@ -195,7 +206,7 @@
                 android:layout_weight="1"
                 android:background="@drawable/buttons_round"
                 android:gravity="center"
-
+                style="?android:attr/borderlessButtonStyle"
                 android:text="@string/btn_eight"
                 android:textColor="@color/black"
                 android:textSize="@dimen/btn_text_size_land"
@@ -210,7 +221,7 @@
                 android:layout_weight="1"
                 android:background="@drawable/buttons_round"
                 android:gravity="center"
-
+                style="?android:attr/borderlessButtonStyle"
                 android:text="@string/btn_nine"
                 android:textColor="@color/black"
                 android:textSize="@dimen/btn_text_size_land"
@@ -225,7 +236,7 @@
                 android:layout_weight="1"
                 android:background="@drawable/buttons_round"
                 android:gravity="center"
-
+                style="?android:attr/borderlessButtonStyle"
                 android:text="@string/btn_percent"
                 android:textColor="@color/black"
                 android:textSize="@dimen/btn_text_size_land"
@@ -241,7 +252,7 @@
                 android:layout_weight="1"
                 android:background="@drawable/buttons_round"
                 android:gravity="center"
-
+                style="?android:attr/borderlessButtonStyle"
                 android:text="@string/btn_ac"
                 android:textAllCaps="false"
                 android:textColor="@color/black"
@@ -263,7 +274,8 @@
                 android:textSize="@dimen/btn_text_size_land"
                 android:textStyle="bold"
                 android:visibility="gone"
-                app:backgroundTint="@color/light_blue" />
+                app:backgroundTint="@color/light_blue"
+                style="?android:attr/borderlessButtonStyle"/>
         </LinearLayout>
 
         <LinearLayout
@@ -312,7 +324,7 @@
                 android:layout_weight="1"
                 android:background="@drawable/buttons_round"
                 android:gravity="center"
-
+                style="?android:attr/borderlessButtonStyle"
                 android:text="@string/btn_lg"
                 android:textAllCaps="false"
                 android:textColor="@color/black"
@@ -328,7 +340,7 @@
                 android:layout_weight="1"
                 android:background="@drawable/buttons_round"
                 android:gravity="center"
-
+                style="?android:attr/borderlessButtonStyle"
                 android:text="@string/btn_ln"
                 android:textAllCaps="false"
                 android:textColor="@color/black"
@@ -344,7 +356,7 @@
                 android:layout_weight="1"
                 android:background="@drawable/buttons_round"
                 android:gravity="center"
-
+                style="?android:attr/borderlessButtonStyle"
                 android:text="@string/btn_log2"
                 android:textAllCaps="false"
                 android:textColor="@color/black"
@@ -360,7 +372,7 @@
                 android:layout_weight="1"
                 android:background="@drawable/buttons_round"
                 android:gravity="center"
-
+                style="?android:attr/borderlessButtonStyle"
                 android:text="@string/btn_four"
                 android:textColor="@color/black"
                 android:textSize="@dimen/btn_text_size_land"
@@ -375,7 +387,7 @@
                 android:layout_weight="1"
                 android:background="@drawable/buttons_round"
                 android:gravity="center"
-
+                style="?android:attr/borderlessButtonStyle"
                 android:text="@string/btn_five"
                 android:textColor="@color/black"
                 android:textSize="@dimen/btn_text_size_land"
@@ -390,7 +402,7 @@
                 android:layout_weight="1"
                 android:background="@drawable/buttons_round"
                 android:gravity="center"
-
+                style="?android:attr/borderlessButtonStyle"
                 android:text="@string/btn_six"
                 android:textColor="@color/black"
                 android:textSize="@dimen/btn_text_size_land"
@@ -405,7 +417,7 @@
                 android:layout_weight="1"
                 android:background="@drawable/buttons_round"
                 android:gravity="center"
-
+                style="?android:attr/borderlessButtonStyle"
                 android:text="@string/btn_brackets"
                 android:textColor="@color/black"
                 android:textSize="@dimen/btn_text_size_land"
@@ -420,7 +432,7 @@
                 android:layout_weight="1"
                 android:background="@drawable/buttons_round"
                 android:gravity="center"
-
+                style="?android:attr/borderlessButtonStyle"
                 android:text="@string/btn_division"
                 android:textColor="@color/black"
                 android:textSize="@dimen/btn_text_size_land"
@@ -449,7 +461,7 @@
                 android:layout_weight="1"
                 android:background="@drawable/buttons_round"
                 android:gravity="center"
-
+                style="?android:attr/borderlessButtonStyle"
                 android:text="@string/btn_square_root"
                 android:textColor="@color/black"
                 android:textSize="@dimen/btn_text_size_land"
@@ -464,7 +476,7 @@
                 android:layout_weight="1"
                 android:background="@drawable/buttons_round"
                 android:gravity="center"
-
+                style="?android:attr/borderlessButtonStyle"
                 android:text="@string/btn_pi"
                 android:textAllCaps="false"
                 android:textColor="@color/black"
@@ -480,7 +492,7 @@
                 android:layout_weight="1"
                 android:background="@drawable/buttons_round"
                 android:gravity="center"
-
+                style="?android:attr/borderlessButtonStyle"
                 android:text="@string/btn_exp"
                 android:textColor="@color/black"
                 android:textSize="@dimen/btn_text_size_land"
@@ -495,7 +507,7 @@
                 android:layout_weight="1"
                 android:background="@drawable/buttons_round"
                 android:gravity="center"
-
+                style="?android:attr/borderlessButtonStyle"
                 android:text="@string/btn_one"
                 android:textColor="@color/black"
                 android:textSize="@dimen/btn_text_size_land"
@@ -510,7 +522,7 @@
                 android:layout_weight="1"
                 android:background="@drawable/buttons_round"
                 android:gravity="center"
-
+                style="?android:attr/borderlessButtonStyle"
                 android:text="@string/btn_two"
                 android:textColor="@color/black"
                 android:textSize="@dimen/btn_text_size_land"
@@ -525,7 +537,7 @@
                 android:layout_weight="1"
                 android:background="@drawable/buttons_round"
                 android:gravity="center"
-
+                style="?android:attr/borderlessButtonStyle"
                 android:text="@string/btn_three"
                 android:textColor="@color/black"
                 android:textSize="@dimen/btn_text_size_land"
@@ -540,7 +552,7 @@
                 android:layout_weight="1"
                 android:background="@drawable/buttons_round"
                 android:gravity="center"
-
+                style="?android:attr/borderlessButtonStyle"
                 android:text="@string/btn_multi"
                 android:textColor="@color/black"
                 android:textSize="@dimen/btn_text_size_land"
@@ -555,7 +567,7 @@
                 android:layout_weight="1"
                 android:background="@drawable/buttons_round"
                 android:gravity="center"
-
+                style="?android:attr/borderlessButtonStyle"
                 android:text="@string/btn_minus"
                 android:textColor="@color/black"
                 android:textSize="@dimen/btn_text_size_land"
@@ -583,7 +595,7 @@
                 android:layout_weight="1"
                 android:background="@drawable/buttons_round"
                 android:gravity="center"
-
+                style="?android:attr/borderlessButtonStyle"
                 android:text="@string/btn_fact"
                 android:textColor="@color/black"
                 android:textSize="@dimen/btn_text_size_land"
@@ -598,7 +610,7 @@
                 android:layout_weight="1"
                 android:background="@drawable/buttons_round"
                 android:gravity="center"
-
+                style="?android:attr/borderlessButtonStyle"
                 android:text="@string/btn_e"
                 android:textAllCaps="false"
                 android:textColor="@color/black"
@@ -614,7 +626,7 @@
                 android:layout_weight="1"
                 android:background="@drawable/buttons_round"
                 android:gravity="center"
-
+                style="?android:attr/borderlessButtonStyle"
                 android:text="@string/btn_rad"
                 android:textAllCaps="false"
                 android:textColor="@color/black"
@@ -631,7 +643,7 @@
                 android:layout_weight="1"
                 android:background="@drawable/buttons_round"
                 android:gravity="center"
-
+                style="?android:attr/borderlessButtonStyle"
                 android:text="@string/btn_zero"
                 android:textColor="@color/black"
                 android:textSize="@dimen/btn_text_size_land"
@@ -646,7 +658,7 @@
                 android:layout_weight="1"
                 android:background="@drawable/buttons_round"
                 android:gravity="center"
-
+                style="?android:attr/borderlessButtonStyle"
                 android:text="@string/btn_dot"
                 android:textColor="@color/black"
                 android:textSize="@dimen/btn_text_size_land"
@@ -661,7 +673,7 @@
                 android:layout_weight="1"
                 android:background="@drawable/buttons_round"
                 android:gravity="center"
-
+                style="?android:attr/borderlessButtonStyle"
                 android:text="@string/btn_backspace"
                 android:textColor="@color/black"
                 android:textSize="@dimen/btn_text_size_land"
@@ -676,7 +688,7 @@
                 android:layout_weight="1"
                 android:background="@drawable/buttons_round"
                 android:gravity="center"
-
+                style="?android:attr/borderlessButtonStyle"
                 android:text="@string/btn_plus"
                 android:textColor="@color/black"
                 android:textSize="@dimen/btn_text_size_land"
@@ -691,7 +703,7 @@
                 android:layout_weight="1"
                 android:background="@drawable/buttons_round"
                 android:gravity="center"
-
+                style="?android:attr/borderlessButtonStyle"
                 android:text="@string/btn_equal"
                 android:textColor="@color/black"
                 android:textSize="@dimen/btn_text_size_land"
