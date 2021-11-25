@@ -1415,7 +1415,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
             "updateEdtResult: ${(edtResult.text.length + strToAdd.length) * edtResult.textSize}"
         )
 
-        if ((edtResult.text.length + strToAdd.length) * textSize > cardView.width && textSize > 22) {
+        if ((edtResult.text.length + strToAdd.length) * textSize > cardView.width && textSize > 22 && resources.configuration.orientation==Configuration.ORIENTATION_PORTRAIT) {
             for (i in 0..strToAdd.length) {
                 textSize -= if (resources.configuration.orientation == Configuration.ORIENTATION_PORTRAIT) 2
                 else 1
