@@ -4,7 +4,6 @@ import android.annotation.SuppressLint
 import android.content.Context
 import android.content.res.ColorStateList
 import android.content.res.Configuration
-import android.graphics.Color
 import android.os.Build
 import android.os.Bundle
 import android.view.MotionEvent
@@ -21,7 +20,7 @@ import com.gmail.mukatdisovilyas.easycalculator.utils.HistoryDatabaseHelper
 
 class HistoryActivity : AppCompatActivity(), View.OnTouchListener
 {
-    private lateinit var llMenu : LinearLayout
+    private lateinit var llMenu: LinearLayout
     private lateinit var recyclerView: RecyclerView
     private lateinit var adapter: HistoryAdapter
     private lateinit var tv: TextView
@@ -30,26 +29,25 @@ class HistoryActivity : AppCompatActivity(), View.OnTouchListener
     private lateinit var baseHelperHistory: HistoryDatabaseHelper
     private lateinit var list: MutableList<Expression>
 
+    private lateinit var darkGrayColor: ColorStateList
+    private lateinit var semiGrayColor: ColorStateList
+    private lateinit var whiteColor: ColorStateList
+    private lateinit var blackColor: ColorStateList
+
+
     override fun onCreate(savedInstanceState: Bundle?)
     {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_history)
-        /*setFullScreen()*/
 
-        recyclerView = findViewById(R.id.history_rv)
-        tv = findViewById(R.id.tv_no_history)
-        llMenu=findViewById(R.id.ll_menu)
-        img = findViewById(R.id.iv_history)
-        btnMenu = findViewById(R.id.btn_menu)
-        btnMenu.setOnTouchListener(this)
-        llMenu.setOnTouchListener(this)
+        initViews()
+
 
         if (isDarkThemeOn())
         {
-            btnMenu.backgroundTintList=
-                ColorStateList.valueOf(ContextCompat.getColor(this, R.color.black))
+            btnMenu.backgroundTintList = blackColor
             btnMenu.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.ic_more_vert_white))
-            tv.setTextColor(ColorStateList.valueOf(ContextCompat.getColor(this, R.color.white)))
+            tv.setTextColor(whiteColor)
             img.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.ic_history_white))
         }
 
@@ -69,43 +67,58 @@ class HistoryActivity : AppCompatActivity(), View.OnTouchListener
 
     }
 
-    override fun onTouch(view: View, motionEvent: MotionEvent): Boolean {
-        when (view.id) {
-            R.id.btn_menu -> {
-                when (motionEvent.action) {
-                    MotionEvent.ACTION_DOWN -> {
-                        if(isDarkThemeOn())
-                            btnMenu.backgroundTintList =
-                                ColorStateList.valueOf(ContextCompat.getColor(this, R.color.dark_gray))
-                        else btnMenu.backgroundTintList =
-                            ColorStateList.valueOf(Color.GRAY)
+    @SuppressLint("ClickableViewAccessibility")
+    private fun initViews()
+    {
+        recyclerView = findViewById(R.id.history_rv)
+        tv = findViewById(R.id.tv_no_history)
+        llMenu = findViewById(R.id.ll_menu)
+        img = findViewById(R.id.iv_history)
+        btnMenu = findViewById(R.id.btn_menu)
+        btnMenu.setOnTouchListener(this)
+        llMenu.setOnTouchListener(this)
+
+        darkGrayColor = ColorStateList.valueOf(ContextCompat.getColor(this, R.color.dark_gray))
+        semiGrayColor = ColorStateList.valueOf(ContextCompat.getColor(this, R.color.semi_gray))
+        whiteColor = ColorStateList.valueOf(ContextCompat.getColor(this, R.color.white))
+        blackColor = ColorStateList.valueOf(ContextCompat.getColor(this, R.color.black))
+    }
+
+    override fun onTouch(view: View, motionEvent: MotionEvent): Boolean
+    {
+        when (view.id)
+        {
+            R.id.btn_menu ->
+            {
+                when (motionEvent.action)
+                {
+                    MotionEvent.ACTION_DOWN ->
+                    {
+                        if (isDarkThemeOn()) btnMenu.backgroundTintList = darkGrayColor
+                        else btnMenu.backgroundTintList = semiGrayColor
                     }
-                    MotionEvent.ACTION_UP -> {
-                        if(isDarkThemeOn())
-                            btnMenu.backgroundTintList =
-                                ColorStateList.valueOf(ContextCompat.getColor(this, R.color.black))
-                        else btnMenu.backgroundTintList =
-                            ColorStateList.valueOf(ContextCompat.getColor(this, R.color.white))
+                    MotionEvent.ACTION_UP   ->
+                    {
+                        if (isDarkThemeOn()) btnMenu.backgroundTintList = blackColor
+                        else btnMenu.backgroundTintList = whiteColor
                         view.performClick()
                     }
                 }
             }
 
-            R.id.ll_menu -> {
-                when (motionEvent.action) {
-                    MotionEvent.ACTION_DOWN -> {
-                        if(isDarkThemeOn())
-                            btnMenu.backgroundTintList =
-                                ColorStateList.valueOf(ContextCompat.getColor(this, R.color.dark_gray))
-                        else btnMenu.backgroundTintList =
-                            ColorStateList.valueOf(Color.GRAY)
+            R.id.ll_menu  ->
+            {
+                when (motionEvent.action)
+                {
+                    MotionEvent.ACTION_DOWN ->
+                    {
+                        if (isDarkThemeOn()) btnMenu.backgroundTintList = darkGrayColor
+                        else btnMenu.backgroundTintList = semiGrayColor
                     }
-                    MotionEvent.ACTION_UP -> {
-                        if(isDarkThemeOn())
-                            btnMenu.backgroundTintList =
-                                ColorStateList.valueOf(ContextCompat.getColor(this, R.color.black))
-                        else btnMenu.backgroundTintList =
-                            ColorStateList.valueOf(ContextCompat.getColor(this, R.color.white))
+                    MotionEvent.ACTION_UP   ->
+                    {
+                        if (isDarkThemeOn()) btnMenu.backgroundTintList = blackColor
+                        else btnMenu.backgroundTintList = whiteColor
                         view.performClick()
                     }
                 }
@@ -122,7 +135,7 @@ class HistoryActivity : AppCompatActivity(), View.OnTouchListener
             tv.visibility = View.VISIBLE
             img.visibility = View.VISIBLE
             btnMenu.visibility = View.GONE
-            llMenu.visibility=View.GONE
+            llMenu.visibility = View.GONE
         }
     }
 
@@ -143,7 +156,8 @@ class HistoryActivity : AppCompatActivity(), View.OnTouchListener
                             val helper = HistoryDatabaseHelper(this)
                             if (helper.clear())
                             {
-                                Toast.makeText(this, getString(R.string.history_deleted),
+                                Toast.makeText(this,
+                                    getString(R.string.history_deleted),
                                     Toast.LENGTH_SHORT).show()
                                 list.clear()
                                 adapter.notifyDataSetChanged()
@@ -155,8 +169,7 @@ class HistoryActivity : AppCompatActivity(), View.OnTouchListener
                                     getString(R.string.fail_deleting_history),
                                     Toast.LENGTH_SHORT).show()
                             }
-                        }.setNegativeButton("No"
-                        ) { _, _ -> }.show()
+                        }.setNegativeButton("No") { _, _ -> }.show()
                 }
             }
             false
@@ -192,7 +205,6 @@ class HistoryActivity : AppCompatActivity(), View.OnTouchListener
 
     private fun Context.isDarkThemeOn(): Boolean
     {
-        return resources.configuration.uiMode and
-                Configuration.UI_MODE_NIGHT_MASK == Configuration.UI_MODE_NIGHT_YES
+        return resources.configuration.uiMode and Configuration.UI_MODE_NIGHT_MASK == Configuration.UI_MODE_NIGHT_YES
     }
 }

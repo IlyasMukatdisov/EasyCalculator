@@ -35,8 +35,10 @@ class GraphActivity : AppCompatActivity(), View.OnClickListener, View.OnTouchLis
 
     private var isExpanded = true
 
-    private lateinit var drkGray: ColorStateList
+    private lateinit var darkGrayColor: ColorStateList
+    private lateinit var blackColor: ColorStateList
     private lateinit var whiteColor: ColorStateList
+    private lateinit var semiGrayColor: ColorStateList
 
 
     private lateinit var llMenu: LinearLayout
@@ -161,29 +163,28 @@ class GraphActivity : AppCompatActivity(), View.OnClickListener, View.OnTouchLis
         chart.xAxis.gridColor = Color.WHITE
         chart.legend.textColor = Color.WHITE
 
-        btnMenu.backgroundTintList =
-            ColorStateList.valueOf(ContextCompat.getColor(this, R.color.black))
+        btnMenu.backgroundTintList = blackColor
         btnMenu.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.ic_more_vert_white))
     }
 
     private fun setDefaultNightTheme()
     {
-        btnZero.backgroundTintList = drkGray
-        btnOne.backgroundTintList = drkGray
-        btnTwo.backgroundTintList = drkGray
-        btnThree.backgroundTintList = drkGray
-        btnFour.backgroundTintList = drkGray
-        btnFive.backgroundTintList = drkGray
-        btnSix.backgroundTintList = drkGray
-        btnSeven.backgroundTintList = drkGray
-        btnEight.backgroundTintList = drkGray
-        btnNine.backgroundTintList = drkGray
-        btnDot.backgroundTintList = drkGray
-        btnBackSpace.backgroundTintList = drkGray
+        btnZero.backgroundTintList = darkGrayColor
+        btnOne.backgroundTintList = darkGrayColor
+        btnTwo.backgroundTintList = darkGrayColor
+        btnThree.backgroundTintList = darkGrayColor
+        btnFour.backgroundTintList = darkGrayColor
+        btnFive.backgroundTintList = darkGrayColor
+        btnSix.backgroundTintList = darkGrayColor
+        btnSeven.backgroundTintList = darkGrayColor
+        btnEight.backgroundTintList = darkGrayColor
+        btnNine.backgroundTintList = darkGrayColor
+        btnDot.backgroundTintList = darkGrayColor
+        btnBackSpace.backgroundTintList = darkGrayColor
 
-        btnMinusKeyboard.backgroundTintList = drkGray
+        btnMinusKeyboard.backgroundTintList = darkGrayColor
 
-        edtExp.backgroundTintList = drkGray
+        edtExp.backgroundTintList = darkGrayColor
 
         btnZero.setTextColor(whiteColor)
         btnOne.setTextColor(whiteColor)
@@ -201,18 +202,18 @@ class GraphActivity : AppCompatActivity(), View.OnClickListener, View.OnTouchLis
         btnMinusKeyboard.setTextColor(whiteColor)
 
 
-        btnZeroKeyboard.backgroundTintList = drkGray
-        btnOneKeyboard.backgroundTintList = drkGray
-        btnTwoKeyboard.backgroundTintList = drkGray
-        btnThreeKeyboard.backgroundTintList = drkGray
-        btnFourKeyboard.backgroundTintList = drkGray
-        btnFiveKeyboard.backgroundTintList = drkGray
-        btnSixKeyboard.backgroundTintList = drkGray
-        btnSevenKeyboard.backgroundTintList = drkGray
-        btnEightKeyboard.backgroundTintList = drkGray
-        btnNineKeyboard.backgroundTintList = drkGray
-        btnDotKeyboard.backgroundTintList = drkGray
-        btnBackspaceKeyboard.backgroundTintList = drkGray
+        btnZeroKeyboard.backgroundTintList = darkGrayColor
+        btnOneKeyboard.backgroundTintList = darkGrayColor
+        btnTwoKeyboard.backgroundTintList = darkGrayColor
+        btnThreeKeyboard.backgroundTintList = darkGrayColor
+        btnFourKeyboard.backgroundTintList = darkGrayColor
+        btnFiveKeyboard.backgroundTintList = darkGrayColor
+        btnSixKeyboard.backgroundTintList = darkGrayColor
+        btnSevenKeyboard.backgroundTintList = darkGrayColor
+        btnEightKeyboard.backgroundTintList = darkGrayColor
+        btnNineKeyboard.backgroundTintList = darkGrayColor
+        btnDotKeyboard.backgroundTintList = darkGrayColor
+        btnBackspaceKeyboard.backgroundTintList = darkGrayColor
 
 
         btnZeroKeyboard.setTextColor(whiteColor)
@@ -240,43 +241,31 @@ class GraphActivity : AppCompatActivity(), View.OnClickListener, View.OnTouchLis
                 {
                     MotionEvent.ACTION_DOWN ->
                     {
-                        if (isDarkThemeOn())
-                            btnMenu.backgroundTintList =
-                                drkGray
-                        else btnMenu.backgroundTintList =
-                            ColorStateList.valueOf(Color.GRAY)
+                        if (isDarkThemeOn()) btnMenu.backgroundTintList = darkGrayColor
+                        else btnMenu.backgroundTintList = semiGrayColor
                     }
-                    MotionEvent.ACTION_UP ->
+                    MotionEvent.ACTION_UP   ->
                     {
-                        if (isDarkThemeOn())
-                            btnMenu.backgroundTintList =
-                                ColorStateList.valueOf(ContextCompat.getColor(this, R.color.black))
-                        else btnMenu.backgroundTintList =
-                            whiteColor
+                        if (isDarkThemeOn()) btnMenu.backgroundTintList = blackColor
+                        else btnMenu.backgroundTintList = whiteColor
                         view.performClick()
                     }
                 }
             }
 
-            R.id.ll_menu ->
+            R.id.ll_menu  ->
             {
                 when (motionEvent.action)
                 {
                     MotionEvent.ACTION_DOWN ->
                     {
-                        if (isDarkThemeOn())
-                            btnMenu.backgroundTintList =
-                                drkGray
-                        else btnMenu.backgroundTintList =
-                            ColorStateList.valueOf(Color.GRAY)
+                        if (isDarkThemeOn()) btnMenu.backgroundTintList = darkGrayColor
+                        else btnMenu.backgroundTintList = semiGrayColor
                     }
-                    MotionEvent.ACTION_UP ->
+                    MotionEvent.ACTION_UP   ->
                     {
-                        if (isDarkThemeOn())
-                            btnMenu.backgroundTintList =
-                                ColorStateList.valueOf(ContextCompat.getColor(this, R.color.black))
-                        else btnMenu.backgroundTintList =
-                            whiteColor
+                        if (isDarkThemeOn()) btnMenu.backgroundTintList = blackColor
+                        else btnMenu.backgroundTintList = whiteColor
                         view.performClick()
                     }
                 }
@@ -364,8 +353,10 @@ class GraphActivity : AppCompatActivity(), View.OnClickListener, View.OnTouchLis
     @SuppressLint("ClickableViewAccessibility")
     private fun initViews()
     {
-        drkGray = ColorStateList.valueOf(ContextCompat.getColor(this, R.color.dark_gray))
+        darkGrayColor = ColorStateList.valueOf(ContextCompat.getColor(this, R.color.dark_gray))
         whiteColor = ColorStateList.valueOf(ContextCompat.getColor(this, R.color.white))
+        semiGrayColor = ColorStateList.valueOf(ContextCompat.getColor(this, R.color.semi_gray))
+        blackColor = ColorStateList.valueOf(ContextCompat.getColor(this, R.color.black))
 
         llMenu = findViewById(R.id.ll_menu)
         linearLayoutButtons = findViewById(R.id.ll_buttons)
@@ -520,8 +511,6 @@ class GraphActivity : AppCompatActivity(), View.OnClickListener, View.OnTouchLis
         llMenu.setOnTouchListener(this)
         btnMenu.setOnTouchListener(this)
         llParent = findViewById(R.id.ll_parent)
-        TransitionManager.beginDelayedTransition(llParent)
-
 
         /* edtExp.filters = arrayOf<InputFilter>(LengthFilter(15))
          edtXStart.filters = arrayOf<InputFilter>(LengthFilter(5))
@@ -653,10 +642,7 @@ class GraphActivity : AppCompatActivity(), View.OnClickListener, View.OnTouchLis
 
         val color: Int = if (isDarkThemeOn())
         {
-            Color.argb(
-                255, 100 + rnd.nextInt(156), 100 + rnd.nextInt(156),
-                100 + rnd.nextInt(156)
-            )
+            Color.argb(255, 100 + rnd.nextInt(156), 100 + rnd.nextInt(156), 100 + rnd.nextInt(156))
         }
         else
         {
@@ -690,8 +676,7 @@ class GraphActivity : AppCompatActivity(), View.OnClickListener, View.OnTouchLis
 
     private fun Context.isDarkThemeOn(): Boolean
     {
-        return resources.configuration.uiMode and
-                Configuration.UI_MODE_NIGHT_MASK == Configuration.UI_MODE_NIGHT_YES
+        return resources.configuration.uiMode and Configuration.UI_MODE_NIGHT_MASK == Configuration.UI_MODE_NIGHT_YES
     }
 
     override fun onClick(v: View?)
@@ -700,7 +685,7 @@ class GraphActivity : AppCompatActivity(), View.OnClickListener, View.OnTouchLis
         when (v?.id)
         {
 
-            R.id.edt_graph ->
+            R.id.edt_graph              ->
             {
                 btnKeyboard.text = getString(R.string.btn_more_expanded)
                 isExpanded = true
@@ -708,7 +693,7 @@ class GraphActivity : AppCompatActivity(), View.OnClickListener, View.OnTouchLis
                 llKeyboard.visibility = View.GONE
             }
 
-            R.id.edt_x_begin ->
+            R.id.edt_x_begin            ->
             {
                 btnKeyboard.text = getString(R.string.btn_more_expanded)
                 isExpanded = true
@@ -716,7 +701,7 @@ class GraphActivity : AppCompatActivity(), View.OnClickListener, View.OnTouchLis
                 llKeyboard.visibility = View.VISIBLE
             }
 
-            R.id.edt_x_end ->
+            R.id.edt_x_end              ->
             {
                 btnKeyboard.text = getString(R.string.btn_more_expanded)
                 isExpanded = true
@@ -724,7 +709,7 @@ class GraphActivity : AppCompatActivity(), View.OnClickListener, View.OnTouchLis
                 llKeyboard.visibility = View.VISIBLE
             }
 
-            R.id.edt_x_step ->
+            R.id.edt_x_step             ->
             {
                 btnKeyboard.text = getString(R.string.btn_more_expanded)
                 isExpanded = true
@@ -733,7 +718,7 @@ class GraphActivity : AppCompatActivity(), View.OnClickListener, View.OnTouchLis
             }
 
 
-            R.id.btn_minus_keyboard ->
+            R.id.btn_minus_keyboard     ->
             {
                 if (edtXStart.isFocused)
                 {
@@ -763,7 +748,7 @@ class GraphActivity : AppCompatActivity(), View.OnClickListener, View.OnTouchLis
             }
 
 
-            R.id.btn_keyboard ->
+            R.id.btn_keyboard           ->
             {
                 if (isExpanded)
                 {
@@ -796,7 +781,7 @@ class GraphActivity : AppCompatActivity(), View.OnClickListener, View.OnTouchLis
                 }
             }
 
-            R.id.btn_zero_keyboard ->
+            R.id.btn_zero_keyboard      ->
             {
 
                 if (edtXStart.isFocused && edtXEnd.text.length < 5)
@@ -824,7 +809,7 @@ class GraphActivity : AppCompatActivity(), View.OnClickListener, View.OnTouchLis
                 }
             }
 
-            R.id.btn_one_keyboard ->
+            R.id.btn_one_keyboard       ->
             {
                 if (edtXStart.isFocused && edtXStart.text.length < 5)
                 {
@@ -851,7 +836,7 @@ class GraphActivity : AppCompatActivity(), View.OnClickListener, View.OnTouchLis
                 }
             }
 
-            R.id.btn_two_keyboard ->
+            R.id.btn_two_keyboard       ->
             {
                 if (edtXStart.isFocused && edtXStart.text.length < 5)
                 {
@@ -878,7 +863,7 @@ class GraphActivity : AppCompatActivity(), View.OnClickListener, View.OnTouchLis
                 }
             }
 
-            R.id.btn_three_keyboard ->
+            R.id.btn_three_keyboard     ->
             {
                 if (edtXStart.isFocused && edtXStart.text.length < 5)
                 {
@@ -905,7 +890,7 @@ class GraphActivity : AppCompatActivity(), View.OnClickListener, View.OnTouchLis
                 }
             }
 
-            R.id.btn_four_keyboard ->
+            R.id.btn_four_keyboard      ->
             {
                 if (edtXStart.isFocused && edtXStart.text.length < 5)
                 {
@@ -932,7 +917,7 @@ class GraphActivity : AppCompatActivity(), View.OnClickListener, View.OnTouchLis
                 }
             }
 
-            R.id.btn_five_keyboard ->
+            R.id.btn_five_keyboard      ->
             {
                 if (edtXStart.isFocused && edtXStart.text.length < 5)
                 {
@@ -959,7 +944,7 @@ class GraphActivity : AppCompatActivity(), View.OnClickListener, View.OnTouchLis
                 }
             }
 
-            R.id.btn_six_keyboard ->
+            R.id.btn_six_keyboard       ->
             {
                 if (edtXStart.isFocused && edtXEnd.text.length < 5)
                 {
@@ -987,7 +972,7 @@ class GraphActivity : AppCompatActivity(), View.OnClickListener, View.OnTouchLis
 
             }
 
-            R.id.btn_seven_keyboard ->
+            R.id.btn_seven_keyboard     ->
             {
                 if (edtXStart.isFocused && edtXStart.text.length < 5)
                 {
@@ -1014,7 +999,7 @@ class GraphActivity : AppCompatActivity(), View.OnClickListener, View.OnTouchLis
                 }
             }
 
-            R.id.btn_eight_keyboard ->
+            R.id.btn_eight_keyboard     ->
             {
                 if (edtXStart.isFocused && edtXStart.text.length < 5)
                 {
@@ -1041,7 +1026,7 @@ class GraphActivity : AppCompatActivity(), View.OnClickListener, View.OnTouchLis
                 }
             }
 
-            R.id.btn_nine_keyboard ->
+            R.id.btn_nine_keyboard      ->
             {
                 if (edtXStart.isFocused && edtXStart.text.length < 5)
                 {
@@ -1068,7 +1053,7 @@ class GraphActivity : AppCompatActivity(), View.OnClickListener, View.OnTouchLis
                 }
             }
 
-            R.id.btn_dot_keyboard ->
+            R.id.btn_dot_keyboard       ->
             {
                 if (edtXStart.isFocused)
                 {
@@ -1180,7 +1165,7 @@ class GraphActivity : AppCompatActivity(), View.OnClickListener, View.OnTouchLis
             }
 
 
-            R.id.btn_clear_edt ->
+            R.id.btn_clear_edt          ->
             {
                 if (edtExp.text.isNotEmpty())
                 {
@@ -1188,7 +1173,7 @@ class GraphActivity : AppCompatActivity(), View.OnClickListener, View.OnTouchLis
                 }
             }
 
-            R.id.btn_graph_build ->
+            R.id.btn_graph_build        ->
             {
                 if (buildClickCount == 0)
                 {
@@ -1214,7 +1199,7 @@ class GraphActivity : AppCompatActivity(), View.OnClickListener, View.OnTouchLis
 
             }
 
-            R.id.btn_x ->
+            R.id.btn_x                  ->
             {
                 if (isXInsertable())
                 {
@@ -1225,68 +1210,68 @@ class GraphActivity : AppCompatActivity(), View.OnClickListener, View.OnTouchLis
             }
 
 
-            R.id.btn_zero ->
+            R.id.btn_zero               ->
             {
                 updateEdtExp("0")
                 currentNumDigits++
             }
 
-            R.id.btn_one ->
+            R.id.btn_one                ->
             {
 
                 updateEdtExp("1")
                 currentNumDigits++
             }
 
-            R.id.btn_two ->
+            R.id.btn_two                ->
             {
                 updateEdtExp("2")
                 currentNumDigits++
             }
 
-            R.id.btn_three ->
+            R.id.btn_three              ->
             {
                 updateEdtExp("3")
                 currentNumDigits++
             }
 
-            R.id.btn_four ->
+            R.id.btn_four               ->
             {
                 updateEdtExp("4")
                 currentNumDigits++
             }
 
-            R.id.btn_five ->
+            R.id.btn_five               ->
             {
                 updateEdtExp("5")
                 currentNumDigits++
             }
 
-            R.id.btn_six ->
+            R.id.btn_six                ->
             {
                 updateEdtExp("6")
                 currentNumDigits++
             }
 
-            R.id.btn_seven ->
+            R.id.btn_seven              ->
             {
                 updateEdtExp("7")
                 currentNumDigits++
             }
 
-            R.id.btn_eight ->
+            R.id.btn_eight              ->
             {
                 updateEdtExp("8")
                 currentNumDigits++
             }
 
-            R.id.btn_nine ->
+            R.id.btn_nine               ->
             {
                 updateEdtExp("9")
                 currentNumDigits++
             }
 
-            R.id.btn_division ->
+            R.id.btn_division           ->
             {
                 if (edtExp.text.isNotEmpty())
                 {
@@ -1299,7 +1284,7 @@ class GraphActivity : AppCompatActivity(), View.OnClickListener, View.OnTouchLis
                 currentNumDigits = 0
             }
 
-            R.id.btn_multi ->
+            R.id.btn_multi              ->
             {
                 if (edtExp.text.isNotEmpty())
                 {
@@ -1312,7 +1297,7 @@ class GraphActivity : AppCompatActivity(), View.OnClickListener, View.OnTouchLis
                 currentNumDigits = 0
             }
 
-            R.id.btn_plus ->
+            R.id.btn_plus               ->
             {
                 if (edtExp.text.isNotEmpty())
                 {
@@ -1325,7 +1310,7 @@ class GraphActivity : AppCompatActivity(), View.OnClickListener, View.OnTouchLis
                 currentNumDigits = 0
             }
 
-            R.id.btn_minus ->
+            R.id.btn_minus              ->
             {
                 if (edtExp.text.isNotEmpty())
                 {
@@ -1338,7 +1323,7 @@ class GraphActivity : AppCompatActivity(), View.OnClickListener, View.OnTouchLis
                 currentNumDigits = 0
             }
 
-            R.id.btn_dot ->
+            R.id.btn_dot                ->
             {
                 if (edtExp.text.isNotEmpty())
                 {
@@ -1348,25 +1333,25 @@ class GraphActivity : AppCompatActivity(), View.OnClickListener, View.OnTouchLis
                 else return
             }
 
-            R.id.btn_backspace ->
+            R.id.btn_backspace          ->
             {
                 if (edtExp.text.isNotEmpty()) backspaceFun()
                 else return
             }
 
-            R.id.btn_brackets ->
+            R.id.btn_brackets           ->
             {
                 addBrackets()
                 currentNumDigits = 0
             }
 
-            R.id.btn_square_root ->
+            R.id.btn_square_root        ->
             {
                 updateEdtExp("√(")
                 currentNumDigits = 0
             }
 
-            R.id.btn_exp ->
+            R.id.btn_exp                ->
             {
                 if (edtExp.text.isNotEmpty())
                 {
@@ -1379,63 +1364,59 @@ class GraphActivity : AppCompatActivity(), View.OnClickListener, View.OnTouchLis
                 currentNumDigits = 0
             }
 
-            R.id.btn_pi ->
+            R.id.btn_pi                 ->
             {
                 if (edtExp.text.isNotEmpty())
                 {
-                    if (edtExp.text[edtExp.text.toString().length - 1] == 'e'
-                        || edtExp.text[edtExp.text.toString().length - 1] == 'π'
-                    ) return
+                    if (edtExp.text[edtExp.text.toString().length - 1] == 'e' || edtExp.text[edtExp.text.toString().length - 1] == 'π') return
                 }
                 updateEdtExp("π")
                 currentNumDigits = 0
             }
 
-            R.id.btn_e ->
+            R.id.btn_e                  ->
             {
 
                 if (edtExp.text.isNotEmpty())
                 {
-                    if (edtExp.text[edtExp.text.toString().length - 1] == 'e'
-                        || edtExp.text[edtExp.text.toString().length - 1] == 'π'
-                    ) return
+                    if (edtExp.text[edtExp.text.toString().length - 1] == 'e' || edtExp.text[edtExp.text.toString().length - 1] == 'π') return
                 }
                 updateEdtExp("e")
                 currentNumDigits = 0
             }
 
-            R.id.btn_sin ->
+            R.id.btn_sin                ->
             {
                 updateEdtExp("sin(")
                 currentNumDigits = 0
             }
 
-            R.id.btn_cos ->
+            R.id.btn_cos                ->
             {
                 updateEdtExp("cos(")
                 currentNumDigits = 0
             }
 
-            R.id.btn_tan ->
+            R.id.btn_tan                ->
             {
                 updateEdtExp("tan(")
                 currentNumDigits = 0
             }
 
 
-            R.id.btn_log2 ->
+            R.id.btn_log2               ->
             {
                 updateEdtExp("log2(")
                 currentNumDigits = 0
             }
 
-            R.id.btn_log10 ->
+            R.id.btn_log10              ->
             {
                 updateEdtExp("log10(")
                 currentNumDigits = 0
             }
 
-            R.id.btn_ln ->
+            R.id.btn_ln                 ->
             {
                 updateEdtExp("ln(")
                 currentNumDigits = 0
@@ -1478,10 +1459,7 @@ class GraphActivity : AppCompatActivity(), View.OnClickListener, View.OnTouchLis
             return false
         }
 
-        if (strToAdd.length == 1 && !checkForOperator(
-                strToAdd[0]
-            ) && currentNumDigits >= 9
-        )
+        if (strToAdd.length == 1 && !checkForOperator(strToAdd[0]) && currentNumDigits >= 9)
         {
             return false
         }
@@ -1572,8 +1550,7 @@ class GraphActivity : AppCompatActivity(), View.OnClickListener, View.OnTouchLis
 
         if (cursorPos != 0 && textLength != 0)
         {
-            val selection: SpannableStringBuilder =
-                edtExp.text as SpannableStringBuilder
+            val selection: SpannableStringBuilder = edtExp.text as SpannableStringBuilder
             selection.replace(cursorPos - 1, cursorPos, "")
             if (!checkForOperator(lastChar))
             {
@@ -1656,11 +1633,7 @@ class GraphActivity : AppCompatActivity(), View.OnClickListener, View.OnTouchLis
             return
         }
 
-        if (edtExp.text.toString()[cursorPos - 1] == '+' || edtExp.text.toString()[cursorPos - 1] == '-' ||
-            edtExp.text.toString()[cursorPos - 1] == '×' || edtExp.text.toString()[cursorPos - 1] == '÷' ||
-            edtExp.text.toString()[cursorPos - 1] == '^' || edtExp.text.toString()[cursorPos - 1] == '!' ||
-            edtExp.text.toString()[cursorPos - 1] == '√'
-        )
+        if (edtExp.text.toString()[cursorPos - 1] == '+' || edtExp.text.toString()[cursorPos - 1] == '-' || edtExp.text.toString()[cursorPos - 1] == '×' || edtExp.text.toString()[cursorPos - 1] == '÷' || edtExp.text.toString()[cursorPos - 1] == '^' || edtExp.text.toString()[cursorPos - 1] == '!' || edtExp.text.toString()[cursorPos - 1] == '√')
         {
             updateEdtExp("(")
             edtExp.setSelection(cursorPos + 1)
@@ -1774,7 +1747,7 @@ class GraphActivity : AppCompatActivity(), View.OnClickListener, View.OnTouchLis
         {
             when (shape)
             {
-                SHAPE_ROUNDED ->
+                SHAPE_ROUNDED   ->
                 {
                     setButtonsRounded()
                 }
@@ -1782,7 +1755,7 @@ class GraphActivity : AppCompatActivity(), View.OnClickListener, View.OnTouchLis
                 {
                     setButtonsRectangle()
                 }
-                SHAPE_CIRCLE ->
+                SHAPE_CIRCLE    ->
                 {
                     setButtonsCircle()
                 }
@@ -1870,8 +1843,7 @@ class GraphActivity : AppCompatActivity(), View.OnClickListener, View.OnTouchLis
         btnDivision.background = circle
         btnExp.background = circle
         btnPi.background = circle
-        btnSquareRoot.background =
-            circle
+        btnSquareRoot.background = circle
         btnBrackets.background = circle
         btnSin.background = circle
         btnCos.background = circle
@@ -1924,8 +1896,7 @@ class GraphActivity : AppCompatActivity(), View.OnClickListener, View.OnTouchLis
         btnDivision.background = rectangle
         btnExp.background = rectangle
         btnPi.background = rectangle
-        btnSquareRoot.background =
-            rectangle
+        btnSquareRoot.background = rectangle
         btnBrackets.background = rectangle
         btnSin.background = rectangle
         btnCos.background = rectangle
@@ -1979,8 +1950,7 @@ class GraphActivity : AppCompatActivity(), View.OnClickListener, View.OnTouchLis
         btnDivision.background = rounded
         btnExp.background = rounded
         btnPi.background = rounded
-        btnSquareRoot.background =
-            rounded
+        btnSquareRoot.background = rounded
         btnBrackets.background = rounded
         btnSin.background = rounded
         btnCos.background = rounded

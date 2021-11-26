@@ -22,8 +22,12 @@ import com.gmail.mukatdisovilyas.easycalculator.utils.*
 
 class CustomizationActivity : AppCompatActivity(), View.OnClickListener, View.OnTouchListener
 {
+    private lateinit var blackColor: ColorStateList
+    private lateinit var whiteColor: ColorStateList
+    private lateinit var darkGrayColor: ColorStateList
+    private lateinit var lightGrayColor: ColorStateList
 
-    private lateinit var llMenu : LinearLayout
+    private lateinit var llMenu: LinearLayout
 
     private lateinit var btnNumbersColor: Button
     private lateinit var btnActionsColor: Button
@@ -80,21 +84,15 @@ class CustomizationActivity : AppCompatActivity(), View.OnClickListener, View.On
 
         if (isDarkThemeOn())
         {
-            btnMenu.backgroundTintList =
-                ColorStateList.valueOf(ContextCompat.getColor(this, R.color.black))
+            btnMenu.backgroundTintList = blackColor
             btnMenu.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.ic_more_vert_white))
             btnNumbersColor.setTextColor(ContextCompat.getColor(this, R.color.white))
-            tvTitle.setTextColor(
-                ColorStateList.valueOf(ContextCompat.getColor(this, R.color.white)))
-            tvNumbers.setTextColor(
-                ColorStateList.valueOf(ContextCompat.getColor(this, R.color.white)))
-            tvActions.setTextColor(
-                ColorStateList.valueOf(ContextCompat.getColor(this, R.color.white)))
-            tvAc.setTextColor(ColorStateList.valueOf(ContextCompat.getColor(this, R.color.white)))
-            tvEqual.setTextColor(
-                ColorStateList.valueOf(ContextCompat.getColor(this, R.color.white)))
-            tvTextColor.setTextColor(
-                ColorStateList.valueOf(ContextCompat.getColor(this, R.color.white)))
+            tvTitle.setTextColor(whiteColor)
+            tvNumbers.setTextColor(whiteColor)
+            tvActions.setTextColor(whiteColor)
+            tvAc.setTextColor(whiteColor)
+            tvEqual.setTextColor(whiteColor)
+            tvTextColor.setTextColor(whiteColor)
 
         }
 
@@ -107,50 +105,50 @@ class CustomizationActivity : AppCompatActivity(), View.OnClickListener, View.On
 
         }
 
-        setButtonsColor()
+        customization()
 
         initPopUpMenu()
 
 
     }
 
-    override fun onTouch(view: View, motionEvent: MotionEvent): Boolean {
-        when (view.id) {
-            R.id.btn_menu -> {
-                when (motionEvent.action) {
-                    MotionEvent.ACTION_DOWN -> {
-                        if(isDarkThemeOn())
-                            btnMenu.backgroundTintList =
-                                ColorStateList.valueOf(ContextCompat.getColor(this, R.color.dark_gray))
-                        else btnMenu.backgroundTintList =
-                            ColorStateList.valueOf(Color.GRAY)
+    override fun onTouch(view: View, motionEvent: MotionEvent): Boolean
+    {
+        when (view.id)
+        {
+            R.id.btn_menu ->
+            {
+                when (motionEvent.action)
+                {
+                    MotionEvent.ACTION_DOWN ->
+                    {
+                        if (isDarkThemeOn()) btnMenu.backgroundTintList =
+                            ColorStateList.valueOf(ContextCompat.getColor(this, R.color.dark_gray))
+                        else btnMenu.backgroundTintList = ColorStateList.valueOf(Color.GRAY)
                     }
-                    MotionEvent.ACTION_UP -> {
-                        if(isDarkThemeOn())
-                            btnMenu.backgroundTintList =
-                                ColorStateList.valueOf(ContextCompat.getColor(this, R.color.black))
-                        else btnMenu.backgroundTintList =
-                            ColorStateList.valueOf(ContextCompat.getColor(this, R.color.white))
+                    MotionEvent.ACTION_UP   ->
+                    {
+                        if (isDarkThemeOn()) btnMenu.backgroundTintList = blackColor
+                        else btnMenu.backgroundTintList = whiteColor
                         view.performClick()
                     }
                 }
             }
 
-            R.id.ll_menu -> {
-                when (motionEvent.action) {
-                    MotionEvent.ACTION_DOWN -> {
-                        if(isDarkThemeOn())
-                            btnMenu.backgroundTintList =
-                                ColorStateList.valueOf(ContextCompat.getColor(this, R.color.dark_gray))
-                        else btnMenu.backgroundTintList =
-                            ColorStateList.valueOf(Color.GRAY)
+            R.id.ll_menu  ->
+            {
+                when (motionEvent.action)
+                {
+                    MotionEvent.ACTION_DOWN ->
+                    {
+                        if (isDarkThemeOn()) btnMenu.backgroundTintList =
+                            ColorStateList.valueOf(ContextCompat.getColor(this, R.color.dark_gray))
+                        else btnMenu.backgroundTintList = ColorStateList.valueOf(Color.GRAY)
                     }
-                    MotionEvent.ACTION_UP -> {
-                        if(isDarkThemeOn())
-                            btnMenu.backgroundTintList =
-                                ColorStateList.valueOf(ContextCompat.getColor(this, R.color.black))
-                        else btnMenu.backgroundTintList =
-                            ColorStateList.valueOf(ContextCompat.getColor(this, R.color.white))
+                    MotionEvent.ACTION_UP   ->
+                    {
+                        if (isDarkThemeOn()) btnMenu.backgroundTintList = blackColor
+                        else btnMenu.backgroundTintList = whiteColor
                         view.performClick()
                     }
                 }
@@ -161,7 +159,7 @@ class CustomizationActivity : AppCompatActivity(), View.OnClickListener, View.On
     }
 
 
-    private fun setTextSizes(textSize : Float)
+    private fun setTextSizes(textSize: Float)
     {
         btnNumbersColor.textSize = textSize
         btnActionsColor.textSize = textSize
@@ -175,7 +173,7 @@ class CustomizationActivity : AppCompatActivity(), View.OnClickListener, View.On
         tvActions.textSize = textSize
         tvAc.textSize = textSize
         tvEqual.textSize = textSize
-        tvTextColor.textSize=textSize
+        tvTextColor.textSize = textSize
         tvTitle.textSize = textSize * 3 / 2
 
         btnRounded.textSize = textSize
@@ -184,7 +182,7 @@ class CustomizationActivity : AppCompatActivity(), View.OnClickListener, View.On
 
     }
 
-    private fun setButtonsColor()
+    private fun customization()
     {
         if (!CustomModelDatabaseHelper(this).isCustomizationEmpty())
         {
@@ -195,46 +193,21 @@ class CustomizationActivity : AppCompatActivity(), View.OnClickListener, View.On
             val equalColor = list[0].equalButtonColor
             val textColor = list[0].textColor
 
-            when (list[0].shape)
-            {
-                SHAPE_ROUNDED->
-                {
-                    btnNumbersColor.background = ContextCompat.getDrawable(this,R.drawable.buttons_round)
-                    btnActionsColor.background = ContextCompat.getDrawable(this,R.drawable.buttons_round)
-                    btnAcColor.background = ContextCompat.getDrawable(this,R.drawable.buttons_round)
-                    btnEqualColor.background = ContextCompat.getDrawable(this,R.drawable.buttons_round)
-                    btnTextColor.background = ContextCompat.getDrawable(this,R.drawable.buttons_round)
-                }
-                SHAPE_RECTANGLE ->
-                {
-                    btnNumbersColor.background = ContextCompat.getDrawable(this,R.drawable.buttons_rectangle)
-                    btnActionsColor.background = ContextCompat.getDrawable(this,R.drawable.buttons_rectangle)
-                    btnAcColor.background = ContextCompat.getDrawable(this,R.drawable.buttons_rectangle)
-                    btnEqualColor.background = ContextCompat.getDrawable(this,R.drawable.buttons_rectangle)
-                    btnTextColor.background = ContextCompat.getDrawable(this,R.drawable.buttons_rectangle)
-                }
+            setButtonsShape(list[0].shape)
 
-                SHAPE_CIRCLE ->
-                {
-                    btnNumbersColor.background = ContextCompat.getDrawable(this,R.drawable.buttons_circle)
-                    btnActionsColor.background = ContextCompat.getDrawable(this,R.drawable.buttons_circle)
-                    btnAcColor.background = ContextCompat.getDrawable(this,R.drawable.buttons_circle)
-                    btnEqualColor.background = ContextCompat.getDrawable(this,R.drawable.buttons_circle)
-                    btnTextColor.background = ContextCompat.getDrawable(this,R.drawable.buttons_circle)
-                }
-            }
 
-            btnNumbersColor.backgroundTintList =
-                ColorStateList.valueOf(Color.parseColor(numbersColor))
+            val nColor = ColorStateList.valueOf(Color.parseColor(numbersColor))
+
+            btnNumbersColor.backgroundTintList = nColor
 
             btnActionsColor.backgroundTintList =
                 ColorStateList.valueOf(Color.parseColor(actionsColor))
             btnAcColor.backgroundTintList = ColorStateList.valueOf(Color.parseColor(acColor))
             btnEqualColor.backgroundTintList = ColorStateList.valueOf(Color.parseColor(equalColor))
 
-            btnRounded.backgroundTintList = ColorStateList.valueOf(Color.parseColor(numbersColor))
-            btnRectangle.backgroundTintList = ColorStateList.valueOf(Color.parseColor(numbersColor))
-            btnCircle.backgroundTintList = ColorStateList.valueOf(Color.parseColor(numbersColor))
+            btnRounded.backgroundTintList = nColor
+            btnRectangle.backgroundTintList = nColor
+            btnCircle.backgroundTintList = nColor
             btnTextColor.backgroundTintList = ColorStateList.valueOf(Color.parseColor(textColor))
 
         }
@@ -242,27 +215,22 @@ class CustomizationActivity : AppCompatActivity(), View.OnClickListener, View.On
         {
             if (this.isDarkThemeOn())
             {
-                btnNumbersColor.backgroundTintList =
-                    AppCompatResources.getColorStateList(this, R.color.dark_gray)
-                btnRounded.backgroundTintList =
-                    AppCompatResources.getColorStateList(this, R.color.dark_gray)
-                btnRectangle.backgroundTintList =
-                    AppCompatResources.getColorStateList(this, R.color.dark_gray)
-                btnCircle.backgroundTintList = AppCompatResources.getColorStateList(this, R.color.dark_gray)
-                btnTextColor.backgroundTintList = AppCompatResources.getColorStateList(this, R.color.white)
+                btnNumbersColor.backgroundTintList = darkGrayColor
+                btnRounded.backgroundTintList = darkGrayColor
+                btnRectangle.backgroundTintList = darkGrayColor
+                btnCircle.backgroundTintList = darkGrayColor
+                btnTextColor.backgroundTintList =
+                    AppCompatResources.getColorStateList(this, R.color.white)
 
             }
             else
             {
-                btnNumbersColor.backgroundTintList =
-                    AppCompatResources.getColorStateList(this, R.color.light_gray)
-                btnRectangle.backgroundTintList =
-                    AppCompatResources.getColorStateList(this, R.color.light_gray)
-                btnRounded.backgroundTintList =
-                    AppCompatResources.getColorStateList(this, R.color.light_gray)
-                btnCircle.backgroundTintList =
-                    AppCompatResources.getColorStateList(this, R.color.light_gray)
-                btnTextColor.backgroundTintList = AppCompatResources.getColorStateList(this, R.color.black)
+                btnNumbersColor.backgroundTintList = lightGrayColor
+                btnRectangle.backgroundTintList = lightGrayColor
+                btnRounded.backgroundTintList = lightGrayColor
+                btnCircle.backgroundTintList = lightGrayColor
+                btnTextColor.backgroundTintList =
+                    AppCompatResources.getColorStateList(this, R.color.black)
             }
             btnActionsColor.backgroundTintList =
                 AppCompatResources.getColorStateList(this, R.color.light_blue)
@@ -274,16 +242,40 @@ class CustomizationActivity : AppCompatActivity(), View.OnClickListener, View.On
         }
     }
 
-    private fun Context.isDarkThemeOn(): Boolean
+    private fun setButtonsShape(sh: String)
     {
-        return resources.configuration.uiMode and
-                Configuration.UI_MODE_NIGHT_MASK == UI_MODE_NIGHT_YES
+        var shapeDrawable = ContextCompat.getDrawable(this, R.drawable.buttons_round)
+        when (sh)
+        {
+            SHAPE_ROUNDED   -> shapeDrawable =
+                ContextCompat.getDrawable(this, R.drawable.buttons_round)
+            SHAPE_RECTANGLE -> shapeDrawable =
+                ContextCompat.getDrawable(this, R.drawable.buttons_rectangle)
+            SHAPE_CIRCLE    -> shapeDrawable =
+                ContextCompat.getDrawable(this, R.drawable.buttons_circle)
+        }
+        btnNumbersColor.background = shapeDrawable
+        btnActionsColor.background = shapeDrawable
+        btnAcColor.background = shapeDrawable
+        btnEqualColor.background = shapeDrawable
+        btnTextColor.background = shapeDrawable
     }
 
+    private fun Context.isDarkThemeOn(): Boolean
+    {
+        return resources.configuration.uiMode and Configuration.UI_MODE_NIGHT_MASK == UI_MODE_NIGHT_YES
+    }
+
+    @SuppressLint("ClickableViewAccessibility")
     private fun initViews()
     {
 
-        llMenu=findViewById(R.id.ll_menu)
+        blackColor = ColorStateList.valueOf(ContextCompat.getColor(this, R.color.black))
+        whiteColor = ColorStateList.valueOf(ContextCompat.getColor(this, R.color.white))
+        darkGrayColor = ColorStateList.valueOf(ContextCompat.getColor(this, R.color.dark_gray))
+        lightGrayColor = ColorStateList.valueOf(ContextCompat.getColor(this, R.color.light_gray))
+
+        llMenu = findViewById(R.id.ll_menu)
 
         btnNumbersColor = findViewById(R.id.btn_numbers_color)
         btnActionsColor = findViewById(R.id.btn_actions_color)
@@ -366,7 +358,7 @@ class CustomizationActivity : AppCompatActivity(), View.OnClickListener, View.On
                 }
                 colorPickerDialog?.show()
             }
-            R.id.btn_ac_color    ->
+            R.id.btn_ac_color      ->
             {
                 colorPickerDialog?.setOnColorPickedListener { _, hexVal ->
                     btnAcColor.backgroundTintList = ColorStateList.valueOf(Color.parseColor(hexVal))
@@ -376,7 +368,7 @@ class CustomizationActivity : AppCompatActivity(), View.OnClickListener, View.On
                 }
                 colorPickerDialog?.show()
             }
-            R.id.btn_equal_color ->
+            R.id.btn_equal_color   ->
             {
                 colorPickerDialog?.setOnColorPickedListener { _, hexVal ->
                     btnEqualColor.backgroundTintList =
@@ -388,33 +380,44 @@ class CustomizationActivity : AppCompatActivity(), View.OnClickListener, View.On
                 colorPickerDialog?.show()
             }
 
-            R.id.btn_text_color   ->
+            R.id.btn_text_color    ->
             {
                 colorPickerDialog?.setOnColorPickedListener { _, hexVal ->
                     btnTextColor.backgroundTintList =
                         ColorStateList.valueOf(Color.parseColor(hexVal))
                     textColor = hexVal
                     textColorPicked = true
+                    setButtonsTextColor()
                     shouldEnableBtnSave()
-                    btnNumbersColor.setTextColor(ColorStateList.valueOf(Color.parseColor(textColor)))
-                    btnActionsColor.setTextColor(ColorStateList.valueOf(Color.parseColor(textColor)))
-                    btnAcColor.setTextColor(ColorStateList.valueOf(Color.parseColor(textColor)))
-                    btnEqualColor.setTextColor(ColorStateList.valueOf(Color.parseColor(textColor)))
-                    btnRounded.setTextColor(ColorStateList.valueOf(Color.parseColor(textColor)))
-                    btnRectangle.setTextColor(ColorStateList.valueOf(Color.parseColor(textColor)))
-                    btnCircle.setTextColor(ColorStateList.valueOf(Color.parseColor(textColor)))
+
                 }
                 colorPickerDialog?.show()
             }
 
-            R.id.btn_cc_save    ->
+            R.id.btn_cc_save       ->
             {
                 val intent = Intent(this, MainActivity::class.java)
                 val customColorHelper = CustomModelDatabaseHelper(this)
-                customColorHelper.addOne(numbersColor, actionsColor, acColor, equalColor, textColor, shape)
+                customColorHelper.addOne(numbersColor,
+                    actionsColor,
+                    acColor,
+                    equalColor,
+                    textColor,
+                    shape)
                 startActivity(intent)
             }
         }
+    }
+
+    private fun setButtonsTextColor()
+    {
+        btnNumbersColor.setTextColor(ColorStateList.valueOf(Color.parseColor(textColor)))
+        btnActionsColor.setTextColor(ColorStateList.valueOf(Color.parseColor(textColor)))
+        btnAcColor.setTextColor(ColorStateList.valueOf(Color.parseColor(textColor)))
+        btnEqualColor.setTextColor(ColorStateList.valueOf(Color.parseColor(textColor)))
+        btnRounded.setTextColor(ColorStateList.valueOf(Color.parseColor(textColor)))
+        btnRectangle.setTextColor(ColorStateList.valueOf(Color.parseColor(textColor)))
+        btnCircle.setTextColor(ColorStateList.valueOf(Color.parseColor(textColor)))
     }
 
 
@@ -434,8 +437,9 @@ class CustomizationActivity : AppCompatActivity(), View.OnClickListener, View.On
                             val helper = CustomModelDatabaseHelper(this)
                             if (helper.clear())
                             {
-                                setButtonsColor()
-                                Toast.makeText(this, "Colors successfully restored!",
+                                customization()
+                                Toast.makeText(this,
+                                    "Colors successfully restored!",
                                     Toast.LENGTH_SHORT).show()
                             }
                             else
@@ -444,8 +448,7 @@ class CustomizationActivity : AppCompatActivity(), View.OnClickListener, View.On
                                     "Something went wrong. Please try again later!",
                                     Toast.LENGTH_SHORT).show()
                             }
-                        }.setNegativeButton("No"
-                        ) { _, _ -> }.show()
+                        }.setNegativeButton("No") { _, _ -> }.show()
                 }
             }
             false
