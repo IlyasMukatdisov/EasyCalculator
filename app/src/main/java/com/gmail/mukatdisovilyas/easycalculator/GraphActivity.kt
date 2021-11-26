@@ -1,18 +1,16 @@
 package com.gmail.mukatdisovilyas.easycalculator
 
-    import android.annotation.SuppressLint
-    import android.content.Context
+import android.annotation.SuppressLint
+import android.content.Context
 import android.content.res.ColorStateList
 import android.content.res.Configuration
 import android.graphics.Color
 import android.os.Build
 import android.os.Bundle
-import android.text.InputFilter
-import android.text.InputFilter.LengthFilter
 import android.text.SpannableStringBuilder
-    import android.transition.TransitionManager
-    import android.view.MotionEvent
-    import android.view.View
+import android.transition.TransitionManager
+import android.view.MotionEvent
+import android.view.View
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
@@ -37,7 +35,11 @@ class GraphActivity : AppCompatActivity(), View.OnClickListener, View.OnTouchLis
 
     private var isExpanded = true
 
-    private lateinit var llMenu : LinearLayout
+    private lateinit var drkGray: ColorStateList
+    private lateinit var whiteColor: ColorStateList
+
+
+    private lateinit var llMenu: LinearLayout
 
     private lateinit var linearLayoutButtons: LinearLayout
     private lateinit var llParent: LinearLayout
@@ -124,153 +126,8 @@ class GraphActivity : AppCompatActivity(), View.OnClickListener, View.OnTouchLis
         initPopUpMenu()
 
 
-        if (!isEmptyCustomColor())
-        {
-            customization()
-        }
-        else
-        {
-            if (isDarkThemeOn())
-            {
-                btnZero.backgroundTintList =
-                    ColorStateList.valueOf(ContextCompat.getColor(this, R.color.dark_gray))
-                btnOne.backgroundTintList =
-                    ColorStateList.valueOf(ContextCompat.getColor(this, R.color.dark_gray))
-                btnTwo.backgroundTintList =
-                    ColorStateList.valueOf(ContextCompat.getColor(this, R.color.dark_gray))
-                btnThree.backgroundTintList =
-                    ColorStateList.valueOf(ContextCompat.getColor(this, R.color.dark_gray))
-                btnFour.backgroundTintList =
-                    ColorStateList.valueOf(ContextCompat.getColor(this, R.color.dark_gray))
-                btnFive.backgroundTintList =
-                    ColorStateList.valueOf(ContextCompat.getColor(this, R.color.dark_gray))
-                btnSix.backgroundTintList =
-                    ColorStateList.valueOf(ContextCompat.getColor(this, R.color.dark_gray))
-                btnSeven.backgroundTintList =
-                    ColorStateList.valueOf(ContextCompat.getColor(this, R.color.dark_gray))
-                btnEight.backgroundTintList =
-                    ColorStateList.valueOf(ContextCompat.getColor(this, R.color.dark_gray))
-                btnNine.backgroundTintList =
-                    ColorStateList.valueOf(ContextCompat.getColor(this, R.color.dark_gray))
-                btnDot.backgroundTintList =
-                    ColorStateList.valueOf(ContextCompat.getColor(this, R.color.dark_gray))
-                btnBackSpace.backgroundTintList =
-                    ColorStateList.valueOf(ContextCompat.getColor(this, R.color.dark_gray))
-
-                btnMinusKeyboard.backgroundTintList =
-                    ColorStateList.valueOf(ContextCompat.getColor(this, R.color.dark_gray))
-
-                edtExp.backgroundTintList =
-                    ColorStateList.valueOf(ContextCompat.getColor(this, R.color.dark_gray))
-
-                btnZero.setTextColor(
-                    ColorStateList.valueOf(ContextCompat.getColor(this, R.color.white))
-                )
-                btnOne.setTextColor(
-                    ColorStateList.valueOf(ContextCompat.getColor(this, R.color.white))
-                )
-                btnTwo.setTextColor(
-                    ColorStateList.valueOf(ContextCompat.getColor(this, R.color.white))
-                )
-                btnThree.setTextColor(
-                    ColorStateList.valueOf(ContextCompat.getColor(this, R.color.white))
-                )
-                btnFour.setTextColor(
-                    ColorStateList.valueOf(ContextCompat.getColor(this, R.color.white))
-                )
-                btnFive.setTextColor(
-                    ColorStateList.valueOf(ContextCompat.getColor(this, R.color.white))
-                )
-                btnSix.setTextColor(
-                    ColorStateList.valueOf(ContextCompat.getColor(this, R.color.white))
-                )
-                btnSeven.setTextColor(
-                    ColorStateList.valueOf(ContextCompat.getColor(this, R.color.white))
-                )
-                btnEight.setTextColor(
-                    ColorStateList.valueOf(ContextCompat.getColor(this, R.color.white))
-                )
-                btnNine.setTextColor(
-                    ColorStateList.valueOf(ContextCompat.getColor(this, R.color.white))
-                )
-                btnDot.setTextColor(
-                    ColorStateList.valueOf(ContextCompat.getColor(this, R.color.white))
-                )
-                btnBackSpace.setTextColor(
-                    ColorStateList.valueOf(ContextCompat.getColor(this, R.color.white))
-                )
-
-                btnMinusKeyboard.setTextColor(
-                    ColorStateList.valueOf(ContextCompat.getColor(this, R.color.white))
-                )
-
-
-                btnZeroKeyboard.backgroundTintList =
-                    ColorStateList.valueOf(ContextCompat.getColor(this, R.color.dark_gray))
-                btnOneKeyboard.backgroundTintList =
-                    ColorStateList.valueOf(ContextCompat.getColor(this, R.color.dark_gray))
-                btnTwoKeyboard.backgroundTintList =
-                    ColorStateList.valueOf(ContextCompat.getColor(this, R.color.dark_gray))
-                btnThreeKeyboard.backgroundTintList =
-                    ColorStateList.valueOf(ContextCompat.getColor(this, R.color.dark_gray))
-                btnFourKeyboard.backgroundTintList =
-                    ColorStateList.valueOf(ContextCompat.getColor(this, R.color.dark_gray))
-                btnFiveKeyboard.backgroundTintList =
-                    ColorStateList.valueOf(ContextCompat.getColor(this, R.color.dark_gray))
-                btnSixKeyboard.backgroundTintList =
-                    ColorStateList.valueOf(ContextCompat.getColor(this, R.color.dark_gray))
-                btnSevenKeyboard.backgroundTintList =
-                    ColorStateList.valueOf(ContextCompat.getColor(this, R.color.dark_gray))
-                btnEightKeyboard.backgroundTintList =
-                    ColorStateList.valueOf(ContextCompat.getColor(this, R.color.dark_gray))
-                btnNineKeyboard.backgroundTintList =
-                    ColorStateList.valueOf(ContextCompat.getColor(this, R.color.dark_gray))
-                btnDotKeyboard.backgroundTintList =
-                    ColorStateList.valueOf(ContextCompat.getColor(this, R.color.dark_gray))
-                btnBackspaceKeyboard.backgroundTintList =
-                    ColorStateList.valueOf(ContextCompat.getColor(this, R.color.dark_gray))
-
-
-                btnZeroKeyboard.setTextColor(
-                    ColorStateList.valueOf(ContextCompat.getColor(this, R.color.white))
-                )
-                btnOneKeyboard.setTextColor(
-                    ColorStateList.valueOf(ContextCompat.getColor(this, R.color.white))
-                )
-                btnTwoKeyboard.setTextColor(
-                    ColorStateList.valueOf(ContextCompat.getColor(this, R.color.white))
-                )
-                btnThreeKeyboard.setTextColor(
-                    ColorStateList.valueOf(ContextCompat.getColor(this, R.color.white))
-                )
-                btnFourKeyboard.setTextColor(
-                    ColorStateList.valueOf(ContextCompat.getColor(this, R.color.white))
-                )
-                btnFiveKeyboard.setTextColor(
-                    ColorStateList.valueOf(ContextCompat.getColor(this, R.color.white))
-                )
-                btnSixKeyboard.setTextColor(
-                    ColorStateList.valueOf(ContextCompat.getColor(this, R.color.white))
-                )
-                btnSevenKeyboard.setTextColor(
-                    ColorStateList.valueOf(ContextCompat.getColor(this, R.color.white))
-                )
-                btnEightKeyboard.setTextColor(
-                    ColorStateList.valueOf(ContextCompat.getColor(this, R.color.white))
-                )
-                btnNineKeyboard.setTextColor(
-                    ColorStateList.valueOf(ContextCompat.getColor(this, R.color.white))
-                )
-                btnDotKeyboard.setTextColor(
-                    ColorStateList.valueOf(ContextCompat.getColor(this, R.color.white))
-                )
-                btnBackspaceKeyboard.setTextColor(
-                    ColorStateList.valueOf(ContextCompat.getColor(this, R.color.white))
-                )
-
-
-            }
-        }
+        if (!isEmptyCustomColor()) customization()
+        else if (isDarkThemeOn()) setDefaultNightTheme()
 
         if (intent.hasExtra(MAIN_TEXT_SIZE))
         {
@@ -283,69 +140,143 @@ class GraphActivity : AppCompatActivity(), View.OnClickListener, View.OnTouchLis
         val marker: IMarker = MyMarkerView(this, R.layout.chart_marker)
         chart.marker = marker
 
-
-        if (isDarkThemeOn())
-        {
-            chart.axisLeft.textColor = Color.WHITE
-            chart.axisLeft.axisLineColor = Color.WHITE
-            chart.axisLeft.gridColor = Color.WHITE
-
-            chart.axisRight.textColor = Color.WHITE
-            chart.axisRight.axisLineColor = Color.WHITE
-            chart.axisRight.gridColor = Color.WHITE
-
-            chart.xAxis.textColor = Color.WHITE
-            chart.xAxis.axisLineColor = Color.WHITE
-            chart.xAxis.gridColor = Color.WHITE
-            chart.legend.textColor = Color.WHITE
-
-            btnMenu.backgroundTintList =
-                ColorStateList.valueOf(ContextCompat.getColor(this, R.color.black))
-            btnMenu.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.ic_more_vert_white))
-        }
+        if (isDarkThemeOn()) setDarkChartMenu()
         chart.legend.textSize = 18f
 
 
     }
 
+    private fun setDarkChartMenu()
+    {
+        chart.axisLeft.textColor = Color.WHITE
+        chart.axisLeft.axisLineColor = Color.WHITE
+        chart.axisLeft.gridColor = Color.WHITE
 
-    override fun onTouch(view: View, motionEvent: MotionEvent): Boolean {
-        when (view.id) {
-            R.id.btn_menu -> {
-                when (motionEvent.action) {
-                    MotionEvent.ACTION_DOWN -> {
-                        if(isDarkThemeOn())
+        chart.axisRight.textColor = Color.WHITE
+        chart.axisRight.axisLineColor = Color.WHITE
+        chart.axisRight.gridColor = Color.WHITE
+
+        chart.xAxis.textColor = Color.WHITE
+        chart.xAxis.axisLineColor = Color.WHITE
+        chart.xAxis.gridColor = Color.WHITE
+        chart.legend.textColor = Color.WHITE
+
+        btnMenu.backgroundTintList =
+            ColorStateList.valueOf(ContextCompat.getColor(this, R.color.black))
+        btnMenu.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.ic_more_vert_white))
+    }
+
+    private fun setDefaultNightTheme()
+    {
+        btnZero.backgroundTintList = drkGray
+        btnOne.backgroundTintList = drkGray
+        btnTwo.backgroundTintList = drkGray
+        btnThree.backgroundTintList = drkGray
+        btnFour.backgroundTintList = drkGray
+        btnFive.backgroundTintList = drkGray
+        btnSix.backgroundTintList = drkGray
+        btnSeven.backgroundTintList = drkGray
+        btnEight.backgroundTintList = drkGray
+        btnNine.backgroundTintList = drkGray
+        btnDot.backgroundTintList = drkGray
+        btnBackSpace.backgroundTintList = drkGray
+
+        btnMinusKeyboard.backgroundTintList = drkGray
+
+        edtExp.backgroundTintList = drkGray
+
+        btnZero.setTextColor(whiteColor)
+        btnOne.setTextColor(whiteColor)
+        btnTwo.setTextColor(whiteColor)
+        btnThree.setTextColor(whiteColor)
+        btnFour.setTextColor(whiteColor)
+        btnFive.setTextColor(whiteColor)
+        btnSix.setTextColor(whiteColor)
+        btnSeven.setTextColor(whiteColor)
+        btnEight.setTextColor(whiteColor)
+        btnNine.setTextColor(whiteColor)
+        btnDot.setTextColor(whiteColor)
+        btnBackSpace.setTextColor(whiteColor)
+
+        btnMinusKeyboard.setTextColor(whiteColor)
+
+
+        btnZeroKeyboard.backgroundTintList = drkGray
+        btnOneKeyboard.backgroundTintList = drkGray
+        btnTwoKeyboard.backgroundTintList = drkGray
+        btnThreeKeyboard.backgroundTintList = drkGray
+        btnFourKeyboard.backgroundTintList = drkGray
+        btnFiveKeyboard.backgroundTintList = drkGray
+        btnSixKeyboard.backgroundTintList = drkGray
+        btnSevenKeyboard.backgroundTintList = drkGray
+        btnEightKeyboard.backgroundTintList = drkGray
+        btnNineKeyboard.backgroundTintList = drkGray
+        btnDotKeyboard.backgroundTintList = drkGray
+        btnBackspaceKeyboard.backgroundTintList = drkGray
+
+
+        btnZeroKeyboard.setTextColor(whiteColor)
+        btnOneKeyboard.setTextColor(whiteColor)
+        btnTwoKeyboard.setTextColor(whiteColor)
+        btnThreeKeyboard.setTextColor(whiteColor)
+        btnFourKeyboard.setTextColor(whiteColor)
+        btnFiveKeyboard.setTextColor(whiteColor)
+        btnSixKeyboard.setTextColor(whiteColor)
+        btnSevenKeyboard.setTextColor(whiteColor)
+        btnEightKeyboard.setTextColor(whiteColor)
+        btnNineKeyboard.setTextColor(whiteColor)
+        btnDotKeyboard.setTextColor(whiteColor)
+        btnBackspaceKeyboard.setTextColor(whiteColor)
+    }
+
+
+    override fun onTouch(view: View, motionEvent: MotionEvent): Boolean
+    {
+        when (view.id)
+        {
+            R.id.btn_menu ->
+            {
+                when (motionEvent.action)
+                {
+                    MotionEvent.ACTION_DOWN ->
+                    {
+                        if (isDarkThemeOn())
                             btnMenu.backgroundTintList =
-                                ColorStateList.valueOf(ContextCompat.getColor(this, R.color.dark_gray))
+                                drkGray
                         else btnMenu.backgroundTintList =
                             ColorStateList.valueOf(Color.GRAY)
                     }
-                    MotionEvent.ACTION_UP -> {
-                        if(isDarkThemeOn())
+                    MotionEvent.ACTION_UP ->
+                    {
+                        if (isDarkThemeOn())
                             btnMenu.backgroundTintList =
                                 ColorStateList.valueOf(ContextCompat.getColor(this, R.color.black))
                         else btnMenu.backgroundTintList =
-                            ColorStateList.valueOf(ContextCompat.getColor(this, R.color.white))
+                            whiteColor
                         view.performClick()
                     }
                 }
             }
 
-            R.id.ll_menu -> {
-                when (motionEvent.action) {
-                    MotionEvent.ACTION_DOWN -> {
-                        if(isDarkThemeOn())
+            R.id.ll_menu ->
+            {
+                when (motionEvent.action)
+                {
+                    MotionEvent.ACTION_DOWN ->
+                    {
+                        if (isDarkThemeOn())
                             btnMenu.backgroundTintList =
-                                ColorStateList.valueOf(ContextCompat.getColor(this, R.color.dark_gray))
+                                drkGray
                         else btnMenu.backgroundTintList =
                             ColorStateList.valueOf(Color.GRAY)
                     }
-                    MotionEvent.ACTION_UP -> {
-                        if(isDarkThemeOn())
+                    MotionEvent.ACTION_UP ->
+                    {
+                        if (isDarkThemeOn())
                             btnMenu.backgroundTintList =
                                 ColorStateList.valueOf(ContextCompat.getColor(this, R.color.black))
                         else btnMenu.backgroundTintList =
-                            ColorStateList.valueOf(ContextCompat.getColor(this, R.color.white))
+                            whiteColor
                         view.performClick()
                     }
                 }
@@ -430,9 +361,13 @@ class GraphActivity : AppCompatActivity(), View.OnClickListener, View.OnTouchLis
     }
 
 
+    @SuppressLint("ClickableViewAccessibility")
     private fun initViews()
     {
-        llMenu=findViewById(R.id.ll_menu)
+        drkGray = ColorStateList.valueOf(ContextCompat.getColor(this, R.color.dark_gray))
+        whiteColor = ColorStateList.valueOf(ContextCompat.getColor(this, R.color.white))
+
+        llMenu = findViewById(R.id.ll_menu)
         linearLayoutButtons = findViewById(R.id.ll_buttons)
         llKeyboard = findViewById(R.id.ll_keyboard)
 
@@ -507,7 +442,7 @@ class GraphActivity : AppCompatActivity(), View.OnClickListener, View.OnTouchLis
                 isExpanded = true
                 TransitionManager.beginDelayedTransition(llParent)
                 linearLayoutButtons.visibility = View.VISIBLE
-                
+
                 llKeyboard.visibility = View.GONE
             }
             else
@@ -515,7 +450,7 @@ class GraphActivity : AppCompatActivity(), View.OnClickListener, View.OnTouchLis
                 btnKeyboard.text = getString(R.string.btn_more_not_expanded)
                 isExpanded = false
                 TransitionManager.beginDelayedTransition(llParent)
-                
+
                 linearLayoutButtons.visibility = View.GONE
                 llKeyboard.visibility = View.GONE
             }
@@ -527,7 +462,7 @@ class GraphActivity : AppCompatActivity(), View.OnClickListener, View.OnTouchLis
                 btnKeyboard.text = getString(R.string.btn_more_expanded)
                 isExpanded = true
                 TransitionManager.beginDelayedTransition(llParent)
-                
+
                 llKeyboard.visibility = View.VISIBLE
                 linearLayoutButtons.visibility = View.GONE
             }
@@ -536,7 +471,7 @@ class GraphActivity : AppCompatActivity(), View.OnClickListener, View.OnTouchLis
                 btnKeyboard.text = getString(R.string.btn_more_not_expanded)
                 isExpanded = false
                 TransitionManager.beginDelayedTransition(llParent)
-                
+
                 llKeyboard.visibility = View.GONE
                 linearLayoutButtons.visibility = View.GONE
             }
@@ -547,7 +482,7 @@ class GraphActivity : AppCompatActivity(), View.OnClickListener, View.OnTouchLis
                 btnKeyboard.text = getString(R.string.btn_more_expanded)
                 isExpanded = true
                 TransitionManager.beginDelayedTransition(llParent)
-                
+
                 llKeyboard.visibility = View.VISIBLE
                 linearLayoutButtons.visibility = View.GONE
             }
@@ -556,7 +491,7 @@ class GraphActivity : AppCompatActivity(), View.OnClickListener, View.OnTouchLis
                 btnKeyboard.text = getString(R.string.btn_more_not_expanded)
                 isExpanded = false
                 TransitionManager.beginDelayedTransition(llParent)
-                
+
                 llKeyboard.visibility = View.GONE
                 linearLayoutButtons.visibility = View.GONE
             }
@@ -568,7 +503,7 @@ class GraphActivity : AppCompatActivity(), View.OnClickListener, View.OnTouchLis
                 btnKeyboard.text = getString(R.string.btn_more_expanded)
                 isExpanded = true
                 TransitionManager.beginDelayedTransition(llParent)
-                
+
                 llKeyboard.visibility = View.VISIBLE
                 linearLayoutButtons.visibility = View.GONE
             }
@@ -577,7 +512,7 @@ class GraphActivity : AppCompatActivity(), View.OnClickListener, View.OnTouchLis
                 btnKeyboard.text = getString(R.string.btn_more_not_expanded)
                 isExpanded = false
                 TransitionManager.beginDelayedTransition(llParent)
-                
+
                 llKeyboard.visibility = View.GONE
                 linearLayoutButtons.visibility = View.GONE
             }
@@ -588,11 +523,10 @@ class GraphActivity : AppCompatActivity(), View.OnClickListener, View.OnTouchLis
         TransitionManager.beginDelayedTransition(llParent)
 
 
-
-       /* edtExp.filters = arrayOf<InputFilter>(LengthFilter(15))
-        edtXStart.filters = arrayOf<InputFilter>(LengthFilter(5))
-        edtXEnd.filters = arrayOf<InputFilter>(LengthFilter(5))
-        edtXStep.filters = arrayOf<InputFilter>(LengthFilter(5))*/
+        /* edtExp.filters = arrayOf<InputFilter>(LengthFilter(15))
+         edtXStart.filters = arrayOf<InputFilter>(LengthFilter(5))
+         edtXEnd.filters = arrayOf<InputFilter>(LengthFilter(5))
+         edtXStep.filters = arrayOf<InputFilter>(LengthFilter(5))*/
     }
 
     private fun setOnClickListeners()
@@ -664,7 +598,8 @@ class GraphActivity : AppCompatActivity(), View.OnClickListener, View.OnTouchLis
 
         if (!function.checkSyntax())
         {
-            Snackbar.make(llParent, "Please check the syntax of function!", Snackbar.LENGTH_SHORT).show()
+            Snackbar.make(llParent, "Please check the syntax of function!", Snackbar.LENGTH_SHORT)
+                .show()
             return false
         }
 
@@ -765,7 +700,7 @@ class GraphActivity : AppCompatActivity(), View.OnClickListener, View.OnTouchLis
         when (v?.id)
         {
 
-            R.id.edt_graph              ->
+            R.id.edt_graph ->
             {
                 btnKeyboard.text = getString(R.string.btn_more_expanded)
                 isExpanded = true
@@ -773,7 +708,7 @@ class GraphActivity : AppCompatActivity(), View.OnClickListener, View.OnTouchLis
                 llKeyboard.visibility = View.GONE
             }
 
-            R.id.edt_x_begin            ->
+            R.id.edt_x_begin ->
             {
                 btnKeyboard.text = getString(R.string.btn_more_expanded)
                 isExpanded = true
@@ -781,7 +716,7 @@ class GraphActivity : AppCompatActivity(), View.OnClickListener, View.OnTouchLis
                 llKeyboard.visibility = View.VISIBLE
             }
 
-            R.id.edt_x_end              ->
+            R.id.edt_x_end ->
             {
                 btnKeyboard.text = getString(R.string.btn_more_expanded)
                 isExpanded = true
@@ -789,7 +724,7 @@ class GraphActivity : AppCompatActivity(), View.OnClickListener, View.OnTouchLis
                 llKeyboard.visibility = View.VISIBLE
             }
 
-            R.id.edt_x_step             ->
+            R.id.edt_x_step ->
             {
                 btnKeyboard.text = getString(R.string.btn_more_expanded)
                 isExpanded = true
@@ -798,7 +733,7 @@ class GraphActivity : AppCompatActivity(), View.OnClickListener, View.OnTouchLis
             }
 
 
-            R.id.btn_minus_keyboard     ->
+            R.id.btn_minus_keyboard ->
             {
                 if (edtXStart.isFocused)
                 {
@@ -828,12 +763,12 @@ class GraphActivity : AppCompatActivity(), View.OnClickListener, View.OnTouchLis
             }
 
 
-            R.id.btn_keyboard           ->
+            R.id.btn_keyboard ->
             {
                 if (isExpanded)
                 {
                     TransitionManager.beginDelayedTransition(llParent)
-                    
+
                     linearLayoutButtons.visibility = View.GONE
                     llKeyboard.visibility = View.GONE
                     btnKeyboard.text = getString(R.string.btn_more_not_expanded)
@@ -845,14 +780,14 @@ class GraphActivity : AppCompatActivity(), View.OnClickListener, View.OnTouchLis
                     if (edtExp.isFocused || (!edtXStart.isFocused && !edtXEnd.isFocused && !edtXStep.isFocused && !edtExp.isFocused))
                     {
                         TransitionManager.beginDelayedTransition(llParent)
-                        
+
                         linearLayoutButtons.visibility = View.VISIBLE
                         llKeyboard.visibility = View.GONE
                     }
                     if (edtXStart.isFocused || edtXEnd.isFocused || edtXStep.isFocused)
                     {
                         TransitionManager.beginDelayedTransition(llParent)
-                        
+
                         llKeyboard.visibility = View.VISIBLE
                         linearLayoutButtons.visibility = View.GONE
                     }
@@ -861,7 +796,7 @@ class GraphActivity : AppCompatActivity(), View.OnClickListener, View.OnTouchLis
                 }
             }
 
-            R.id.btn_zero_keyboard      ->
+            R.id.btn_zero_keyboard ->
             {
 
                 if (edtXStart.isFocused && edtXEnd.text.length < 5)
@@ -889,7 +824,7 @@ class GraphActivity : AppCompatActivity(), View.OnClickListener, View.OnTouchLis
                 }
             }
 
-            R.id.btn_one_keyboard       ->
+            R.id.btn_one_keyboard ->
             {
                 if (edtXStart.isFocused && edtXStart.text.length < 5)
                 {
@@ -916,7 +851,7 @@ class GraphActivity : AppCompatActivity(), View.OnClickListener, View.OnTouchLis
                 }
             }
 
-            R.id.btn_two_keyboard       ->
+            R.id.btn_two_keyboard ->
             {
                 if (edtXStart.isFocused && edtXStart.text.length < 5)
                 {
@@ -943,7 +878,7 @@ class GraphActivity : AppCompatActivity(), View.OnClickListener, View.OnTouchLis
                 }
             }
 
-            R.id.btn_three_keyboard     ->
+            R.id.btn_three_keyboard ->
             {
                 if (edtXStart.isFocused && edtXStart.text.length < 5)
                 {
@@ -970,7 +905,7 @@ class GraphActivity : AppCompatActivity(), View.OnClickListener, View.OnTouchLis
                 }
             }
 
-            R.id.btn_four_keyboard      ->
+            R.id.btn_four_keyboard ->
             {
                 if (edtXStart.isFocused && edtXStart.text.length < 5)
                 {
@@ -997,7 +932,7 @@ class GraphActivity : AppCompatActivity(), View.OnClickListener, View.OnTouchLis
                 }
             }
 
-            R.id.btn_five_keyboard      ->
+            R.id.btn_five_keyboard ->
             {
                 if (edtXStart.isFocused && edtXStart.text.length < 5)
                 {
@@ -1024,7 +959,7 @@ class GraphActivity : AppCompatActivity(), View.OnClickListener, View.OnTouchLis
                 }
             }
 
-            R.id.btn_six_keyboard       ->
+            R.id.btn_six_keyboard ->
             {
                 if (edtXStart.isFocused && edtXEnd.text.length < 5)
                 {
@@ -1052,7 +987,7 @@ class GraphActivity : AppCompatActivity(), View.OnClickListener, View.OnTouchLis
 
             }
 
-            R.id.btn_seven_keyboard     ->
+            R.id.btn_seven_keyboard ->
             {
                 if (edtXStart.isFocused && edtXStart.text.length < 5)
                 {
@@ -1079,7 +1014,7 @@ class GraphActivity : AppCompatActivity(), View.OnClickListener, View.OnTouchLis
                 }
             }
 
-            R.id.btn_eight_keyboard     ->
+            R.id.btn_eight_keyboard ->
             {
                 if (edtXStart.isFocused && edtXStart.text.length < 5)
                 {
@@ -1106,7 +1041,7 @@ class GraphActivity : AppCompatActivity(), View.OnClickListener, View.OnTouchLis
                 }
             }
 
-            R.id.btn_nine_keyboard      ->
+            R.id.btn_nine_keyboard ->
             {
                 if (edtXStart.isFocused && edtXStart.text.length < 5)
                 {
@@ -1133,7 +1068,7 @@ class GraphActivity : AppCompatActivity(), View.OnClickListener, View.OnTouchLis
                 }
             }
 
-            R.id.btn_dot_keyboard       ->
+            R.id.btn_dot_keyboard ->
             {
                 if (edtXStart.isFocused)
                 {
@@ -1245,7 +1180,7 @@ class GraphActivity : AppCompatActivity(), View.OnClickListener, View.OnTouchLis
             }
 
 
-            R.id.btn_clear_edt          ->
+            R.id.btn_clear_edt ->
             {
                 if (edtExp.text.isNotEmpty())
                 {
@@ -1253,7 +1188,7 @@ class GraphActivity : AppCompatActivity(), View.OnClickListener, View.OnTouchLis
                 }
             }
 
-            R.id.btn_graph_build        ->
+            R.id.btn_graph_build ->
             {
                 if (buildClickCount == 0)
                 {
@@ -1279,7 +1214,7 @@ class GraphActivity : AppCompatActivity(), View.OnClickListener, View.OnTouchLis
 
             }
 
-            R.id.btn_x                  ->
+            R.id.btn_x ->
             {
                 if (isXInsertable())
                 {
@@ -1290,68 +1225,68 @@ class GraphActivity : AppCompatActivity(), View.OnClickListener, View.OnTouchLis
             }
 
 
-            R.id.btn_zero               ->
+            R.id.btn_zero ->
             {
                 updateEdtExp("0")
                 currentNumDigits++
             }
 
-            R.id.btn_one                ->
+            R.id.btn_one ->
             {
 
                 updateEdtExp("1")
                 currentNumDigits++
             }
 
-            R.id.btn_two                ->
+            R.id.btn_two ->
             {
                 updateEdtExp("2")
                 currentNumDigits++
             }
 
-            R.id.btn_three              ->
+            R.id.btn_three ->
             {
                 updateEdtExp("3")
                 currentNumDigits++
             }
 
-            R.id.btn_four               ->
+            R.id.btn_four ->
             {
                 updateEdtExp("4")
                 currentNumDigits++
             }
 
-            R.id.btn_five               ->
+            R.id.btn_five ->
             {
                 updateEdtExp("5")
                 currentNumDigits++
             }
 
-            R.id.btn_six                ->
+            R.id.btn_six ->
             {
                 updateEdtExp("6")
                 currentNumDigits++
             }
 
-            R.id.btn_seven              ->
+            R.id.btn_seven ->
             {
                 updateEdtExp("7")
                 currentNumDigits++
             }
 
-            R.id.btn_eight              ->
+            R.id.btn_eight ->
             {
                 updateEdtExp("8")
                 currentNumDigits++
             }
 
-            R.id.btn_nine               ->
+            R.id.btn_nine ->
             {
                 updateEdtExp("9")
                 currentNumDigits++
             }
 
-            R.id.btn_division           ->
+            R.id.btn_division ->
             {
                 if (edtExp.text.isNotEmpty())
                 {
@@ -1364,7 +1299,7 @@ class GraphActivity : AppCompatActivity(), View.OnClickListener, View.OnTouchLis
                 currentNumDigits = 0
             }
 
-            R.id.btn_multi              ->
+            R.id.btn_multi ->
             {
                 if (edtExp.text.isNotEmpty())
                 {
@@ -1377,7 +1312,7 @@ class GraphActivity : AppCompatActivity(), View.OnClickListener, View.OnTouchLis
                 currentNumDigits = 0
             }
 
-            R.id.btn_plus               ->
+            R.id.btn_plus ->
             {
                 if (edtExp.text.isNotEmpty())
                 {
@@ -1390,7 +1325,7 @@ class GraphActivity : AppCompatActivity(), View.OnClickListener, View.OnTouchLis
                 currentNumDigits = 0
             }
 
-            R.id.btn_minus              ->
+            R.id.btn_minus ->
             {
                 if (edtExp.text.isNotEmpty())
                 {
@@ -1403,7 +1338,7 @@ class GraphActivity : AppCompatActivity(), View.OnClickListener, View.OnTouchLis
                 currentNumDigits = 0
             }
 
-            R.id.btn_dot                ->
+            R.id.btn_dot ->
             {
                 if (edtExp.text.isNotEmpty())
                 {
@@ -1413,25 +1348,25 @@ class GraphActivity : AppCompatActivity(), View.OnClickListener, View.OnTouchLis
                 else return
             }
 
-            R.id.btn_backspace          ->
+            R.id.btn_backspace ->
             {
                 if (edtExp.text.isNotEmpty()) backspaceFun()
                 else return
             }
 
-            R.id.btn_brackets           ->
+            R.id.btn_brackets ->
             {
                 addBrackets()
                 currentNumDigits = 0
             }
 
-            R.id.btn_square_root        ->
+            R.id.btn_square_root ->
             {
                 updateEdtExp("√(")
                 currentNumDigits = 0
             }
 
-            R.id.btn_exp                ->
+            R.id.btn_exp ->
             {
                 if (edtExp.text.isNotEmpty())
                 {
@@ -1444,7 +1379,7 @@ class GraphActivity : AppCompatActivity(), View.OnClickListener, View.OnTouchLis
                 currentNumDigits = 0
             }
 
-            R.id.btn_pi                 ->
+            R.id.btn_pi ->
             {
                 if (edtExp.text.isNotEmpty())
                 {
@@ -1456,7 +1391,7 @@ class GraphActivity : AppCompatActivity(), View.OnClickListener, View.OnTouchLis
                 currentNumDigits = 0
             }
 
-            R.id.btn_e                  ->
+            R.id.btn_e ->
             {
 
                 if (edtExp.text.isNotEmpty())
@@ -1469,38 +1404,38 @@ class GraphActivity : AppCompatActivity(), View.OnClickListener, View.OnTouchLis
                 currentNumDigits = 0
             }
 
-            R.id.btn_sin                ->
+            R.id.btn_sin ->
             {
                 updateEdtExp("sin(")
                 currentNumDigits = 0
             }
 
-            R.id.btn_cos                ->
+            R.id.btn_cos ->
             {
                 updateEdtExp("cos(")
                 currentNumDigits = 0
             }
 
-            R.id.btn_tan                ->
+            R.id.btn_tan ->
             {
                 updateEdtExp("tan(")
                 currentNumDigits = 0
             }
 
 
-            R.id.btn_log2               ->
+            R.id.btn_log2 ->
             {
                 updateEdtExp("log2(")
                 currentNumDigits = 0
             }
 
-            R.id.btn_log10              ->
+            R.id.btn_log10 ->
             {
                 updateEdtExp("log10(")
                 currentNumDigits = 0
             }
 
-            R.id.btn_ln                 ->
+            R.id.btn_ln ->
             {
                 updateEdtExp("ln(")
                 currentNumDigits = 0
@@ -1772,68 +1707,53 @@ class GraphActivity : AppCompatActivity(), View.OnClickListener, View.OnTouchLis
 
         if (numbersColor.isNotEmpty())
         {
-            btnZero.backgroundTintList = ColorStateList.valueOf(Color.parseColor(numbersColor))
-            btnOne.backgroundTintList = ColorStateList.valueOf(Color.parseColor(numbersColor))
-            btnTwo.backgroundTintList = ColorStateList.valueOf(Color.parseColor(numbersColor))
-            btnThree.backgroundTintList = ColorStateList.valueOf(Color.parseColor(numbersColor))
-            btnFour.backgroundTintList = ColorStateList.valueOf(Color.parseColor(numbersColor))
-            btnFive.backgroundTintList = ColorStateList.valueOf(Color.parseColor(numbersColor))
-            btnSix.backgroundTintList = ColorStateList.valueOf(Color.parseColor(numbersColor))
-            btnSeven.backgroundTintList = ColorStateList.valueOf(Color.parseColor(numbersColor))
-            btnEight.backgroundTintList = ColorStateList.valueOf(Color.parseColor(numbersColor))
-            btnNine.backgroundTintList = ColorStateList.valueOf(Color.parseColor(numbersColor))
-            btnDot.backgroundTintList = ColorStateList.valueOf(Color.parseColor(numbersColor))
-            btnBackSpace.backgroundTintList =
-                ColorStateList.valueOf(Color.parseColor(numbersColor))
-
-            btnZeroKeyboard.backgroundTintList =
-                ColorStateList.valueOf(Color.parseColor(numbersColor))
-            btnOneKeyboard.backgroundTintList =
-                ColorStateList.valueOf(Color.parseColor(numbersColor))
-            btnTwoKeyboard.backgroundTintList =
-                ColorStateList.valueOf(Color.parseColor(numbersColor))
-            btnThreeKeyboard.backgroundTintList =
-                ColorStateList.valueOf(Color.parseColor(numbersColor))
-            btnFourKeyboard.backgroundTintList =
-                ColorStateList.valueOf(Color.parseColor(numbersColor))
-            btnFiveKeyboard.backgroundTintList =
-                ColorStateList.valueOf(Color.parseColor(numbersColor))
-            btnSixKeyboard.backgroundTintList =
-                ColorStateList.valueOf(Color.parseColor(numbersColor))
-            btnSevenKeyboard.backgroundTintList =
-                ColorStateList.valueOf(Color.parseColor(numbersColor))
-            btnEightKeyboard.backgroundTintList =
-                ColorStateList.valueOf(Color.parseColor(numbersColor))
-            btnNineKeyboard.backgroundTintList =
-                ColorStateList.valueOf(Color.parseColor(numbersColor))
-            btnDotKeyboard.backgroundTintList =
-                ColorStateList.valueOf(Color.parseColor(numbersColor))
-            btnBackspaceKeyboard.backgroundTintList =
-                ColorStateList.valueOf(Color.parseColor(numbersColor))
-            btnMinusKeyboard.backgroundTintList =
-                ColorStateList.valueOf(Color.parseColor(numbersColor))
+            val nColor = ColorStateList.valueOf(Color.parseColor(numbersColor))
+            btnZero.backgroundTintList = nColor
+            btnOne.backgroundTintList = nColor
+            btnTwo.backgroundTintList = nColor
+            btnThree.backgroundTintList = nColor
+            btnFour.backgroundTintList = nColor
+            btnFive.backgroundTintList = nColor
+            btnSix.backgroundTintList = nColor
+            btnSeven.backgroundTintList = nColor
+            btnEight.backgroundTintList = nColor
+            btnNine.backgroundTintList = nColor
+            btnDot.backgroundTintList = nColor
+            btnBackSpace.backgroundTintList = nColor
+            btnZeroKeyboard.backgroundTintList = nColor
+            btnOneKeyboard.backgroundTintList = nColor
+            btnTwoKeyboard.backgroundTintList = nColor
+            btnThreeKeyboard.backgroundTintList = nColor
+            btnFourKeyboard.backgroundTintList = nColor
+            btnFiveKeyboard.backgroundTintList = nColor
+            btnSixKeyboard.backgroundTintList = nColor
+            btnSevenKeyboard.backgroundTintList = nColor
+            btnEightKeyboard.backgroundTintList = nColor
+            btnNineKeyboard.backgroundTintList = nColor
+            btnDotKeyboard.backgroundTintList = nColor
+            btnBackspaceKeyboard.backgroundTintList = nColor
+            btnMinusKeyboard.backgroundTintList = nColor
         }
 
         if (actionsColor.isNotEmpty())
         {
-            btnPlus.backgroundTintList = ColorStateList.valueOf(Color.parseColor(actionsColor))
-            btnMinus.backgroundTintList = ColorStateList.valueOf(Color.parseColor(actionsColor))
-            btnMulti.backgroundTintList = ColorStateList.valueOf(Color.parseColor(actionsColor))
-            btnDivision.backgroundTintList =
-                ColorStateList.valueOf(Color.parseColor(actionsColor))
-            btnExp.backgroundTintList = ColorStateList.valueOf(Color.parseColor(actionsColor))
-            btnPi.backgroundTintList = ColorStateList.valueOf(Color.parseColor(actionsColor))
-            btnSquareRoot.backgroundTintList =
-                ColorStateList.valueOf(Color.parseColor(actionsColor))
-            btnBrackets.backgroundTintList =
-                ColorStateList.valueOf(Color.parseColor(actionsColor))
-            btnSin.backgroundTintList = ColorStateList.valueOf(Color.parseColor(actionsColor))
-            btnCos.backgroundTintList = ColorStateList.valueOf(Color.parseColor(actionsColor))
-            btnTan.backgroundTintList = ColorStateList.valueOf(Color.parseColor(actionsColor))
-            btnE.backgroundTintList = ColorStateList.valueOf(Color.parseColor(actionsColor))
-            btnLg.backgroundTintList = ColorStateList.valueOf(Color.parseColor(actionsColor))
-            btnLn.backgroundTintList = ColorStateList.valueOf(Color.parseColor(actionsColor))
-            btnLog2.backgroundTintList = ColorStateList.valueOf(Color.parseColor(actionsColor))
+            val actColor = ColorStateList.valueOf(Color.parseColor(actionsColor))
+
+            btnPlus.backgroundTintList = actColor
+            btnMinus.backgroundTintList = actColor
+            btnMulti.backgroundTintList = actColor
+            btnDivision.backgroundTintList = actColor
+            btnExp.backgroundTintList = actColor
+            btnPi.backgroundTintList = actColor
+            btnSquareRoot.backgroundTintList = actColor
+            btnBrackets.backgroundTintList = actColor
+            btnSin.backgroundTintList = actColor
+            btnCos.backgroundTintList = actColor
+            btnTan.backgroundTintList = actColor
+            btnE.backgroundTintList = actColor
+            btnLg.backgroundTintList = actColor
+            btnLn.backgroundTintList = actColor
+            btnLog2.backgroundTintList = actColor
         }
 
 
@@ -1843,10 +1763,9 @@ class GraphActivity : AppCompatActivity(), View.OnClickListener, View.OnTouchLis
         }
         if (equalColor.isNotEmpty())
         {
-            btnBuild.backgroundTintList =
-                ColorStateList.valueOf(Color.parseColor(equalColor))
-            btnX.backgroundTintList =
-                ColorStateList.valueOf(Color.parseColor(equalColor))
+            val eColor = ColorStateList.valueOf(Color.parseColor(equalColor))
+            btnBuild.backgroundTintList = eColor
+            btnX.backgroundTintList = eColor
         }
 
         if (textColor.isNotEmpty()) setButtonsTextColor(textColor)
@@ -1855,7 +1774,7 @@ class GraphActivity : AppCompatActivity(), View.OnClickListener, View.OnTouchLis
         {
             when (shape)
             {
-                SHAPE_ROUNDED   ->
+                SHAPE_ROUNDED ->
                 {
                     setButtonsRounded()
                 }
@@ -1863,7 +1782,7 @@ class GraphActivity : AppCompatActivity(), View.OnClickListener, View.OnTouchLis
                 {
                     setButtonsRectangle()
                 }
-                SHAPE_CIRCLE    ->
+                SHAPE_CIRCLE ->
                 {
                     setButtonsCircle()
                 }
@@ -1875,224 +1794,219 @@ class GraphActivity : AppCompatActivity(), View.OnClickListener, View.OnTouchLis
 
     private fun setButtonsTextColor(textColor: String)
     {
-        btnZero.setTextColor(ColorStateList.valueOf(Color.parseColor(textColor)))
-        btnOne.setTextColor(ColorStateList.valueOf(Color.parseColor(textColor)))
-        btnTwo.setTextColor(ColorStateList.valueOf(Color.parseColor(textColor)))
-        btnThree.setTextColor(ColorStateList.valueOf(Color.parseColor(textColor)))
-        btnFour.setTextColor(ColorStateList.valueOf(Color.parseColor(textColor)))
-        btnFive.setTextColor(ColorStateList.valueOf(Color.parseColor(textColor)))
-        btnSix.setTextColor(ColorStateList.valueOf(Color.parseColor(textColor)))
-        btnSeven.setTextColor(ColorStateList.valueOf(Color.parseColor(textColor)))
-        btnEight.setTextColor(ColorStateList.valueOf(Color.parseColor(textColor)))
-        btnNine.setTextColor(ColorStateList.valueOf(Color.parseColor(textColor)))
-        btnBackSpace.setTextColor(ColorStateList.valueOf(Color.parseColor(textColor)))
-        btnDot.setTextColor(ColorStateList.valueOf(Color.parseColor(textColor)))
+        val tColor = ColorStateList.valueOf(Color.parseColor(textColor))
 
-        btnX.setTextColor(ColorStateList.valueOf(Color.parseColor(textColor)))
-        btnKeyboard.setTextColor(ColorStateList.valueOf(Color.parseColor(textColor)))
+        btnZero.setTextColor(tColor)
+        btnOne.setTextColor(tColor)
+        btnTwo.setTextColor(tColor)
+        btnThree.setTextColor(tColor)
+        btnFour.setTextColor(tColor)
+        btnFive.setTextColor(tColor)
+        btnSix.setTextColor(tColor)
+        btnSeven.setTextColor(tColor)
+        btnEight.setTextColor(tColor)
+        btnNine.setTextColor(tColor)
+        btnBackSpace.setTextColor(tColor)
+        btnDot.setTextColor(tColor)
 
-        btnPlus.setTextColor(ColorStateList.valueOf(Color.parseColor(textColor)))
-        btnMinus.setTextColor(ColorStateList.valueOf(Color.parseColor(textColor)))
-        btnMulti.setTextColor(ColorStateList.valueOf(Color.parseColor(textColor)))
-        btnDivision.setTextColor(ColorStateList.valueOf(Color.parseColor(textColor)))
-        btnExp.setTextColor(ColorStateList.valueOf(Color.parseColor(textColor)))
-        btnPi.setTextColor(ColorStateList.valueOf(Color.parseColor(textColor)))
-        btnSquareRoot.setTextColor(ColorStateList.valueOf(Color.parseColor(textColor)))
-        btnBrackets.setTextColor(ColorStateList.valueOf(Color.parseColor(textColor)))
-        btnSin.setTextColor(ColorStateList.valueOf(Color.parseColor(textColor)))
-        btnCos.setTextColor(ColorStateList.valueOf(Color.parseColor(textColor)))
-        btnTan.setTextColor(ColorStateList.valueOf(Color.parseColor(textColor)))
-        btnE.setTextColor(ColorStateList.valueOf(Color.parseColor(textColor)))
-        btnLg.setTextColor(ColorStateList.valueOf(Color.parseColor(textColor)))
-        btnLn.setTextColor(ColorStateList.valueOf(Color.parseColor(textColor)))
-        btnLog2.setTextColor(ColorStateList.valueOf(Color.parseColor(textColor)))
+        btnX.setTextColor(tColor)
+        btnKeyboard.setTextColor(tColor)
 
-        btnZeroKeyboard.setTextColor(ColorStateList.valueOf(Color.parseColor(textColor)))
-        btnOneKeyboard.setTextColor(ColorStateList.valueOf(Color.parseColor(textColor)))
-        btnTwoKeyboard.setTextColor(ColorStateList.valueOf(Color.parseColor(textColor)))
-        btnThreeKeyboard.setTextColor(ColorStateList.valueOf(Color.parseColor(textColor)))
-        btnFourKeyboard.setTextColor(ColorStateList.valueOf(Color.parseColor(textColor)))
-        btnFiveKeyboard.setTextColor(ColorStateList.valueOf(Color.parseColor(textColor)))
-        btnSixKeyboard.setTextColor(ColorStateList.valueOf(Color.parseColor(textColor)))
-        btnSevenKeyboard.setTextColor(ColorStateList.valueOf(Color.parseColor(textColor)))
-        btnEightKeyboard.setTextColor(ColorStateList.valueOf(Color.parseColor(textColor)))
-        btnNineKeyboard.setTextColor(ColorStateList.valueOf(Color.parseColor(textColor)))
-        btnDotKeyboard.setTextColor(ColorStateList.valueOf(Color.parseColor(textColor)))
-        btnMinusKeyboard.setTextColor(ColorStateList.valueOf(Color.parseColor(textColor)))
-        btnBackspaceKeyboard.setTextColor(ColorStateList.valueOf(Color.parseColor(textColor)))
+        btnPlus.setTextColor(tColor)
+        btnMinus.setTextColor(tColor)
+        btnMulti.setTextColor(tColor)
+        btnDivision.setTextColor(tColor)
+        btnExp.setTextColor(tColor)
+        btnPi.setTextColor(tColor)
+        btnSquareRoot.setTextColor(tColor)
+        btnBrackets.setTextColor(tColor)
+        btnSin.setTextColor(tColor)
+        btnCos.setTextColor(tColor)
+        btnTan.setTextColor(tColor)
+        btnE.setTextColor(tColor)
+        btnLg.setTextColor(tColor)
+        btnLn.setTextColor(tColor)
+        btnLog2.setTextColor(tColor)
+
+        btnZeroKeyboard.setTextColor(tColor)
+        btnOneKeyboard.setTextColor(tColor)
+        btnTwoKeyboard.setTextColor(tColor)
+        btnThreeKeyboard.setTextColor(tColor)
+        btnFourKeyboard.setTextColor(tColor)
+        btnFiveKeyboard.setTextColor(tColor)
+        btnSixKeyboard.setTextColor(tColor)
+        btnSevenKeyboard.setTextColor(tColor)
+        btnEightKeyboard.setTextColor(tColor)
+        btnNineKeyboard.setTextColor(tColor)
+        btnDotKeyboard.setTextColor(tColor)
+        btnMinusKeyboard.setTextColor(tColor)
+        btnBackspaceKeyboard.setTextColor(tColor)
 
 
     }
 
     private fun setButtonsCircle()
     {
-        btnZero.background = ContextCompat.getDrawable(this, R.drawable.buttons_circle)
-        btnOne.background = ContextCompat.getDrawable(this, R.drawable.buttons_circle)
-        btnTwo.background = ContextCompat.getDrawable(this, R.drawable.buttons_circle)
-        btnThree.background = ContextCompat.getDrawable(this, R.drawable.buttons_circle)
-        btnFour.background = ContextCompat.getDrawable(this, R.drawable.buttons_circle)
-        btnFive.background = ContextCompat.getDrawable(this, R.drawable.buttons_circle)
-        btnSix.background = ContextCompat.getDrawable(this, R.drawable.buttons_circle)
-        btnSeven.background = ContextCompat.getDrawable(this, R.drawable.buttons_circle)
-        btnEight.background = ContextCompat.getDrawable(this, R.drawable.buttons_circle)
-        btnNine.background = ContextCompat.getDrawable(this, R.drawable.buttons_circle)
-        btnDot.background = ContextCompat.getDrawable(this, R.drawable.buttons_circle)
-        btnBackSpace.background = ContextCompat.getDrawable(this, R.drawable.buttons_circle)
-        btnKeyboard.background = ContextCompat.getDrawable(this, R.drawable.buttons_circle)
+        val circle = ContextCompat.getDrawable(this, R.drawable.buttons_circle)
+
+        btnZero.background = circle
+        btnOne.background = circle
+        btnTwo.background = circle
+        btnThree.background = circle
+        btnFour.background = circle
+        btnFive.background = circle
+        btnSix.background = circle
+        btnSeven.background = circle
+        btnEight.background = circle
+        btnNine.background = circle
+        btnDot.background = circle
+        btnBackSpace.background = circle
+        btnKeyboard.background = circle
 
 
-        btnPlus.background = ContextCompat.getDrawable(this, R.drawable.buttons_circle)
-        btnMinus.background = ContextCompat.getDrawable(this, R.drawable.buttons_circle)
-        btnMulti.background = ContextCompat.getDrawable(this, R.drawable.buttons_circle)
-        btnDivision.background = ContextCompat.getDrawable(this, R.drawable.buttons_circle)
-        btnExp.background = ContextCompat.getDrawable(this, R.drawable.buttons_circle)
-        btnPi.background = ContextCompat.getDrawable(this, R.drawable.buttons_circle)
+        btnPlus.background = circle
+        btnMinus.background = circle
+        btnMulti.background = circle
+        btnDivision.background = circle
+        btnExp.background = circle
+        btnPi.background = circle
         btnSquareRoot.background =
-            ContextCompat.getDrawable(this, R.drawable.buttons_circle)
-        btnBrackets.background = ContextCompat.getDrawable(this, R.drawable.buttons_circle)
-        btnSin.background = ContextCompat.getDrawable(this, R.drawable.buttons_circle)
-        btnCos.background = ContextCompat.getDrawable(this, R.drawable.buttons_circle)
-        btnTan.background = ContextCompat.getDrawable(this, R.drawable.buttons_circle)
-        btnE.background = ContextCompat.getDrawable(this, R.drawable.buttons_circle)
-        btnLg.background = ContextCompat.getDrawable(this, R.drawable.buttons_circle)
-        btnLn.background = ContextCompat.getDrawable(this, R.drawable.buttons_circle)
-        btnLog2.background = ContextCompat.getDrawable(this, R.drawable.buttons_circle)
-        btnX.background = ContextCompat.getDrawable(this, R.drawable.buttons_circle)
-        btnBuild.background = ContextCompat.getDrawable(this, R.drawable.buttons_circle)
-        btnClearEdt.background = ContextCompat.getDrawable(this, R.drawable.buttons_circle)
+            circle
+        btnBrackets.background = circle
+        btnSin.background = circle
+        btnCos.background = circle
+        btnTan.background = circle
+        btnE.background = circle
+        btnLg.background = circle
+        btnLn.background = circle
+        btnLog2.background = circle
+        btnX.background = circle
+        btnBuild.background = circle
+        btnClearEdt.background = circle
 
-        btnZeroKeyboard.background = ContextCompat.getDrawable(this, R.drawable.buttons_circle)
-        btnOneKeyboard.background = ContextCompat.getDrawable(this, R.drawable.buttons_circle)
-        btnTwoKeyboard.background = ContextCompat.getDrawable(this, R.drawable.buttons_circle)
-        btnThreeKeyboard.background = ContextCompat.getDrawable(this, R.drawable.buttons_circle)
-        btnFourKeyboard.background = ContextCompat.getDrawable(this, R.drawable.buttons_circle)
-        btnFiveKeyboard.background = ContextCompat.getDrawable(this, R.drawable.buttons_circle)
-        btnSixKeyboard.background = ContextCompat.getDrawable(this, R.drawable.buttons_circle)
-        btnSevenKeyboard.background = ContextCompat.getDrawable(this, R.drawable.buttons_circle)
-        btnEightKeyboard.background = ContextCompat.getDrawable(this, R.drawable.buttons_circle)
-        btnNineKeyboard.background = ContextCompat.getDrawable(this, R.drawable.buttons_circle)
-        btnDotKeyboard.background = ContextCompat.getDrawable(this, R.drawable.buttons_circle)
-        btnMinusKeyboard.background = ContextCompat.getDrawable(this, R.drawable.buttons_circle)
-        btnBackspaceKeyboard.background = ContextCompat.getDrawable(this, R.drawable.buttons_circle)
+        btnZeroKeyboard.background = circle
+        btnOneKeyboard.background = circle
+        btnTwoKeyboard.background = circle
+        btnThreeKeyboard.background = circle
+        btnFourKeyboard.background = circle
+        btnFiveKeyboard.background = circle
+        btnSixKeyboard.background = circle
+        btnSevenKeyboard.background = circle
+        btnEightKeyboard.background = circle
+        btnNineKeyboard.background = circle
+        btnDotKeyboard.background = circle
+        btnMinusKeyboard.background = circle
+        btnBackspaceKeyboard.background = circle
 
     }
 
     private fun setButtonsRectangle()
     {
-        btnZero.background = ContextCompat.getDrawable(this, R.drawable.buttons_rectangle)
-        btnOne.background = ContextCompat.getDrawable(this, R.drawable.buttons_rectangle)
-        btnTwo.background = ContextCompat.getDrawable(this, R.drawable.buttons_rectangle)
-        btnThree.background = ContextCompat.getDrawable(this, R.drawable.buttons_rectangle)
-        btnFour.background = ContextCompat.getDrawable(this, R.drawable.buttons_rectangle)
-        btnFive.background = ContextCompat.getDrawable(this, R.drawable.buttons_rectangle)
-        btnSix.background = ContextCompat.getDrawable(this, R.drawable.buttons_rectangle)
-        btnSeven.background = ContextCompat.getDrawable(this, R.drawable.buttons_rectangle)
-        btnEight.background = ContextCompat.getDrawable(this, R.drawable.buttons_rectangle)
-        btnNine.background = ContextCompat.getDrawable(this, R.drawable.buttons_rectangle)
-        btnDot.background = ContextCompat.getDrawable(this, R.drawable.buttons_rectangle)
-        btnBackSpace.background = ContextCompat.getDrawable(this, R.drawable.buttons_rectangle)
-        btnKeyboard.background = ContextCompat.getDrawable(this, R.drawable.buttons_rectangle)
+        val rectangle = ContextCompat.getDrawable(this, R.drawable.buttons_rectangle)
 
-        btnPlus.background = ContextCompat.getDrawable(this, R.drawable.buttons_rectangle)
-        btnMinus.background = ContextCompat.getDrawable(this, R.drawable.buttons_rectangle)
-        btnMulti.background = ContextCompat.getDrawable(this, R.drawable.buttons_rectangle)
-        btnDivision.background = ContextCompat.getDrawable(this, R.drawable.buttons_rectangle)
-        btnExp.background = ContextCompat.getDrawable(this, R.drawable.buttons_rectangle)
-        btnPi.background = ContextCompat.getDrawable(this, R.drawable.buttons_rectangle)
+        btnZero.background = rectangle
+        btnOne.background = rectangle
+        btnTwo.background = rectangle
+        btnThree.background = rectangle
+        btnFour.background = rectangle
+        btnFive.background = rectangle
+        btnSix.background = rectangle
+        btnSeven.background = rectangle
+        btnEight.background = rectangle
+        btnNine.background = rectangle
+        btnDot.background = rectangle
+        btnBackSpace.background = rectangle
+        btnKeyboard.background = rectangle
+
+        btnPlus.background = rectangle
+        btnMinus.background = rectangle
+        btnMulti.background = rectangle
+        btnDivision.background = rectangle
+        btnExp.background = rectangle
+        btnPi.background = rectangle
         btnSquareRoot.background =
-            ContextCompat.getDrawable(this, R.drawable.buttons_rectangle)
-        btnBrackets.background = ContextCompat.getDrawable(this, R.drawable.buttons_rectangle)
-        btnSin.background = ContextCompat.getDrawable(this, R.drawable.buttons_rectangle)
-        btnCos.background = ContextCompat.getDrawable(this, R.drawable.buttons_rectangle)
-        btnTan.background = ContextCompat.getDrawable(this, R.drawable.buttons_rectangle)
-        btnE.background = ContextCompat.getDrawable(this, R.drawable.buttons_rectangle)
-        btnLg.background = ContextCompat.getDrawable(this, R.drawable.buttons_rectangle)
-        btnLn.background = ContextCompat.getDrawable(this, R.drawable.buttons_rectangle)
-        btnLog2.background = ContextCompat.getDrawable(this, R.drawable.buttons_rectangle)
-        btnX.background = ContextCompat.getDrawable(this, R.drawable.buttons_rectangle)
-        btnBuild.background = ContextCompat.getDrawable(this, R.drawable.buttons_rectangle)
-        btnClearEdt.background = ContextCompat.getDrawable(this, R.drawable.buttons_rectangle)
+            rectangle
+        btnBrackets.background = rectangle
+        btnSin.background = rectangle
+        btnCos.background = rectangle
+        btnTan.background = rectangle
+        btnE.background = rectangle
+        btnLg.background = rectangle
+        btnLn.background = rectangle
+        btnLog2.background = rectangle
+        btnX.background = rectangle
+        btnBuild.background = rectangle
+        btnClearEdt.background = rectangle
 
 
-        btnZeroKeyboard.background =
-            ContextCompat.getDrawable(this, R.drawable.buttons_rectangle)
-        btnOneKeyboard.background =
-            ContextCompat.getDrawable(this, R.drawable.buttons_rectangle)
-        btnTwoKeyboard.background =
-            ContextCompat.getDrawable(this, R.drawable.buttons_rectangle)
-        btnThreeKeyboard.background =
-            ContextCompat.getDrawable(this, R.drawable.buttons_rectangle)
-        btnFourKeyboard.background =
-            ContextCompat.getDrawable(this, R.drawable.buttons_rectangle)
-        btnFiveKeyboard.background =
-            ContextCompat.getDrawable(this, R.drawable.buttons_rectangle)
-        btnSixKeyboard.background =
-            ContextCompat.getDrawable(this, R.drawable.buttons_rectangle)
-        btnSevenKeyboard.background =
-            ContextCompat.getDrawable(this, R.drawable.buttons_rectangle)
-        btnEightKeyboard.background =
-            ContextCompat.getDrawable(this, R.drawable.buttons_rectangle)
-        btnNineKeyboard.background =
-            ContextCompat.getDrawable(this, R.drawable.buttons_rectangle)
-        btnDotKeyboard.background =
-            ContextCompat.getDrawable(this, R.drawable.buttons_rectangle)
-        btnBackspaceKeyboard.background =
-            ContextCompat.getDrawable(this, R.drawable.buttons_rectangle)
-        btnMinusKeyboard.background = ContextCompat.getDrawable(this, R.drawable.buttons_rectangle)
+        btnZeroKeyboard.background = rectangle
+        btnOneKeyboard.background = rectangle
+        btnTwoKeyboard.background = rectangle
+        btnThreeKeyboard.background = rectangle
+        btnFourKeyboard.background = rectangle
+        btnFiveKeyboard.background = rectangle
+        btnSixKeyboard.background = rectangle
+        btnSevenKeyboard.background = rectangle
+        btnEightKeyboard.background = rectangle
+        btnNineKeyboard.background = rectangle
+        btnDotKeyboard.background = rectangle
+        btnBackspaceKeyboard.background = rectangle
+        btnMinusKeyboard.background = rectangle
     }
 
     private fun setButtonsRounded()
     {
-        btnZero.background = ContextCompat.getDrawable(this, R.drawable.buttons_round)
-        btnOne.background = ContextCompat.getDrawable(this, R.drawable.buttons_round)
-        btnTwo.background = ContextCompat.getDrawable(this, R.drawable.buttons_round)
-        btnThree.background = ContextCompat.getDrawable(this, R.drawable.buttons_round)
-        btnFour.background = ContextCompat.getDrawable(this, R.drawable.buttons_round)
-        btnFive.background = ContextCompat.getDrawable(this, R.drawable.buttons_round)
-        btnSix.background = ContextCompat.getDrawable(this, R.drawable.buttons_round)
-        btnSeven.background = ContextCompat.getDrawable(this, R.drawable.buttons_round)
-        btnEight.background = ContextCompat.getDrawable(this, R.drawable.buttons_round)
-        btnNine.background = ContextCompat.getDrawable(this, R.drawable.buttons_round)
-        btnDot.background = ContextCompat.getDrawable(this, R.drawable.buttons_round)
-        btnBackSpace.background = ContextCompat.getDrawable(this, R.drawable.buttons_round)
-        btnKeyboard.background = ContextCompat.getDrawable(this, R.drawable.buttons_round)
+        val rounded = ContextCompat.getDrawable(this, R.drawable.buttons_round)
+
+        btnZero.background = rounded
+        btnOne.background = rounded
+        btnTwo.background = rounded
+        btnThree.background = rounded
+        btnFour.background = rounded
+        btnFive.background = rounded
+        btnSix.background = rounded
+        btnSeven.background = rounded
+        btnEight.background = rounded
+        btnNine.background = rounded
+        btnDot.background = rounded
+        btnBackSpace.background = rounded
+        btnKeyboard.background = rounded
 
 
-        btnPlus.background = ContextCompat.getDrawable(this, R.drawable.buttons_round)
-        btnMinus.background = ContextCompat.getDrawable(this, R.drawable.buttons_round)
-        btnMulti.background = ContextCompat.getDrawable(this, R.drawable.buttons_round)
-        btnDivision.background = ContextCompat.getDrawable(this, R.drawable.buttons_round)
-        btnExp.background = ContextCompat.getDrawable(this, R.drawable.buttons_round)
-        btnPi.background = ContextCompat.getDrawable(this, R.drawable.buttons_round)
+        btnPlus.background = rounded
+        btnMinus.background = rounded
+        btnMulti.background = rounded
+        btnDivision.background = rounded
+        btnExp.background = rounded
+        btnPi.background = rounded
         btnSquareRoot.background =
-            ContextCompat.getDrawable(this, R.drawable.buttons_round)
-        btnBrackets.background = ContextCompat.getDrawable(this, R.drawable.buttons_round)
-        btnSin.background = ContextCompat.getDrawable(this, R.drawable.buttons_round)
-        btnCos.background = ContextCompat.getDrawable(this, R.drawable.buttons_round)
-        btnTan.background = ContextCompat.getDrawable(this, R.drawable.buttons_round)
-        btnE.background = ContextCompat.getDrawable(this, R.drawable.buttons_round)
-        btnLg.background = ContextCompat.getDrawable(this, R.drawable.buttons_round)
-        btnLn.background = ContextCompat.getDrawable(this, R.drawable.buttons_round)
-        btnLog2.background = ContextCompat.getDrawable(this, R.drawable.buttons_round)
-        btnX.background = ContextCompat.getDrawable(this, R.drawable.buttons_round)
-        btnBuild.background = ContextCompat.getDrawable(this, R.drawable.buttons_round)
-        btnClearEdt.background = ContextCompat.getDrawable(this, R.drawable.buttons_round)
+            rounded
+        btnBrackets.background = rounded
+        btnSin.background = rounded
+        btnCos.background = rounded
+        btnTan.background = rounded
+        btnE.background = rounded
+        btnLg.background = rounded
+        btnLn.background = rounded
+        btnLog2.background = rounded
+        btnX.background = rounded
+        btnBuild.background = rounded
+        btnClearEdt.background = rounded
 
 
-        btnZeroKeyboard.background = ContextCompat.getDrawable(this, R.drawable.buttons_round)
-        btnOneKeyboard.background = ContextCompat.getDrawable(this, R.drawable.buttons_round)
-        btnTwoKeyboard.background = ContextCompat.getDrawable(this, R.drawable.buttons_round)
-        btnThreeKeyboard.background = ContextCompat.getDrawable(this, R.drawable.buttons_round)
-        btnFourKeyboard.background = ContextCompat.getDrawable(this, R.drawable.buttons_round)
-        btnFiveKeyboard.background = ContextCompat.getDrawable(this, R.drawable.buttons_round)
-        btnSixKeyboard.background = ContextCompat.getDrawable(this, R.drawable.buttons_round)
-        btnSevenKeyboard.background = ContextCompat.getDrawable(this, R.drawable.buttons_round)
-        btnEightKeyboard.background = ContextCompat.getDrawable(this, R.drawable.buttons_round)
-        btnNineKeyboard.background = ContextCompat.getDrawable(this, R.drawable.buttons_round)
-        btnDotKeyboard.background = ContextCompat.getDrawable(this, R.drawable.buttons_round)
-        btnMinusKeyboard.background = ContextCompat.getDrawable(this, R.drawable.buttons_round)
-        btnBackspaceKeyboard.background =
-            ContextCompat.getDrawable(this, R.drawable.buttons_round)
+        btnZeroKeyboard.background = rounded
+        btnOneKeyboard.background = rounded
+        btnTwoKeyboard.background = rounded
+        btnThreeKeyboard.background = rounded
+        btnFourKeyboard.background = rounded
+        btnFiveKeyboard.background = rounded
+        btnSixKeyboard.background = rounded
+        btnSevenKeyboard.background = rounded
+        btnEightKeyboard.background = rounded
+        btnNineKeyboard.background = rounded
+        btnDotKeyboard.background = rounded
+        btnMinusKeyboard.background = rounded
+        btnBackspaceKeyboard.background = rounded
 
     }
 }
