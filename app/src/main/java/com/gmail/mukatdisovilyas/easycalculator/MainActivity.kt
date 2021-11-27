@@ -61,7 +61,6 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, View.OnTouchList
     private lateinit var sinLinLay: LinearLayout
     private lateinit var logLinLay: LinearLayout
     private lateinit var edtResult: EditText
-    private lateinit var edtPrevExp: EditText
     private lateinit var btnAc: Button
     private lateinit var btnBrackets: Button
     private lateinit var btnPercent: Button
@@ -97,11 +96,12 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, View.OnTouchList
     private lateinit var btnRad: Button
     private var isExpanded = false
     private var edtResultTextSize = 0f
-    private var edtPrevTextSize = 0f
+    private var edtTempResultTextSize = 0f
     private var prevOperator = ""
     private var isPrevEqual = false
     private var prevOperatorIndex = 0
     private var prevEqualIndex = 0
+
 
     private var mWidthPixels = 0
     private var mHeightPixels = 0
@@ -145,7 +145,6 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, View.OnTouchList
                 btnNine.backgroundTintList = darkGrayColor
                 btnDot.backgroundTintList = darkGrayColor
                 btnBackSpace.backgroundTintList = darkGrayColor
-                edtPrevExp.backgroundTintList = darkGrayColor
                 edtResult.backgroundTintList = darkGrayColor
                 edtTempResult.backgroundTintList = darkGrayColor
 
@@ -168,7 +167,6 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, View.OnTouchList
 
         if (isDarkThemeOn())
         {
-            edtPrevExp.backgroundTintList = darkGrayColor
             edtResult.backgroundTintList = darkGrayColor
             edtTempResult.backgroundTintList = darkGrayColor
             llMain.backgroundTintList = blackColor
@@ -181,12 +179,10 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, View.OnTouchList
 
             edtResult.setTextColor(whiteColor)
             edtTempResult.setTextColor(whiteColor)
-            edtPrevExp.setTextColor(whiteColor)
 
         }
 
         edtResult.showSoftInputOnFocus = false
-        edtPrevExp.showSoftInputOnFocus = false
         edtTempResult.showSoftInputOnFocus = false
 
         /*if (resources.configuration.orientation == Configuration.ORIENTATION_LANDSCAPE) {
@@ -237,7 +233,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, View.OnTouchList
 
         return if (value.isNaN())
         {
-            edtTempResult.visibility = View.GONE
+            edtTempResult.visibility = View.INVISIBLE
             false
         }
         else
@@ -674,7 +670,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, View.OnTouchList
     private fun getPrevTextSize()
     {
         edtResultTextSize = edtResult.textSize / resources.displayMetrics.scaledDensity
-        edtPrevTextSize = edtPrevExp.textSize / resources.displayMetrics.scaledDensity
+        edtTempResultTextSize = edtTempResult.textSize / resources.displayMetrics.scaledDensity
     }
 
 
@@ -726,19 +722,19 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, View.OnTouchList
         {
             if (resources.configuration.orientation == Configuration.ORIENTATION_LANDSCAPE)
             {
-                if (mWidthPixels in 0..480) btnTextSize = 30 * resources.displayMetrics.density
-                if (mWidthPixels in 481..720) btnTextSize = 22 * resources.displayMetrics.density
-                if (mWidthPixels in 721..1080) btnTextSize = 15 * resources.displayMetrics.density
-                if (mWidthPixels in 1081..1600) btnTextSize = 13 * resources.displayMetrics.density
-                if (mWidthPixels in 1601..2560) btnTextSize = 10 * resources.displayMetrics.density
+                if (mWidthPixels in 0..480) btnTextSize = 28 * resources.displayMetrics.density
+                if (mWidthPixels in 481..720) btnTextSize = 20 * resources.displayMetrics.density
+                if (mWidthPixels in 721..1080) btnTextSize = 12 * resources.displayMetrics.density
+                if (mWidthPixels in 1081..1600) btnTextSize = 10 * resources.displayMetrics.density
+                if (mWidthPixels in 1601..2560) btnTextSize = 9 * resources.displayMetrics.density
             }
             else
             {
-                if (mWidthPixels in 0..480) btnTextSize = 26 * resources.displayMetrics.density
-                if (mWidthPixels in 481..720) btnTextSize = 16 * resources.displayMetrics.density
-                if (mWidthPixels in 721..1080) btnTextSize = 10 * resources.displayMetrics.density
-                if (mWidthPixels in 1081..1600) btnTextSize = 8 * resources.displayMetrics.density
-                if (mWidthPixels in 1601..2560) btnTextSize = 6 * resources.displayMetrics.density
+                if (mWidthPixels in 0..480) btnTextSize = 24 * resources.displayMetrics.density
+                if (mWidthPixels in 481..720) btnTextSize = 14 * resources.displayMetrics.density
+                if (mWidthPixels in 721..1080) btnTextSize = 9 * resources.displayMetrics.density
+                if (mWidthPixels in 1081..1600) btnTextSize = 7 * resources.displayMetrics.density
+                if (mWidthPixels in 1601..2560) btnTextSize = 5 * resources.displayMetrics.density
             }
         }
 
@@ -800,13 +796,11 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, View.OnTouchList
         if (resources.configuration.orientation == Configuration.ORIENTATION_LANDSCAPE)
         {
             edtResult.textSize = btnTextSize * 13 / 8
-            edtPrevExp.textSize = btnTextSize * 4 / 3
             edtTempResult.textSize = btnTextSize * 4 / 3
         }
         else
         {
             edtResult.textSize = btnTextSize * 5 / 2
-            edtPrevExp.textSize = btnTextSize * 3 / 2
             edtTempResult.textSize = btnTextSize * 3 / 2
         }
 
@@ -843,7 +837,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, View.OnTouchList
         btnDot = findViewById(R.id.btn_dot)
         btnBackSpace = findViewById(R.id.btn_backspace)
         btnEqual = findViewById(R.id.btn_equal)
-        edtResult = findViewById(R.id.edt_result)
+        edtResult = findViewById(R.id.edt_input)
         btnSquareRoot = findViewById(R.id.btn_square_root)
         btnExp = findViewById(R.id.btn_exp)
         btnPi = findViewById(R.id.btn_pi)
@@ -859,9 +853,8 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, View.OnTouchList
         btnRad = findViewById(R.id.btn_rad)
         sinLinLay = findViewById(R.id.sin_ll)
         logLinLay = findViewById(R.id.log_ll)
-        edtPrevExp = findViewById(R.id.tv_prev_expression)
         btnMenu = findViewById(R.id.btn_menu)
-        edtTempResult = findViewById(R.id.edt_temp_result)
+        edtTempResult = findViewById(R.id.edt_temp_result_expression)
 
         llMain = findViewById(R.id.ll_main)
         llExpression = findViewById(R.id.ll_expression)
@@ -956,7 +949,6 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, View.OnTouchList
                 if (isPrevEqual) clear()
                 if (updateEdtResult("0")) isAvailableToCalculate()
                 isPrevEqual = false
-                edtPrevExp.visibility = View.GONE
                 currentNumDigits++
             }
 
@@ -965,7 +957,6 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, View.OnTouchList
                 if (isPrevEqual) clear()
                 if (updateEdtResult("1")) isAvailableToCalculate()
                 isPrevEqual = false
-                edtPrevExp.visibility = View.GONE
                 currentNumDigits++
             }
 
@@ -975,7 +966,6 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, View.OnTouchList
                 if (updateEdtResult("2")) isAvailableToCalculate()
                 isPrevEqual = false
                 isAvailableToCalculate()
-                edtPrevExp.visibility = View.GONE
                 currentNumDigits++
             }
 
@@ -985,7 +975,6 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, View.OnTouchList
                 if (updateEdtResult("3")) isAvailableToCalculate()
                 isPrevEqual = false
                 isAvailableToCalculate()
-                edtPrevExp.visibility = View.GONE
                 currentNumDigits++
             }
 
@@ -995,7 +984,6 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, View.OnTouchList
                 if (updateEdtResult("4")) isAvailableToCalculate()
                 isPrevEqual = false
                 isAvailableToCalculate()
-                edtPrevExp.visibility = View.GONE
                 currentNumDigits++
             }
 
@@ -1005,7 +993,6 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, View.OnTouchList
                 if (updateEdtResult("5")) isAvailableToCalculate()
                 isPrevEqual = false
                 isAvailableToCalculate()
-                edtPrevExp.visibility = View.GONE
                 currentNumDigits++
             }
 
@@ -1015,7 +1002,6 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, View.OnTouchList
                 if (updateEdtResult("6")) isAvailableToCalculate()
                 isPrevEqual = false
                 isAvailableToCalculate()
-                edtPrevExp.visibility = View.GONE
                 currentNumDigits++
             }
 
@@ -1025,7 +1011,6 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, View.OnTouchList
                 if (updateEdtResult("7")) isAvailableToCalculate()
                 isPrevEqual = false
                 isAvailableToCalculate()
-                edtPrevExp.visibility = View.GONE
                 currentNumDigits++
             }
 
@@ -1035,7 +1020,6 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, View.OnTouchList
                 if (updateEdtResult("8")) isAvailableToCalculate()
                 isPrevEqual = false
                 isAvailableToCalculate()
-                edtPrevExp.visibility = View.GONE
                 currentNumDigits++
             }
 
@@ -1045,7 +1029,6 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, View.OnTouchList
                 if (updateEdtResult("9")) isAvailableToCalculate()
                 isPrevEqual = false
                 isAvailableToCalculate()
-                edtPrevExp.visibility = View.GONE
                 currentNumDigits++
             }
 
@@ -1056,7 +1039,6 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, View.OnTouchList
                 prevOperator = ""
                 isPrevEqual = false
                 isAvailableToCalculate()
-                edtPrevExp.visibility = View.GONE
                 currentNumDigits = 0
             }
 
@@ -1068,7 +1050,6 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, View.OnTouchList
                 prevOperatorIndex = edtResult.text.lastIndex
                 isPrevEqual = false
                 isAvailableToCalculate()
-                edtPrevExp.visibility = View.GONE
                 currentNumDigits = 0
             }
 
@@ -1080,7 +1061,6 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, View.OnTouchList
                 prevOperatorIndex = edtResult.text.lastIndex
                 isPrevEqual = false
                 isAvailableToCalculate()
-                edtPrevExp.visibility = View.GONE
                 currentNumDigits = 0
             }
 
@@ -1092,7 +1072,6 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, View.OnTouchList
                 prevOperatorIndex = edtResult.text.lastIndex
                 isPrevEqual = false
                 isAvailableToCalculate()
-                edtPrevExp.visibility = View.GONE
                 currentNumDigits = 0
             }
 
@@ -1104,7 +1083,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, View.OnTouchList
                 prevOperatorIndex = edtResult.text.lastIndex
                 isPrevEqual = false
                 isAvailableToCalculate()
-                edtPrevExp.visibility = View.GONE
+
                 currentNumDigits = 0
             }
 
@@ -1113,7 +1092,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, View.OnTouchList
                 if (isDotInsertable()) if (updateEdtResult(".")) isAvailableToCalculate()
                 isPrevEqual = false
                 isAvailableToCalculate()
-                edtPrevExp.visibility = View.GONE
+
             }
 
 
@@ -1122,7 +1101,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, View.OnTouchList
                 clear()
                 isPrevEqual = false
                 prevOperator = ""
-                edtPrevExp.visibility = View.GONE
+
                 currentNumDigits = 0
             }
 
@@ -1132,7 +1111,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, View.OnTouchList
                 backspaceFun()
                 isPrevEqual = false
                 isAvailableToCalculate()
-                edtPrevExp.visibility = View.GONE
+
 
             }
 
@@ -1142,17 +1121,14 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, View.OnTouchList
                 addBrackets()
                 isPrevEqual = false
                 isAvailableToCalculate()
-                edtPrevExp.visibility = View.GONE
+
                 currentNumDigits = 0
             }
 
             R.id.btn_equal       ->
             {
-                if (!isPrevEqual)
-                {
-                    edtPrevExp.setText("")
-                    updateEdtPrevExp(edtResult.text.toString())
-                }
+
+                if (!isPrevEqual) edtTempResult.setText(edtResult.text.toString())
 
                 /*else
                 {
@@ -1175,7 +1151,6 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, View.OnTouchList
 
                 calculateFun()
                 currentNumDigits = 0
-                edtPrevExp.visibility = View.VISIBLE
                 isPrevEqual = true
             }
 
@@ -1186,7 +1161,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, View.OnTouchList
                 prevOperator = ""
                 isPrevEqual = false
                 isAvailableToCalculate()
-                edtPrevExp.visibility = View.GONE
+
                 currentNumDigits = 0
             }
 
@@ -1200,7 +1175,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, View.OnTouchList
                 prevOperator = ""
                 isPrevEqual = false
                 isAvailableToCalculate()
-                edtPrevExp.visibility = View.GONE
+
                 currentNumDigits = 0
             }
 
@@ -1214,7 +1189,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, View.OnTouchList
                 if (updateEdtResult("π")) isAvailableToCalculate()
                 isPrevEqual = false
                 isAvailableToCalculate()
-                edtPrevExp.visibility = View.GONE
+
                 currentNumDigits = 0
             }
 
@@ -1228,7 +1203,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, View.OnTouchList
                 prevOperator = ""
                 isPrevEqual = false
                 isAvailableToCalculate()
-                edtPrevExp.visibility = View.GONE
+
                 currentNumDigits = 0
             }
 
@@ -1246,7 +1221,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, View.OnTouchList
                 prevOperator = ""
                 isPrevEqual = false
                 isAvailableToCalculate()
-                edtPrevExp.visibility = View.GONE
+
                 currentNumDigits = 0
             }
 
@@ -1257,7 +1232,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, View.OnTouchList
                 prevOperator = ""
                 isPrevEqual = false
                 isAvailableToCalculate()
-                edtPrevExp.visibility = View.GONE
+
                 currentNumDigits = 0
             }
 
@@ -1268,7 +1243,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, View.OnTouchList
                 prevOperator = ""
                 isPrevEqual = false
                 isAvailableToCalculate()
-                edtPrevExp.visibility = View.GONE
+
                 currentNumDigits = 0
             }
 
@@ -1283,7 +1258,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, View.OnTouchList
                 if (updateEdtResult("e")) isAvailableToCalculate()
                 isPrevEqual = false
                 isAvailableToCalculate()
-                edtPrevExp.visibility = View.GONE
+
                 currentNumDigits = 0
             }
 
@@ -1294,7 +1269,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, View.OnTouchList
                 prevOperator = ""
                 isPrevEqual = false
                 isAvailableToCalculate()
-                edtPrevExp.visibility = View.GONE
+
                 currentNumDigits = 0
             }
 
@@ -1305,7 +1280,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, View.OnTouchList
                 prevOperator = ""
                 isPrevEqual = false
                 isAvailableToCalculate()
-                edtPrevExp.visibility = View.GONE
+
                 currentNumDigits = 0
             }
 
@@ -1316,7 +1291,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, View.OnTouchList
                 prevOperator = ""
                 isPrevEqual = false
                 isAvailableToCalculate()
-                edtPrevExp.visibility = View.GONE
+
                 currentNumDigits = 0
             }
 
@@ -1327,7 +1302,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, View.OnTouchList
                 prevOperator = ""
                 isPrevEqual = false
                 isAvailableToCalculate()
-                edtPrevExp.visibility = View.GONE
+
                 currentNumDigits = 0
             }
 
@@ -1337,11 +1312,9 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, View.OnTouchList
     private fun clear()
     {
         edtResult.setText("")
-        edtPrevExp.setText("")
         edtTempResult.setText("")
         edtResult.setTextSize(TypedValue.COMPLEX_UNIT_SP, edtResultTextSize)
-        edtPrevExp.setTextSize(TypedValue.COMPLEX_UNIT_SP, edtPrevTextSize)
-        edtTempResult.setTextSize(TypedValue.COMPLEX_UNIT_SP, edtPrevTextSize)
+        edtTempResult.setTextSize(TypedValue.COMPLEX_UNIT_SP, edtTempResultTextSize)
     }
 
 
@@ -1365,10 +1338,9 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, View.OnTouchList
 
     private fun calculateFun()
     {
-        edtTempResult.visibility = View.GONE
         checkForClosedBrackets()
         var userExp = edtResult.text.toString()
-        val dbPrevExp = edtPrevExp.text.toString()
+        val dbExp = userExp
         val dbHelper = HistoryDatabaseHelper(this)
 
         userExp = userExp.replace("√", "sqrt")
@@ -1406,7 +1378,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, View.OnTouchList
         {
             val sdf = SimpleDateFormat("yyyy-MM-dd", Locale.US)
             val date: String = sdf.format(Date())
-            dbHelper.addOne(dbPrevExp, result, date)
+            dbHelper.addOne(dbExp, result, date)
         }
     }
 
@@ -1661,25 +1633,26 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, View.OnTouchList
 
     }
 
-    private fun updateEdtPrevExp(S: String)
+    private fun updateEdtTempResult(S: String)
     {
 
-        var textSize = edtPrevExp.textSize / resources.displayMetrics.scaledDensity
+        var textSize = edtTempResult.textSize / resources.displayMetrics.scaledDensity
 
-        Log.i(TAG, "updateEdtPrevExp: ${(edtPrevExp.text.length + S.length) * edtPrevExp.textSize}")
+        Log.i(TAG,
+            "updateEdtPrevExp: ${(edtTempResult.text.length + S.length) * edtTempResult.textSize}")
 
-        if (edtPrevExp.width > cardView.width)
+        if (edtTempResult.width > cardView.width)
         {
             for (i in 0..S.length)
             {
                 textSize -= 2
-                edtPrevExp.setTextSize(TypedValue.COMPLEX_UNIT_SP, textSize)
+                edtTempResult.setTextSize(TypedValue.COMPLEX_UNIT_SP, textSize)
             }
         }
 
-        var prevStr = edtPrevExp.text.toString()
+        var prevStr = edtTempResult.text.toString()
         prevStr += S
-        edtPrevExp.setText(prevStr)/*var textSize = edtPrevExp.textSize / resources.displayMetrics.scaledDensity
+        edtTempResult.setText(prevStr)/*var textSize = edtPrevExp.textSize / resources.displayMetrics.scaledDensity
 
         if (edtPrevExp.width + textSize > mWidthPixels)
         {
@@ -1798,7 +1771,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, View.OnTouchList
         }*/
 
         isAvailableToCalculate()
-        edtPrevExp.visibility = View.GONE
+
     }
 
 

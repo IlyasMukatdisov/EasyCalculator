@@ -53,29 +53,8 @@
 
                 </LinearLayout>
 
-
-
                 <EditText
-                    android:id="@+id/tv_prev_expression"
-                    android:visibility="gone"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="bottom"
-                    android:background="@color/light_gray"
-                    android:focusable="false"
-                    android:gravity="end"
-                    android:importantForAutofill="no"
-                    android:inputType="textNoSuggestions"
-                    android:maxLines="1"
-                    android:textColor="@color/black"
-                    android:textSize="30sp"
-                    app:layout_constraintBottom_toTopOf="@+id/edt_result"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    tools:ignore="LabelFor" />
-
-                <EditText
-                    android:id="@+id/edt_result"
+                    android:id="@+id/edt_input"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="bottom"
@@ -93,20 +72,20 @@
                     tools:ignore="LabelFor" />
 
                 <EditText
-                    android:id="@+id/edt_temp_result"
-                    android:textColor="@color/black"
+                    android:id="@+id/edt_temp_result_expression"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text=""
-                    android:scrollHorizontally="true"
-                    android:maxLines="1"
-                    android:gravity="end"
-                    android:inputType="textNoSuggestions"
                     android:background="@color/light_gray"
-                    android:visibility="gone"
-                    app:layout_constraintBottom_toBottomOf="@+id/tv_prev_expression"
-                    app:layout_constraintEnd_toEndOf="parent"
+                    android:gravity="end"
                     android:importantForAutofill="no"
+                    android:inputType="none"
+                    android:maxLines="1"
+                    android:scrollHorizontally="true"
+                    android:text=""
+                    android:textColor="@color/black"
+                    android:visibility="gone"
+                    app:layout_constraintBottom_toTopOf="@+id/edt_input"
+                    app:layout_constraintEnd_toEndOf="parent"
                     tools:ignore="LabelFor" />
 
 
