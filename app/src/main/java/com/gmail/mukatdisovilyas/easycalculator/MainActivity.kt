@@ -250,7 +250,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, View.OnTouchList
                     temp = String.format("%.7f", value)
                 }
 
-                if (!checkForDot(temp))
+                if (!isStringHasDot(temp))
                 {
                     temp = value.toInt().toString()
                 }
@@ -1110,7 +1110,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, View.OnTouchList
 
             R.id.btn_dot         ->
             {
-                if (!checkForDot()) if (updateEdtResult(".")) isAvailableToCalculate()
+                if (isDotInsertable()) if (updateEdtResult(".")) isAvailableToCalculate()
                 isPrevEqual = false
                 isAvailableToCalculate()
                 edtPrevExp.visibility = View.GONE
@@ -1148,11 +1148,13 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, View.OnTouchList
 
             R.id.btn_equal       ->
             {
-                if (edtPrevExp.text.toString() == "")
+                if (!isPrevEqual)
                 {
+                    edtPrevExp.setText("")
                     updateEdtPrevExp(edtResult.text.toString())
                 }
-                else
+
+                /*else
                 {
                     if (isPrevEqual && prevOperator != "")
                     {
@@ -1169,7 +1171,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, View.OnTouchList
                             updateEdtPrevExp(temp)
                         }
                     }
-                }
+                }*/
 
                 calculateFun()
                 currentNumDigits = 0
@@ -1431,17 +1433,63 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, View.OnTouchList
         }
     }
 
-    private fun checkForDot(): Boolean
+
+    private fun isDotInsertable(): Boolean
     {
-        for (element in edtResult.text.toString())
+        if (edtResult.text.isEmpty()) return false
+        var str: String = edtResult.text[edtResult.text.lastIndex].toString()
+        if (edtResult.text.length > 1)
         {
-            if (element == '.') return true
+            for (i in edtResult.text.length - 2..0)
+            {
+                if (checkForNumber(edtResult.text[i])) str = "${(edtResult.text[i])}$str"
+                else break
+            }
+        }
+        else return checkForDigit(str[0])
+
+        return !isStringHasDot(str)
+    }
+
+    private fun checkForDigit(c: Char): Boolean
+    {
+        when (c)
+        {
+            '0' -> return true
+            '1' -> return true
+            '2' -> return true
+            '3' -> return true
+            '4' -> return true
+            '5' -> return true
+            '6' -> return true
+            '7' -> return true
+            '8' -> return true
+            '9' -> return true
+        }
+        return false
+    }
+
+    private fun checkForNumber(c: Char): Boolean
+    {
+        when (c)
+        {
+            '0' -> return true
+            '1' -> return true
+            '2' -> return true
+            '3' -> return true
+            '4' -> return true
+            '5' -> return true
+            '6' -> return true
+            '7' -> return true
+            '8' -> return true
+            '9' -> return true
+            '.' -> return true
         }
         return false
     }
 
 
-    private fun checkForDot(s: String): Boolean
+    private fun isStringHasDot(s: String): Boolean
     {
         for (element in s)
         {
@@ -1543,7 +1591,9 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, View.OnTouchList
     private fun updateEdtResult(strToAdd: String): Boolean
     {
 
-        if (strToAdd.length == 1 && !checkForOperator(strToAdd[0]) && currentNumDigits >= MAX_DIGITS)
+        if (strToAdd.length == 1 && !checkForOperator(
+                strToAdd[0]) && currentNumDigits >= MAX_DIGITS
+        )
         {
             return false
         }
@@ -1570,7 +1620,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, View.OnTouchList
         edtResult.measure(0, 0)
         edtResult.measuredWidth
 
-        if (edtResult.width >= cardView.width && textSize > 22.0)
+        if (edtResult.textSize * edtResult.text.length >= cardView.width && textSize > 22.0)
         {
             for (i in 0..strToAdd.length)
             {
