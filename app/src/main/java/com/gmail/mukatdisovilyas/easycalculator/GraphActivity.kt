@@ -681,7 +681,6 @@ class GraphActivity : AppCompatActivity(), View.OnClickListener, View.OnTouchLis
 
     override fun onClick(v: View?)
     {
-        var temp: String
         when (v?.id)
         {
 
@@ -724,9 +723,7 @@ class GraphActivity : AppCompatActivity(), View.OnClickListener, View.OnTouchLis
                 {
                     if (edtXStart.text.isEmpty() && edtXStart.text.length < 5)
                     {
-                        val position = edtXStart.selectionStart
-                        edtXStart.setText("-")
-                        edtXStart.setSelection(position + 1)
+                        updateEdt(edtXStart,"-")
                     }
                 }
 
@@ -735,9 +732,7 @@ class GraphActivity : AppCompatActivity(), View.OnClickListener, View.OnTouchLis
 
                     if (edtXEnd.text.isEmpty())
                     {
-                        val position = edtXEnd.selectionStart
-                        edtXEnd.setText("-")
-                        edtXEnd.setSelection(position + 1)
+                        updateEdt(edtXEnd,"-")
                     }
                 }
 
@@ -786,26 +781,17 @@ class GraphActivity : AppCompatActivity(), View.OnClickListener, View.OnTouchLis
 
                 if (edtXStart.isFocused && edtXEnd.text.length < 5)
                 {
-                    temp = "${edtXStart.text}0"
-                    val position = edtXStart.selectionStart
-                    edtXStart.setText(temp)
-                    edtXStart.setSelection(position + 1)
+                    updateEdt(edtXStart,"0")
                 }
 
                 if (edtXEnd.isFocused && edtXEnd.text.length < 5)
                 {
-                    temp = "${edtXEnd.text}0"
-                    val position = edtXEnd.selectionStart
-                    edtXEnd.setText(temp)
-                    edtXEnd.setSelection(position + 1)
+                    updateEdt(edtXEnd,"0")
                 }
 
                 if (edtXStep.isFocused && edtXStep.text.length < 5)
                 {
-                    temp = "${edtXStep.text}0"
-                    val position = edtXStep.selectionStart
-                    edtXStep.setText(temp)
-                    edtXStep.setSelection(position + 1)
+                    updateEdt(edtXStep,"0")
                 }
             }
 
@@ -813,26 +799,17 @@ class GraphActivity : AppCompatActivity(), View.OnClickListener, View.OnTouchLis
             {
                 if (edtXStart.isFocused && edtXStart.text.length < 5)
                 {
-                    temp = "${edtXStart.text}1"
-                    val position = edtXStart.selectionStart
-                    edtXStart.setText(temp)
-                    edtXStart.setSelection(position + 1)
+                    updateEdt(edtXStart,"1")
                 }
 
                 if (edtXEnd.isFocused && edtXEnd.text.length < 5)
                 {
-                    temp = "${edtXEnd.text}1"
-                    val position = edtXEnd.selectionStart
-                    edtXEnd.setText(temp)
-                    edtXEnd.setSelection(position + 1)
+                    updateEdt(edtXEnd,"1")
                 }
 
                 if (edtXStep.isFocused && edtXStep.text.length < 5)
                 {
-                    temp = "${edtXStep.text}1"
-                    val position = edtXStep.selectionStart
-                    edtXStep.setText(temp)
-                    edtXStep.setSelection(position + 1)
+                    updateEdt(edtXStep,"1")
                 }
             }
 
@@ -840,26 +817,17 @@ class GraphActivity : AppCompatActivity(), View.OnClickListener, View.OnTouchLis
             {
                 if (edtXStart.isFocused && edtXStart.text.length < 5)
                 {
-                    temp = "${edtXStart.text}2"
-                    val position = edtXStart.selectionStart
-                    edtXStart.setText(temp)
-                    edtXStart.setSelection(position + 1)
+                    updateEdt(edtXStart,"2")
                 }
 
                 if (edtXEnd.isFocused && edtXEnd.text.length < 5)
                 {
-                    temp = "${edtXEnd.text}2"
-                    val position = edtXEnd.selectionStart
-                    edtXEnd.setText(temp)
-                    edtXEnd.setSelection(position + 1)
+                    updateEdt(edtXEnd,"2")
                 }
 
                 if (edtXStep.isFocused && edtXStep.text.length < 5)
                 {
-                    temp = "${edtXStep.text}2"
-                    val position = edtXStep.selectionStart
-                    edtXStep.setText(temp)
-                    edtXStep.setSelection(position + 1)
+                    updateEdt(edtXStep,"2")
                 }
             }
 
@@ -867,26 +835,17 @@ class GraphActivity : AppCompatActivity(), View.OnClickListener, View.OnTouchLis
             {
                 if (edtXStart.isFocused && edtXStart.text.length < 5)
                 {
-                    temp = "${edtXStart.text}3"
-                    val position = edtXStart.selectionStart
-                    edtXStart.setText(temp)
-                    edtXStart.setSelection(position + 1)
+                    updateEdt(edtXStart,"3")
                 }
 
                 if (edtXEnd.isFocused && edtXEnd.text.length < 5)
                 {
-                    temp = "${edtXEnd.text}3"
-                    val position = edtXEnd.selectionStart
-                    edtXEnd.setText(temp)
-                    edtXEnd.setSelection(position + 1)
+                    updateEdt(edtXEnd,"3")
                 }
 
                 if (edtXStep.isFocused && edtXStep.text.length < 5)
                 {
-                    temp = "${edtXStep.text}3"
-                    val position = edtXStep.selectionStart
-                    edtXStep.setText(temp)
-                    edtXStep.setSelection(position + 1)
+                    updateEdt(edtXStep,"3")
                 }
             }
 
@@ -894,26 +853,17 @@ class GraphActivity : AppCompatActivity(), View.OnClickListener, View.OnTouchLis
             {
                 if (edtXStart.isFocused && edtXStart.text.length < 5)
                 {
-                    temp = "${edtXStart.text}4"
-                    val position = edtXStart.selectionStart
-                    edtXStart.setText(temp)
-                    edtXStart.setSelection(position + 1)
+                    updateEdt(edtXStart,"4")
                 }
 
                 if (edtXEnd.isFocused && edtXEnd.text.length < 5)
                 {
-                    temp = "${edtXEnd.text}4"
-                    val position = edtXEnd.selectionStart
-                    edtXEnd.setText(temp)
-                    edtXEnd.setSelection(position + 1)
+                    updateEdt(edtXEnd,"4")
                 }
 
                 if (edtXStep.isFocused && edtXStep.text.length < 5)
                 {
-                    temp = "${edtXStep.text}4"
-                    val position = edtXStep.selectionStart
-                    edtXStep.setText(temp)
-                    edtXStep.setSelection(position + 1)
+                    updateEdt(edtXStep,"4")
                 }
             }
 
@@ -921,26 +871,17 @@ class GraphActivity : AppCompatActivity(), View.OnClickListener, View.OnTouchLis
             {
                 if (edtXStart.isFocused && edtXStart.text.length < 5)
                 {
-                    temp = "${edtXStart.text}5"
-                    val position = edtXStart.selectionStart
-                    edtXStart.setText(temp)
-                    edtXStart.setSelection(position + 1)
+                    updateEdt(edtXStart,"5")
                 }
 
                 if (edtXEnd.isFocused && edtXEnd.text.length < 5)
                 {
-                    temp = "${edtXEnd.text}5"
-                    val position = edtXEnd.selectionStart
-                    edtXEnd.setText(temp)
-                    edtXEnd.setSelection(position + 1)
+                    updateEdt(edtXEnd,"5")
                 }
 
                 if (edtXStep.isFocused && edtXStep.text.length < 5)
                 {
-                    temp = "${edtXStep.text}5"
-                    val position = edtXStep.selectionStart
-                    edtXStep.setText(temp)
-                    edtXStep.setSelection(position + 1)
+                    updateEdt(edtXStep,"5")
                 }
             }
 
@@ -948,26 +889,17 @@ class GraphActivity : AppCompatActivity(), View.OnClickListener, View.OnTouchLis
             {
                 if (edtXStart.isFocused && edtXEnd.text.length < 5)
                 {
-                    temp = "${edtXStart.text}6"
-                    val position = edtXStart.selectionStart
-                    edtXStart.setText(temp)
-                    edtXStart.setSelection(position + 1)
+                    updateEdt(edtXStart,"6")
                 }
 
                 if (edtXEnd.isFocused && edtXEnd.text.length < 5)
                 {
-                    temp = "${edtXEnd.text}6"
-                    val position = edtXEnd.selectionStart
-                    edtXEnd.setText(temp)
-                    edtXEnd.setSelection(position + 1)
+                    updateEdt(edtXEnd,"6")
                 }
 
                 if (edtXStep.isFocused && edtXStep.text.length < 5)
                 {
-                    temp = "${edtXStep.text}6"
-                    val position = edtXStep.selectionStart
-                    edtXStep.setText(temp)
-                    edtXStep.setSelection(position + 1)
+                    updateEdt(edtXStep,"6")
                 }
 
             }
@@ -976,26 +908,17 @@ class GraphActivity : AppCompatActivity(), View.OnClickListener, View.OnTouchLis
             {
                 if (edtXStart.isFocused && edtXStart.text.length < 5)
                 {
-                    temp = "${edtXStart.text}7"
-                    val position = edtXStart.selectionStart
-                    edtXStart.setText(temp)
-                    edtXStart.setSelection(position + 1)
+                    updateEdt(edtXStart,"7")
                 }
 
                 if (edtXEnd.isFocused && edtXEnd.text.length < 5)
                 {
-                    temp = "${edtXEnd.text}7"
-                    val position = edtXEnd.selectionStart
-                    edtXEnd.setText(temp)
-                    edtXEnd.setSelection(position + 1)
+                    updateEdt(edtXEnd,"7")
                 }
 
                 if (edtXStep.isFocused && edtXStep.text.length < 5)
                 {
-                    temp = "${edtXStep.text}7"
-                    val position = edtXStep.selectionStart
-                    edtXStep.setText(temp)
-                    edtXStep.setSelection(position + 1)
+                    updateEdt(edtXStep,"7")
                 }
             }
 
@@ -1003,26 +926,17 @@ class GraphActivity : AppCompatActivity(), View.OnClickListener, View.OnTouchLis
             {
                 if (edtXStart.isFocused && edtXStart.text.length < 5)
                 {
-                    temp = "${edtXStart.text}8"
-                    val position = edtXStart.selectionStart
-                    edtXStart.setText(temp)
-                    edtXStart.setSelection(position + 1)
+                    updateEdt(edtXStart,"8")
                 }
 
                 if (edtXEnd.isFocused && edtXEnd.text.length < 5)
                 {
-                    temp = "${edtXEnd.text}8"
-                    val position = edtXEnd.selectionStart
-                    edtXEnd.setText(temp)
-                    edtXEnd.setSelection(position + 1)
+                    updateEdt(edtXEnd, "8")
                 }
 
                 if (edtXStep.isFocused && edtXStep.text.length < 5)
                 {
-                    temp = "${edtXStep.text}8"
-                    val position = edtXStep.selectionStart
-                    edtXStep.setText(temp)
-                    edtXStep.setSelection(position + 1)
+                    updateEdt(edtXStep, "8")
                 }
             }
 
@@ -1030,26 +944,17 @@ class GraphActivity : AppCompatActivity(), View.OnClickListener, View.OnTouchLis
             {
                 if (edtXStart.isFocused && edtXStart.text.length < 5)
                 {
-                    temp = "${edtXStart.text}9"
-                    val position = edtXStart.selectionStart
-                    edtXStart.setText(temp)
-                    edtXStart.setSelection(position + 1)
+                    updateEdt(edtXStart, "9")
                 }
 
                 if (edtXEnd.isFocused && edtXEnd.text.length < 5)
                 {
-                    temp = "${edtXEnd.text}9"
-                    val position = edtXEnd.selectionStart
-                    edtXEnd.setText(temp)
-                    edtXEnd.setSelection(position + 1)
+                    updateEdt(edtXEnd, "9")
                 }
 
                 if (edtXStep.isFocused && edtXStep.text.length < 5)
                 {
-                    temp = "${edtXStep.text}9"
-                    val position = edtXStep.selectionStart
-                    edtXStep.setText(temp)
-                    edtXStep.setSelection(position + 1)
+                    updateEdt(edtXStep, "9")
                 }
             }
 
@@ -1057,35 +962,17 @@ class GraphActivity : AppCompatActivity(), View.OnClickListener, View.OnTouchLis
             {
                 if (edtXStart.isFocused)
                 {
-                    if (!checkForDot(edtXStart.text.toString()) && edtXStart.text.length < 5)
-                    {
-                        temp = "${edtXStart.text}."
-                        val position = edtXStart.selectionStart
-                        edtXStart.setText(temp)
-                        edtXStart.setSelection(position + 1)
-                    }
+                    if (isDotInsertable(edtExp)) updateEdt(edtXStart, ".")
                 }
 
                 if (edtXEnd.isFocused)
                 {
-                    if (!checkForDot(edtXEnd.text.toString()) && edtXEnd.text.length < 5)
-                    {
-                        temp = "${edtXEnd.text}."
-                        val position = edtXEnd.selectionStart
-                        edtXEnd.setText(temp)
-                        edtXEnd.setSelection(position + 1)
-                    }
+                    if (isDotInsertable(edtExp)) updateEdt(edtXEnd, ".")
                 }
 
                 if (edtXStep.isFocused)
                 {
-                    if (!checkForDot(edtXStep.text.toString()) && edtXStep.text.length < 5)
-                    {
-                        temp = "${edtXStep.text}."
-                        val position = edtXStep.selectionStart
-                        edtXStep.setText(temp)
-                        edtXStep.setSelection(position + 1)
-                    }
+                    if (isDotInsertable(edtExp)) updateEdt(edtXStep, ".")
                 }
             }
 
@@ -1203,7 +1090,7 @@ class GraphActivity : AppCompatActivity(), View.OnClickListener, View.OnTouchLis
             {
                 if (isXInsertable())
                 {
-                    updateEdtExp("x")
+                    updateEdt(edtExp, "x")
                     currentNumDigits++
                 }
                 else return
@@ -1212,62 +1099,62 @@ class GraphActivity : AppCompatActivity(), View.OnClickListener, View.OnTouchLis
 
             R.id.btn_zero               ->
             {
-                updateEdtExp("0")
+                updateEdt(edtExp, "0")
                 currentNumDigits++
             }
 
             R.id.btn_one                ->
             {
 
-                updateEdtExp("1")
+                updateEdt(edtExp, "1")
                 currentNumDigits++
             }
 
             R.id.btn_two                ->
             {
-                updateEdtExp("2")
+                updateEdt(edtExp, "2")
                 currentNumDigits++
             }
 
             R.id.btn_three              ->
             {
-                updateEdtExp("3")
+                updateEdt(edtExp, "3")
                 currentNumDigits++
             }
 
             R.id.btn_four               ->
             {
-                updateEdtExp("4")
+                updateEdt(edtExp, "4")
                 currentNumDigits++
             }
 
             R.id.btn_five               ->
             {
-                updateEdtExp("5")
+                updateEdt(edtExp, "5")
                 currentNumDigits++
             }
 
             R.id.btn_six                ->
             {
-                updateEdtExp("6")
+                updateEdt(edtExp, "6")
                 currentNumDigits++
             }
 
             R.id.btn_seven              ->
             {
-                updateEdtExp("7")
+                updateEdt(edtExp, "7")
                 currentNumDigits++
             }
 
             R.id.btn_eight              ->
             {
-                updateEdtExp("8")
+                updateEdt(edtExp, "8")
                 currentNumDigits++
             }
 
             R.id.btn_nine               ->
             {
-                updateEdtExp("9")
+                updateEdt(edtExp, "9")
                 currentNumDigits++
             }
 
@@ -1280,7 +1167,7 @@ class GraphActivity : AppCompatActivity(), View.OnClickListener, View.OnTouchLis
                         backspaceFun()
                     }
                 }
-                updateEdtExp("÷")
+                updateEdt(edtExp, "÷")
                 currentNumDigits = 0
             }
 
@@ -1293,7 +1180,7 @@ class GraphActivity : AppCompatActivity(), View.OnClickListener, View.OnTouchLis
                         backspaceFun()
                     }
                 }
-                updateEdtExp("×")
+                updateEdt(edtExp, "×")
                 currentNumDigits = 0
             }
 
@@ -1306,7 +1193,7 @@ class GraphActivity : AppCompatActivity(), View.OnClickListener, View.OnTouchLis
                         backspaceFun()
                     }
                 }
-                updateEdtExp("+")
+                updateEdt(edtExp, "+")
                 currentNumDigits = 0
             }
 
@@ -1319,18 +1206,14 @@ class GraphActivity : AppCompatActivity(), View.OnClickListener, View.OnTouchLis
                         backspaceFun()
                     }
                 }
-                updateEdtExp("-")
+                updateEdt(edtExp, "-")
                 currentNumDigits = 0
             }
 
             R.id.btn_dot                ->
             {
-                if (edtExp.text.isNotEmpty())
-                {
-                    if (!checkForDot(edtExp.text.toString())) updateEdtExp(".")
-                    else return
-                }
-                else return
+
+                if (isDotInsertable(edtExp)) if (updateEdt(edtExp, ".")) currentNumDigits++
             }
 
             R.id.btn_backspace          ->
@@ -1347,7 +1230,7 @@ class GraphActivity : AppCompatActivity(), View.OnClickListener, View.OnTouchLis
 
             R.id.btn_square_root        ->
             {
-                updateEdtExp("√(")
+                updateEdt(edtExp, "√(")
                 currentNumDigits = 0
             }
 
@@ -1360,7 +1243,7 @@ class GraphActivity : AppCompatActivity(), View.OnClickListener, View.OnTouchLis
                         backspaceFun()
                     }
                 }
-                updateEdtExp("^")
+                updateEdt(edtExp, "^")
                 currentNumDigits = 0
             }
 
@@ -1370,7 +1253,7 @@ class GraphActivity : AppCompatActivity(), View.OnClickListener, View.OnTouchLis
                 {
                     if (edtExp.text[edtExp.text.toString().length - 1] == 'e' || edtExp.text[edtExp.text.toString().length - 1] == 'π') return
                 }
-                updateEdtExp("π")
+                updateEdt(edtExp, "π")
                 currentNumDigits = 0
             }
 
@@ -1381,49 +1264,105 @@ class GraphActivity : AppCompatActivity(), View.OnClickListener, View.OnTouchLis
                 {
                     if (edtExp.text[edtExp.text.toString().length - 1] == 'e' || edtExp.text[edtExp.text.toString().length - 1] == 'π') return
                 }
-                updateEdtExp("e")
+                updateEdt(edtExp, "e")
                 currentNumDigits = 0
             }
 
             R.id.btn_sin                ->
             {
-                updateEdtExp("sin(")
+                updateEdt(edtExp, "sin(")
                 currentNumDigits = 0
             }
 
             R.id.btn_cos                ->
             {
-                updateEdtExp("cos(")
+                updateEdt(edtExp, "cos(")
                 currentNumDigits = 0
             }
 
             R.id.btn_tan                ->
             {
-                updateEdtExp("tan(")
+                updateEdt(edtExp, "tan(")
                 currentNumDigits = 0
             }
 
 
             R.id.btn_log2               ->
             {
-                updateEdtExp("log2(")
+                updateEdt(edtExp, "log2(")
                 currentNumDigits = 0
             }
 
             R.id.btn_log10              ->
             {
-                updateEdtExp("log10(")
+                updateEdt(edtExp, "log10(")
                 currentNumDigits = 0
             }
 
             R.id.btn_ln                 ->
             {
-                updateEdtExp("ln(")
+                updateEdt(edtExp, "ln(")
                 currentNumDigits = 0
             }
 
         }
     }
+
+
+    private fun isDotInsertable(edt: EditText): Boolean
+    {
+        if (edt.text.isEmpty()) return false
+
+        val cursor = edt.selectionStart
+        var i: Int = if (cursor == 0) cursor
+        else cursor - 1
+        var number = ""
+        while (i >= 0)
+        {
+            if (!(checkForDigit(edt.text[i]) || edt.text[i] == '.')) break
+            number = "${edt.text[i]}$number"
+            i--
+        }
+        i = if (cursor == edt.text.lastIndex) cursor - 1
+        else cursor
+        while (i <= edt.text.lastIndex)
+        {
+            if (!(checkForDigit(edt.text[i]) || edt.text[i] == '.')) break
+            number = "$number${edt.text[i]}"
+            i++
+        }
+        if (number.isEmpty()) return false
+        return !isStringHasDot(number)
+    }
+
+
+    private fun isStringHasDot(s: String): Boolean
+    {
+        for (element in s)
+        {
+            if (element == '.') return true
+        }
+        return false
+    }
+
+    private fun checkForDigit(c: Char): Boolean
+    {
+        when (c)
+        {
+            '0' -> return true
+            '1' -> return true
+            '2' -> return true
+            '3' -> return true
+            '4' -> return true
+            '5' -> return true
+            '6' -> return true
+            '7' -> return true
+            '8' -> return true
+            '9' -> return true
+        }
+        return false
+    }
+
 
     private fun isXInsertable(): Boolean
     {
@@ -1452,9 +1391,9 @@ class GraphActivity : AppCompatActivity(), View.OnClickListener, View.OnTouchLis
     }
 
 
-    private fun updateEdtExp(strToAdd: String): Boolean
+    private fun updateEdt(edt: EditText, strToAdd: String): Boolean
     {
-        if (edtExp.text.length + strToAdd.length > 15)
+        if (edt.text.length + strToAdd.length > 15)
         {
             return false
         }
@@ -1464,13 +1403,13 @@ class GraphActivity : AppCompatActivity(), View.OnClickListener, View.OnTouchLis
             return false
         }
 
-        val prevString = edtExp.text.toString()
+        val prevString = edt.text.toString()
 
-        val cursorPos = edtExp.selectionStart
+        val cursorPos = edt.selectionStart
         val leftString = prevString.substring(0, cursorPos)
         val rightString = prevString.substring(cursorPos)
-        edtExp.setText(String.format("%s%s%s", leftString, strToAdd, rightString))
-        edtExp.setSelection(cursorPos + strToAdd.length)
+        edt.setText(String.format("%s%s%s", leftString, strToAdd, rightString))
+        edt.setSelection(cursorPos + strToAdd.length)
 
         return true
 
@@ -1628,14 +1567,14 @@ class GraphActivity : AppCompatActivity(), View.OnClickListener, View.OnTouchLis
 
         if (textLength == 0)
         {
-            updateEdtExp("(")
+            updateEdt(edtExp, "(")
             edtExp.setSelection(cursorPos + 1)
             return
         }
 
         if (edtExp.text.toString()[cursorPos - 1] == '+' || edtExp.text.toString()[cursorPos - 1] == '-' || edtExp.text.toString()[cursorPos - 1] == '×' || edtExp.text.toString()[cursorPos - 1] == '÷' || edtExp.text.toString()[cursorPos - 1] == '^' || edtExp.text.toString()[cursorPos - 1] == '!' || edtExp.text.toString()[cursorPos - 1] == '√')
         {
-            updateEdtExp("(")
+            updateEdt(edtExp, "(")
             edtExp.setSelection(cursorPos + 1)
             return
         }
@@ -1656,13 +1595,13 @@ class GraphActivity : AppCompatActivity(), View.OnClickListener, View.OnTouchLis
                 .substring(textLength - 1, textLength) == "("
         )
         {
-            if (updateEdtExp("(")) edtExp.setSelection(cursorPos + 1)
+            if (updateEdt(edtExp, "(")) edtExp.setSelection(cursorPos + 1)
         }
         else if (closeBracketCount < openBracketCount && edtExp.text.toString()
                 .substring(textLength - 1, textLength) != "("
         )
         {
-            if (updateEdtExp(")")) edtExp.setSelection(cursorPos + 1)
+            if (updateEdt(edtExp, ")")) edtExp.setSelection(cursorPos + 1)
         }
 
     }

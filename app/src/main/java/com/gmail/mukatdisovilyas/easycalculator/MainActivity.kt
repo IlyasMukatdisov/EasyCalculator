@@ -1331,18 +1331,27 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, View.OnTouchList
     private fun isDotInsertable(): Boolean
     {
         if (edtMain.text.isEmpty()) return false
-        var str: String = edtMain.text[edtMain.text.lastIndex].toString()
-        if (edtMain.text.length > 1)
-        {
-            for (i in edtMain.text.length - 2..0)
-            {
-                if (checkForNumber(edtMain.text[i])) str = "${(edtMain.text[i])}$str"
-                else break
-            }
-        }
-        else return checkForDigit(str[0])
 
-        return !isStringHasDot(str)
+        val cursor = edtMain.selectionStart
+        var i : Int = if(cursor==0) cursor
+        else cursor-1
+        var number = ""
+        while (i >= 0)
+        {
+            if (!(checkForDigit(edtMain.text[i]) || edtMain.text[i] == '.')) break
+            number = "${edtMain.text[i]}$number"
+            i--
+        }
+        i = if(cursor==edtMain.text.lastIndex) cursor-1
+        else cursor
+        while (i <= edtMain.text.lastIndex)
+        {
+            if (!(checkForDigit(edtMain.text[i]) || edtMain.text[i] == '.')) break
+            number = "$number${edtMain.text[i]}"
+            i++
+        }
+        if (number.isEmpty()) return false
+        return !isStringHasDot(number)
     }
 
     private fun checkForDigit(c: Char): Boolean
@@ -1602,7 +1611,8 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, View.OnTouchList
         }
     }
 
-    private fun changeLastOperator(){
+    private fun changeLastOperator()
+    {
         var i = edtMain.text.lastIndex
 
         while (i >= 0)
@@ -1630,12 +1640,12 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, View.OnTouchList
         val lastChar = edtMain.text.toString()[textLength - 1]
 
 
-        var countDeletedChars = 0
+        val countDeletedChars: Int
 
         if (textLength >= 3)
         {
             val a = edtMain.text.toString().substring(edtMain.text.lastIndex - 2)
-            if (a == "ln(")
+            if (a == "ln(" || a=="NaN")
             {
                 edtMain.text.replace(edtMain.text.lastIndex - 2, edtMain.text.length, "")
                 edtMain.setSelection(cursorPos - 3)
@@ -1691,6 +1701,20 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, View.OnTouchList
                 }
             }
 
+            if (textLength >= 8)
+            {
+                val c = edtMain.text.toString().substring(edtMain.text.lastIndex - 7)
+                if ("log10(" in c)
+                {
+                    edtMain.text.replace(edtMain.text.lastIndex - 7, edtMain.text.length, "")
+                    edtMain.setSelection(cursorPos - 8)
+                    cursorPos -= 8
+                    countDeletedChars = 8
+                    increaseEdtMainTextSize(countDeletedChars)
+                    changeLastOperator()
+                    return
+                }
+            }
 
         }
         if (cursorPos != 0 && textLength != 0)
@@ -1723,7 +1747,6 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, View.OnTouchList
             textSize += 2
             edtResult.setTextSize(TypedValue.COMPLEX_UNIT_SP, textSize)
         }*/
-
 
 
     }
