@@ -1058,7 +1058,9 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, View.OnTouchList
                         ) lastNumber =
                             edtMain.text.toString().substring(prevOperatorIndex + 1).toDouble()
                     }
-                    catch (e: Exception){}
+                    catch (e: Exception)
+                    {
+                    }
                 }
                 else
                 {
@@ -1255,10 +1257,9 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, View.OnTouchList
         }
     }
 
-    private fun calculateFun(Exp: String): String
+    private fun calculateFun(exp: String): String
     {
-        checkForClosedBrackets()
-        var userExp = Exp
+        var userExp = checkForClosedBrackets(exp)
         val dbExp = userExp
         val dbHelper = HistoryDatabaseHelper(this)
 
@@ -1301,9 +1302,10 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, View.OnTouchList
         return result
     }
 
-    private fun checkForClosedBrackets()
+    private fun checkForClosedBrackets(s: String): String
     {
-        val textLength = edtMain.text.length
+        var exp = s
+        val textLength = exp.length
         var openBracketCount = 0
         var closeBracketCount = 0
         for (i in 0 until textLength)
@@ -1319,9 +1321,10 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, View.OnTouchList
         }
         while (openBracketCount > closeBracketCount)
         {
-            updateEdtMain(")")
+            exp = "$exp)"
             closeBracketCount++
         }
+        return exp
     }
 
 
@@ -1583,6 +1586,37 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, View.OnTouchList
     }*/
 
 
+    private fun increaseEdtMainTextSize(countDeletedChars: Int)
+    {
+        var edtResTextSize = edtMain.textSize / resources.displayMetrics.scaledDensity
+
+        if (edtResTextSize < edtMainTextSize)
+        {
+            for (i in 0..countDeletedChars)
+            {
+                if (edtResTextSize >= edtMainTextSize) break
+                edtResTextSize += if (resources.configuration.orientation == Configuration.ORIENTATION_PORTRAIT) 2
+                else 1
+                edtMain.textSize = edtResTextSize
+            }
+        }
+    }
+
+    private fun changeLastOperator(){
+        var i = edtMain.text.lastIndex
+
+        while (i >= 0)
+        {
+            if (edtMain.text[i] == '+' || edtMain.text[i] == '-' || edtMain.text[i] == '×' || edtMain.text[i] == '÷')
+            {
+                prevOperator = edtMain.text[i].toString()
+                prevOperatorIndex = i
+            }
+            i--
+        }
+    }
+
+
     private fun backspaceFun()
     {
         if (edtMain.length() == 0)
@@ -1594,11 +1628,11 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, View.OnTouchList
         val textLength = edtMain.text.length
 
         val lastChar = edtMain.text.toString()[textLength - 1]
-        var edtResTextSize = edtMain.textSize / resources.displayMetrics.scaledDensity
+
 
         var countDeletedChars = 0
 
-        if (edtMain.length() >= 3)
+        if (textLength >= 3)
         {
             val a = edtMain.text.toString().substring(edtMain.text.lastIndex - 2)
             if (a == "ln(")
@@ -1607,17 +1641,23 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, View.OnTouchList
                 edtMain.setSelection(cursorPos - 3)
                 cursorPos -= 3
                 countDeletedChars = 3
+                increaseEdtMainTextSize(countDeletedChars)
+                changeLastOperator()
+                return
             }
 
-            if (edtMain.length() >= 4)
+            if (textLength >= 4)
             {
                 val b = edtMain.text.toString().substring(edtMain.text.lastIndex - 3)
-                if (b == "sin(" || b == "cos(" || b == "tan(" || b == "rad(" || b== "ln(")
+                if (b == "sin(" || b == "cos(" || b == "tan(" || b == "rad(" || b == "ln(")
                 {
                     edtMain.text.replace(edtMain.text.lastIndex - 3, edtMain.text.length, "")
                     edtMain.setSelection(cursorPos - 4)
                     cursorPos -= 4
                     countDeletedChars = 4
+                    increaseEdtMainTextSize(countDeletedChars)
+                    changeLastOperator()
+                    return
                 }
             }
 
@@ -1630,6 +1670,9 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, View.OnTouchList
                     edtMain.setSelection(cursorPos - 5)
                     cursorPos -= 5
                     countDeletedChars = 5
+                    increaseEdtMainTextSize(countDeletedChars)
+                    changeLastOperator()
+                    return
                 }
             }
 
@@ -1642,14 +1685,14 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, View.OnTouchList
                     edtMain.setSelection(cursorPos - 6)
                     cursorPos -= 6
                     countDeletedChars = 6
+                    increaseEdtMainTextSize(countDeletedChars)
+                    changeLastOperator()
+                    return
                 }
             }
 
 
         }
-
-
-
         if (cursorPos != 0 && textLength != 0)
         {
             val selection: SpannableStringBuilder = edtMain.text as SpannableStringBuilder
@@ -1663,28 +1706,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, View.OnTouchList
         }
 
 
-        if (edtResTextSize < edtMainTextSize)
-        {
-            for (i in 0..countDeletedChars)
-            {
-                if (edtResTextSize >= edtMainTextSize) break
-                edtResTextSize += if (resources.configuration.orientation == Configuration.ORIENTATION_PORTRAIT) 2
-                else 1
-                edtMain.textSize = edtResTextSize
-            }
-        }
-
-        var i = edtMain.text.lastIndex
-
-        while (i >= 0)
-        {
-            if (edtMain.text[i] == '+' || edtMain.text[i] == '-' || edtMain.text[i] == '×' || edtMain.text[i] == '÷')
-            {
-                prevOperator = edtMain.text[i].toString()
-                prevOperatorIndex=i
-            }
-            i--
-        }
+        isAvailableToCalculate("")
 
         /*if (edtResult.length() <= 5 && textSize < edtResultTextSize &&
             resources.configuration.orientation == android.content.res.Configuration.ORIENTATION_PORTRAIT
@@ -1702,7 +1724,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, View.OnTouchList
             edtResult.setTextSize(TypedValue.COMPLEX_UNIT_SP, textSize)
         }*/
 
-        isAvailableToCalculate("")
+
 
     }
 
