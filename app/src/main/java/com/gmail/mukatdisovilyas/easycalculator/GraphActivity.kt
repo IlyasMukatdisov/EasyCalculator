@@ -962,17 +962,17 @@ class GraphActivity : AppCompatActivity(), View.OnClickListener, View.OnTouchLis
             {
                 if (edtXStart.isFocused)
                 {
-                    if (isDotInsertable(edtExp)) updateEdt(edtXStart, ".")
+                    if (isDotInsertable(edtXStart)) updateEdt(edtXStart, ".")
                 }
 
                 if (edtXEnd.isFocused)
                 {
-                    if (isDotInsertable(edtExp)) updateEdt(edtXEnd, ".")
+                    if (isDotInsertable(edtXEnd)) updateEdt(edtXEnd, ".")
                 }
 
                 if (edtXStep.isFocused)
                 {
-                    if (isDotInsertable(edtExp)) updateEdt(edtXStep, ".")
+                    if (isDotInsertable(edtXStep)) updateEdt(edtXStep, ".")
                 }
             }
 
@@ -982,23 +982,7 @@ class GraphActivity : AppCompatActivity(), View.OnClickListener, View.OnTouchLis
                 {
                     if (edtXStart.text.isNotEmpty())
                     {
-                        val cursorPos = edtXStart.selectionStart
-                        val textLength = edtXStart.text.length
-
-                        val lastChar = edtXStart.text.toString()[textLength - 1]
-
-                        if (cursorPos != 0 && textLength != 0)
-                        {
-                            val selection: SpannableStringBuilder =
-                                edtXStart.text as SpannableStringBuilder
-                            selection.replace(cursorPos - 1, cursorPos, "")
-                            if (!checkForOperator(lastChar))
-                            {
-                                currentNumDigits--
-                            }
-                            edtXStart.text = selection
-                            edtXStart.setSelection(cursorPos - 1)
-                        }
+                        backspaceFun(edtXStart)
                     }
                 }
 
@@ -1006,23 +990,7 @@ class GraphActivity : AppCompatActivity(), View.OnClickListener, View.OnTouchLis
                 {
                     if (edtXEnd.text.isNotEmpty())
                     {
-                        val cursorPos = edtXEnd.selectionStart
-                        val textLength = edtXEnd.text.length
-
-                        val lastChar = edtXEnd.text.toString()[textLength - 1]
-
-                        if (cursorPos != 0 && textLength != 0)
-                        {
-                            val selection: SpannableStringBuilder =
-                                edtXEnd.text as SpannableStringBuilder
-                            selection.replace(cursorPos - 1, cursorPos, "")
-                            if (!checkForOperator(lastChar))
-                            {
-                                currentNumDigits--
-                            }
-                            edtXEnd.text = selection
-                            edtXEnd.setSelection(cursorPos - 1)
-                        }
+                        backspaceFun(edtXEnd)
                     }
                 }
 
@@ -1030,23 +998,7 @@ class GraphActivity : AppCompatActivity(), View.OnClickListener, View.OnTouchLis
                 {
                     if (edtXStep.text.isNotEmpty())
                     {
-                        val cursorPos = edtXStep.selectionStart
-                        val textLength = edtXStep.text.length
-
-                        val lastChar = edtXStep.text.toString()[textLength - 1]
-
-                        if (cursorPos != 0 && textLength != 0)
-                        {
-                            val selection: SpannableStringBuilder =
-                                edtXStep.text as SpannableStringBuilder
-                            selection.replace(cursorPos - 1, cursorPos, "")
-                            if (!checkForOperator(lastChar))
-                            {
-                                currentNumDigits--
-                            }
-                            edtXStep.text = selection
-                            edtXStep.setSelection(cursorPos - 1)
-                        }
+                        backspaceFun(edtXStep)
                     }
                 }
             }
@@ -1164,7 +1116,7 @@ class GraphActivity : AppCompatActivity(), View.OnClickListener, View.OnTouchLis
                 {
                     if (checkForOperator(edtExp.text[edtExp.text.lastIndex]))
                     {
-                        backspaceFun()
+                        backspaceFun(edtExp)
                     }
                 }
                 updateEdt(edtExp, "÷")
@@ -1177,7 +1129,7 @@ class GraphActivity : AppCompatActivity(), View.OnClickListener, View.OnTouchLis
                 {
                     if (checkForOperator(edtExp.text[edtExp.text.lastIndex]))
                     {
-                        backspaceFun()
+                        backspaceFun(edtExp)
                     }
                 }
                 updateEdt(edtExp, "×")
@@ -1190,7 +1142,7 @@ class GraphActivity : AppCompatActivity(), View.OnClickListener, View.OnTouchLis
                 {
                     if (checkForOperator(edtExp.text[edtExp.text.lastIndex]))
                     {
-                        backspaceFun()
+                        backspaceFun(edtExp)
                     }
                 }
                 updateEdt(edtExp, "+")
@@ -1203,7 +1155,7 @@ class GraphActivity : AppCompatActivity(), View.OnClickListener, View.OnTouchLis
                 {
                     if (checkForOperator(edtExp.text[edtExp.text.lastIndex]))
                     {
-                        backspaceFun()
+                        backspaceFun(edtExp)
                     }
                 }
                 updateEdt(edtExp, "-")
@@ -1218,7 +1170,7 @@ class GraphActivity : AppCompatActivity(), View.OnClickListener, View.OnTouchLis
 
             R.id.btn_backspace          ->
             {
-                if (edtExp.text.isNotEmpty()) backspaceFun()
+                if (edtExp.text.isNotEmpty()) backspaceFun(edtExp)
                 else return
             }
 
@@ -1240,7 +1192,7 @@ class GraphActivity : AppCompatActivity(), View.OnClickListener, View.OnTouchLis
                 {
                     if (checkForOperator(edtExp.text[edtExp.text.lastIndex]))
                     {
-                        backspaceFun()
+                        backspaceFun(edtExp)
                     }
                 }
                 updateEdt(edtExp, "^")
@@ -1428,76 +1380,105 @@ class GraphActivity : AppCompatActivity(), View.OnClickListener, View.OnTouchLis
         return false
     }
 
-    private fun backspaceFun()
+    private fun backspaceFun(edt : EditText)
     {
-        if (edtExp.text.isEmpty())
+        if (edt.length() == 0)
         {
             return
         }
-        var cursorPos = edtExp.selectionStart
-        val textLength = edtExp.text.length
 
-        val lastChar = edtExp.text.toString()[textLength - 1]
+        var cursorPos = edt.selectionStart
+        val textLength = edt.text.length
+
+        val lastChar = edt.text.toString()[textLength - 1]
 
 
-        if (edtExp.length() >= 3)
+        if (textLength >= 3)
         {
-            val a = edtExp.text.toString().substring(edtExp.text.lastIndex - 2)
-            if (a == "ln(")
+            val a = edt.text.toString().substring(edt.text.lastIndex - 2)
+            if (a == "ln(" || a=="NaN")
             {
-                edtExp.text.replace(edtExp.text.lastIndex - 2, edtExp.text.length, "")
-                edtExp.setSelection(cursorPos - 3)
+                edt.text.replace(edt.text.lastIndex - 2, edt.text.length, "")
+                edt.setSelection(cursorPos - 3)
                 cursorPos -= 3
+                return
             }
 
-            if (edtExp.length() >= 4)
+            if (textLength >= 4)
             {
-                val b = edtExp.text.toString().substring(edtExp.text.lastIndex - 3)
-                if (b == "sin(" || b == "cos(" || b == "tan(")
+                val b = edt.text.toString().substring(edt.text.lastIndex - 3)
+                if (b == "sin(" || b == "cos(" || b == "tan(" || b == "rad(" || b == "ln(")
                 {
-                    edtExp.text.replace(edtExp.text.lastIndex - 3, edtExp.text.length, "")
-                    edtExp.setSelection(cursorPos - 4)
+                    edt.text.replace(edt.text.lastIndex - 3, edt.text.length, "")
+                    edt.setSelection(cursorPos - 4)
                     cursorPos -= 4
+                    return
                 }
             }
 
             if (textLength >= 5)
             {
-                val b = edtExp.text.toString().substring(edtExp.text.lastIndex - 4)
+                val b = edt.text.toString().substring(edt.text.lastIndex - 4)
                 if ("log2(" in b)
                 {
-                    edtExp.text.replace(edtExp.text.lastIndex - 4, edtExp.text.length, "")
-                    edtExp.setSelection(cursorPos - 5)
-                    cursorPos -= 5
+                    edt.text.replace(edt.text.lastIndex - 4, edt.text.length, "")
+                    edt.setSelection(cursorPos - 5)
+                    return
                 }
             }
 
             if (textLength >= 6)
             {
-                val c = edtExp.text.toString().substring(edtExp.text.lastIndex - 5)
+                val c = edt.text.toString().substring(edt.text.lastIndex - 5)
                 if ("log10(" in c)
                 {
-                    edtExp.text.replace(edtExp.text.lastIndex - 5, edtExp.text.length, "")
-                    edtExp.setSelection(cursorPos - 6)
-                    cursorPos -= 6
+                    edt.text.replace(edt.text.lastIndex - 5, edt.text.length, "")
+                    edt.setSelection(cursorPos - 6)
+                    return
                 }
             }
 
+            if (textLength >= 8)
+            {
+                val c = edt.text.toString().substring(edt.text.lastIndex - 7)
+                if ("log10(" in c)
+                {
+                    edt.text.replace(edt.text.lastIndex - 7, edt.text.length, "")
+                    edt.setSelection(cursorPos - 8)
+                    return
+                }
+            }
 
         }
-
-
         if (cursorPos != 0 && textLength != 0)
         {
-            val selection: SpannableStringBuilder = edtExp.text as SpannableStringBuilder
+            val selection: SpannableStringBuilder = edt.text as SpannableStringBuilder
             selection.replace(cursorPos - 1, cursorPos, "")
             if (!checkForOperator(lastChar))
             {
                 currentNumDigits--
             }
-            edtExp.text = selection
-            edtExp.setSelection(cursorPos - 1)
+            edt.text = selection
+            edt.setSelection(cursorPos - 1)
         }
+
+
+        /*if (edtResult.length() <= 5 && textSize < edtResultTextSize &&
+            resources.configuration.orientation == android.content.res.Configuration.ORIENTATION_PORTRAIT
+        )
+        {
+            textSize += 5
+            edtResult.setTextSize(TypedValue.COMPLEX_UNIT_SP, textSize)
+        }
+
+        if (edtResult.length() > 18 && textSize < edtResultTextSize &&
+            resources.configuration.orientation == android.content.res.Configuration.ORIENTATION_LANDSCAPE
+        )
+        {
+            textSize += 2
+            edtResult.setTextSize(TypedValue.COMPLEX_UNIT_SP, textSize)
+        }*/
+
 
     }
 
