@@ -18,6 +18,7 @@
     <string name="btn_plus">+</string>
     <string name="btn_zero">0</string>
     <string name="btn_dot">.</string>
+    <string name="btn_dot_minus">. / −</string>
     <string name="btn_equal">=</string>
     <string name="btn_square_root">√</string>
     <string name="btn_pi">π</string>

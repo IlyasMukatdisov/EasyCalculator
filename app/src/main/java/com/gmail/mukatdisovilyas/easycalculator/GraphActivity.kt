@@ -71,7 +71,6 @@ class GraphActivity : AppCompatActivity(), View.OnClickListener, View.OnTouchLis
     private lateinit var btnNineKeyboard: Button
     private lateinit var btnDotKeyboard: Button
     private lateinit var btnBackspaceKeyboard: Button
-    private lateinit var btnMinusKeyboard: Button
 
     private lateinit var btnX: Button
     private lateinit var btnKeyboard: Button
@@ -182,7 +181,6 @@ class GraphActivity : AppCompatActivity(), View.OnClickListener, View.OnTouchLis
         btnDot.backgroundTintList = darkGrayColor
         btnBackSpace.backgroundTintList = darkGrayColor
 
-        btnMinusKeyboard.backgroundTintList = darkGrayColor
 
         edtExp.backgroundTintList = darkGrayColor
 
@@ -199,7 +197,6 @@ class GraphActivity : AppCompatActivity(), View.OnClickListener, View.OnTouchLis
         btnDot.setTextColor(whiteColor)
         btnBackSpace.setTextColor(whiteColor)
 
-        btnMinusKeyboard.setTextColor(whiteColor)
 
 
         btnZeroKeyboard.backgroundTintList = darkGrayColor
@@ -334,7 +331,6 @@ class GraphActivity : AppCompatActivity(), View.OnClickListener, View.OnTouchLis
         btnNineKeyboard.textSize = viewsTextSize * 3 / 2
         btnDotKeyboard.textSize = viewsTextSize * 3 / 2
         btnBackspaceKeyboard.textSize = viewsTextSize * 3 / 2
-        btnMinusKeyboard.textSize = viewsTextSize * 3 / 2
 
         tvFx.textSize = viewsTextSize
         tvXValues.textSize = viewsTextSize
@@ -416,9 +412,8 @@ class GraphActivity : AppCompatActivity(), View.OnClickListener, View.OnTouchLis
         btnSevenKeyboard = findViewById(R.id.btn_seven_keyboard)
         btnEightKeyboard = findViewById(R.id.btn_eight_keyboard)
         btnNineKeyboard = findViewById(R.id.btn_nine_keyboard)
-        btnDotKeyboard = findViewById(R.id.btn_dot_keyboard)
+        btnDotKeyboard = findViewById(R.id.btn_dot_minus_keyboard)
         btnBackspaceKeyboard = findViewById(R.id.btn_backspace_keyboard)
-        btnMinusKeyboard = findViewById(R.id.btn_minus_keyboard)
 
 
         tvFx = findViewById(R.id.tv_fx)
@@ -562,7 +557,6 @@ class GraphActivity : AppCompatActivity(), View.OnClickListener, View.OnTouchLis
         btnNineKeyboard.setOnClickListener(this)
         btnDotKeyboard.setOnClickListener(this)
         btnBackspaceKeyboard.setOnClickListener(this)
-        btnMinusKeyboard.setOnClickListener(this)
 
         edtExp.setOnClickListener(this)
         edtXStart.setOnClickListener(this)
@@ -619,7 +613,8 @@ class GraphActivity : AppCompatActivity(), View.OnClickListener, View.OnTouchLis
 
         if (xStart >= xEnd)
         {
-            Snackbar.make(llParent, "End value must be bigger than Start value!", Snackbar.LENGTH_SHORT).show()
+            Snackbar.make(llParent, "End value must be bigger than Start value!",
+                Snackbar.LENGTH_SHORT).show()
             return false
         }
 
@@ -720,32 +715,6 @@ class GraphActivity : AppCompatActivity(), View.OnClickListener, View.OnTouchLis
                 isExpanded = true
                 linearLayoutButtons.visibility = View.GONE
                 llKeyboard.visibility = View.VISIBLE
-            }
-
-
-            R.id.btn_minus_keyboard     ->
-            {
-                if (edtXStart.isFocused)
-                {
-                    if (edtXStart.text.isEmpty() && edtXStart.text.length < 5)
-                    {
-                        updateEdt(edtXStart, "-")
-                    }
-                }
-
-                if (edtXEnd.isFocused && edtXEnd.text.length < 5)
-                {
-
-                    if (edtXEnd.text.isEmpty())
-                    {
-                        updateEdt(edtXEnd, "-")
-                    }
-                }
-
-                if (edtXStep.isFocused)
-                {
-                    return
-                }
             }
 
 
@@ -964,15 +933,25 @@ class GraphActivity : AppCompatActivity(), View.OnClickListener, View.OnTouchLis
                 }
             }
 
-            R.id.btn_dot_keyboard       ->
+            R.id.btn_dot_minus_keyboard ->
             {
                 if (edtXStart.isFocused)
                 {
+                    if (edtXStart.selectionStart == 0 && isMinusInsertable(edtXStart))
+                    {
+                        updateEdt(edtXStart, "-")
+                        return
+                    }
                     if (isDotInsertable(edtXStart)) updateEdt(edtXStart, ".")
                 }
 
                 if (edtXEnd.isFocused)
                 {
+                    if (edtXEnd.selectionStart == 0 && isMinusInsertable(edtXEnd))
+                    {
+                        updateEdt(edtXEnd, "-")
+                        return
+                    }
                     if (isDotInsertable(edtXEnd)) updateEdt(edtXEnd, ".")
                 }
 
@@ -1264,6 +1243,15 @@ class GraphActivity : AppCompatActivity(), View.OnClickListener, View.OnTouchLis
             }
 
         }
+    }
+
+    private fun isMinusInsertable(edt: EditText): Boolean
+    {
+        for (c in edt.text.toString())
+        {
+            if (c == '-') return false
+        }
+        return true
     }
 
 
@@ -1934,7 +1922,6 @@ class GraphActivity : AppCompatActivity(), View.OnClickListener, View.OnTouchLis
             btnNineKeyboard.backgroundTintList = nColor
             btnDotKeyboard.backgroundTintList = nColor
             btnBackspaceKeyboard.backgroundTintList = nColor
-            btnMinusKeyboard.backgroundTintList = nColor
         }
 
         if (actionsColor.isNotEmpty())
@@ -2041,7 +2028,6 @@ class GraphActivity : AppCompatActivity(), View.OnClickListener, View.OnTouchLis
         btnEightKeyboard.setTextColor(tColor)
         btnNineKeyboard.setTextColor(tColor)
         btnDotKeyboard.setTextColor(tColor)
-        btnMinusKeyboard.setTextColor(tColor)
         btnBackspaceKeyboard.setTextColor(tColor)
 
 
@@ -2096,7 +2082,6 @@ class GraphActivity : AppCompatActivity(), View.OnClickListener, View.OnTouchLis
         btnEightKeyboard.background = circle
         btnNineKeyboard.background = circle
         btnDotKeyboard.background = circle
-        btnMinusKeyboard.background = circle
         btnBackspaceKeyboard.background = circle
 
     }
@@ -2151,7 +2136,6 @@ class GraphActivity : AppCompatActivity(), View.OnClickListener, View.OnTouchLis
         btnNineKeyboard.background = rectangle
         btnDotKeyboard.background = rectangle
         btnBackspaceKeyboard.background = rectangle
-        btnMinusKeyboard.background = rectangle
     }
 
     private fun setButtonsRounded()
@@ -2204,7 +2188,6 @@ class GraphActivity : AppCompatActivity(), View.OnClickListener, View.OnTouchLis
         btnEightKeyboard.background = rounded
         btnNineKeyboard.background = rounded
         btnDotKeyboard.background = rounded
-        btnMinusKeyboard.background = rounded
         btnBackspaceKeyboard.background = rounded
 
     }
