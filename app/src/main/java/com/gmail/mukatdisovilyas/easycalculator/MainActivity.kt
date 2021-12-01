@@ -1491,12 +1491,52 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, View.OnTouchList
         return false
     }
 
+
+    private fun digitLimit(): Int
+    {
+        var currentNumDigits = 0
+        if (edtMain.text.isEmpty()) return currentNumDigits
+        val position = edtMain.selectionStart
+        var i = if (position == 0) position
+        else position - 1
+
+        while (checkForNumber(edtMain.text[i]) || edtMain.text[i] == ',')
+        {
+            if (edtMain.text[i] == ',')
+            {
+                i--
+                if (i < 0) break
+                continue
+            }
+            currentNumDigits++
+            i--
+            if (i < 0) break
+        }
+
+        i = if (position == edtMain.text.length) position - 1
+        else position
+
+        while (checkForNumber(edtMain.text[i]) || edtMain.text[i] == ',')
+        {
+            if (edtMain.text[i] == ',')
+            {
+                i++
+                if (i > edtMain.text.lastIndex) break
+                continue
+            }
+
+            currentNumDigits++
+            i++
+            if (i > edtMain.text.lastIndex) break
+        }
+
+        return currentNumDigits
+    }
+
     private fun updateEdtMain(strToAdd: String): Boolean
     {
 
-        if (strToAdd.length == 1 && !checkForOperator(
-                strToAdd[0]) && currentNumDigits >= MAX_DIGITS
-        )
+        if (strToAdd.length == 1 && !checkForOperator(strToAdd[0]) && digitLimit() >= MAX_DIGITS)
         {
             return false
         }
@@ -1629,126 +1669,357 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, View.OnTouchList
 
     private fun backspaceFun()
     {
-        if (edtMain.length() == 0)
+        if (edtMain.length() == 0 || edtMain.selectionStart == 0 || digitLimit()>= MAX_DIGITS)
         {
             return
         }
 
-        var cursorPos = edtMain.selectionStart
+        if (edtMain.text.toString() == "NaN" || edtMain.text.toString() == "Infinity")
+        {
+            clear()
+            return
+        }
+
+        if (edtMain.length() >= 3) if (mathFunDelete())
+        {
+            changeLastOperator()
+            isAvailableToCalculate("")
+            return
+        }
+
+
+        val cursorPos = edtMain.selectionStart
         val textLength = edtMain.text.length
 
-        val lastChar = edtMain.text.toString()[textLength - 1]
-
-
-        val countDeletedChars: Int
-
-        if (textLength >= 3)
-        {
-            val a = edtMain.text.toString().substring(edtMain.text.lastIndex - 2)
-            if (a == "ln(" || a=="NaN")
-            {
-                edtMain.text.replace(edtMain.text.lastIndex - 2, edtMain.text.length, "")
-                edtMain.setSelection(cursorPos - 3)
-                cursorPos -= 3
-                countDeletedChars = 3
-                increaseEdtMainTextSize(countDeletedChars)
-                changeLastOperator()
-                return
-            }
-
-            if (textLength >= 4)
-            {
-                val b = edtMain.text.toString().substring(edtMain.text.lastIndex - 3)
-                if (b == "sin(" || b == "cos(" || b == "tan(" || b == "rad(" || b == "ln(")
-                {
-                    edtMain.text.replace(edtMain.text.lastIndex - 3, edtMain.text.length, "")
-                    edtMain.setSelection(cursorPos - 4)
-                    cursorPos -= 4
-                    countDeletedChars = 4
-                    increaseEdtMainTextSize(countDeletedChars)
-                    changeLastOperator()
-                    return
-                }
-            }
-
-            if (textLength >= 5)
-            {
-                val b = edtMain.text.toString().substring(edtMain.text.lastIndex - 4)
-                if ("log2(" in b)
-                {
-                    edtMain.text.replace(edtMain.text.lastIndex - 4, edtMain.text.length, "")
-                    edtMain.setSelection(cursorPos - 5)
-                    cursorPos -= 5
-                    countDeletedChars = 5
-                    increaseEdtMainTextSize(countDeletedChars)
-                    changeLastOperator()
-                    return
-                }
-            }
-
-            if (textLength >= 6)
-            {
-                val c = edtMain.text.toString().substring(edtMain.text.lastIndex - 5)
-                if ("log10(" in c)
-                {
-                    edtMain.text.replace(edtMain.text.lastIndex - 5, edtMain.text.length, "")
-                    edtMain.setSelection(cursorPos - 6)
-                    cursorPos -= 6
-                    countDeletedChars = 6
-                    increaseEdtMainTextSize(countDeletedChars)
-                    changeLastOperator()
-                    return
-                }
-            }
-
-            if (textLength >= 8)
-            {
-                val c = edtMain.text.toString().substring(edtMain.text.lastIndex - 7)
-                if ("log10(" in c)
-                {
-                    edtMain.text.replace(edtMain.text.lastIndex - 7, edtMain.text.length, "")
-                    edtMain.setSelection(cursorPos - 8)
-                    cursorPos -= 8
-                    countDeletedChars = 8
-                    increaseEdtMainTextSize(countDeletedChars)
-                    changeLastOperator()
-                    return
-                }
-            }
-
-        }
         if (cursorPos != 0 && textLength != 0)
         {
-            val selection: SpannableStringBuilder = edtMain.text as SpannableStringBuilder
-            selection.replace(cursorPos - 1, cursorPos, "")
-            if (!checkForOperator(lastChar))
-            {
-                currentNumDigits--
-            }
-            edtMain.text = selection
-            edtMain.setSelection(cursorPos - 1)
+            deleteLast(edtMain)
+            increaseEdtMainTextSize(1)
         }
 
-
+        changeLastOperator()
         isAvailableToCalculate("")
 
-        /*if (edtResult.length() <= 5 && textSize < edtResultTextSize &&
-            resources.configuration.orientation == android.content.res.Configuration.ORIENTATION_PORTRAIT
-        )
+
+    }
+
+    private fun deleteLast(edt: EditText)
+    {
+        val cursorPos = edt.selectionStart
+        val selection: SpannableStringBuilder = edt.text as SpannableStringBuilder
+        selection.replace(cursorPos - 1, cursorPos, "")
+        edt.text = selection
+        edt.setSelection(cursorPos - 1)
+    }
+
+    private fun mathFunDelete(): Boolean
+    {
+        val pos = edtMain.selectionStart
+        val lastIndex = edtMain.text.lastIndex
+
+        when (edtMain.text[pos - 1])
         {
-            textSize += 5
-            edtResult.setTextSize(TypedValue.COMPLEX_UNIT_SP, textSize)
+            's' ->
+            {
+                if (edtMain.length() >= 4 && pos - 1 >= 0 && pos + 3 <= lastIndex + 1)
+                {
+                    if (edtMain.text.substring(pos - 1, pos + 3) == "sin(")
+                    {
+                        edtMain.text.replace(pos - 1, pos + 3, "")
+                        increaseEdtMainTextSize(4)
+                        return true
+                    }
+                }
+                if (edtMain.length() >= 4 && pos - 3 >= 0 && pos + 1 <= lastIndex + 1)
+                {
+                    if (edtMain.text.substring(pos - 3, pos + 1) == "cos(")
+                    {
+                        edtMain.text.replace(pos - 3, pos + 1, "")
+                        increaseEdtMainTextSize(4)
+                        return true
+                    }
+                }
+
+            }
+
+            'i' ->
+            {
+                if (edtMain.length() >= 4 && pos - 2 >= 0 && pos + 2 <= lastIndex + 1)
+                {
+                    if (edtMain.text.substring(pos - 2, pos + 2) == "sin(")
+                    {
+                        edtMain.text.replace(pos - 2, pos + 2, "")
+                        increaseEdtMainTextSize(4)
+                        return true
+                    }
+                }
+            }
+
+            'n' ->
+            {
+                if (edtMain.length() >= 4 && pos - 3 >= 0 && pos + 1 <= lastIndex + 1)
+                {
+                    if (edtMain.text.substring(pos - 3, pos + 1) == "sin(")
+                    {
+                        edtMain.text.replace(pos - 3, pos + 1, "")
+                        increaseEdtMainTextSize(4)
+                        return true
+                    }
+                    if (edtMain.text.substring(pos - 3, pos + 1) == "tan(")
+                    {
+                        edtMain.text.replace(pos - 3, pos + 1, "")
+                        increaseEdtMainTextSize(4)
+                        return true
+                    }
+                }
+                if (pos - 2 >= 0 && pos + 1 <= lastIndex + 1)
+                {
+                    if (edtMain.text.substring(pos - 2, pos + 1) == "ln(")
+                    {
+                        edtMain.text.replace(pos - 2, pos + 1, "")
+                        increaseEdtMainTextSize(3)
+                        return true
+                    }
+                }
+            }
+
+            'c' ->
+            {
+                if (edtMain.length() >= 4 && pos - 1 >= 0 && pos + 3 <= lastIndex + 1)
+                {
+                    if (edtMain.text.substring(pos - 1, pos + 3) == "cos(")
+                    {
+                        edtMain.text.replace(pos - 1, pos + 3, "")
+                        increaseEdtMainTextSize(4)
+                        return true
+                    }
+                }
+            }
+
+            'o' ->
+            {
+                if (edtMain.length() >= 4 && pos - 2 >= 0 && pos + 2 <= lastIndex + 1)
+                {
+                    if (edtMain.text.substring(pos - 2, pos + 2) == "cos(")
+                    {
+                        edtMain.text.replace(pos - 2, pos + 2, "")
+                        increaseEdtMainTextSize(4)
+                        return true
+                    }
+                }
+                if (edtMain.length() >= 5 && pos - 2 >= 0 && pos + 3 <= lastIndex + 1)
+                {
+                    if (edtMain.text.substring(pos - 2, pos + 3) == "log2(")
+                    {
+                        edtMain.text.replace(pos - 2, pos + 3, "")
+                        increaseEdtMainTextSize(5)
+                        return true
+                    }
+                }
+                if (edtMain.length() >= 6 && pos - 2 >= 0 && pos + 4 <= lastIndex + 1)
+                {
+                    if (edtMain.text.substring(pos - 2, pos + 4) == "log10(")
+                    {
+                        edtMain.text.replace(pos - 2, pos + 4, "")
+                        increaseEdtMainTextSize(6)
+                        return true
+                    }
+                }
+            }
+
+            't' ->
+            {
+                if (edtMain.length() >= 4 && pos - 1 >= 0 && pos + 3 <= lastIndex + 1)
+                {
+                    if (edtMain.text.substring(pos - 1, pos + 3) == "tan(")
+                    {
+                        edtMain.text.replace(pos - 1, pos + 3, "")
+                        increaseEdtMainTextSize(4)
+                        return true
+                    }
+                }
+            }
+
+            'a' ->
+            {
+                if (edtMain.length() >= 4 && pos - 2 >= 0 && pos + 2 <= lastIndex + 1)
+                {
+                    if (edtMain.text.substring(pos - 2,
+                            pos + 2) == "tan(" || edtMain.text.substring(pos - 2, pos + 2) == "rad("
+                    )
+                    {
+                        edtMain.text.replace(pos - 2, pos + 2, "")
+                        increaseEdtMainTextSize(4)
+                        return true
+                    }
+                }
+            }
+
+            'l' ->
+            {
+                if (pos - 1 >= 0 && pos + 2 <= lastIndex + 1)
+                {
+                    if (edtMain.text.substring(pos - 1, pos + 2) == "ln(")
+                    {
+                        edtMain.text.replace(pos - 1, pos + 2, "")
+                        increaseEdtMainTextSize(3)
+                        return true
+                    }
+                }
+                if (edtMain.length() >= 5 && pos - 1 >= 0 && pos + 4 <= lastIndex + 1)
+                {
+                    if (edtMain.text.substring(pos - 1, pos + 4) == "log2(")
+                    {
+                        edtMain.text.replace(pos - 1, pos + 4, "")
+                        increaseEdtMainTextSize(5)
+                        return true
+                    }
+                }
+                if (edtMain.length() >= 6 && pos - 1 >= 0 && pos + 5 <= lastIndex + 1)
+                {
+                    if (edtMain.text.substring(pos - 1, pos + 5) == "log10(")
+                    {
+                        edtMain.text.replace(pos - 1, pos + 5, "")
+                        increaseEdtMainTextSize(6)
+                        return true
+                    }
+                }
+            }
+
+            'g' ->
+            {
+                if (edtMain.length() >= 5 && pos - 3 >= 0 && pos + 2 <= lastIndex + 1)
+                {
+                    if (edtMain.text.substring(pos - 3, pos + 2) == "log2(")
+                    {
+                        edtMain.text.replace(pos - 3, pos + 2, "")
+                        increaseEdtMainTextSize(5)
+                        return true
+                    }
+                }
+                if (edtMain.length() >= 6 && pos - 3 >= 0 && pos + 3 <= lastIndex + 1)
+                {
+                    if (edtMain.text.substring(pos - 3, pos + 3) == "log10(")
+                    {
+                        edtMain.text.replace(pos - 3, pos + 3, "")
+                        increaseEdtMainTextSize(5)
+                        return true
+                    }
+                }
+            }
+
+            '1' ->
+            {
+                if (edtMain.length() >= 6 && pos - 4 >= 0 && pos + 2 <= lastIndex + 1)
+                {
+                    if (edtMain.text.substring(pos - 4, pos + 2) == "log10(")
+                    {
+                        edtMain.text.replace(pos - 4, pos + 2, "")
+                        increaseEdtMainTextSize(6)
+                        return true
+                    }
+                }
+            }
+
+            '0' ->
+            {
+                if (edtMain.length() >= 6 && pos - 5 >= 0 && pos + 1 <= lastIndex + 1)
+                {
+
+                    if (edtMain.text.substring(pos - 5, pos + 1) == "log10(")
+                    {
+                        edtMain.text.replace(pos - 5, pos + 1, "")
+                        increaseEdtMainTextSize(6)
+                        return true
+                    }
+                }
+            }
+
+            '2' ->
+            {
+                if (edtMain.length() >= 5 && pos - 4 >= 0 && pos + 1 <= lastIndex + 1)
+                {
+                    if (edtMain.text.substring(pos - 4, pos + 1) == "log2(")
+                    {
+                        edtMain.text.replace(pos - 4, pos + 1, "")
+                        increaseEdtMainTextSize(5)
+                        return true
+                    }
+                }
+            }
+
+            'r' ->
+            {
+                if (edtMain.length() >= 4 && pos - 1 >= 0 && pos + 3 <= lastIndex + 1)
+                {
+                    if (edtMain.text.substring(pos - 1, pos + 3) == "rad(")
+                    {
+                        edtMain.text.replace(pos - 1, pos + 3, "")
+                        increaseEdtMainTextSize(4)
+                        return true
+                    }
+                }
+            }
+
+            'd' ->
+            {
+                if (edtMain.length() >= 4 && pos - 3 >= 0 && pos + 1 <= lastIndex + 1)
+                {
+                    if (edtMain.text.substring(pos - 3, pos + 1) == "rad(")
+                    {
+                        edtMain.text.replace(pos - 3, pos + 1, "")
+                        increaseEdtMainTextSize(4)
+                        return true
+                    }
+                }
+            }
+
+            '(' ->
+            {
+
+                if (pos - 3 >= 0 && pos <= lastIndex + 1)
+                {
+                    if (edtMain.text.substring(pos - 3, pos) == "ln(")
+                    {
+                        edtMain.text.replace(pos - 3, pos, "")
+                        increaseEdtMainTextSize(3)
+                        return true
+                    }
+                }
+                if (edtMain.length() >= 4 && pos - 4 >= 0 && pos <= lastIndex + 1)
+                {
+                    if (edtMain.text.substring(pos - 4, pos) == "sin(" || edtMain.text.substring(
+                            pos - 4, pos) == "cos(" || edtMain.text.substring(pos - 4,
+                            pos) == "tan(" || edtMain.text.substring(pos - 4, pos) == "rad("
+                    )
+                    {
+                        edtMain.text.replace(pos - 4, pos, "")
+                        increaseEdtMainTextSize(4)
+                        return true
+                    }
+                }
+                if (edtMain.length() >= 5 && pos - 5 >= 0 && pos <= lastIndex + 1 + 1)
+                {
+                    if (edtMain.text.substring(pos - 5, pos) == "log2(")
+                    {
+                        edtMain.text.replace(pos - 5, pos, "")
+                        increaseEdtMainTextSize(5)
+                        return true
+                    }
+                }
+                if (edtMain.length() >= 6 && pos - 6 >= 0 && pos <= lastIndex + 1) if (edtMain.text.substring(
+                        pos - 6, pos) == "log10("
+                )
+                {
+                    edtMain.text.replace(pos - 6, pos, "")
+                    increaseEdtMainTextSize(6)
+                    return true
+                }
+            }
+
+
         }
-
-        if (edtResult.length() > 18 && textSize < edtResultTextSize &&
-            resources.configuration.orientation == android.content.res.Configuration.ORIENTATION_LANDSCAPE
-        )
-        {
-            textSize += 2
-            edtResult.setTextSize(TypedValue.COMPLEX_UNIT_SP, textSize)
-        }*/
-
-
+        return false
     }
 
 

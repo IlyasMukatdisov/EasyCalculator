@@ -617,6 +617,12 @@ class GraphActivity : AppCompatActivity(), View.OnClickListener, View.OnTouchLis
             return false
         }
 
+        if (xStart >= xEnd)
+        {
+            Snackbar.make(llParent, "End value must be bigger than Start value!", Snackbar.LENGTH_SHORT).show()
+            return false
+        }
+
         if (("log" in exp || "ln" in exp) && xStart <= 0.0 && xStep > 0.0)
         {
             xStart = xStep
@@ -723,7 +729,7 @@ class GraphActivity : AppCompatActivity(), View.OnClickListener, View.OnTouchLis
                 {
                     if (edtXStart.text.isEmpty() && edtXStart.text.length < 5)
                     {
-                        updateEdt(edtXStart,"-")
+                        updateEdt(edtXStart, "-")
                     }
                 }
 
@@ -732,7 +738,7 @@ class GraphActivity : AppCompatActivity(), View.OnClickListener, View.OnTouchLis
 
                     if (edtXEnd.text.isEmpty())
                     {
-                        updateEdt(edtXEnd,"-")
+                        updateEdt(edtXEnd, "-")
                     }
                 }
 
@@ -781,17 +787,17 @@ class GraphActivity : AppCompatActivity(), View.OnClickListener, View.OnTouchLis
 
                 if (edtXStart.isFocused && edtXEnd.text.length < 5)
                 {
-                    updateEdt(edtXStart,"0")
+                    updateEdt(edtXStart, "0")
                 }
 
                 if (edtXEnd.isFocused && edtXEnd.text.length < 5)
                 {
-                    updateEdt(edtXEnd,"0")
+                    updateEdt(edtXEnd, "0")
                 }
 
                 if (edtXStep.isFocused && edtXStep.text.length < 5)
                 {
-                    updateEdt(edtXStep,"0")
+                    updateEdt(edtXStep, "0")
                 }
             }
 
@@ -799,17 +805,17 @@ class GraphActivity : AppCompatActivity(), View.OnClickListener, View.OnTouchLis
             {
                 if (edtXStart.isFocused && edtXStart.text.length < 5)
                 {
-                    updateEdt(edtXStart,"1")
+                    updateEdt(edtXStart, "1")
                 }
 
                 if (edtXEnd.isFocused && edtXEnd.text.length < 5)
                 {
-                    updateEdt(edtXEnd,"1")
+                    updateEdt(edtXEnd, "1")
                 }
 
                 if (edtXStep.isFocused && edtXStep.text.length < 5)
                 {
-                    updateEdt(edtXStep,"1")
+                    updateEdt(edtXStep, "1")
                 }
             }
 
@@ -817,17 +823,17 @@ class GraphActivity : AppCompatActivity(), View.OnClickListener, View.OnTouchLis
             {
                 if (edtXStart.isFocused && edtXStart.text.length < 5)
                 {
-                    updateEdt(edtXStart,"2")
+                    updateEdt(edtXStart, "2")
                 }
 
                 if (edtXEnd.isFocused && edtXEnd.text.length < 5)
                 {
-                    updateEdt(edtXEnd,"2")
+                    updateEdt(edtXEnd, "2")
                 }
 
                 if (edtXStep.isFocused && edtXStep.text.length < 5)
                 {
-                    updateEdt(edtXStep,"2")
+                    updateEdt(edtXStep, "2")
                 }
             }
 
@@ -835,17 +841,17 @@ class GraphActivity : AppCompatActivity(), View.OnClickListener, View.OnTouchLis
             {
                 if (edtXStart.isFocused && edtXStart.text.length < 5)
                 {
-                    updateEdt(edtXStart,"3")
+                    updateEdt(edtXStart, "3")
                 }
 
                 if (edtXEnd.isFocused && edtXEnd.text.length < 5)
                 {
-                    updateEdt(edtXEnd,"3")
+                    updateEdt(edtXEnd, "3")
                 }
 
                 if (edtXStep.isFocused && edtXStep.text.length < 5)
                 {
-                    updateEdt(edtXStep,"3")
+                    updateEdt(edtXStep, "3")
                 }
             }
 
@@ -853,17 +859,17 @@ class GraphActivity : AppCompatActivity(), View.OnClickListener, View.OnTouchLis
             {
                 if (edtXStart.isFocused && edtXStart.text.length < 5)
                 {
-                    updateEdt(edtXStart,"4")
+                    updateEdt(edtXStart, "4")
                 }
 
                 if (edtXEnd.isFocused && edtXEnd.text.length < 5)
                 {
-                    updateEdt(edtXEnd,"4")
+                    updateEdt(edtXEnd, "4")
                 }
 
                 if (edtXStep.isFocused && edtXStep.text.length < 5)
                 {
-                    updateEdt(edtXStep,"4")
+                    updateEdt(edtXStep, "4")
                 }
             }
 
@@ -871,17 +877,17 @@ class GraphActivity : AppCompatActivity(), View.OnClickListener, View.OnTouchLis
             {
                 if (edtXStart.isFocused && edtXStart.text.length < 5)
                 {
-                    updateEdt(edtXStart,"5")
+                    updateEdt(edtXStart, "5")
                 }
 
                 if (edtXEnd.isFocused && edtXEnd.text.length < 5)
                 {
-                    updateEdt(edtXEnd,"5")
+                    updateEdt(edtXEnd, "5")
                 }
 
                 if (edtXStep.isFocused && edtXStep.text.length < 5)
                 {
-                    updateEdt(edtXStep,"5")
+                    updateEdt(edtXStep, "5")
                 }
             }
 
@@ -889,17 +895,17 @@ class GraphActivity : AppCompatActivity(), View.OnClickListener, View.OnTouchLis
             {
                 if (edtXStart.isFocused && edtXEnd.text.length < 5)
                 {
-                    updateEdt(edtXStart,"6")
+                    updateEdt(edtXStart, "6")
                 }
 
                 if (edtXEnd.isFocused && edtXEnd.text.length < 5)
                 {
-                    updateEdt(edtXEnd,"6")
+                    updateEdt(edtXEnd, "6")
                 }
 
                 if (edtXStep.isFocused && edtXStep.text.length < 5)
                 {
-                    updateEdt(edtXStep,"6")
+                    updateEdt(edtXStep, "6")
                 }
 
             }
@@ -908,17 +914,17 @@ class GraphActivity : AppCompatActivity(), View.OnClickListener, View.OnTouchLis
             {
                 if (edtXStart.isFocused && edtXStart.text.length < 5)
                 {
-                    updateEdt(edtXStart,"7")
+                    updateEdt(edtXStart, "7")
                 }
 
                 if (edtXEnd.isFocused && edtXEnd.text.length < 5)
                 {
-                    updateEdt(edtXEnd,"7")
+                    updateEdt(edtXEnd, "7")
                 }
 
                 if (edtXStep.isFocused && edtXStep.text.length < 5)
                 {
-                    updateEdt(edtXStep,"7")
+                    updateEdt(edtXStep, "7")
                 }
             }
 
@@ -926,7 +932,7 @@ class GraphActivity : AppCompatActivity(), View.OnClickListener, View.OnTouchLis
             {
                 if (edtXStart.isFocused && edtXStart.text.length < 5)
                 {
-                    updateEdt(edtXStart,"8")
+                    updateEdt(edtXStart, "8")
                 }
 
                 if (edtXEnd.isFocused && edtXEnd.text.length < 5)
@@ -1380,106 +1386,409 @@ class GraphActivity : AppCompatActivity(), View.OnClickListener, View.OnTouchLis
         return false
     }
 
-    private fun backspaceFun(edt : EditText)
+    private fun checkForNumber(c: Char): Boolean
     {
-        if (edt.length() == 0)
+        when (c)
+        {
+            '0' -> return true
+            '1' -> return true
+            '2' -> return true
+            '3' -> return true
+            '4' -> return true
+            '5' -> return true
+            '6' -> return true
+            '7' -> return true
+            '8' -> return true
+            '9' -> return true
+            '.' -> return true
+        }
+        return false
+    }
+
+
+    private fun digitLimit(edt: EditText): Int
+    {
+        var currentNumDigits = 0
+        if (edt.text.isEmpty()) return currentNumDigits
+        val position = edt.selectionStart
+        var i = if (position == 0) position
+        else position - 1
+
+        while (checkForNumber(edt.text[i]) || edt.text[i] == ',')
+        {
+            if (edt.text[i] == ',')
+            {
+                i--
+                if (i < 0) break
+                continue
+            }
+            currentNumDigits++
+            i--
+            if (i < 0) break
+        }
+
+        i = if (position == edt.text.length) position - 1
+        else position
+
+        while (checkForNumber(edt.text[i]) || edt.text[i] == ',')
+        {
+            if (edt.text[i] == ',')
+            {
+                i++
+                if (i > edt.text.lastIndex) break
+                continue
+            }
+
+            currentNumDigits++
+            i++
+            if (i > edt.text.lastIndex) break
+        }
+
+        return currentNumDigits
+    }
+
+
+    private fun mathFunDelete(edt: EditText): Boolean
+    {
+        val pos = edt.selectionStart
+        val lastIndex = edt.text.lastIndex
+
+        when (edt.text[pos - 1])
+        {
+            's' ->
+            {
+                if (edt.length() >= 4 && pos - 1 >= 0 && pos + 3 <= lastIndex + 1)
+                {
+                    if (edt.text.substring(pos - 1, pos + 3) == "sin(")
+                    {
+                        edt.text.replace(pos - 1, pos + 3, "")
+
+                        return true
+                    }
+                }
+                if (edt.length() >= 4 && pos - 3 >= 0 && pos + 1 <= lastIndex + 1)
+                {
+                    if (edt.text.substring(pos - 3, pos + 1) == "cos(")
+                    {
+                        edt.text.replace(pos - 3, pos + 1, "")
+
+                        return true
+                    }
+                }
+
+            }
+
+            'i' ->
+            {
+                if (edt.length() >= 4 && pos - 2 >= 0 && pos + 2 <= lastIndex + 1)
+                {
+                    if (edt.text.substring(pos - 2, pos + 2) == "sin(")
+                    {
+                        edt.text.replace(pos - 2, pos + 2, "")
+
+                        return true
+                    }
+                }
+            }
+
+            'n' ->
+            {
+                if (edt.length() >= 4 && pos - 3 >= 0 && pos + 1 <= lastIndex + 1)
+                {
+                    if (edt.text.substring(pos - 3, pos + 1) == "sin(")
+                    {
+                        edt.text.replace(pos - 3, pos + 1, "")
+
+                        return true
+                    }
+                    if (edt.text.substring(pos - 3, pos + 1) == "tan(")
+                    {
+                        edt.text.replace(pos - 3, pos + 1, "")
+
+                        return true
+                    }
+                }
+                if (pos - 2 >= 0 && pos + 1 <= lastIndex + 1)
+                {
+                    if (edt.text.substring(pos - 2, pos + 1) == "ln(")
+                    {
+                        edt.text.replace(pos - 2, pos + 1, "")
+
+                        return true
+                    }
+                }
+            }
+
+            'c' ->
+            {
+                if (edt.length() >= 4 && pos - 1 >= 0 && pos + 3 <= lastIndex + 1)
+                {
+                    if (edt.text.substring(pos - 1, pos + 3) == "cos(")
+                    {
+                        edt.text.replace(pos - 1, pos + 3, "")
+
+                        return true
+                    }
+                }
+            }
+
+            'o' ->
+            {
+                if (edt.length() >= 4 && pos - 2 >= 0 && pos + 2 <= lastIndex + 1)
+                {
+                    if (edt.text.substring(pos - 2, pos + 2) == "cos(")
+                    {
+                        edt.text.replace(pos - 2, pos + 2, "")
+
+                        return true
+                    }
+                }
+                if (edt.length() >= 5 && pos - 2 >= 0 && pos + 3 <= lastIndex + 1)
+                {
+                    if (edt.text.substring(pos - 2, pos + 3) == "log2(")
+                    {
+                        edt.text.replace(pos - 2, pos + 3, "")
+
+                        return true
+                    }
+                }
+                if (edt.length() >= 6 && pos - 2 >= 0 && pos + 4 <= lastIndex + 1)
+                {
+                    if (edt.text.substring(pos - 2, pos + 4) == "log10(")
+                    {
+                        edt.text.replace(pos - 2, pos + 4, "")
+
+                        return true
+                    }
+                }
+            }
+
+            't' ->
+            {
+                if (edt.length() >= 4 && pos - 1 >= 0 && pos + 3 <= lastIndex + 1)
+                {
+                    if (edt.text.substring(pos - 1, pos + 3) == "tan(")
+                    {
+                        edt.text.replace(pos - 1, pos + 3, "")
+
+                        return true
+                    }
+                }
+            }
+
+            'a' ->
+            {
+                if (edt.length() >= 4 && pos - 2 >= 0 && pos + 2 <= lastIndex + 1)
+                {
+                    if (edt.text.substring(pos - 2, pos + 2) == "tan(" || edt.text.substring(
+                            pos - 2, pos + 2) == "rad("
+                    )
+                    {
+                        edt.text.replace(pos - 2, pos + 2, "")
+
+                        return true
+                    }
+                }
+            }
+
+            'l' ->
+            {
+                if (pos - 1 >= 0 && pos + 2 <= lastIndex + 1)
+                {
+                    if (edt.text.substring(pos - 1, pos + 2) == "ln(")
+                    {
+                        edt.text.replace(pos - 1, pos + 2, "")
+
+                        return true
+                    }
+                }
+                if (edt.length() >= 5 && pos - 1 >= 0 && pos + 4 <= lastIndex + 1)
+                {
+                    if (edt.text.substring(pos - 1, pos + 4) == "log2(")
+                    {
+                        edt.text.replace(pos - 1, pos + 4, "")
+
+                        return true
+                    }
+                }
+                if (edt.length() >= 6 && pos - 1 >= 0 && pos + 5 <= lastIndex + 1)
+                {
+                    if (edt.text.substring(pos - 1, pos + 5) == "log10(")
+                    {
+                        edt.text.replace(pos - 1, pos + 5, "")
+
+                        return true
+                    }
+                }
+            }
+
+            'g' ->
+            {
+                if (edt.length() >= 5 && pos - 3 >= 0 && pos + 2 <= lastIndex + 1)
+                {
+                    if (edt.text.substring(pos - 3, pos + 2) == "log2(")
+                    {
+                        edt.text.replace(pos - 3, pos + 2, "")
+
+                        return true
+                    }
+                }
+                if (edt.length() >= 6 && pos - 3 >= 0 && pos + 3 <= lastIndex + 1)
+                {
+                    if (edt.text.substring(pos - 3, pos + 3) == "log10(")
+                    {
+                        edt.text.replace(pos - 3, pos + 3, "")
+
+                        return true
+                    }
+                }
+            }
+
+            '1' ->
+            {
+                if (edt.length() >= 6 && pos - 4 >= 0 && pos + 2 <= lastIndex + 1)
+                {
+                    if (edt.text.substring(pos - 4, pos + 2) == "log10(")
+                    {
+                        edt.text.replace(pos - 4, pos + 2, "")
+
+                        return true
+                    }
+                }
+            }
+
+            '0' ->
+            {
+                if (edt.length() >= 6 && pos - 5 >= 0 && pos + 1 <= lastIndex + 1)
+                {
+
+                    if (edt.text.substring(pos - 5, pos + 1) == "log10(")
+                    {
+                        edt.text.replace(pos - 5, pos + 1, "")
+
+                        return true
+                    }
+                }
+            }
+
+            '2' ->
+            {
+                if (edt.length() >= 5 && pos - 4 >= 0 && pos + 1 <= lastIndex + 1)
+                {
+                    if (edt.text.substring(pos - 4, pos + 1) == "log2(")
+                    {
+                        edt.text.replace(pos - 4, pos + 1, "")
+
+                        return true
+                    }
+                }
+            }
+
+            'r' ->
+            {
+                if (edt.length() >= 4 && pos - 1 >= 0 && pos + 3 <= lastIndex + 1)
+                {
+                    if (edt.text.substring(pos - 1, pos + 3) == "rad(")
+                    {
+                        edt.text.replace(pos - 1, pos + 3, "")
+
+                        return true
+                    }
+                }
+            }
+
+            'd' ->
+            {
+                if (edt.length() >= 4 && pos - 3 >= 0 && pos + 1 <= lastIndex + 1)
+                {
+                    if (edt.text.substring(pos - 3, pos + 1) == "rad(")
+                    {
+                        edt.text.replace(pos - 3, pos + 1, "")
+
+                        return true
+                    }
+                }
+            }
+
+            '(' ->
+            {
+
+                if (pos - 3 >= 0 && pos <= lastIndex + 1)
+                {
+                    if (edt.text.substring(pos - 3, pos) == "ln(")
+                    {
+                        edt.text.replace(pos - 3, pos, "")
+
+                        return true
+                    }
+                }
+                if (edt.length() >= 4 && pos - 4 >= 0 && pos <= lastIndex + 1)
+                {
+                    if (edt.text.substring(pos - 4, pos) == "sin(" || edt.text.substring(pos - 4,
+                            pos) == "cos(" || edt.text.substring(pos - 4,
+                            pos) == "tan(" || edt.text.substring(pos - 4, pos) == "rad("
+                    )
+                    {
+                        edt.text.replace(pos - 4, pos, "")
+
+                        return true
+                    }
+                }
+                if (edt.length() >= 5 && pos - 5 >= 0 && pos <= lastIndex + 1 + 1)
+                {
+                    if (edt.text.substring(pos - 5, pos) == "log2(")
+                    {
+                        edt.text.replace(pos - 5, pos, "")
+
+                        return true
+                    }
+                }
+                if (edt.length() >= 6 && pos - 6 >= 0 && pos <= lastIndex + 1) if (edt.text.substring(
+                        pos - 6, pos) == "log10("
+                )
+                {
+                    edt.text.replace(pos - 6, pos, "")
+
+                    return true
+                }
+            }
+
+
+        }
+        return false
+    }
+
+    private fun backspaceFun(edt: EditText)
+    {
+        if (edt.length() == 0 || edt.selectionStart == 0 || digitLimit(edt) >= MAX_DIGITS)
         {
             return
         }
 
-        var cursorPos = edt.selectionStart
+        if (edt.length() >= 3) if (mathFunDelete(edt))
+        {
+            return
+        }
+
+
+        val cursorPos = edt.selectionStart
         val textLength = edt.text.length
 
-        val lastChar = edt.text.toString()[textLength - 1]
-
-
-        if (textLength >= 3)
-        {
-            val a = edt.text.toString().substring(edt.text.lastIndex - 2)
-            if (a == "ln(" || a=="NaN")
-            {
-                edt.text.replace(edt.text.lastIndex - 2, edt.text.length, "")
-                edt.setSelection(cursorPos - 3)
-                cursorPos -= 3
-                return
-            }
-
-            if (textLength >= 4)
-            {
-                val b = edt.text.toString().substring(edt.text.lastIndex - 3)
-                if (b == "sin(" || b == "cos(" || b == "tan(" || b == "rad(" || b == "ln(")
-                {
-                    edt.text.replace(edt.text.lastIndex - 3, edt.text.length, "")
-                    edt.setSelection(cursorPos - 4)
-                    cursorPos -= 4
-                    return
-                }
-            }
-
-            if (textLength >= 5)
-            {
-                val b = edt.text.toString().substring(edt.text.lastIndex - 4)
-                if ("log2(" in b)
-                {
-                    edt.text.replace(edt.text.lastIndex - 4, edt.text.length, "")
-                    edt.setSelection(cursorPos - 5)
-                    return
-                }
-            }
-
-            if (textLength >= 6)
-            {
-                val c = edt.text.toString().substring(edt.text.lastIndex - 5)
-                if ("log10(" in c)
-                {
-                    edt.text.replace(edt.text.lastIndex - 5, edt.text.length, "")
-                    edt.setSelection(cursorPos - 6)
-                    return
-                }
-            }
-
-            if (textLength >= 8)
-            {
-                val c = edt.text.toString().substring(edt.text.lastIndex - 7)
-                if ("log10(" in c)
-                {
-                    edt.text.replace(edt.text.lastIndex - 7, edt.text.length, "")
-                    edt.setSelection(cursorPos - 8)
-                    return
-                }
-            }
-
-        }
         if (cursorPos != 0 && textLength != 0)
         {
-            val selection: SpannableStringBuilder = edt.text as SpannableStringBuilder
-            selection.replace(cursorPos - 1, cursorPos, "")
-            if (!checkForOperator(lastChar))
-            {
-                currentNumDigits--
-            }
-            edt.text = selection
-            edt.setSelection(cursorPos - 1)
+            deleteLast(edt)
         }
+        return
+    }
 
 
-        /*if (edtResult.length() <= 5 && textSize < edtResultTextSize &&
-            resources.configuration.orientation == android.content.res.Configuration.ORIENTATION_PORTRAIT
-        )
-        {
-            textSize += 5
-            edtResult.setTextSize(TypedValue.COMPLEX_UNIT_SP, textSize)
-        }
-
-        if (edtResult.length() > 18 && textSize < edtResultTextSize &&
-            resources.configuration.orientation == android.content.res.Configuration.ORIENTATION_LANDSCAPE
-        )
-        {
-            textSize += 2
-            edtResult.setTextSize(TypedValue.COMPLEX_UNIT_SP, textSize)
-        }*/
-
-
+    private fun deleteLast(edt: EditText)
+    {
+        val cursorPos = edt.selectionStart
+        val selection: SpannableStringBuilder = edt.text as SpannableStringBuilder
+        selection.replace(cursorPos - 1, cursorPos, "")
+        edt.text = selection
+        edt.setSelection(cursorPos - 1)
     }
 
     @SuppressLint("DiscouragedPrivateApi")
