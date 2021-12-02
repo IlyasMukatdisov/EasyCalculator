@@ -140,7 +140,6 @@
                 android:layout_marginEnd="10dp"
                 android:layout_weight="1"
                 android:background="@drawable/buttons_round"
-                android:fontFamily="@font/amiko"
                 android:gravity="center"
                 android:text="@string/btn_pi"
                 android:textAllCaps="false"
