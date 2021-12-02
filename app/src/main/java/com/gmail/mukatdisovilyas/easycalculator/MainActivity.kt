@@ -40,13 +40,6 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, View.OnTouchList
 
     }*/
 
-    private lateinit var darkGrayColor: ColorStateList
-    private lateinit var semiGrayColor: ColorStateList
-    private lateinit var lightGrayColor: ColorStateList
-    private lateinit var alphaColor: ColorStateList
-    private lateinit var whiteColor: ColorStateList
-    private lateinit var blackColor: ColorStateList
-
     private lateinit var llMenu: LinearLayout
     private lateinit var llMain: LinearLayout
     private lateinit var llExpression: LinearLayout
@@ -135,33 +128,33 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, View.OnTouchList
             if (isDarkThemeOn())
             {
 
-                btnZero.backgroundTintList = darkGrayColor
-                btnOne.backgroundTintList = darkGrayColor
-                btnTwo.backgroundTintList = darkGrayColor
-                btnThree.backgroundTintList = darkGrayColor
-                btnFour.backgroundTintList = darkGrayColor
-                btnFive.backgroundTintList = darkGrayColor
-                btnSix.backgroundTintList = darkGrayColor
-                btnSeven.backgroundTintList = darkGrayColor
-                btnEight.backgroundTintList = darkGrayColor
-                btnNine.backgroundTintList = darkGrayColor
-                btnDot.backgroundTintList = darkGrayColor
-                btnBackSpace.backgroundTintList = darkGrayColor
-                edtMain.backgroundTintList = darkGrayColor
-                edtSecond.backgroundTintList = darkGrayColor
+                btnZero.backgroundTintList = ColorStateList.valueOf(ContextCompat.getColor(this, R.color.dark_gray))
+                btnOne.backgroundTintList = ColorStateList.valueOf(ContextCompat.getColor(this, R.color.dark_gray))
+                btnTwo.backgroundTintList = ColorStateList.valueOf(ContextCompat.getColor(this, R.color.dark_gray))
+                btnThree.backgroundTintList = ColorStateList.valueOf(ContextCompat.getColor(this, R.color.dark_gray))
+                btnFour.backgroundTintList = ColorStateList.valueOf(ContextCompat.getColor(this, R.color.dark_gray))
+                btnFive.backgroundTintList = ColorStateList.valueOf(ContextCompat.getColor(this, R.color.dark_gray))
+                btnSix.backgroundTintList = ColorStateList.valueOf(ContextCompat.getColor(this, R.color.dark_gray))
+                btnSeven.backgroundTintList = ColorStateList.valueOf(ContextCompat.getColor(this, R.color.dark_gray))
+                btnEight.backgroundTintList = ColorStateList.valueOf(ContextCompat.getColor(this, R.color.dark_gray))
+                btnNine.backgroundTintList = ColorStateList.valueOf(ContextCompat.getColor(this, R.color.dark_gray))
+                btnDot.backgroundTintList = ColorStateList.valueOf(ContextCompat.getColor(this, R.color.dark_gray))
+                btnBackSpace.backgroundTintList = ColorStateList.valueOf(ContextCompat.getColor(this, R.color.dark_gray))
+                edtMain.backgroundTintList = ColorStateList.valueOf(ContextCompat.getColor(this, R.color.dark_gray))
+                edtSecond.backgroundTintList = ColorStateList.valueOf(ContextCompat.getColor(this, R.color.dark_gray))
 
-                btnZero.setTextColor(whiteColor)
-                btnOne.setTextColor(whiteColor)
-                btnTwo.setTextColor(whiteColor)
-                btnThree.setTextColor(whiteColor)
-                btnFour.setTextColor(whiteColor)
-                btnFive.setTextColor(whiteColor)
-                btnSix.setTextColor(whiteColor)
-                btnSeven.setTextColor(whiteColor)
-                btnEight.setTextColor(whiteColor)
-                btnNine.setTextColor(whiteColor)
-                btnDot.setTextColor(whiteColor)
-                btnBackSpace.setTextColor(whiteColor)
+                btnZero.setTextColor(ColorStateList.valueOf(ContextCompat.getColor(this, R.color.white)))
+                btnOne.setTextColor(ColorStateList.valueOf(ContextCompat.getColor(this, R.color.white)))
+                btnTwo.setTextColor(ColorStateList.valueOf(ContextCompat.getColor(this, R.color.white)))
+                btnThree.setTextColor(ColorStateList.valueOf(ContextCompat.getColor(this, R.color.white)))
+                btnFour.setTextColor(ColorStateList.valueOf(ContextCompat.getColor(this, R.color.white)))
+                btnFive.setTextColor(ColorStateList.valueOf(ContextCompat.getColor(this, R.color.white)))
+                btnSix.setTextColor(ColorStateList.valueOf(ContextCompat.getColor(this, R.color.white)))
+                btnSeven.setTextColor(ColorStateList.valueOf(ContextCompat.getColor(this, R.color.white)))
+                btnEight.setTextColor(ColorStateList.valueOf(ContextCompat.getColor(this, R.color.white)))
+                btnNine.setTextColor(ColorStateList.valueOf(ContextCompat.getColor(this, R.color.white)))
+                btnDot.setTextColor(ColorStateList.valueOf(ContextCompat.getColor(this, R.color.white)))
+                btnBackSpace.setTextColor(ColorStateList.valueOf(ContextCompat.getColor(this, R.color.white)))
 
 
             }
@@ -169,18 +162,18 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, View.OnTouchList
 
         if (isDarkThemeOn())
         {
-            edtMain.backgroundTintList = darkGrayColor
-            edtSecond.backgroundTintList = darkGrayColor
-            llMain.backgroundTintList = blackColor
-            llExpression.backgroundTintList = blackColor
-            cardView.backgroundTintList = darkGrayColor
-            clExp.backgroundTintList = darkGrayColor
-            llButtons.backgroundTintList = blackColor
-            btnMenu.backgroundTintList = darkGrayColor
+            edtMain.backgroundTintList = ColorStateList.valueOf(ContextCompat.getColor(this, R.color.dark_gray))
+            edtSecond.backgroundTintList = ColorStateList.valueOf(ContextCompat.getColor(this, R.color.dark_gray))
+            llMain.backgroundTintList = ColorStateList.valueOf(ContextCompat.getColor(this, R.color.black))
+            llExpression.backgroundTintList = ColorStateList.valueOf(ContextCompat.getColor(this, R.color.black))
+            cardView.backgroundTintList = ColorStateList.valueOf(ContextCompat.getColor(this, R.color.dark_gray))
+            clExp.backgroundTintList = ColorStateList.valueOf(ContextCompat.getColor(this, R.color.dark_gray))
+            llButtons.backgroundTintList = ColorStateList.valueOf(ContextCompat.getColor(this, R.color.black))
+            btnMenu.backgroundTintList = ColorStateList.valueOf(ContextCompat.getColor(this, R.color.dark_gray))
             btnMenu.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.ic_more_vert_white))
 
-            edtMain.setTextColor(whiteColor)
-            edtSecond.setTextColor(whiteColor)
+            edtMain.setTextColor(ColorStateList.valueOf(ContextCompat.getColor(this, R.color.white)))
+            edtSecond.setTextColor(ColorStateList.valueOf(ContextCompat.getColor(this, R.color.white)))
 
         }
 
@@ -251,45 +244,41 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, View.OnTouchList
 
         if (numbersColor.isNotEmpty())
         {
-
-            val nColor = ColorStateList.valueOf(Color.parseColor(numbersColor))
-
-            btnZero.backgroundTintList = nColor
-            btnOne.backgroundTintList = nColor
-            btnTwo.backgroundTintList = nColor
-            btnThree.backgroundTintList = nColor
-            btnFour.backgroundTintList = nColor
-            btnFive.backgroundTintList = nColor
-            btnSix.backgroundTintList = nColor
-            btnSeven.backgroundTintList = nColor
-            btnEight.backgroundTintList = nColor
-            btnNine.backgroundTintList = nColor
-            btnDot.backgroundTintList = nColor
-            btnBackSpace.backgroundTintList = nColor
+            btnZero.backgroundTintList = ColorStateList.valueOf(Color.parseColor(numbersColor))
+            btnOne.backgroundTintList = ColorStateList.valueOf(Color.parseColor(numbersColor))
+            btnTwo.backgroundTintList = ColorStateList.valueOf(Color.parseColor(numbersColor))
+            btnThree.backgroundTintList = ColorStateList.valueOf(Color.parseColor(numbersColor))
+            btnFour.backgroundTintList = ColorStateList.valueOf(Color.parseColor(numbersColor))
+            btnFive.backgroundTintList = ColorStateList.valueOf(Color.parseColor(numbersColor))
+            btnSix.backgroundTintList = ColorStateList.valueOf(Color.parseColor(numbersColor))
+            btnSeven.backgroundTintList = ColorStateList.valueOf(Color.parseColor(numbersColor))
+            btnEight.backgroundTintList = ColorStateList.valueOf(Color.parseColor(numbersColor))
+            btnNine.backgroundTintList = ColorStateList.valueOf(Color.parseColor(numbersColor))
+            btnDot.backgroundTintList = ColorStateList.valueOf(Color.parseColor(numbersColor))
+            btnBackSpace.backgroundTintList = ColorStateList.valueOf(Color.parseColor(numbersColor))
         }
 
         if (actionsColor.isNotEmpty())
         {
-            val actColor = ColorStateList.valueOf(Color.parseColor(actionsColor))
-            btnPlus.backgroundTintList = actColor
-            btnMinus.backgroundTintList = actColor
-            btnMulti.backgroundTintList = actColor
-            btnDivision.backgroundTintList = actColor
-            btnPercent.backgroundTintList = actColor
-            btnExp.backgroundTintList = actColor
-            btnPi.backgroundTintList = actColor
-            btnFact.backgroundTintList = actColor
-            btnSquareRoot.backgroundTintList = actColor
-            btnBrackets.backgroundTintList = actColor
-            btnMore.backgroundTintList = actColor
-            btnSin.backgroundTintList = actColor
-            btnCos.backgroundTintList = actColor
-            btnTan.backgroundTintList = actColor
-            btnE.backgroundTintList = actColor
-            btnLg.backgroundTintList = actColor
-            btnLn.backgroundTintList = actColor
-            btnLog2.backgroundTintList = actColor
-            btnRad.backgroundTintList = actColor
+            btnPlus.backgroundTintList = ColorStateList.valueOf(Color.parseColor(actionsColor))
+            btnMinus.backgroundTintList = ColorStateList.valueOf(Color.parseColor(actionsColor))
+            btnMulti.backgroundTintList = ColorStateList.valueOf(Color.parseColor(actionsColor))
+            btnDivision.backgroundTintList = ColorStateList.valueOf(Color.parseColor(actionsColor))
+            btnPercent.backgroundTintList = ColorStateList.valueOf(Color.parseColor(actionsColor))
+            btnExp.backgroundTintList = ColorStateList.valueOf(Color.parseColor(actionsColor))
+            btnPi.backgroundTintList = ColorStateList.valueOf(Color.parseColor(actionsColor))
+            btnFact.backgroundTintList = ColorStateList.valueOf(Color.parseColor(actionsColor))
+            btnSquareRoot.backgroundTintList = ColorStateList.valueOf(Color.parseColor(actionsColor))
+            btnBrackets.backgroundTintList = ColorStateList.valueOf(Color.parseColor(actionsColor))
+            btnMore.backgroundTintList = ColorStateList.valueOf(Color.parseColor(actionsColor))
+            btnSin.backgroundTintList = ColorStateList.valueOf(Color.parseColor(actionsColor))
+            btnCos.backgroundTintList = ColorStateList.valueOf(Color.parseColor(actionsColor))
+            btnTan.backgroundTintList = ColorStateList.valueOf(Color.parseColor(actionsColor))
+            btnE.backgroundTintList = ColorStateList.valueOf(Color.parseColor(actionsColor))
+            btnLg.backgroundTintList = ColorStateList.valueOf(Color.parseColor(actionsColor))
+            btnLn.backgroundTintList = ColorStateList.valueOf(Color.parseColor(actionsColor))
+            btnLog2.backgroundTintList = ColorStateList.valueOf(Color.parseColor(actionsColor))
+            btnRad.backgroundTintList = ColorStateList.valueOf(Color.parseColor(actionsColor))
         }
 
 
@@ -324,160 +313,156 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, View.OnTouchList
 
     private fun setButtonsTextColor(textColor: String)
     {
-        val tColor = ColorStateList.valueOf(Color.parseColor(textColor))
-        btnZero.setTextColor(tColor)
-        btnOne.setTextColor(tColor)
-        btnTwo.setTextColor(tColor)
-        btnThree.setTextColor(tColor)
-        btnFour.setTextColor(tColor)
-        btnFive.setTextColor(tColor)
-        btnSix.setTextColor(tColor)
-        btnSeven.setTextColor(tColor)
-        btnEight.setTextColor(tColor)
-        btnNine.setTextColor(tColor)
-        btnDot.setTextColor(tColor)
-        btnBackSpace.setTextColor(tColor)
+        btnZero.setTextColor(ColorStateList.valueOf(Color.parseColor(textColor)))
+        btnOne.setTextColor(ColorStateList.valueOf(Color.parseColor(textColor)))
+        btnTwo.setTextColor(ColorStateList.valueOf(Color.parseColor(textColor)))
+        btnThree.setTextColor(ColorStateList.valueOf(Color.parseColor(textColor)))
+        btnFour.setTextColor(ColorStateList.valueOf(Color.parseColor(textColor)))
+        btnFive.setTextColor(ColorStateList.valueOf(Color.parseColor(textColor)))
+        btnSix.setTextColor(ColorStateList.valueOf(Color.parseColor(textColor)))
+        btnSeven.setTextColor(ColorStateList.valueOf(Color.parseColor(textColor)))
+        btnEight.setTextColor(ColorStateList.valueOf(Color.parseColor(textColor)))
+        btnNine.setTextColor(ColorStateList.valueOf(Color.parseColor(textColor)))
+        btnDot.setTextColor(ColorStateList.valueOf(Color.parseColor(textColor)))
+        btnBackSpace.setTextColor(ColorStateList.valueOf(Color.parseColor(textColor)))
 
-        btnPlus.setTextColor(tColor)
-        btnMinus.setTextColor(tColor)
-        btnMulti.setTextColor(tColor)
-        btnDivision.setTextColor(tColor)
-        btnPercent.setTextColor(tColor)
-        btnExp.setTextColor(tColor)
-        btnPi.setTextColor(tColor)
-        btnFact.setTextColor(tColor)
-        btnSquareRoot.setTextColor(tColor)
-        btnBrackets.setTextColor(tColor)
-        btnMore.setTextColor(tColor)
-        btnSin.setTextColor(tColor)
-        btnCos.setTextColor(tColor)
-        btnTan.setTextColor(tColor)
-        btnE.setTextColor(tColor)
-        btnLg.setTextColor(tColor)
-        btnLn.setTextColor(tColor)
-        btnLog2.setTextColor(tColor)
-        btnRad.setTextColor(tColor)
+        btnPlus.setTextColor(ColorStateList.valueOf(Color.parseColor(textColor)))
+        btnMinus.setTextColor(ColorStateList.valueOf(Color.parseColor(textColor)))
+        btnMulti.setTextColor(ColorStateList.valueOf(Color.parseColor(textColor)))
+        btnDivision.setTextColor(ColorStateList.valueOf(Color.parseColor(textColor)))
+        btnPercent.setTextColor(ColorStateList.valueOf(Color.parseColor(textColor)))
+        btnExp.setTextColor(ColorStateList.valueOf(Color.parseColor(textColor)))
+        btnPi.setTextColor(ColorStateList.valueOf(Color.parseColor(textColor)))
+        btnFact.setTextColor(ColorStateList.valueOf(Color.parseColor(textColor)))
+        btnSquareRoot.setTextColor(ColorStateList.valueOf(Color.parseColor(textColor)))
+        btnBrackets.setTextColor(ColorStateList.valueOf(Color.parseColor(textColor)))
+        btnMore.setTextColor(ColorStateList.valueOf(Color.parseColor(textColor)))
+        btnSin.setTextColor(ColorStateList.valueOf(Color.parseColor(textColor)))
+        btnCos.setTextColor(ColorStateList.valueOf(Color.parseColor(textColor)))
+        btnTan.setTextColor(ColorStateList.valueOf(Color.parseColor(textColor)))
+        btnE.setTextColor(ColorStateList.valueOf(Color.parseColor(textColor)))
+        btnLg.setTextColor(ColorStateList.valueOf(Color.parseColor(textColor)))
+        btnLn.setTextColor(ColorStateList.valueOf(Color.parseColor(textColor)))
+        btnLog2.setTextColor(ColorStateList.valueOf(Color.parseColor(textColor)))
+        btnRad.setTextColor(ColorStateList.valueOf(Color.parseColor(textColor)))
 
-        btnAc.setTextColor(tColor)
-        btnEqual.setTextColor(tColor)
+        btnAc.setTextColor(ColorStateList.valueOf(Color.parseColor(textColor)))
+        btnEqual.setTextColor(ColorStateList.valueOf(Color.parseColor(textColor)))
 
     }
 
     private fun setButtonsCircle()
     {
-        val circle = ContextCompat.getDrawable(this, R.drawable.buttons_circle)
-        btnZero.background = circle
-        btnOne.background = circle
-        btnTwo.background = circle
-        btnThree.background = circle
-        btnFour.background = circle
-        btnFive.background = circle
-        btnSix.background = circle
-        btnSeven.background = circle
-        btnEight.background = circle
-        btnNine.background = circle
-        btnDot.background = circle
-        btnBackSpace.background = circle
+        btnZero.background = ContextCompat.getDrawable(this, R.drawable.buttons_circle)
+        btnOne.background = ContextCompat.getDrawable(this, R.drawable.buttons_circle)
+        btnTwo.background = ContextCompat.getDrawable(this, R.drawable.buttons_circle)
+        btnThree.background = ContextCompat.getDrawable(this, R.drawable.buttons_circle)
+        btnFour.background = ContextCompat.getDrawable(this, R.drawable.buttons_circle)
+        btnFive.background = ContextCompat.getDrawable(this, R.drawable.buttons_circle)
+        btnSix.background = ContextCompat.getDrawable(this, R.drawable.buttons_circle)
+        btnSeven.background = ContextCompat.getDrawable(this, R.drawable.buttons_circle)
+        btnEight.background = ContextCompat.getDrawable(this, R.drawable.buttons_circle)
+        btnNine.background = ContextCompat.getDrawable(this, R.drawable.buttons_circle)
+        btnDot.background = ContextCompat.getDrawable(this, R.drawable.buttons_circle)
+        btnBackSpace.background = ContextCompat.getDrawable(this, R.drawable.buttons_circle)
 
-        btnPlus.background = circle
-        btnMinus.background = circle
-        btnMulti.background = circle
-        btnDivision.background = circle
-        btnPercent.background = circle
-        btnExp.background = circle
-        btnPi.background = circle
-        btnFact.background = circle
-        btnSquareRoot.background = circle
-        btnBrackets.background = circle
-        btnMore.background = circle
-        btnSin.background = circle
-        btnCos.background = circle
-        btnTan.background = circle
-        btnE.background = circle
-        btnLg.background = circle
-        btnLn.background = circle
-        btnLog2.background = circle
-        btnRad.background = circle
-        btnAc.background = circle
-        btnEqual.background = circle
+        btnPlus.background = ContextCompat.getDrawable(this, R.drawable.buttons_circle)
+        btnMinus.background = ContextCompat.getDrawable(this, R.drawable.buttons_circle)
+        btnMulti.background = ContextCompat.getDrawable(this, R.drawable.buttons_circle)
+        btnDivision.background = ContextCompat.getDrawable(this, R.drawable.buttons_circle)
+        btnPercent.background = ContextCompat.getDrawable(this, R.drawable.buttons_circle)
+        btnExp.background = ContextCompat.getDrawable(this, R.drawable.buttons_circle)
+        btnPi.background = ContextCompat.getDrawable(this, R.drawable.buttons_circle)
+        btnFact.background = ContextCompat.getDrawable(this, R.drawable.buttons_circle)
+        btnSquareRoot.background = ContextCompat.getDrawable(this, R.drawable.buttons_circle)
+        btnBrackets.background = ContextCompat.getDrawable(this, R.drawable.buttons_circle)
+        btnMore.background = ContextCompat.getDrawable(this, R.drawable.buttons_circle)
+        btnSin.background = ContextCompat.getDrawable(this, R.drawable.buttons_circle)
+        btnCos.background = ContextCompat.getDrawable(this, R.drawable.buttons_circle)
+        btnTan.background = ContextCompat.getDrawable(this, R.drawable.buttons_circle)
+        btnE.background = ContextCompat.getDrawable(this, R.drawable.buttons_circle)
+        btnLg.background = ContextCompat.getDrawable(this, R.drawable.buttons_circle)
+        btnLn.background = ContextCompat.getDrawable(this, R.drawable.buttons_circle)
+        btnLog2.background = ContextCompat.getDrawable(this, R.drawable.buttons_circle)
+        btnRad.background = ContextCompat.getDrawable(this, R.drawable.buttons_circle)
+        btnAc.background = ContextCompat.getDrawable(this, R.drawable.buttons_circle)
+        btnEqual.background = ContextCompat.getDrawable(this, R.drawable.buttons_circle)
     }
 
     private fun setButtonsRectangle()
     {
-        val rectangle = ContextCompat.getDrawable(this, R.drawable.buttons_rectangle)
-        btnZero.background = rectangle
-        btnOne.background = rectangle
-        btnTwo.background = rectangle
-        btnThree.background = rectangle
-        btnFour.background = rectangle
-        btnFive.background = rectangle
-        btnSix.background = rectangle
-        btnSeven.background = rectangle
-        btnEight.background = rectangle
-        btnNine.background = rectangle
-        btnDot.background = rectangle
-        btnBackSpace.background = rectangle
+        btnZero.background = ContextCompat.getDrawable(this, R.drawable.buttons_rectangle)
+        btnOne.background = ContextCompat.getDrawable(this, R.drawable.buttons_rectangle)
+        btnTwo.background = ContextCompat.getDrawable(this, R.drawable.buttons_rectangle)
+        btnThree.background = ContextCompat.getDrawable(this, R.drawable.buttons_rectangle)
+        btnFour.background = ContextCompat.getDrawable(this, R.drawable.buttons_rectangle)
+        btnFive.background = ContextCompat.getDrawable(this, R.drawable.buttons_rectangle)
+        btnSix.background = ContextCompat.getDrawable(this, R.drawable.buttons_rectangle)
+        btnSeven.background = ContextCompat.getDrawable(this, R.drawable.buttons_rectangle)
+        btnEight.background = ContextCompat.getDrawable(this, R.drawable.buttons_rectangle)
+        btnNine.background = ContextCompat.getDrawable(this, R.drawable.buttons_rectangle)
+        btnDot.background = ContextCompat.getDrawable(this, R.drawable.buttons_rectangle)
+        btnBackSpace.background = ContextCompat.getDrawable(this, R.drawable.buttons_rectangle)
 
-        btnPlus.background = rectangle
-        btnMinus.background = rectangle
-        btnMulti.background = rectangle
-        btnDivision.background = rectangle
-        btnPercent.background = rectangle
-        btnExp.background = rectangle
-        btnPi.background = rectangle
-        btnFact.background = rectangle
-        btnSquareRoot.background = rectangle
-        btnBrackets.background = rectangle
-        btnMore.background = rectangle
-        btnSin.background = rectangle
-        btnCos.background = rectangle
-        btnTan.background = rectangle
-        btnE.background = rectangle
-        btnLg.background = rectangle
-        btnLn.background = rectangle
-        btnLog2.background = rectangle
-        btnRad.background = rectangle
-        btnAc.background = rectangle
-        btnEqual.background = rectangle
+        btnPlus.background = ContextCompat.getDrawable(this, R.drawable.buttons_rectangle)
+        btnMinus.background = ContextCompat.getDrawable(this, R.drawable.buttons_rectangle)
+        btnMulti.background = ContextCompat.getDrawable(this, R.drawable.buttons_rectangle)
+        btnDivision.background = ContextCompat.getDrawable(this, R.drawable.buttons_rectangle)
+        btnPercent.background = ContextCompat.getDrawable(this, R.drawable.buttons_rectangle)
+        btnExp.background = ContextCompat.getDrawable(this, R.drawable.buttons_rectangle)
+        btnPi.background = ContextCompat.getDrawable(this, R.drawable.buttons_rectangle)
+        btnFact.background = ContextCompat.getDrawable(this, R.drawable.buttons_rectangle)
+        btnSquareRoot.background = ContextCompat.getDrawable(this, R.drawable.buttons_rectangle)
+        btnBrackets.background = ContextCompat.getDrawable(this, R.drawable.buttons_rectangle)
+        btnMore.background = ContextCompat.getDrawable(this, R.drawable.buttons_rectangle)
+        btnSin.background = ContextCompat.getDrawable(this, R.drawable.buttons_rectangle)
+        btnCos.background = ContextCompat.getDrawable(this, R.drawable.buttons_rectangle)
+        btnTan.background = ContextCompat.getDrawable(this, R.drawable.buttons_rectangle)
+        btnE.background = ContextCompat.getDrawable(this, R.drawable.buttons_rectangle)
+        btnLg.background = ContextCompat.getDrawable(this, R.drawable.buttons_rectangle)
+        btnLn.background = ContextCompat.getDrawable(this, R.drawable.buttons_rectangle)
+        btnLog2.background = ContextCompat.getDrawable(this, R.drawable.buttons_rectangle)
+        btnRad.background = ContextCompat.getDrawable(this, R.drawable.buttons_rectangle)
+        btnAc.background = ContextCompat.getDrawable(this, R.drawable.buttons_rectangle)
+        btnEqual.background = ContextCompat.getDrawable(this, R.drawable.buttons_rectangle)
     }
 
     private fun setButtonsRounded()
     {
-        val rounded = ContextCompat.getDrawable(this, R.drawable.buttons_round)
-        btnZero.background = rounded
-        btnOne.background = rounded
-        btnTwo.background = rounded
-        btnThree.background = rounded
-        btnFour.background = rounded
-        btnFive.background = rounded
-        btnSix.background = rounded
-        btnSeven.background = rounded
-        btnEight.background = rounded
-        btnNine.background = rounded
-        btnDot.background = rounded
-        btnBackSpace.background = rounded
+        btnZero.background = ContextCompat.getDrawable(this, R.drawable.buttons_round)
+        btnOne.background = ContextCompat.getDrawable(this, R.drawable.buttons_round)
+        btnTwo.background = ContextCompat.getDrawable(this, R.drawable.buttons_round)
+        btnThree.background = ContextCompat.getDrawable(this, R.drawable.buttons_round)
+        btnFour.background = ContextCompat.getDrawable(this, R.drawable.buttons_round)
+        btnFive.background = ContextCompat.getDrawable(this, R.drawable.buttons_round)
+        btnSix.background = ContextCompat.getDrawable(this, R.drawable.buttons_round)
+        btnSeven.background = ContextCompat.getDrawable(this, R.drawable.buttons_round)
+        btnEight.background = ContextCompat.getDrawable(this, R.drawable.buttons_round)
+        btnNine.background = ContextCompat.getDrawable(this, R.drawable.buttons_round)
+        btnDot.background = ContextCompat.getDrawable(this, R.drawable.buttons_round)
+        btnBackSpace.background = ContextCompat.getDrawable(this, R.drawable.buttons_round)
 
-        btnPlus.background = rounded
-        btnMinus.background = rounded
-        btnMulti.background = rounded
-        btnDivision.background = rounded
-        btnPercent.background = rounded
-        btnExp.background = rounded
-        btnPi.background = rounded
-        btnFact.background = rounded
-        btnSquareRoot.background = rounded
-        btnBrackets.background = rounded
-        btnMore.background = rounded
-        btnSin.background = rounded
-        btnCos.background = rounded
-        btnTan.background = rounded
-        btnE.background = rounded
-        btnLg.background = rounded
-        btnLn.background = rounded
-        btnLog2.background = rounded
-        btnRad.background = rounded
-        btnAc.background = rounded
-        btnEqual.background = rounded
+        btnPlus.background = ContextCompat.getDrawable(this, R.drawable.buttons_round)
+        btnMinus.background = ContextCompat.getDrawable(this, R.drawable.buttons_round)
+        btnMulti.background = ContextCompat.getDrawable(this, R.drawable.buttons_round)
+        btnDivision.background = ContextCompat.getDrawable(this, R.drawable.buttons_round)
+        btnPercent.background = ContextCompat.getDrawable(this, R.drawable.buttons_round)
+        btnExp.background = ContextCompat.getDrawable(this, R.drawable.buttons_round)
+        btnPi.background = ContextCompat.getDrawable(this, R.drawable.buttons_round)
+        btnFact.background = ContextCompat.getDrawable(this, R.drawable.buttons_round)
+        btnSquareRoot.background = ContextCompat.getDrawable(this, R.drawable.buttons_round)
+        btnBrackets.background = ContextCompat.getDrawable(this, R.drawable.buttons_round)
+        btnMore.background = ContextCompat.getDrawable(this, R.drawable.buttons_round)
+        btnSin.background = ContextCompat.getDrawable(this, R.drawable.buttons_round)
+        btnCos.background = ContextCompat.getDrawable(this, R.drawable.buttons_round)
+        btnTan.background = ContextCompat.getDrawable(this, R.drawable.buttons_round)
+        btnE.background = ContextCompat.getDrawable(this, R.drawable.buttons_round)
+        btnLg.background = ContextCompat.getDrawable(this, R.drawable.buttons_round)
+        btnLn.background = ContextCompat.getDrawable(this, R.drawable.buttons_round)
+        btnLog2.background = ContextCompat.getDrawable(this, R.drawable.buttons_round)
+        btnRad.background = ContextCompat.getDrawable(this, R.drawable.buttons_round)
+        btnAc.background = ContextCompat.getDrawable(this, R.drawable.buttons_round)
+        btnEqual.background = ContextCompat.getDrawable(this, R.drawable.buttons_round)
 
     }
 
@@ -577,13 +562,13 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, View.OnTouchList
                 {
                     MotionEvent.ACTION_DOWN ->
                     {
-                        if (isDarkThemeOn()) btnMenu.backgroundTintList = alphaColor
-                        else btnMenu.backgroundTintList = semiGrayColor
+                        if (isDarkThemeOn()) btnMenu.backgroundTintList = ColorStateList.valueOf(ContextCompat.getColor(this, R.color.alpha))
+                        else btnMenu.backgroundTintList = ColorStateList.valueOf(ContextCompat.getColor(this, R.color.semi_gray))
                     }
                     MotionEvent.ACTION_UP   ->
                     {
-                        if (isDarkThemeOn()) btnMenu.backgroundTintList = darkGrayColor
-                        else btnMenu.backgroundTintList = lightGrayColor
+                        if (isDarkThemeOn()) btnMenu.backgroundTintList = ColorStateList.valueOf(ContextCompat.getColor(this, R.color.dark_gray))
+                        else btnMenu.backgroundTintList = ColorStateList.valueOf(ContextCompat.getColor(this, R.color.light_gray))
                         view.performClick()
                     }
                 }
@@ -595,13 +580,13 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, View.OnTouchList
                 {
                     MotionEvent.ACTION_DOWN ->
                     {
-                        if (isDarkThemeOn()) btnMenu.backgroundTintList = alphaColor
-                        else btnMenu.backgroundTintList = semiGrayColor
+                        if (isDarkThemeOn()) btnMenu.backgroundTintList = ColorStateList.valueOf(ContextCompat.getColor(this, R.color.alpha))
+                        else btnMenu.backgroundTintList = ColorStateList.valueOf(ContextCompat.getColor(this, R.color.semi_gray))
                     }
                     MotionEvent.ACTION_UP   ->
                     {
-                        if (isDarkThemeOn()) btnMenu.backgroundTintList = darkGrayColor
-                        else btnMenu.backgroundTintList = lightGrayColor
+                        if (isDarkThemeOn()) btnMenu.backgroundTintList = ColorStateList.valueOf(ContextCompat.getColor(this, R.color.dark_gray))
+                        else btnMenu.backgroundTintList = ColorStateList.valueOf(ContextCompat.getColor(this, R.color.light_gray))
                         view.performClick()
                     }
                 }
@@ -752,12 +737,6 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, View.OnTouchList
 
     private fun initViews()
     {
-        darkGrayColor = ColorStateList.valueOf(ContextCompat.getColor(this, R.color.dark_gray))
-        semiGrayColor = ColorStateList.valueOf(ContextCompat.getColor(this, R.color.semi_gray))
-        lightGrayColor = ColorStateList.valueOf(ContextCompat.getColor(this, R.color.light_gray))
-        alphaColor = ColorStateList.valueOf(ContextCompat.getColor(this, R.color.alpha))
-        whiteColor = ColorStateList.valueOf(ContextCompat.getColor(this, R.color.white))
-        blackColor = ColorStateList.valueOf(ContextCompat.getColor(this, R.color.black))
 
         llMenu = findViewById(R.id.ll_menu)
 
@@ -842,8 +821,6 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, View.OnTouchList
         btnLg.setOnClickListener(this)
         btnLn.setOnClickListener(this)
         btnRad.setOnClickListener(this)
-
-
     }
 
 
