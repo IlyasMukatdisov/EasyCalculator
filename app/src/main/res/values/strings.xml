@@ -36,7 +36,7 @@
     <string name="btn_ln">ln</string>
     <string name="btn_rad">rad</string>
     <string name="btn_log2">log2</string>
-    <string name="btn_backspace"><![CDATA[<−]]></string>
+    <string name="btn_backspace">←</string>
     <string name="no_history">No History</string>
     <string name="my_telegram">https://t.me/MainActivity_kt</string>
     <string name="btn_arc_sin">asin</string>
