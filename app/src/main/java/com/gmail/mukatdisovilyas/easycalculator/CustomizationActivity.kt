@@ -10,6 +10,7 @@ import android.graphics.Color
 import android.os.Build
 import android.os.Bundle
 import android.transition.TransitionManager
+import android.util.TypedValue
 import android.view.MotionEvent
 import android.view.View
 import android.widget.*
@@ -26,7 +27,6 @@ class CustomizationActivity : AppCompatActivity(), View.OnClickListener, View.On
 {
 
     private lateinit var llMenu: LinearLayout
-    private lateinit var ccContent: ConstraintLayout
 
     private lateinit var btnNumbersColor: Button
     private lateinit var btnActionsColor: Button
@@ -188,12 +188,12 @@ class CustomizationActivity : AppCompatActivity(), View.OnClickListener, View.On
 
         btnTextColor.textSize = textSize
 
-        tvNumbers.textSize = textSize
-        tvActions.textSize = textSize
-        tvAc.textSize = textSize
-        tvEqual.textSize = textSize
-        tvTextColor.textSize = textSize
-        tvTitle.textSize = textSize * 3 / 2
+        val tvTextSize = tvNumbers.textSize /resources.displayMetrics.scaledDensity
+        tvActions.setTextSize(TypedValue.COMPLEX_UNIT_SP,tvTextSize)
+        tvAc.setTextSize(TypedValue.COMPLEX_UNIT_SP,tvTextSize)
+        tvEqual.setTextSize(TypedValue.COMPLEX_UNIT_SP,tvTextSize)
+        tvTextColor.setTextSize(TypedValue.COMPLEX_UNIT_SP,tvTextSize)
+        tvTitle.setTextSize(TypedValue.COMPLEX_UNIT_SP,tvTextSize)
 
         btnRounded.textSize = textSize
         btnRectangle.textSize = textSize
@@ -328,7 +328,6 @@ class CustomizationActivity : AppCompatActivity(), View.OnClickListener, View.On
 
         llMenu = findViewById(R.id.ll_menu)
 
-        ccContent=findViewById(R.id.cc_content)
 
         btnNumbersColor = findViewById(R.id.btn_numbers_color)
         btnActionsColor = findViewById(R.id.btn_actions_color)

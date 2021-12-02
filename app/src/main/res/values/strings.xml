@@ -42,11 +42,11 @@
     <string name="btn_arc_sin">asin</string>
     <string name="btn_arc_cos">acos</string>
     <string name="btn_arc_tan">atan</string>
-    <string name="number_buttons_color">Number buttons color:</string>
-    <string name="action_buttons_color">Action buttons color:</string>
-    <string name="equal_button_color">\'=\' button color:</string>
-    <string name="ac_button_color">\'AC\' button color:</string>
-    <string name="buttons_text_color">Buttons text color:</string>
+    <string name="number_buttons_color">Number buttons color</string>
+    <string name="action_buttons_color">Action buttons color</string>
+    <string name="equal_button_color">\'=\' button color</string>
+    <string name="ac_button_color">\'AC\' button color</string>
+    <string name="buttons_text_color">Buttons text color</string>
     <string name="your_custom_theme">Your custom theme</string>
     <string name="btn_save">Save</string>
     <string name="btn_menu">Menu</string>
