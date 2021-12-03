@@ -9,15 +9,12 @@ import android.content.res.Configuration.UI_MODE_NIGHT_YES
 import android.graphics.Color
 import android.os.Build
 import android.os.Bundle
-import android.transition.TransitionManager
-import android.util.TypedValue
 import android.view.MotionEvent
 import android.view.View
 import android.widget.*
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.content.res.AppCompatResources
-import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.ContextCompat
 import com.azeesoft.lib.colorpicker.ColorPickerDialog
 import com.gmail.mukatdisovilyas.easycalculator.utils.*
@@ -188,12 +185,15 @@ class CustomizationActivity : AppCompatActivity(), View.OnClickListener, View.On
 
         btnTextColor.textSize = textSize
 
-        val tvTextSize = tvNumbers.textSize /resources.displayMetrics.scaledDensity
-        tvActions.setTextSize(TypedValue.COMPLEX_UNIT_SP,tvTextSize)
-        tvAc.setTextSize(TypedValue.COMPLEX_UNIT_SP,tvTextSize)
-        tvEqual.setTextSize(TypedValue.COMPLEX_UNIT_SP,tvTextSize)
-        tvTextColor.setTextSize(TypedValue.COMPLEX_UNIT_SP,tvTextSize)
-        tvTitle.setTextSize(TypedValue.COMPLEX_UNIT_SP,tvTextSize)
+        val tvTextSize = textSize * 3 / 2
+
+
+        tvNumbers.textSize = tvTextSize
+        tvActions.textSize = tvTextSize
+        tvAc.textSize = tvTextSize
+        tvEqual.textSize = tvTextSize
+        tvTextColor.textSize = tvTextSize
+        tvTitle.textSize = tvTextSize
 
         btnRounded.textSize = textSize
         btnRectangle.textSize = textSize
@@ -272,6 +272,8 @@ class CustomizationActivity : AppCompatActivity(), View.OnClickListener, View.On
                 AppCompatResources.getColorStateList(this, R.color.light_green)
             btnEqualColor.backgroundTintList =
                 AppCompatResources.getColorStateList(this, R.color.magenta)
+
+            setButtonsShape(SHAPE_ROUNDED)
 
         }
     }
@@ -479,25 +481,28 @@ class CustomizationActivity : AppCompatActivity(), View.OnClickListener, View.On
                 startActivity(intent)
             }
 
-            R.id.btn_rounded ->{
-                shape= SHAPE_ROUNDED
-                shapePicked=true
+            R.id.btn_rounded       ->
+            {
+                shape = SHAPE_ROUNDED
+                shapePicked = true
                 setButtonsShape(shape)
-                radioRounded.isChecked=true
+                radioRounded.isChecked = true
             }
 
-            R.id.btn_rectangle ->{
-                shape= SHAPE_RECTANGLE
-                shapePicked=true
+            R.id.btn_rectangle     ->
+            {
+                shape = SHAPE_RECTANGLE
+                shapePicked = true
                 setButtonsShape(shape)
-                radioRectangle.isChecked=true
+                radioRectangle.isChecked = true
             }
 
-            R.id.btn_circle ->{
-                shape= SHAPE_CIRCLE
-                shapePicked=true
+            R.id.btn_circle        ->
+            {
+                shape = SHAPE_CIRCLE
+                shapePicked = true
                 setButtonsShape(shape)
-                radioCircle.isChecked=true
+                radioCircle.isChecked = true
             }
 
         }

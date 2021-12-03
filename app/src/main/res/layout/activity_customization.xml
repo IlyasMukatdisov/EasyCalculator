@@ -49,8 +49,8 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1"
-            android:layout_marginStart="20dp"
-            android:layout_marginEnd="20dp"
+            android:layout_marginStart="40dp"
+            android:layout_marginEnd="40dp"
             android:gravity="center">
 
             <androidx.appcompat.widget.AppCompatTextView
@@ -90,7 +90,6 @@
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:layout_marginStart="10dp"
-                app:autoSizeTextType="uniform"
                 android:id="@+id/tv_cc_numbers_color"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
