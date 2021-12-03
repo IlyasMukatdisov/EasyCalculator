@@ -13,9 +13,7 @@
         android:id="@+id/ll_menu"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:gravity="end"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        android:gravity="end">
 
         <ImageButton
             android:id="@+id/btn_menu"
@@ -26,9 +24,7 @@
             android:background="@drawable/buttons_round"
             android:backgroundTint="@color/white"
             android:contentDescription="@string/btn_menu"
-            android:src="@drawable/ic_more_vert_black"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            android:src="@drawable/ic_more_vert_black" />
 
     </LinearLayout>
 
@@ -38,12 +34,7 @@
         android:layout_height="0dp"
         android:layout_marginTop="16dp"
         android:layout_weight="0.7"
-        android:orientation="vertical"
-        app:layout_constraintBottom_toTopOf="@+id/btn_cc_save"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_cc_title"
-        app:layout_constraintVertical_bias="0.01999998">
+        android:orientation="vertical">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -83,23 +74,18 @@
                 android:layout_weight="0.2"
                 android:background="@drawable/buttons_round"
                 android:text="@string/btn_zero"
-                android:textColor="@color/black"
-                app:layout_constraintBottom_toBottomOf="@+id/tv_cc_numbers_color"
-                app:layout_constraintStart_toEndOf="@+id/tv_cc_numbers_color"
-                app:layout_constraintTop_toTopOf="@+id/tv_cc_numbers_color" />
+                android:textColor="@color/black" />
 
             <androidx.appcompat.widget.AppCompatTextView
-                android:layout_marginStart="10dp"
+                android:layout_marginStart="20dp"
                 android:id="@+id/tv_cc_numbers_color"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="0.8"
-                android:gravity="end|center_vertical"
+                android:gravity="center_vertical"
                 android:text="@string/number_buttons_color"
                 android:textColor="@color/black"
-                android:textSize="16sp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                android:textSize="16sp" />
 
 
         </LinearLayout>
@@ -123,35 +109,20 @@
                 android:layout_weight="0.2"
                 android:background="@drawable/buttons_round"
                 android:text="@string/btn_plus"
-                android:textColor="@color/black"
-                app:layout_constraintBottom_toBottomOf="@+id/tv_cc_actions_color"
-                app:layout_constraintEnd_toEndOf="@+id/btn_numbers_color"
-                app:layout_constraintStart_toStartOf="@+id/btn_numbers_color"
-                app:layout_constraintTop_toTopOf="@+id/tv_cc_actions_color" />
+                android:textColor="@color/black"/>
 
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="0.8"
-                android:layout_marginStart="10dp"
-                android:gravity="end">
 
                 <androidx.appcompat.widget.AppCompatTextView
-                    android:layout_marginStart="10dp"
+                    android:layout_marginStart="20dp"
                     android:id="@+id/tv_cc_actions_color"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="match_parent"
+                    android:layout_weight="0.8"
                     android:layout_gravity="end"
-                    android:gravity="start|center_vertical"
+                    android:gravity="center_vertical"
                     android:text="@string/action_buttons_color"
                     android:textColor="@color/black"
-                    android:textSize="16sp"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/tv_cc_numbers_color" />
-
-            </LinearLayout>
-
-
+                    android:textSize="16sp" />
 
 
         </LinearLayout>
@@ -181,17 +152,13 @@
                 app:layout_constraintStart_toStartOf="@+id/btn_actions_color"
                 app:layout_constraintTop_toTopOf="@+id/tv_cc_ac_color" />
 
-        <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="0.8"
-            android:gravity="end"
-            android:layout_marginStart="10dp">
+
 
             <androidx.appcompat.widget.AppCompatTextView
-                android:layout_marginStart="10dp"
+                android:layout_marginStart="20dp"
                 android:id="@+id/tv_cc_ac_color"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
+                android:layout_weight="0.8"
                 android:layout_height="match_parent"
                 android:gravity="start|center_vertical"
                 android:text="@string/ac_button_color"
@@ -199,7 +166,6 @@
                 android:textSize="16sp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/tv_cc_actions_color" />
-        </LinearLayout>
 
 
 
@@ -230,17 +196,11 @@
                 app:layout_constraintStart_toStartOf="@+id/btn_ac_color"
                 app:layout_constraintTop_toTopOf="@+id/tv_cc_equal_color" />
 
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="0.8"
-                android:gravity="end"
-                android:layout_marginStart="10dp">
-
                 <TextView
-                    android:layout_marginStart="10dp"
+                    android:layout_marginStart="20dp"
                     android:id="@+id/tv_cc_equal_color"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
+                    android:layout_weight="0.8"
                     android:layout_height="match_parent"
                     android:gravity="start|center_vertical"
                     android:text="@string/equal_button_color"
@@ -249,8 +209,6 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/tv_cc_ac_color" />
 
-
-            </LinearLayout>
 
 
 
@@ -285,18 +243,12 @@
                 app:layout_constraintStart_toStartOf="@+id/btn_ac_color"
                 app:layout_constraintTop_toTopOf="@+id/tv_buttons_text_color" />
 
-        <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="0.8"
-            android:gravity="end"
-            android:layout_marginStart="10dp">
-
 
             <androidx.appcompat.widget.AppCompatTextView
-                android:layout_marginStart="10dp"
+                android:layout_marginStart="20dp"
                 android:id="@+id/tv_buttons_text_color"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
+                android:layout_weight="0.8"
                 android:layout_height="match_parent"
                 android:gravity="start|center_vertical"
                 android:text="@string/buttons_text_color"
@@ -304,8 +256,6 @@
                 android:textSize="16sp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/tv_cc_equal_color" />
-
-        </LinearLayout>
 
 
 

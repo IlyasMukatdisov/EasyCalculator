@@ -219,22 +219,58 @@ class CustomizationActivity : AppCompatActivity(), View.OnClickListener, View.On
             {
                 btnNumbersColor.backgroundTintList =
                     ColorStateList.valueOf(Color.parseColor(numbersColor))
-
-                btnActionsColor.backgroundTintList =
-                    ColorStateList.valueOf(Color.parseColor(actionsColor))
-                btnAcColor.backgroundTintList = ColorStateList.valueOf(Color.parseColor(acColor))
-                btnEqualColor.backgroundTintList =
-                    ColorStateList.valueOf(Color.parseColor(equalColor))
-
                 btnRounded.backgroundTintList =
                     ColorStateList.valueOf(Color.parseColor(numbersColor))
                 btnRectangle.backgroundTintList =
                     ColorStateList.valueOf(Color.parseColor(numbersColor))
                 btnCircle.backgroundTintList =
                     ColorStateList.valueOf(Color.parseColor(numbersColor))
-                btnTextColor.backgroundTintList =
-                    ColorStateList.valueOf(Color.parseColor(textColor))
             }
+            else
+            {
+                setDefaultNumbersColor()
+            }
+            if (actionsColor.isNotEmpty())
+            {
+                btnActionsColor.backgroundTintList =
+                    ColorStateList.valueOf(Color.parseColor(actionsColor))
+            }
+            else
+            {
+                btnActionsColor.backgroundTintList =
+                    AppCompatResources.getColorStateList(this, R.color.light_blue)
+            }
+            if (acColor.isNotEmpty()) btnAcColor.backgroundTintList =
+                ColorStateList.valueOf(Color.parseColor(acColor))
+            else
+            {
+                btnAcColor.backgroundTintList =
+                    AppCompatResources.getColorStateList(this, R.color.light_green)
+            }
+            if (equalColor.isNotEmpty()) btnEqualColor.backgroundTintList =
+                ColorStateList.valueOf(Color.parseColor(equalColor))
+            else
+            {
+                btnEqualColor.backgroundTintList =
+                    AppCompatResources.getColorStateList(this, R.color.magenta)
+            }
+
+            if (textColor.isNotEmpty()) btnTextColor.backgroundTintList =
+                ColorStateList.valueOf(Color.parseColor(textColor))
+            else
+            {
+                if (isDarkThemeOn()) if (textColor.isNotEmpty())
+                {
+                    btnTextColor.backgroundTintList =
+                        AppCompatResources.getColorStateList(this, R.color.white)
+                }
+                else
+                {
+                    btnTextColor.backgroundTintList =
+                        AppCompatResources.getColorStateList(this, R.color.black)
+                }
+            }
+
 
         }
         else
@@ -278,9 +314,41 @@ class CustomizationActivity : AppCompatActivity(), View.OnClickListener, View.On
         }
     }
 
+    private fun setDefaultNumbersColor()
+    {
+        if (this.isDarkThemeOn())
+        {
+            btnNumbersColor.backgroundTintList =
+                ColorStateList.valueOf(ContextCompat.getColor(this, R.color.dark_gray))
+            btnRounded.backgroundTintList =
+                ColorStateList.valueOf(ContextCompat.getColor(this, R.color.dark_gray))
+            btnRectangle.backgroundTintList =
+                ColorStateList.valueOf(ContextCompat.getColor(this, R.color.dark_gray))
+            btnCircle.backgroundTintList =
+                ColorStateList.valueOf(ContextCompat.getColor(this, R.color.dark_gray))
+
+        }
+        else
+        {
+            btnNumbersColor.backgroundTintList =
+                ColorStateList.valueOf(ContextCompat.getColor(this, R.color.light_gray))
+            btnRectangle.backgroundTintList =
+                ColorStateList.valueOf(ContextCompat.getColor(this, R.color.light_gray))
+            btnRounded.backgroundTintList =
+                ColorStateList.valueOf(ContextCompat.getColor(this, R.color.light_gray))
+            btnCircle.backgroundTintList =
+                ColorStateList.valueOf(ContextCompat.getColor(this, R.color.light_gray))
+        }
+    }
+
+
     private fun setButtonsShape(shape: String)
     {
-        when (shape)
+        var sh = shape
+        if (sh == "") sh = SHAPE_ROUNDED
+
+
+        when (sh)
         {
             SHAPE_ROUNDED   ->
             {
@@ -582,14 +650,14 @@ class CustomizationActivity : AppCompatActivity(), View.OnClickListener, View.On
     }
 
 
-    private fun isAllFieldFilled(): Boolean
+    private fun isColorPicked(): Boolean
     {
-        return numberPicked && actionPicked && acPicked && equalPicked && textColorPicked && shapePicked
+        return numberPicked || actionPicked || acPicked || equalPicked || textColorPicked || shapePicked
     }
 
     private fun shouldEnableBtnSave()
     {
-        if (isAllFieldFilled())
+        if (isColorPicked())
         {
             btnSave.isEnabled = true
             btnSave.alpha = 1.0f

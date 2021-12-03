@@ -11,7 +11,8 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="0.5">
+        android:layout_weight="0.5"
+        android:id="@+id/cc_content">
 
         <LinearLayout
             android:id="@+id/ll_menu"
@@ -54,8 +55,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
-        android:layout_marginBottom="5dp"
-        >
+        android:layout_marginBottom="5dp">
 
         <TextView
             android:id="@+id/tv_fx"
@@ -82,10 +82,10 @@
 
         <ImageButton
             android:id="@+id/btn_clear_edt"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_marginEnd="10dp"
-            android:layout_weight="0.1"
+            android:layout_weight="0.2"
             android:background="@drawable/buttons_round"
             android:backgroundTint="@color/yellow"
             android:src="@drawable/ic_close"
@@ -95,10 +95,10 @@
 
         <ImageButton
             android:id="@+id/btn_graph_build"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_marginEnd="10dp"
-            android:layout_weight="0.1"
+            android:layout_weight="0.2"
             android:background="@drawable/buttons_round"
             android:backgroundTint="@color/light_green"
             android:src="@drawable/ic_graph_black"
@@ -111,15 +111,18 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="start">
+        android:gravity="start"
+        android:layout_marginBottom="10dp">
 
         <LinearLayout
             android:layout_width="0dp"
             android:layout_weight="0.8"
-            android:layout_height="wrap_content">
+            android:layout_height="match_parent"
+            >
             <TextView
                 android:id="@+id/tv_x_values"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
+                android:layout_weight="0.1"
                 android:layout_height="match_parent"
                 android:layout_marginStart="10dp"
                 android:gravity="center"
@@ -128,7 +131,8 @@
 
             <EditText
                 android:id="@+id/edt_x_begin"
-                android:layout_width="70dp"
+                android:layout_width="0dp"
+                android:layout_weight="0.2"
                 android:layout_height="wrap_content"
                 android:ems="10"
                 android:gravity="center"
@@ -141,15 +145,17 @@
 
             <TextView
                 android:id="@+id/tv_semicolon"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="match_parent"
+                android:layout_weight="0.05"
                 android:gravity="center"
                 android:text="@string/semicolon"
                 android:textSize="24sp" />
 
             <EditText
                 android:id="@+id/edt_x_end"
-                android:layout_width="70dp"
+                android:layout_width="0dp"
+                android:layout_weight="0.2"
                 android:layout_height="wrap_content"
                 android:ems="10"
                 android:gravity="center"
@@ -162,7 +168,8 @@
 
             <TextView
                 android:id="@+id/tv_x_step"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
+                android:layout_weight="0.15"
                 android:layout_height="match_parent"
                 android:gravity="center"
                 android:text="@string/tv_x_step"
@@ -170,7 +177,8 @@
 
             <EditText
                 android:id="@+id/edt_x_step"
-                android:layout_width="70dp"
+                android:layout_width="0dp"
+                android:layout_weight="0.2"
                 android:layout_height="wrap_content"
                 android:ems="10"
                 android:gravity="center"
@@ -185,14 +193,11 @@
 
 
         <androidx.appcompat.widget.AppCompatButton
-            android:layout_marginTop="5dp"
-            android:layout_marginBottom="5dp"
             android:id="@+id/btn_keyboard"
             android:layout_width="0dp"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:layout_marginEnd="10dp"
-
-            android:layout_weight="0.13"
+            android:layout_weight="0.14"
             android:background="@drawable/buttons_round"
             android:gravity="center"
             android:text="@string/btn_more_expanded"

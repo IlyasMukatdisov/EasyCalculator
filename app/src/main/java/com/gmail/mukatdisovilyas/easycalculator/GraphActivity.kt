@@ -13,6 +13,7 @@ import android.view.MotionEvent
 import android.view.View
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.content.res.AppCompatResources
 import androidx.core.content.ContextCompat
 import com.github.mikephil.charting.charts.LineChart
 import com.github.mikephil.charting.components.IMarker
@@ -23,6 +24,8 @@ import com.github.mikephil.charting.interfaces.datasets.ILineDataSet
 import com.gmail.mukatdisovilyas.easycalculator.utils.*
 import com.google.android.material.snackbar.Snackbar
 import org.mariuszgromada.math.mxparser.Function
+import android.widget.LinearLayout
+import androidx.constraintlayout.widget.ConstraintLayout
 
 
 class GraphActivity : AppCompatActivity(), View.OnClickListener, View.OnTouchListener
@@ -36,6 +39,7 @@ class GraphActivity : AppCompatActivity(), View.OnClickListener, View.OnTouchLis
     private var isExpanded = false
 
     private lateinit var llMenu: LinearLayout
+    private lateinit var ccGraph: ConstraintLayout
 
     private lateinit var linearLayoutButtons: LinearLayout
     private lateinit var llParent: LinearLayout
@@ -122,7 +126,7 @@ class GraphActivity : AppCompatActivity(), View.OnClickListener, View.OnTouchLis
 
 
         if (!isEmptyCustomColor()) customization()
-        else if (isDarkThemeOn()) setDefaultNightTheme()
+        else if (isDarkThemeOn()) setDefaultTheme()
 
         if (intent.hasExtra(MAIN_TEXT_SIZE))
         {
@@ -156,27 +160,41 @@ class GraphActivity : AppCompatActivity(), View.OnClickListener, View.OnTouchLis
         chart.xAxis.gridColor = Color.WHITE
         chart.legend.textColor = Color.WHITE
 
-        btnMenu.backgroundTintList = ColorStateList.valueOf(ContextCompat.getColor(this, R.color.black))
+        btnMenu.backgroundTintList =
+            ColorStateList.valueOf(ContextCompat.getColor(this, R.color.black))
         btnMenu.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.ic_more_vert_white))
     }
 
-    private fun setDefaultNightTheme()
+    private fun setDefaultTheme()
     {
-        btnZero.backgroundTintList = ColorStateList.valueOf(ContextCompat.getColor(this, R.color.dark_gray))
-        btnOne.backgroundTintList = ColorStateList.valueOf(ContextCompat.getColor(this, R.color.dark_gray))
-        btnTwo.backgroundTintList = ColorStateList.valueOf(ContextCompat.getColor(this, R.color.dark_gray))
-        btnThree.backgroundTintList = ColorStateList.valueOf(ContextCompat.getColor(this, R.color.dark_gray))
-        btnFour.backgroundTintList = ColorStateList.valueOf(ContextCompat.getColor(this, R.color.dark_gray))
-        btnFive.backgroundTintList = ColorStateList.valueOf(ContextCompat.getColor(this, R.color.dark_gray))
-        btnSix.backgroundTintList = ColorStateList.valueOf(ContextCompat.getColor(this, R.color.dark_gray))
-        btnSeven.backgroundTintList = ColorStateList.valueOf(ContextCompat.getColor(this, R.color.dark_gray))
-        btnEight.backgroundTintList = ColorStateList.valueOf(ContextCompat.getColor(this, R.color.dark_gray))
-        btnNine.backgroundTintList = ColorStateList.valueOf(ContextCompat.getColor(this, R.color.dark_gray))
-        btnDot.backgroundTintList = ColorStateList.valueOf(ContextCompat.getColor(this, R.color.dark_gray))
-        btnBackSpace.backgroundTintList = ColorStateList.valueOf(ContextCompat.getColor(this, R.color.dark_gray))
+        btnZero.backgroundTintList =
+            ColorStateList.valueOf(ContextCompat.getColor(this, R.color.dark_gray))
+        btnOne.backgroundTintList =
+            ColorStateList.valueOf(ContextCompat.getColor(this, R.color.dark_gray))
+        btnTwo.backgroundTintList =
+            ColorStateList.valueOf(ContextCompat.getColor(this, R.color.dark_gray))
+        btnThree.backgroundTintList =
+            ColorStateList.valueOf(ContextCompat.getColor(this, R.color.dark_gray))
+        btnFour.backgroundTintList =
+            ColorStateList.valueOf(ContextCompat.getColor(this, R.color.dark_gray))
+        btnFive.backgroundTintList =
+            ColorStateList.valueOf(ContextCompat.getColor(this, R.color.dark_gray))
+        btnSix.backgroundTintList =
+            ColorStateList.valueOf(ContextCompat.getColor(this, R.color.dark_gray))
+        btnSeven.backgroundTintList =
+            ColorStateList.valueOf(ContextCompat.getColor(this, R.color.dark_gray))
+        btnEight.backgroundTintList =
+            ColorStateList.valueOf(ContextCompat.getColor(this, R.color.dark_gray))
+        btnNine.backgroundTintList =
+            ColorStateList.valueOf(ContextCompat.getColor(this, R.color.dark_gray))
+        btnDot.backgroundTintList =
+            ColorStateList.valueOf(ContextCompat.getColor(this, R.color.dark_gray))
+        btnBackSpace.backgroundTintList =
+            ColorStateList.valueOf(ContextCompat.getColor(this, R.color.dark_gray))
 
 
-        edtExp.backgroundTintList = ColorStateList.valueOf(ContextCompat.getColor(this, R.color.dark_gray))
+        edtExp.backgroundTintList =
+            ColorStateList.valueOf(ContextCompat.getColor(this, R.color.dark_gray))
 
         btnZero.setTextColor(ColorStateList.valueOf(ContextCompat.getColor(this, R.color.white)))
         btnOne.setTextColor(ColorStateList.valueOf(ContextCompat.getColor(this, R.color.white)))
@@ -189,36 +207,61 @@ class GraphActivity : AppCompatActivity(), View.OnClickListener, View.OnTouchLis
         btnEight.setTextColor(ColorStateList.valueOf(ContextCompat.getColor(this, R.color.white)))
         btnNine.setTextColor(ColorStateList.valueOf(ContextCompat.getColor(this, R.color.white)))
         btnDot.setTextColor(ColorStateList.valueOf(ContextCompat.getColor(this, R.color.white)))
-        btnBackSpace.setTextColor(ColorStateList.valueOf(ContextCompat.getColor(this, R.color.white)))
+        btnBackSpace.setTextColor(
+            ColorStateList.valueOf(ContextCompat.getColor(this, R.color.white)))
 
 
 
-        btnZeroKeyboard.backgroundTintList = ColorStateList.valueOf(ContextCompat.getColor(this, R.color.dark_gray))
-        btnOneKeyboard.backgroundTintList = ColorStateList.valueOf(ContextCompat.getColor(this, R.color.dark_gray))
-        btnTwoKeyboard.backgroundTintList = ColorStateList.valueOf(ContextCompat.getColor(this, R.color.dark_gray))
-        btnThreeKeyboard.backgroundTintList = ColorStateList.valueOf(ContextCompat.getColor(this, R.color.dark_gray))
-        btnFourKeyboard.backgroundTintList = ColorStateList.valueOf(ContextCompat.getColor(this, R.color.dark_gray))
-        btnFiveKeyboard.backgroundTintList = ColorStateList.valueOf(ContextCompat.getColor(this, R.color.dark_gray))
-        btnSixKeyboard.backgroundTintList = ColorStateList.valueOf(ContextCompat.getColor(this, R.color.dark_gray))
-        btnSevenKeyboard.backgroundTintList = ColorStateList.valueOf(ContextCompat.getColor(this, R.color.dark_gray))
-        btnEightKeyboard.backgroundTintList = ColorStateList.valueOf(ContextCompat.getColor(this, R.color.dark_gray))
-        btnNineKeyboard.backgroundTintList = ColorStateList.valueOf(ContextCompat.getColor(this, R.color.dark_gray))
-        btnDotKeyboard.backgroundTintList = ColorStateList.valueOf(ContextCompat.getColor(this, R.color.dark_gray))
-        btnBackspaceKeyboard.backgroundTintList = ColorStateList.valueOf(ContextCompat.getColor(this, R.color.dark_gray))
+        btnZeroKeyboard.backgroundTintList =
+            ColorStateList.valueOf(ContextCompat.getColor(this, R.color.dark_gray))
+        btnOneKeyboard.backgroundTintList =
+            ColorStateList.valueOf(ContextCompat.getColor(this, R.color.dark_gray))
+        btnTwoKeyboard.backgroundTintList =
+            ColorStateList.valueOf(ContextCompat.getColor(this, R.color.dark_gray))
+        btnThreeKeyboard.backgroundTintList =
+            ColorStateList.valueOf(ContextCompat.getColor(this, R.color.dark_gray))
+        btnFourKeyboard.backgroundTintList =
+            ColorStateList.valueOf(ContextCompat.getColor(this, R.color.dark_gray))
+        btnFiveKeyboard.backgroundTintList =
+            ColorStateList.valueOf(ContextCompat.getColor(this, R.color.dark_gray))
+        btnSixKeyboard.backgroundTintList =
+            ColorStateList.valueOf(ContextCompat.getColor(this, R.color.dark_gray))
+        btnSevenKeyboard.backgroundTintList =
+            ColorStateList.valueOf(ContextCompat.getColor(this, R.color.dark_gray))
+        btnEightKeyboard.backgroundTintList =
+            ColorStateList.valueOf(ContextCompat.getColor(this, R.color.dark_gray))
+        btnNineKeyboard.backgroundTintList =
+            ColorStateList.valueOf(ContextCompat.getColor(this, R.color.dark_gray))
+        btnDotKeyboard.backgroundTintList =
+            ColorStateList.valueOf(ContextCompat.getColor(this, R.color.dark_gray))
+        btnBackspaceKeyboard.backgroundTintList =
+            ColorStateList.valueOf(ContextCompat.getColor(this, R.color.dark_gray))
 
 
-        btnZeroKeyboard.setTextColor(ColorStateList.valueOf(ContextCompat.getColor(this, R.color.white)))
-        btnOneKeyboard.setTextColor(ColorStateList.valueOf(ContextCompat.getColor(this, R.color.white)))
-        btnTwoKeyboard.setTextColor(ColorStateList.valueOf(ContextCompat.getColor(this, R.color.white)))
-        btnThreeKeyboard.setTextColor(ColorStateList.valueOf(ContextCompat.getColor(this, R.color.white)))
-        btnFourKeyboard.setTextColor(ColorStateList.valueOf(ContextCompat.getColor(this, R.color.white)))
-        btnFiveKeyboard.setTextColor(ColorStateList.valueOf(ContextCompat.getColor(this, R.color.white)))
-        btnSixKeyboard.setTextColor(ColorStateList.valueOf(ContextCompat.getColor(this, R.color.white)))
-        btnSevenKeyboard.setTextColor(ColorStateList.valueOf(ContextCompat.getColor(this, R.color.white)))
-        btnEightKeyboard.setTextColor(ColorStateList.valueOf(ContextCompat.getColor(this, R.color.white)))
-        btnNineKeyboard.setTextColor(ColorStateList.valueOf(ContextCompat.getColor(this, R.color.white)))
-        btnDotKeyboard.setTextColor(ColorStateList.valueOf(ContextCompat.getColor(this, R.color.white)))
-        btnBackspaceKeyboard.setTextColor(ColorStateList.valueOf(ContextCompat.getColor(this, R.color.white)))
+        btnZeroKeyboard.setTextColor(
+            ColorStateList.valueOf(ContextCompat.getColor(this, R.color.white)))
+        btnOneKeyboard.setTextColor(
+            ColorStateList.valueOf(ContextCompat.getColor(this, R.color.white)))
+        btnTwoKeyboard.setTextColor(
+            ColorStateList.valueOf(ContextCompat.getColor(this, R.color.white)))
+        btnThreeKeyboard.setTextColor(
+            ColorStateList.valueOf(ContextCompat.getColor(this, R.color.white)))
+        btnFourKeyboard.setTextColor(
+            ColorStateList.valueOf(ContextCompat.getColor(this, R.color.white)))
+        btnFiveKeyboard.setTextColor(
+            ColorStateList.valueOf(ContextCompat.getColor(this, R.color.white)))
+        btnSixKeyboard.setTextColor(
+            ColorStateList.valueOf(ContextCompat.getColor(this, R.color.white)))
+        btnSevenKeyboard.setTextColor(
+            ColorStateList.valueOf(ContextCompat.getColor(this, R.color.white)))
+        btnEightKeyboard.setTextColor(
+            ColorStateList.valueOf(ContextCompat.getColor(this, R.color.white)))
+        btnNineKeyboard.setTextColor(
+            ColorStateList.valueOf(ContextCompat.getColor(this, R.color.white)))
+        btnDotKeyboard.setTextColor(
+            ColorStateList.valueOf(ContextCompat.getColor(this, R.color.white)))
+        btnBackspaceKeyboard.setTextColor(
+            ColorStateList.valueOf(ContextCompat.getColor(this, R.color.white)))
     }
 
 
@@ -232,13 +275,17 @@ class GraphActivity : AppCompatActivity(), View.OnClickListener, View.OnTouchLis
                 {
                     MotionEvent.ACTION_DOWN ->
                     {
-                        if (isDarkThemeOn()) btnMenu.backgroundTintList = ColorStateList.valueOf(ContextCompat.getColor(this, R.color.dark_gray))
-                        else btnMenu.backgroundTintList = ColorStateList.valueOf(ContextCompat.getColor(this, R.color.semi_gray))
+                        if (isDarkThemeOn()) btnMenu.backgroundTintList =
+                            ColorStateList.valueOf(ContextCompat.getColor(this, R.color.dark_gray))
+                        else btnMenu.backgroundTintList =
+                            ColorStateList.valueOf(ContextCompat.getColor(this, R.color.semi_gray))
                     }
                     MotionEvent.ACTION_UP   ->
                     {
-                        if (isDarkThemeOn()) btnMenu.backgroundTintList = ColorStateList.valueOf(ContextCompat.getColor(this, R.color.black))
-                        else btnMenu.backgroundTintList = ColorStateList.valueOf(ContextCompat.getColor(this, R.color.white))
+                        if (isDarkThemeOn()) btnMenu.backgroundTintList =
+                            ColorStateList.valueOf(ContextCompat.getColor(this, R.color.black))
+                        else btnMenu.backgroundTintList =
+                            ColorStateList.valueOf(ContextCompat.getColor(this, R.color.white))
                         view.performClick()
                     }
                 }
@@ -250,13 +297,17 @@ class GraphActivity : AppCompatActivity(), View.OnClickListener, View.OnTouchLis
                 {
                     MotionEvent.ACTION_DOWN ->
                     {
-                        if (isDarkThemeOn()) btnMenu.backgroundTintList = ColorStateList.valueOf(ContextCompat.getColor(this, R.color.dark_gray))
-                        else btnMenu.backgroundTintList = ColorStateList.valueOf(ContextCompat.getColor(this, R.color.semi_gray))
+                        if (isDarkThemeOn()) btnMenu.backgroundTintList =
+                            ColorStateList.valueOf(ContextCompat.getColor(this, R.color.dark_gray))
+                        else btnMenu.backgroundTintList =
+                            ColorStateList.valueOf(ContextCompat.getColor(this, R.color.semi_gray))
                     }
                     MotionEvent.ACTION_UP   ->
                     {
-                        if (isDarkThemeOn()) btnMenu.backgroundTintList = ColorStateList.valueOf(ContextCompat.getColor(this, R.color.black))
-                        else btnMenu.backgroundTintList = ColorStateList.valueOf(ContextCompat.getColor(this, R.color.white))
+                        if (isDarkThemeOn()) btnMenu.backgroundTintList =
+                            ColorStateList.valueOf(ContextCompat.getColor(this, R.color.black))
+                        else btnMenu.backgroundTintList =
+                            ColorStateList.valueOf(ContextCompat.getColor(this, R.color.white))
                         view.performClick()
                     }
                 }
@@ -326,6 +377,8 @@ class GraphActivity : AppCompatActivity(), View.OnClickListener, View.OnTouchLis
         btnDotKeyboard.textSize = viewsTextSize * 3 / 2
         btnBackspaceKeyboard.textSize = viewsTextSize * 3 / 2
 
+        btnKeyboard.textSize=viewsTextSize + 4
+
         tvFx.textSize = viewsTextSize
         tvXValues.textSize = viewsTextSize
         tvSemicolon.textSize = viewsTextSize
@@ -343,6 +396,8 @@ class GraphActivity : AppCompatActivity(), View.OnClickListener, View.OnTouchLis
     @SuppressLint("ClickableViewAccessibility")
     private fun initViews()
     {
+        ccGraph=findViewById(R.id.cc_content)
+
         llMenu = findViewById(R.id.ll_menu)
         linearLayoutButtons = findViewById(R.id.ll_buttons)
         llKeyboard = findViewById(R.id.ll_keyboard)
@@ -417,15 +472,21 @@ class GraphActivity : AppCompatActivity(), View.OnClickListener, View.OnTouchLis
                 isExpanded = true
                 TransitionManager.beginDelayedTransition(llParent)
                 linearLayoutButtons.visibility = View.VISIBLE
-
                 llKeyboard.visibility = View.GONE
+                val param =
+                    LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, 0,
+                        0.3f)
+                ccGraph.layoutParams = param
             }
             else
             {
                 btnKeyboard.text = getString(R.string.btn_more_not_expanded)
                 isExpanded = false
                 TransitionManager.beginDelayedTransition(llParent)
-
+                val param =
+                    LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, 0,
+                        0.5f)
+                ccGraph.layoutParams = param
                 linearLayoutButtons.visibility = View.GONE
                 llKeyboard.visibility = View.GONE
             }
@@ -437,7 +498,10 @@ class GraphActivity : AppCompatActivity(), View.OnClickListener, View.OnTouchLis
                 btnKeyboard.text = getString(R.string.btn_more_expanded)
                 isExpanded = true
                 TransitionManager.beginDelayedTransition(llParent)
-
+                val param =
+                    LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, 0,
+                        0.3f)
+                ccGraph.layoutParams = param
                 llKeyboard.visibility = View.VISIBLE
                 linearLayoutButtons.visibility = View.GONE
             }
@@ -446,7 +510,10 @@ class GraphActivity : AppCompatActivity(), View.OnClickListener, View.OnTouchLis
                 btnKeyboard.text = getString(R.string.btn_more_not_expanded)
                 isExpanded = false
                 TransitionManager.beginDelayedTransition(llParent)
-
+                val param =
+                    LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, 0,
+                        0.5f)
+                ccGraph.layoutParams = param
                 llKeyboard.visibility = View.GONE
                 linearLayoutButtons.visibility = View.GONE
             }
@@ -457,7 +524,10 @@ class GraphActivity : AppCompatActivity(), View.OnClickListener, View.OnTouchLis
                 btnKeyboard.text = getString(R.string.btn_more_expanded)
                 isExpanded = true
                 TransitionManager.beginDelayedTransition(llParent)
-
+                val param =
+                    LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, 0,
+                        0.3f)
+                ccGraph.layoutParams = param
                 llKeyboard.visibility = View.VISIBLE
                 linearLayoutButtons.visibility = View.GONE
             }
@@ -466,7 +536,10 @@ class GraphActivity : AppCompatActivity(), View.OnClickListener, View.OnTouchLis
                 btnKeyboard.text = getString(R.string.btn_more_not_expanded)
                 isExpanded = false
                 TransitionManager.beginDelayedTransition(llParent)
-
+                val param =
+                    LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, 0,
+                        0.5f)
+                ccGraph.layoutParams = param
                 llKeyboard.visibility = View.GONE
                 linearLayoutButtons.visibility = View.GONE
             }
@@ -478,7 +551,10 @@ class GraphActivity : AppCompatActivity(), View.OnClickListener, View.OnTouchLis
                 btnKeyboard.text = getString(R.string.btn_more_expanded)
                 isExpanded = true
                 TransitionManager.beginDelayedTransition(llParent)
-
+                val param =
+                    LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, 0,
+                        0.3f)
+                ccGraph.layoutParams = param
                 llKeyboard.visibility = View.VISIBLE
                 linearLayoutButtons.visibility = View.GONE
             }
@@ -487,7 +563,10 @@ class GraphActivity : AppCompatActivity(), View.OnClickListener, View.OnTouchLis
                 btnKeyboard.text = getString(R.string.btn_more_not_expanded)
                 isExpanded = false
                 TransitionManager.beginDelayedTransition(llParent)
-
+                val param =
+                    LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, 0,
+                        0.5f)
+                ccGraph.layoutParams = param
                 llKeyboard.visibility = View.GONE
                 linearLayoutButtons.visibility = View.GONE
             }
@@ -497,6 +576,9 @@ class GraphActivity : AppCompatActivity(), View.OnClickListener, View.OnTouchLis
         llMenu.setOnTouchListener(this)
         btnMenu.setOnTouchListener(this)
         llParent = findViewById(R.id.ll_parent)
+
+        btnKeyboard.width=btnBuild.width
+        btnKeyboard.height=btnBuild.height
 
         /* edtExp.filters = arrayOf<InputFilter>(LengthFilter(15))
          edtXStart.filters = arrayOf<InputFilter>(LengthFilter(5))
@@ -1900,19 +1982,32 @@ class GraphActivity : AppCompatActivity(), View.OnClickListener, View.OnTouchLis
             btnNine.backgroundTintList = ColorStateList.valueOf(Color.parseColor(numbersColor))
             btnDot.backgroundTintList = ColorStateList.valueOf(Color.parseColor(numbersColor))
             btnBackSpace.backgroundTintList = ColorStateList.valueOf(Color.parseColor(numbersColor))
-            btnZeroKeyboard.backgroundTintList = ColorStateList.valueOf(Color.parseColor(numbersColor))
-            btnOneKeyboard.backgroundTintList = ColorStateList.valueOf(Color.parseColor(numbersColor))
-            btnTwoKeyboard.backgroundTintList = ColorStateList.valueOf(Color.parseColor(numbersColor))
-            btnThreeKeyboard.backgroundTintList = ColorStateList.valueOf(Color.parseColor(numbersColor))
-            btnFourKeyboard.backgroundTintList = ColorStateList.valueOf(Color.parseColor(numbersColor))
-            btnFiveKeyboard.backgroundTintList = ColorStateList.valueOf(Color.parseColor(numbersColor))
-            btnSixKeyboard.backgroundTintList = ColorStateList.valueOf(Color.parseColor(numbersColor))
-            btnSevenKeyboard.backgroundTintList = ColorStateList.valueOf(Color.parseColor(numbersColor))
-            btnEightKeyboard.backgroundTintList = ColorStateList.valueOf(Color.parseColor(numbersColor))
-            btnNineKeyboard.backgroundTintList = ColorStateList.valueOf(Color.parseColor(numbersColor))
-            btnDotKeyboard.backgroundTintList = ColorStateList.valueOf(Color.parseColor(numbersColor))
-            btnBackspaceKeyboard.backgroundTintList = ColorStateList.valueOf(Color.parseColor(numbersColor))
+            btnZeroKeyboard.backgroundTintList =
+                ColorStateList.valueOf(Color.parseColor(numbersColor))
+            btnOneKeyboard.backgroundTintList =
+                ColorStateList.valueOf(Color.parseColor(numbersColor))
+            btnTwoKeyboard.backgroundTintList =
+                ColorStateList.valueOf(Color.parseColor(numbersColor))
+            btnThreeKeyboard.backgroundTintList =
+                ColorStateList.valueOf(Color.parseColor(numbersColor))
+            btnFourKeyboard.backgroundTintList =
+                ColorStateList.valueOf(Color.parseColor(numbersColor))
+            btnFiveKeyboard.backgroundTintList =
+                ColorStateList.valueOf(Color.parseColor(numbersColor))
+            btnSixKeyboard.backgroundTintList =
+                ColorStateList.valueOf(Color.parseColor(numbersColor))
+            btnSevenKeyboard.backgroundTintList =
+                ColorStateList.valueOf(Color.parseColor(numbersColor))
+            btnEightKeyboard.backgroundTintList =
+                ColorStateList.valueOf(Color.parseColor(numbersColor))
+            btnNineKeyboard.backgroundTintList =
+                ColorStateList.valueOf(Color.parseColor(numbersColor))
+            btnDotKeyboard.backgroundTintList =
+                ColorStateList.valueOf(Color.parseColor(numbersColor))
+            btnBackspaceKeyboard.backgroundTintList =
+                ColorStateList.valueOf(Color.parseColor(numbersColor))
         }
+        else setDefaultNumberColor()
 
         if (actionsColor.isNotEmpty())
         {
@@ -1922,7 +2017,8 @@ class GraphActivity : AppCompatActivity(), View.OnClickListener, View.OnTouchLis
             btnDivision.backgroundTintList = ColorStateList.valueOf(Color.parseColor(actionsColor))
             btnExp.backgroundTintList = ColorStateList.valueOf(Color.parseColor(actionsColor))
             btnPi.backgroundTintList = ColorStateList.valueOf(Color.parseColor(actionsColor))
-            btnSquareRoot.backgroundTintList = ColorStateList.valueOf(Color.parseColor(actionsColor))
+            btnSquareRoot.backgroundTintList =
+                ColorStateList.valueOf(Color.parseColor(actionsColor))
             btnBrackets.backgroundTintList = ColorStateList.valueOf(Color.parseColor(actionsColor))
             btnSin.backgroundTintList = ColorStateList.valueOf(Color.parseColor(actionsColor))
             btnCos.backgroundTintList = ColorStateList.valueOf(Color.parseColor(actionsColor))
@@ -1933,19 +2029,23 @@ class GraphActivity : AppCompatActivity(), View.OnClickListener, View.OnTouchLis
             btnLog2.backgroundTintList = ColorStateList.valueOf(Color.parseColor(actionsColor))
             btnKeyboard.backgroundTintList = ColorStateList.valueOf(Color.parseColor(actionsColor))
         }
+        else setDefaultActionsColor()
 
 
         if (acColor.isNotEmpty())
         {
             btnClearEdt.backgroundTintList = ColorStateList.valueOf(Color.parseColor(acColor))
         }
+
         if (equalColor.isNotEmpty())
         {
             btnBuild.backgroundTintList = ColorStateList.valueOf(Color.parseColor(equalColor))
             btnX.backgroundTintList = ColorStateList.valueOf(Color.parseColor(equalColor))
         }
 
+
         if (textColor.isNotEmpty()) setButtonsTextColor(textColor)
+        else setDefaultTextColor()
 
         if (shape.isNotEmpty())
         {
@@ -1965,6 +2065,223 @@ class GraphActivity : AppCompatActivity(), View.OnClickListener, View.OnTouchLis
                 }
             }
 
+        }
+        else setButtonsRounded()
+
+    }
+
+    private fun setDefaultTextColor()
+    {
+
+        if (isDarkThemeOn())
+        {
+
+            btnZero.setTextColor(AppCompatResources.getColorStateList(this, R.color.white))
+            btnOne.setTextColor(AppCompatResources.getColorStateList(this, R.color.white))
+            btnTwo.setTextColor(AppCompatResources.getColorStateList(this, R.color.white))
+            btnThree.setTextColor(AppCompatResources.getColorStateList(this, R.color.white))
+            btnFour.setTextColor(AppCompatResources.getColorStateList(this, R.color.white))
+            btnFive.setTextColor(AppCompatResources.getColorStateList(this, R.color.white))
+            btnSix.setTextColor(AppCompatResources.getColorStateList(this, R.color.white))
+            btnSeven.setTextColor(AppCompatResources.getColorStateList(this, R.color.white))
+            btnEight.setTextColor(AppCompatResources.getColorStateList(this, R.color.white))
+            btnNine.setTextColor(AppCompatResources.getColorStateList(this, R.color.white))
+            btnBackSpace.setTextColor(AppCompatResources.getColorStateList(this, R.color.white))
+            btnDot.setTextColor(AppCompatResources.getColorStateList(this, R.color.white))
+
+            btnZeroKeyboard.setTextColor(AppCompatResources.getColorStateList(this, R.color.white))
+            btnOneKeyboard.setTextColor(AppCompatResources.getColorStateList(this, R.color.white))
+            btnTwoKeyboard.setTextColor(AppCompatResources.getColorStateList(this, R.color.white))
+            btnThreeKeyboard.setTextColor(AppCompatResources.getColorStateList(this, R.color.white))
+            btnFourKeyboard.setTextColor(AppCompatResources.getColorStateList(this, R.color.white))
+            btnFiveKeyboard.setTextColor(AppCompatResources.getColorStateList(this, R.color.white))
+            btnSixKeyboard.setTextColor(AppCompatResources.getColorStateList(this, R.color.white))
+            btnSevenKeyboard.setTextColor(AppCompatResources.getColorStateList(this, R.color.white))
+            btnEightKeyboard.setTextColor(AppCompatResources.getColorStateList(this, R.color.white))
+            btnNineKeyboard.setTextColor(AppCompatResources.getColorStateList(this, R.color.white))
+            btnDotKeyboard.setTextColor(AppCompatResources.getColorStateList(this, R.color.white))
+            btnBackspaceKeyboard.setTextColor(
+                AppCompatResources.getColorStateList(this, R.color.white))
+        }
+        else
+        {
+            btnZero.setTextColor(AppCompatResources.getColorStateList(this, R.color.black))
+            btnOne.setTextColor(AppCompatResources.getColorStateList(this, R.color.black))
+            btnTwo.setTextColor(AppCompatResources.getColorStateList(this, R.color.black))
+            btnThree.setTextColor(AppCompatResources.getColorStateList(this, R.color.black))
+            btnFour.setTextColor(AppCompatResources.getColorStateList(this, R.color.black))
+            btnFive.setTextColor(AppCompatResources.getColorStateList(this, R.color.black))
+            btnSix.setTextColor(AppCompatResources.getColorStateList(this, R.color.black))
+            btnSeven.setTextColor(AppCompatResources.getColorStateList(this, R.color.black))
+            btnEight.setTextColor(AppCompatResources.getColorStateList(this, R.color.black))
+            btnNine.setTextColor(AppCompatResources.getColorStateList(this, R.color.black))
+            btnBackSpace.setTextColor(AppCompatResources.getColorStateList(this, R.color.black))
+            btnDot.setTextColor(AppCompatResources.getColorStateList(this, R.color.black))
+
+            btnZeroKeyboard.setTextColor(AppCompatResources.getColorStateList(this, R.color.black))
+            btnOneKeyboard.setTextColor(AppCompatResources.getColorStateList(this, R.color.black))
+            btnTwoKeyboard.setTextColor(AppCompatResources.getColorStateList(this, R.color.black))
+            btnThreeKeyboard.setTextColor(AppCompatResources.getColorStateList(this, R.color.black))
+            btnFourKeyboard.setTextColor(AppCompatResources.getColorStateList(this, R.color.black))
+            btnFiveKeyboard.setTextColor(AppCompatResources.getColorStateList(this, R.color.black))
+            btnSixKeyboard.setTextColor(AppCompatResources.getColorStateList(this, R.color.black))
+            btnSevenKeyboard.setTextColor(AppCompatResources.getColorStateList(this, R.color.black))
+            btnEightKeyboard.setTextColor(AppCompatResources.getColorStateList(this, R.color.black))
+            btnNineKeyboard.setTextColor(AppCompatResources.getColorStateList(this, R.color.black))
+            btnDotKeyboard.setTextColor(AppCompatResources.getColorStateList(this, R.color.black))
+            btnBackspaceKeyboard.setTextColor(
+                AppCompatResources.getColorStateList(this, R.color.black))
+        }
+
+
+        btnX.setTextColor(AppCompatResources.getColorStateList(this, R.color.black))
+        btnKeyboard.setTextColor(AppCompatResources.getColorStateList(this, R.color.black))
+
+        btnPlus.setTextColor(AppCompatResources.getColorStateList(this, R.color.black))
+        btnMinus.setTextColor(AppCompatResources.getColorStateList(this, R.color.black))
+        btnMulti.setTextColor(AppCompatResources.getColorStateList(this, R.color.black))
+        btnDivision.setTextColor(AppCompatResources.getColorStateList(this, R.color.black))
+        btnExp.setTextColor(AppCompatResources.getColorStateList(this, R.color.black))
+        btnPi.setTextColor(AppCompatResources.getColorStateList(this, R.color.black))
+        btnSquareRoot.setTextColor(AppCompatResources.getColorStateList(this, R.color.black))
+        btnBrackets.setTextColor(AppCompatResources.getColorStateList(this, R.color.black))
+        btnSin.setTextColor(AppCompatResources.getColorStateList(this, R.color.black))
+        btnCos.setTextColor(AppCompatResources.getColorStateList(this, R.color.black))
+        btnTan.setTextColor(AppCompatResources.getColorStateList(this, R.color.black))
+        btnE.setTextColor(AppCompatResources.getColorStateList(this, R.color.black))
+        btnLg.setTextColor(AppCompatResources.getColorStateList(this, R.color.black))
+        btnLn.setTextColor(AppCompatResources.getColorStateList(this, R.color.black))
+        btnLog2.setTextColor(AppCompatResources.getColorStateList(this, R.color.black))
+
+    }
+
+    private fun setDefaultActionsColor()
+    {
+        btnPlus.backgroundTintList = AppCompatResources.getColorStateList(this, R.color.light_blue)
+        btnMinus.backgroundTintList = AppCompatResources.getColorStateList(this, R.color.light_blue)
+        btnMulti.backgroundTintList = AppCompatResources.getColorStateList(this, R.color.light_blue)
+        btnDivision.backgroundTintList =
+            AppCompatResources.getColorStateList(this, R.color.light_blue)
+        btnExp.backgroundTintList = AppCompatResources.getColorStateList(this, R.color.light_blue)
+        btnPi.backgroundTintList = AppCompatResources.getColorStateList(this, R.color.light_blue)
+        btnSquareRoot.backgroundTintList =
+            AppCompatResources.getColorStateList(this, R.color.light_blue)
+        btnBrackets.backgroundTintList =
+            AppCompatResources.getColorStateList(this, R.color.light_blue)
+        btnSin.backgroundTintList = AppCompatResources.getColorStateList(this, R.color.light_blue)
+        btnCos.backgroundTintList = AppCompatResources.getColorStateList(this, R.color.light_blue)
+        btnTan.backgroundTintList = AppCompatResources.getColorStateList(this, R.color.light_blue)
+        btnE.backgroundTintList = AppCompatResources.getColorStateList(this, R.color.light_blue)
+        btnLg.backgroundTintList = AppCompatResources.getColorStateList(this, R.color.light_blue)
+        btnLn.backgroundTintList = AppCompatResources.getColorStateList(this, R.color.light_blue)
+        btnLog2.backgroundTintList = AppCompatResources.getColorStateList(this, R.color.light_blue)
+        btnKeyboard.backgroundTintList =
+            AppCompatResources.getColorStateList(this, R.color.light_blue)
+    }
+
+    private fun setDefaultNumberColor()
+    {
+        if (isDarkThemeOn())
+        {
+            btnZero.backgroundTintList =
+                AppCompatResources.getColorStateList(this, R.color.dark_gray)
+            btnOne.backgroundTintList =
+                AppCompatResources.getColorStateList(this, R.color.dark_gray)
+            btnTwo.backgroundTintList =
+                AppCompatResources.getColorStateList(this, R.color.dark_gray)
+            btnThree.backgroundTintList =
+                AppCompatResources.getColorStateList(this, R.color.dark_gray)
+            btnFour.backgroundTintList =
+                AppCompatResources.getColorStateList(this, R.color.dark_gray)
+            btnFive.backgroundTintList =
+                AppCompatResources.getColorStateList(this, R.color.dark_gray)
+            btnSix.backgroundTintList =
+                AppCompatResources.getColorStateList(this, R.color.dark_gray)
+            btnSeven.backgroundTintList =
+                AppCompatResources.getColorStateList(this, R.color.dark_gray)
+            btnEight.backgroundTintList =
+                AppCompatResources.getColorStateList(this, R.color.dark_gray)
+            btnNine.backgroundTintList =
+                AppCompatResources.getColorStateList(this, R.color.dark_gray)
+            btnDot.backgroundTintList =
+                AppCompatResources.getColorStateList(this, R.color.dark_gray)
+            btnBackSpace.backgroundTintList =
+                AppCompatResources.getColorStateList(this, R.color.dark_gray)
+            btnZeroKeyboard.backgroundTintList =
+                AppCompatResources.getColorStateList(this, R.color.dark_gray)
+            btnOneKeyboard.backgroundTintList =
+                AppCompatResources.getColorStateList(this, R.color.dark_gray)
+            btnTwoKeyboard.backgroundTintList =
+                AppCompatResources.getColorStateList(this, R.color.dark_gray)
+            btnThreeKeyboard.backgroundTintList =
+                AppCompatResources.getColorStateList(this, R.color.dark_gray)
+            btnFourKeyboard.backgroundTintList =
+                AppCompatResources.getColorStateList(this, R.color.dark_gray)
+            btnFiveKeyboard.backgroundTintList =
+                AppCompatResources.getColorStateList(this, R.color.dark_gray)
+            btnSixKeyboard.backgroundTintList =
+                AppCompatResources.getColorStateList(this, R.color.dark_gray)
+            btnSevenKeyboard.backgroundTintList =
+                AppCompatResources.getColorStateList(this, R.color.dark_gray)
+            btnEightKeyboard.backgroundTintList =
+                AppCompatResources.getColorStateList(this, R.color.dark_gray)
+            btnNineKeyboard.backgroundTintList =
+                AppCompatResources.getColorStateList(this, R.color.dark_gray)
+            btnDotKeyboard.backgroundTintList =
+                AppCompatResources.getColorStateList(this, R.color.dark_gray)
+            btnBackspaceKeyboard.backgroundTintList =
+                AppCompatResources.getColorStateList(this, R.color.dark_gray)
+        }
+        else
+        {
+            btnZero.backgroundTintList =
+                AppCompatResources.getColorStateList(this, R.color.light_gray)
+            btnOne.backgroundTintList =
+                AppCompatResources.getColorStateList(this, R.color.light_gray)
+            btnTwo.backgroundTintList =
+                AppCompatResources.getColorStateList(this, R.color.light_gray)
+            btnThree.backgroundTintList =
+                AppCompatResources.getColorStateList(this, R.color.light_gray)
+            btnFour.backgroundTintList =
+                AppCompatResources.getColorStateList(this, R.color.light_gray)
+            btnFive.backgroundTintList =
+                AppCompatResources.getColorStateList(this, R.color.light_gray)
+            btnSix.backgroundTintList =
+                AppCompatResources.getColorStateList(this, R.color.light_gray)
+            btnSeven.backgroundTintList =
+                AppCompatResources.getColorStateList(this, R.color.light_gray)
+            btnEight.backgroundTintList =
+                AppCompatResources.getColorStateList(this, R.color.light_gray)
+            btnNine.backgroundTintList =
+                AppCompatResources.getColorStateList(this, R.color.light_gray)
+            btnDot.backgroundTintList =
+                AppCompatResources.getColorStateList(this, R.color.light_gray)
+            btnBackSpace.backgroundTintList =
+                AppCompatResources.getColorStateList(this, R.color.light_gray)
+            btnZeroKeyboard.backgroundTintList =
+                AppCompatResources.getColorStateList(this, R.color.light_gray)
+            btnOneKeyboard.backgroundTintList =
+                AppCompatResources.getColorStateList(this, R.color.light_gray)
+            btnTwoKeyboard.backgroundTintList =
+                AppCompatResources.getColorStateList(this, R.color.light_gray)
+            btnThreeKeyboard.backgroundTintList =
+                AppCompatResources.getColorStateList(this, R.color.light_gray)
+            btnFourKeyboard.backgroundTintList =
+                AppCompatResources.getColorStateList(this, R.color.light_gray)
+            btnFiveKeyboard.backgroundTintList =
+                AppCompatResources.getColorStateList(this, R.color.light_gray)
+            btnSixKeyboard.backgroundTintList =
+                AppCompatResources.getColorStateList(this, R.color.light_gray)
+            btnSevenKeyboard.backgroundTintList =
+                AppCompatResources.getColorStateList(this, R.color.light_gray)
+            btnEightKeyboard.backgroundTintList =
+                AppCompatResources.getColorStateList(this, R.color.light_gray)
+            btnNineKeyboard.backgroundTintList =
+                AppCompatResources.getColorStateList(this, R.color.light_gray)
+            btnDotKeyboard.backgroundTintList =
+                AppCompatResources.getColorStateList(this, R.color.light_gray)
+            btnBackspaceKeyboard.backgroundTintList =
+                AppCompatResources.getColorStateList(this, R.color.light_gray)
         }
 
     }
@@ -2117,7 +2434,8 @@ class GraphActivity : AppCompatActivity(), View.OnClickListener, View.OnTouchLis
         btnEightKeyboard.background = ContextCompat.getDrawable(this, R.drawable.buttons_rectangle)
         btnNineKeyboard.background = ContextCompat.getDrawable(this, R.drawable.buttons_rectangle)
         btnDotKeyboard.background = ContextCompat.getDrawable(this, R.drawable.buttons_rectangle)
-        btnBackspaceKeyboard.background = ContextCompat.getDrawable(this, R.drawable.buttons_rectangle)
+        btnBackspaceKeyboard.background =
+            ContextCompat.getDrawable(this, R.drawable.buttons_rectangle)
     }
 
     private fun setButtonsRounded()
