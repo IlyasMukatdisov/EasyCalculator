@@ -27,19 +27,40 @@ class CustomModelDatabaseHelper(context: Context) :
         numbersColor: String, actionsColor: String, acColor: String,
         equalColor: String, textColor:String, shape:String): Boolean
     {
+        var db = this.writableDatabase
+        val cv = ContentValues()
+        var result: Long = -1
         if (!isCustomizationEmpty())
         {
-            clear()
+            db = this.writableDatabase
+            if (numbersColor!="")
+                cv.put(COLUMN_NUMBERS_COLOR, numbersColor)
+            if (actionsColor!="")
+                cv.put(COLUMN_ACTIONS_COLOR, actionsColor)
+            if (acColor!="")
+                cv.put(COLUMN_AC_COLOR, acColor)
+            if (equalColor!="")
+                cv.put(COLUMN_EQUAL_COLOR, equalColor)
+            if (textColor!="")
+                cv.put(COLUMN_TEXT_COLOR, textColor)
+            if (shape!="")
+                cv.put(COLUMN_SHAPE, shape)
+            result=db.update(COLORS_TABLE_NAME,cv,"$COLUMN_ID = 1", null).toLong()
+            if (result == 0L) result=-1L
         }
-        val db = this.writableDatabase
-        val cv = ContentValues()
-        cv.put(COLUMN_NUMBERS_COLOR, numbersColor)
-        cv.put(COLUMN_ACTIONS_COLOR, actionsColor)
-        cv.put(COLUMN_AC_COLOR, acColor)
-        cv.put(COLUMN_EQUAL_COLOR, equalColor)
-        cv.put(COLUMN_TEXT_COLOR, textColor)
-        cv.put(COLUMN_SHAPE, shape)
-        val result = db.insert(COLORS_TABLE_NAME, null, cv)
+        else
+        {
+            db = this.writableDatabase
+            cv.put(COLUMN_NUMBERS_COLOR, numbersColor)
+            cv.put(COLUMN_ACTIONS_COLOR, actionsColor)
+            cv.put(COLUMN_AC_COLOR, acColor)
+            cv.put(COLUMN_EQUAL_COLOR, equalColor)
+            cv.put(COLUMN_TEXT_COLOR, textColor)
+            cv.put(COLUMN_SHAPE, shape)
+            result = db.insert(COLORS_TABLE_NAME, null, cv)
+        }
+
+
         db.close()
         return result != -1L
     }

@@ -259,7 +259,7 @@ class CustomizationActivity : AppCompatActivity(), View.OnClickListener, View.On
                 ColorStateList.valueOf(Color.parseColor(textColor))
             else
             {
-                if (isDarkThemeOn()) if (textColor.isNotEmpty())
+                if (isDarkThemeOn())
                 {
                     btnTextColor.backgroundTintList =
                         AppCompatResources.getColorStateList(this, R.color.white)

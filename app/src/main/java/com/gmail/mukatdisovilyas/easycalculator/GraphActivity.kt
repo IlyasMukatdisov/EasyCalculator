@@ -2,11 +2,14 @@ package com.gmail.mukatdisovilyas.easycalculator
 
 import android.annotation.SuppressLint
 import android.content.Context
+import android.content.Intent
 import android.content.res.ColorStateList
 import android.content.res.Configuration
 import android.graphics.Color
 import android.os.Build
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.text.SpannableStringBuilder
 import android.transition.TransitionManager
 import android.view.MotionEvent
@@ -14,6 +17,7 @@ import android.view.View
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.content.res.AppCompatResources
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.ContextCompat
 import com.github.mikephil.charting.charts.LineChart
 import com.github.mikephil.charting.components.IMarker
@@ -24,8 +28,6 @@ import com.github.mikephil.charting.interfaces.datasets.ILineDataSet
 import com.gmail.mukatdisovilyas.easycalculator.utils.*
 import com.google.android.material.snackbar.Snackbar
 import org.mariuszgromada.math.mxparser.Function
-import android.widget.LinearLayout
-import androidx.constraintlayout.widget.ConstraintLayout
 
 
 class GraphActivity : AppCompatActivity(), View.OnClickListener, View.OnTouchListener
@@ -35,6 +37,9 @@ class GraphActivity : AppCompatActivity(), View.OnClickListener, View.OnTouchLis
     {
         private const val TAG = "GraphActivity"
     }
+
+
+    private var doubleBackToExitPressedOnce = false
 
     private var isExpanded = false
 
@@ -71,8 +76,7 @@ class GraphActivity : AppCompatActivity(), View.OnClickListener, View.OnTouchLis
     private lateinit var btnBackspaceKeyboard: Button
 
     private lateinit var btnX: Button
-    private lateinit var btnKeyboard: Button
-    private lateinit var btnBuild: ImageButton
+    private lateinit var btnBuild: Button
     private lateinit var chart: LineChart
     private lateinit var btnBrackets: Button
     private lateinit var btnDivision: Button
@@ -101,7 +105,6 @@ class GraphActivity : AppCompatActivity(), View.OnClickListener, View.OnTouchLis
     private lateinit var btnLg: Button
     private lateinit var btnLog2: Button
     private lateinit var btnLn: Button
-    private lateinit var btnClearEdt: ImageButton
 
     private var currentNumDigits = 0
 
@@ -144,6 +147,31 @@ class GraphActivity : AppCompatActivity(), View.OnClickListener, View.OnTouchLis
 
 
     }
+
+
+    override fun onBackPressed()
+    {
+        if (isExpanded)
+        {
+            isExpanded = false
+            TransitionManager.beginDelayedTransition(llParent)
+            linearLayoutButtons.visibility = View.GONE
+            llKeyboard.visibility = View.GONE
+        }
+        else
+        {
+            if (doubleBackToExitPressedOnce) {
+                val intent = Intent(this, MainActivity::class.java)
+                startActivity(intent)
+            }
+
+            this.doubleBackToExitPressedOnce = true
+            Toast.makeText(this, "Please click BACK again to exit", Toast.LENGTH_SHORT).show()
+
+            Handler(Looper.getMainLooper()).postDelayed(Runnable { doubleBackToExitPressedOnce = false }, 2000)
+        }
+    }
+
 
     private fun setDarkChartMenu()
     {
@@ -377,7 +405,8 @@ class GraphActivity : AppCompatActivity(), View.OnClickListener, View.OnTouchLis
         btnDotKeyboard.textSize = viewsTextSize * 3 / 2
         btnBackspaceKeyboard.textSize = viewsTextSize * 3 / 2
 
-        btnKeyboard.textSize=viewsTextSize + 4
+        btnBuild.textSize=viewsTextSize
+
 
         tvFx.textSize = viewsTextSize
         tvXValues.textSize = viewsTextSize
@@ -396,7 +425,7 @@ class GraphActivity : AppCompatActivity(), View.OnClickListener, View.OnTouchLis
     @SuppressLint("ClickableViewAccessibility")
     private fun initViews()
     {
-        ccGraph=findViewById(R.id.cc_content)
+        ccGraph = findViewById(R.id.cc_content)
 
         llMenu = findViewById(R.id.ll_menu)
         linearLayoutButtons = findViewById(R.id.ll_buttons)
@@ -414,7 +443,6 @@ class GraphActivity : AppCompatActivity(), View.OnClickListener, View.OnTouchLis
         chart = findViewById(R.id.line_chart)
         chart.description.isEnabled = false
 
-        btnKeyboard = findViewById(R.id.btn_keyboard)
 
         btnBrackets = findViewById(R.id.btn_brackets)
         btnDivision = findViewById(R.id.btn_division)
@@ -444,7 +472,6 @@ class GraphActivity : AppCompatActivity(), View.OnClickListener, View.OnTouchLis
         btnLg = findViewById(R.id.btn_log10)
         btnLn = findViewById(R.id.btn_ln)
         btnX = findViewById(R.id.btn_x)
-        btnClearEdt = findViewById(R.id.btn_clear_edt)
 
         btnZeroKeyboard = findViewById(R.id.btn_zero_keyboard)
         btnOneKeyboard = findViewById(R.id.btn_one_keyboard)
@@ -468,25 +495,15 @@ class GraphActivity : AppCompatActivity(), View.OnClickListener, View.OnTouchLis
         edtExp.setOnFocusChangeListener { _, hasFocus ->
             if (hasFocus)
             {
-                btnKeyboard.text = getString(R.string.btn_more_expanded)
                 isExpanded = true
                 TransitionManager.beginDelayedTransition(llParent)
                 linearLayoutButtons.visibility = View.VISIBLE
                 llKeyboard.visibility = View.GONE
-                val param =
-                    LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, 0,
-                        0.3f)
-                ccGraph.layoutParams = param
             }
             else
             {
-                btnKeyboard.text = getString(R.string.btn_more_not_expanded)
                 isExpanded = false
                 TransitionManager.beginDelayedTransition(llParent)
-                val param =
-                    LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, 0,
-                        0.5f)
-                ccGraph.layoutParams = param
                 linearLayoutButtons.visibility = View.GONE
                 llKeyboard.visibility = View.GONE
             }
@@ -495,25 +512,15 @@ class GraphActivity : AppCompatActivity(), View.OnClickListener, View.OnTouchLis
         edtXStart.setOnFocusChangeListener { _, hasFocus ->
             if (hasFocus)
             {
-                btnKeyboard.text = getString(R.string.btn_more_expanded)
                 isExpanded = true
                 TransitionManager.beginDelayedTransition(llParent)
-                val param =
-                    LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, 0,
-                        0.3f)
-                ccGraph.layoutParams = param
                 llKeyboard.visibility = View.VISIBLE
                 linearLayoutButtons.visibility = View.GONE
             }
             else
             {
-                btnKeyboard.text = getString(R.string.btn_more_not_expanded)
                 isExpanded = false
                 TransitionManager.beginDelayedTransition(llParent)
-                val param =
-                    LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, 0,
-                        0.5f)
-                ccGraph.layoutParams = param
                 llKeyboard.visibility = View.GONE
                 linearLayoutButtons.visibility = View.GONE
             }
@@ -521,25 +528,15 @@ class GraphActivity : AppCompatActivity(), View.OnClickListener, View.OnTouchLis
         edtXEnd.setOnFocusChangeListener { _, hasFocus ->
             if (hasFocus)
             {
-                btnKeyboard.text = getString(R.string.btn_more_expanded)
                 isExpanded = true
                 TransitionManager.beginDelayedTransition(llParent)
-                val param =
-                    LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, 0,
-                        0.3f)
-                ccGraph.layoutParams = param
                 llKeyboard.visibility = View.VISIBLE
                 linearLayoutButtons.visibility = View.GONE
             }
             else
             {
-                btnKeyboard.text = getString(R.string.btn_more_not_expanded)
                 isExpanded = false
                 TransitionManager.beginDelayedTransition(llParent)
-                val param =
-                    LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, 0,
-                        0.5f)
-                ccGraph.layoutParams = param
                 llKeyboard.visibility = View.GONE
                 linearLayoutButtons.visibility = View.GONE
             }
@@ -547,26 +544,15 @@ class GraphActivity : AppCompatActivity(), View.OnClickListener, View.OnTouchLis
         edtXStep.setOnFocusChangeListener { _, hasFocus ->
             if (hasFocus)
             {
-
-                btnKeyboard.text = getString(R.string.btn_more_expanded)
                 isExpanded = true
                 TransitionManager.beginDelayedTransition(llParent)
-                val param =
-                    LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, 0,
-                        0.3f)
-                ccGraph.layoutParams = param
                 llKeyboard.visibility = View.VISIBLE
                 linearLayoutButtons.visibility = View.GONE
             }
             else
             {
-                btnKeyboard.text = getString(R.string.btn_more_not_expanded)
                 isExpanded = false
                 TransitionManager.beginDelayedTransition(llParent)
-                val param =
-                    LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, 0,
-                        0.5f)
-                ccGraph.layoutParams = param
                 llKeyboard.visibility = View.GONE
                 linearLayoutButtons.visibility = View.GONE
             }
@@ -576,9 +562,6 @@ class GraphActivity : AppCompatActivity(), View.OnClickListener, View.OnTouchLis
         llMenu.setOnTouchListener(this)
         btnMenu.setOnTouchListener(this)
         llParent = findViewById(R.id.ll_parent)
-
-        btnKeyboard.width=btnBuild.width
-        btnKeyboard.height=btnBuild.height
 
         /* edtExp.filters = arrayOf<InputFilter>(LengthFilter(15))
          edtXStart.filters = arrayOf<InputFilter>(LengthFilter(5))
@@ -617,7 +600,6 @@ class GraphActivity : AppCompatActivity(), View.OnClickListener, View.OnTouchLis
         btnLg.setOnClickListener(this)
         btnLn.setOnClickListener(this)
         btnX.setOnClickListener(this)
-        btnClearEdt.setOnClickListener(this)
         btnZeroKeyboard.setOnClickListener(this)
         btnOneKeyboard.setOnClickListener(this)
         btnTwoKeyboard.setOnClickListener(this)
@@ -636,7 +618,6 @@ class GraphActivity : AppCompatActivity(), View.OnClickListener, View.OnTouchLis
         edtXEnd.setOnClickListener(this)
         edtXStep.setOnClickListener(this)
 
-        btnKeyboard.setOnClickListener(this)
     }
 
 
@@ -760,7 +741,6 @@ class GraphActivity : AppCompatActivity(), View.OnClickListener, View.OnTouchLis
 
             R.id.edt_graph              ->
             {
-                btnKeyboard.text = getString(R.string.btn_more_expanded)
                 isExpanded = true
                 linearLayoutButtons.visibility = View.VISIBLE
                 llKeyboard.visibility = View.GONE
@@ -768,7 +748,6 @@ class GraphActivity : AppCompatActivity(), View.OnClickListener, View.OnTouchLis
 
             R.id.edt_x_begin            ->
             {
-                btnKeyboard.text = getString(R.string.btn_more_expanded)
                 isExpanded = true
                 linearLayoutButtons.visibility = View.GONE
                 llKeyboard.visibility = View.VISIBLE
@@ -776,7 +755,6 @@ class GraphActivity : AppCompatActivity(), View.OnClickListener, View.OnTouchLis
 
             R.id.edt_x_end              ->
             {
-                btnKeyboard.text = getString(R.string.btn_more_expanded)
                 isExpanded = true
                 linearLayoutButtons.visibility = View.GONE
                 llKeyboard.visibility = View.VISIBLE
@@ -784,44 +762,9 @@ class GraphActivity : AppCompatActivity(), View.OnClickListener, View.OnTouchLis
 
             R.id.edt_x_step             ->
             {
-                btnKeyboard.text = getString(R.string.btn_more_expanded)
                 isExpanded = true
                 linearLayoutButtons.visibility = View.GONE
                 llKeyboard.visibility = View.VISIBLE
-            }
-
-
-            R.id.btn_keyboard           ->
-            {
-                if (isExpanded)
-                {
-                    TransitionManager.beginDelayedTransition(llParent)
-
-                    linearLayoutButtons.visibility = View.GONE
-                    llKeyboard.visibility = View.GONE
-                    btnKeyboard.text = getString(R.string.btn_more_not_expanded)
-                    isExpanded = false
-                }
-                else
-                {
-
-                    if (edtExp.isFocused || (!edtXStart.isFocused && !edtXEnd.isFocused && !edtXStep.isFocused && !edtExp.isFocused))
-                    {
-                        TransitionManager.beginDelayedTransition(llParent)
-
-                        linearLayoutButtons.visibility = View.VISIBLE
-                        llKeyboard.visibility = View.GONE
-                    }
-                    if (edtXStart.isFocused || edtXEnd.isFocused || edtXStep.isFocused)
-                    {
-                        TransitionManager.beginDelayedTransition(llParent)
-
-                        llKeyboard.visibility = View.VISIBLE
-                        linearLayoutButtons.visibility = View.GONE
-                    }
-                    btnKeyboard.text = getString(R.string.btn_more_expanded)
-                    isExpanded = true
-                }
             }
 
             R.id.btn_zero_keyboard      ->
@@ -1058,15 +1001,6 @@ class GraphActivity : AppCompatActivity(), View.OnClickListener, View.OnTouchLis
                     {
                         backspaceFun(edtXStep)
                     }
-                }
-            }
-
-
-            R.id.btn_clear_edt          ->
-            {
-                if (edtExp.text.isNotEmpty())
-                {
-                    edtExp.setText("")
                 }
             }
 
@@ -2027,20 +1961,18 @@ class GraphActivity : AppCompatActivity(), View.OnClickListener, View.OnTouchLis
             btnLg.backgroundTintList = ColorStateList.valueOf(Color.parseColor(actionsColor))
             btnLn.backgroundTintList = ColorStateList.valueOf(Color.parseColor(actionsColor))
             btnLog2.backgroundTintList = ColorStateList.valueOf(Color.parseColor(actionsColor))
-            btnKeyboard.backgroundTintList = ColorStateList.valueOf(Color.parseColor(actionsColor))
         }
         else setDefaultActionsColor()
 
 
         if (acColor.isNotEmpty())
         {
-            btnClearEdt.backgroundTintList = ColorStateList.valueOf(Color.parseColor(acColor))
+            btnX.backgroundTintList = ColorStateList.valueOf(Color.parseColor(acColor))
         }
 
         if (equalColor.isNotEmpty())
         {
             btnBuild.backgroundTintList = ColorStateList.valueOf(Color.parseColor(equalColor))
-            btnX.backgroundTintList = ColorStateList.valueOf(Color.parseColor(equalColor))
         }
 
 
@@ -2135,7 +2067,6 @@ class GraphActivity : AppCompatActivity(), View.OnClickListener, View.OnTouchLis
 
 
         btnX.setTextColor(AppCompatResources.getColorStateList(this, R.color.black))
-        btnKeyboard.setTextColor(AppCompatResources.getColorStateList(this, R.color.black))
 
         btnPlus.setTextColor(AppCompatResources.getColorStateList(this, R.color.black))
         btnMinus.setTextColor(AppCompatResources.getColorStateList(this, R.color.black))
@@ -2175,8 +2106,6 @@ class GraphActivity : AppCompatActivity(), View.OnClickListener, View.OnTouchLis
         btnLg.backgroundTintList = AppCompatResources.getColorStateList(this, R.color.light_blue)
         btnLn.backgroundTintList = AppCompatResources.getColorStateList(this, R.color.light_blue)
         btnLog2.backgroundTintList = AppCompatResources.getColorStateList(this, R.color.light_blue)
-        btnKeyboard.backgroundTintList =
-            AppCompatResources.getColorStateList(this, R.color.light_blue)
     }
 
     private fun setDefaultNumberColor()
@@ -2302,7 +2231,6 @@ class GraphActivity : AppCompatActivity(), View.OnClickListener, View.OnTouchLis
         btnDot.setTextColor(ColorStateList.valueOf(Color.parseColor(textColor)))
 
         btnX.setTextColor(ColorStateList.valueOf(Color.parseColor(textColor)))
-        btnKeyboard.setTextColor(ColorStateList.valueOf(Color.parseColor(textColor)))
 
         btnPlus.setTextColor(ColorStateList.valueOf(Color.parseColor(textColor)))
         btnMinus.setTextColor(ColorStateList.valueOf(Color.parseColor(textColor)))
@@ -2350,7 +2278,6 @@ class GraphActivity : AppCompatActivity(), View.OnClickListener, View.OnTouchLis
         btnNine.background = ContextCompat.getDrawable(this, R.drawable.buttons_circle)
         btnDot.background = ContextCompat.getDrawable(this, R.drawable.buttons_circle)
         btnBackSpace.background = ContextCompat.getDrawable(this, R.drawable.buttons_circle)
-        btnKeyboard.background = ContextCompat.getDrawable(this, R.drawable.buttons_circle)
 
 
         btnPlus.background = ContextCompat.getDrawable(this, R.drawable.buttons_circle)
@@ -2370,7 +2297,6 @@ class GraphActivity : AppCompatActivity(), View.OnClickListener, View.OnTouchLis
         btnLog2.background = ContextCompat.getDrawable(this, R.drawable.buttons_circle)
         btnX.background = ContextCompat.getDrawable(this, R.drawable.buttons_circle)
         btnBuild.background = ContextCompat.getDrawable(this, R.drawable.buttons_circle)
-        btnClearEdt.background = ContextCompat.getDrawable(this, R.drawable.buttons_circle)
 
         btnZeroKeyboard.background = ContextCompat.getDrawable(this, R.drawable.buttons_circle)
         btnOneKeyboard.background = ContextCompat.getDrawable(this, R.drawable.buttons_circle)
@@ -2401,7 +2327,6 @@ class GraphActivity : AppCompatActivity(), View.OnClickListener, View.OnTouchLis
         btnNine.background = ContextCompat.getDrawable(this, R.drawable.buttons_rectangle)
         btnDot.background = ContextCompat.getDrawable(this, R.drawable.buttons_rectangle)
         btnBackSpace.background = ContextCompat.getDrawable(this, R.drawable.buttons_rectangle)
-        btnKeyboard.background = ContextCompat.getDrawable(this, R.drawable.buttons_rectangle)
 
         btnPlus.background = ContextCompat.getDrawable(this, R.drawable.buttons_rectangle)
         btnMinus.background = ContextCompat.getDrawable(this, R.drawable.buttons_rectangle)
@@ -2420,7 +2345,6 @@ class GraphActivity : AppCompatActivity(), View.OnClickListener, View.OnTouchLis
         btnLog2.background = ContextCompat.getDrawable(this, R.drawable.buttons_rectangle)
         btnX.background = ContextCompat.getDrawable(this, R.drawable.buttons_rectangle)
         btnBuild.background = ContextCompat.getDrawable(this, R.drawable.buttons_rectangle)
-        btnClearEdt.background = ContextCompat.getDrawable(this, R.drawable.buttons_rectangle)
 
 
         btnZeroKeyboard.background = ContextCompat.getDrawable(this, R.drawable.buttons_rectangle)
@@ -2452,7 +2376,6 @@ class GraphActivity : AppCompatActivity(), View.OnClickListener, View.OnTouchLis
         btnNine.background = ContextCompat.getDrawable(this, R.drawable.buttons_round)
         btnDot.background = ContextCompat.getDrawable(this, R.drawable.buttons_round)
         btnBackSpace.background = ContextCompat.getDrawable(this, R.drawable.buttons_round)
-        btnKeyboard.background = ContextCompat.getDrawable(this, R.drawable.buttons_round)
 
 
         btnPlus.background = ContextCompat.getDrawable(this, R.drawable.buttons_round)
@@ -2472,7 +2395,6 @@ class GraphActivity : AppCompatActivity(), View.OnClickListener, View.OnTouchLis
         btnLog2.background = ContextCompat.getDrawable(this, R.drawable.buttons_round)
         btnX.background = ContextCompat.getDrawable(this, R.drawable.buttons_round)
         btnBuild.background = ContextCompat.getDrawable(this, R.drawable.buttons_round)
-        btnClearEdt.background = ContextCompat.getDrawable(this, R.drawable.buttons_round)
 
 
         btnZeroKeyboard.background = ContextCompat.getDrawable(this, R.drawable.buttons_round)

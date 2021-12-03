@@ -80,31 +80,19 @@
             android:textSize="24sp"
             android:importantForAutofill="no" />
 
-        <ImageButton
-            android:id="@+id/btn_clear_edt"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_marginEnd="10dp"
-            android:layout_weight="0.2"
-            android:background="@drawable/buttons_round"
-            android:backgroundTint="@color/yellow"
-            android:src="@drawable/ic_close"
-            android:textAllCaps="false"
-            android:textSize="20sp"
-            android:contentDescription="@string/clear_input" />
 
-        <ImageButton
+
+        <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/btn_graph_build"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_marginEnd="10dp"
             android:layout_weight="0.2"
+            android:text="@string/btn_build"
             android:background="@drawable/buttons_round"
-            android:backgroundTint="@color/light_green"
-            android:src="@drawable/ic_graph_black"
+            app:backgroundTint="@color/light_green"
             android:textAllCaps="false"
-            android:textSize="20sp"
-            android:contentDescription="@string/btn_build" />
+            android:textSize="16sp" />
 
     </LinearLayout>
 
@@ -187,23 +175,11 @@
                 android:maxLines="1"
                 android:scrollHorizontally="true"
                 android:textSize="24sp"
-                android:importantForAutofill="no" />
+                android:importantForAutofill="no"
+                android:layout_marginEnd="10dp"/>
 
         </LinearLayout>
 
-
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/btn_keyboard"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="10dp"
-            android:layout_weight="0.14"
-            android:background="@drawable/buttons_round"
-            android:gravity="center"
-            android:text="@string/btn_more_expanded"
-            android:textColor="@color/black"
-            android:textSize="@dimen/btn_text_size"
-            app:backgroundTint="@color/light_blue" />
 
 
     </LinearLayout>

@@ -273,11 +273,10 @@
             android:orientation="horizontal"
             android:layout_marginTop="20dp">
 
-            <com.google.android.material.radiobutton.MaterialRadioButton
+            <RadioButton
                 android:id="@+id/radio_rounded"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="0.1" />
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent" />
 
             <Button
                 android:id="@+id/btn_rounded"
@@ -290,11 +289,11 @@
                 android:text="@string/btn_zero"
                 android:textColor="@color/black" />
 
-            <com.google.android.material.radiobutton.MaterialRadioButton
+            <RadioButton
                 android:id="@+id/radio_rectangle"
-                android:layout_width="0dp"
+                android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:layout_weight="0.1" />
+                android:layout_marginStart="10dp"/>
 
             <Button
                 android:id="@+id/btn_rectangle"
@@ -309,9 +308,9 @@
 
             <com.google.android.material.radiobutton.MaterialRadioButton
                 android:id="@+id/radio_circle"
-                android:layout_width="0dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="0.1" />
+                android:layout_marginStart="10dp"/>
 
             <Button
                 android:id="@+id/btn_circle"
