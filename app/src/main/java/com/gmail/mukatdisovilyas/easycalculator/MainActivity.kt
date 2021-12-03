@@ -135,7 +135,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, View.OnTouchList
         /*if (resources.configuration.orientation == Configuration.ORIENTATION_LANDSCAPE) {
             hideSystemUI()
         }*/
-        
+
     }
 
     private fun setDefaultTheme()

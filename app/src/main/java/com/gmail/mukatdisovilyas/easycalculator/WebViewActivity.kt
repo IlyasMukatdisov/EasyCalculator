@@ -5,7 +5,7 @@ import android.os.Bundle
 import android.webkit.WebView
 import com.gmail.mukatdisovilyas.easycalculator.utils.EXTRA_URL
 
-class WebViewActivity() : AppCompatActivity()
+class WebViewActivity : AppCompatActivity()
 {
     private lateinit var webView: WebView
     override fun onCreate(savedInstanceState: Bundle?)

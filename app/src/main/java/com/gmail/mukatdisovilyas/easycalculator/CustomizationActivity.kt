@@ -1,6 +1,7 @@
 package com.gmail.mukatdisovilyas.easycalculator
 
 import android.annotation.SuppressLint
+import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.content.res.ColorStateList
@@ -12,6 +13,8 @@ import android.os.Bundle
 import android.view.MotionEvent
 import android.view.View
 import android.widget.*
+import androidx.activity.result.ActivityResult
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.content.res.AppCompatResources
@@ -588,6 +591,14 @@ class CustomizationActivity : AppCompatActivity(), View.OnClickListener, View.On
     }
 
 
+    private fun launchIntentForPhotos()
+    {
+
+        intent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true)
+
+    }
+
+
     @SuppressLint("DiscouragedPrivateApi")
     private fun initPopUpMenu()
     {
@@ -596,7 +607,7 @@ class CustomizationActivity : AppCompatActivity(), View.OnClickListener, View.On
         popupMenu.setOnMenuItemClickListener {
             when (it.itemId)
             {
-                R.id.menu_restore_colors ->
+                R.id.menu_restore_colors   ->
                 {
                     AlertDialog.Builder(this).setTitle("Confirm delete")
                         .setMessage("Are you sure want to restore custom colors?")
@@ -615,6 +626,10 @@ class CustomizationActivity : AppCompatActivity(), View.OnClickListener, View.On
                                     Toast.LENGTH_SHORT).show()
                             }
                         }.setNegativeButton("No") { _, _ -> }.show()
+                }
+                R.id.menu_background_image ->
+                {
+
                 }
             }
             false

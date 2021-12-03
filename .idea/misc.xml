@@ -10,11 +10,13 @@
         <entry key="..\:/AndroidStudioProjects/EasyCalculator/app/src/main/res/drawable/buttons_rectangle.xml" value="0.15885416666666666" />
         <entry key="..\:/AndroidStudioProjects/EasyCalculator/app/src/main/res/drawable/buttons_round.xml" value="0.2846153846153846" />
         <entry key="..\:/AndroidStudioProjects/EasyCalculator/app/src/main/res/drawable/ic_background.xml" value="0.2846153846153846" />
+        <entry key="..\:/AndroidStudioProjects/EasyCalculator/app/src/main/res/drawable/ic_baseline_image_black.xml" value="0.2638888888888889" />
         <entry key="..\:/AndroidStudioProjects/EasyCalculator/app/src/main/res/drawable/ic_easycalculatorlogo.xml" value="0.2846153846153846" />
         <entry key="..\:/AndroidStudioProjects/EasyCalculator/app/src/main/res/drawable/ic_foreground.xml" value="0.2846153846153846" />
+        <entry key="..\:/AndroidStudioProjects/EasyCalculator/app/src/main/res/drawable/ic_image_white.xml" value="0.2638888888888889" />
         <entry key="..\:/AndroidStudioProjects/EasyCalculator/app/src/main/res/layout-land/activity_main.xml" value="0.23505323505323505" />
         <entry key="..\:/AndroidStudioProjects/EasyCalculator/app/src/main/res/layout-night/history_rv_item.xml" value="0.20416666666666666" />
-        <entry key="..\:/AndroidStudioProjects/EasyCalculator/app/src/main/res/layout/activity_customization.xml" value="0.14270833333333333" />
+        <entry key="..\:/AndroidStudioProjects/EasyCalculator/app/src/main/res/layout/activity_customization.xml" value="0.25" />
         <entry key="..\:/AndroidStudioProjects/EasyCalculator/app/src/main/res/layout/activity_graph.xml" value="0.41013824884792627" />
         <entry key="..\:/AndroidStudioProjects/EasyCalculator/app/src/main/res/layout/activity_history.xml" value="0.20416666666666666" />
         <entry key="..\:/AndroidStudioProjects/EasyCalculator/app/src/main/res/layout/activity_main.xml" value="0.22" />
