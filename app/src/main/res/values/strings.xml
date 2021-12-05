@@ -84,5 +84,6 @@
     <string name="fail_deleting_history">Something went wrong. Please try again later!</string>
     <string name="btn_contact">contact</string>
     <string name="background">Background</string>
+    <string name="background_image">Background Image</string>
 
 </resources>

@@ -21,8 +21,6 @@ android {
         targetSdk 31
         versionCode 1
         versionName kotlin_version
-
-
     }
 
     buildTypes {
