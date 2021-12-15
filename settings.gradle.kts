@@ -4,8 +4,8 @@ dependencyResolutionManagement {
         google()
         mavenCentral()
         jcenter()
-        maven { url "https://jitpack.io" }
+        maven ("https://jitpack.io")
     }
 }
 rootProject.name = "Easy Calculator"
-include ':app'
+include (":app")

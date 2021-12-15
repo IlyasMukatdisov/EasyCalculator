@@ -14,7 +14,7 @@ class CustomModelDatabaseHelper(context: Context) :
         val creatingDbStatement =
             "CREATE TABLE $COLORS_TABLE_NAME( $COLUMN_ID INTEGER PRIMARY KEY, $COLUMN_NUMBERS_COLOR TEXT, " +
                     "$COLUMN_ACTIONS_COLOR TEXT, $COLUMN_AC_COLOR TEXT, $COLUMN_EQUAL_COLOR TEXT, " +
-                    "$COLUMN_TEXT_COLOR TEXT, $COLUMN_SHAPE TEXT );"
+                    "$COLUMN_TEXT_COLOR TEXT, $COLUMN_SHAPE TEXT);"
         db?.execSQL(creatingDbStatement)
     }
 
@@ -25,30 +25,25 @@ class CustomModelDatabaseHelper(context: Context) :
 
     fun addOne(
         numbersColor: String, actionsColor: String, acColor: String,
-        equalColor: String, textColor:String, shape:String): Boolean
+        equalColor: String, textColor: String, shape: String
+    ): Boolean
     {
-        var db = this.writableDatabase
+        val db: SQLiteDatabase
         val cv = ContentValues()
         var result: Long = -1
         if (!isCustomizationEmpty())
         {
             db = this.writableDatabase
-            if (numbersColor!="")
-                cv.put(COLUMN_NUMBERS_COLOR, numbersColor)
-            if (actionsColor!="")
-                cv.put(COLUMN_ACTIONS_COLOR, actionsColor)
-            if (acColor!="")
-                cv.put(COLUMN_AC_COLOR, acColor)
-            if (equalColor!="")
-                cv.put(COLUMN_EQUAL_COLOR, equalColor)
-            if (textColor!="")
-                cv.put(COLUMN_TEXT_COLOR, textColor)
-            if (shape!="")
-                cv.put(COLUMN_SHAPE, shape)
-            result=db.update(COLORS_TABLE_NAME,cv,"$COLUMN_ID = 1", null).toLong()
-            if (result == 0L) result=-1L
-        }
-        else
+
+            cv.put(COLUMN_NUMBERS_COLOR, numbersColor)
+            cv.put(COLUMN_ACTIONS_COLOR, actionsColor)
+            cv.put(COLUMN_AC_COLOR, acColor)
+            cv.put(COLUMN_EQUAL_COLOR, equalColor)
+            cv.put(COLUMN_TEXT_COLOR, textColor)
+            cv.put(COLUMN_SHAPE, shape)
+            result = db.update(COLORS_TABLE_NAME, cv, "$COLUMN_ID = 1", null).toLong()
+            if (result == 0L) result = -1L
+        } else
         {
             db = this.writableDatabase
             cv.put(COLUMN_NUMBERS_COLOR, numbersColor)
@@ -65,7 +60,7 @@ class CustomModelDatabaseHelper(context: Context) :
         return result != -1L
     }
 
-    fun isCustomizationEmpty() : Boolean
+    fun isCustomizationEmpty(): Boolean
     {
         var empty = false
         val db = this.readableDatabase
@@ -79,6 +74,7 @@ class CustomModelDatabaseHelper(context: Context) :
         db.close()
         return empty
     }
+
 
     fun getAll(): MutableList<CustomModel>
     {
@@ -100,7 +96,8 @@ class CustomModelDatabaseHelper(context: Context) :
                 val eqColor = cursor.getString(4)
                 val textColor = cursor.getString(5)
                 val shape = cursor.getString(6)
-                val expression = CustomModel(id, nColor, actColor, acColor, eqColor, textColor, shape)
+                val expression =
+                    CustomModel(id, nColor, actColor, acColor, eqColor, textColor, shape)
                 list.add(expression)
             }
             while (cursor.moveToNext())
@@ -110,7 +107,7 @@ class CustomModelDatabaseHelper(context: Context) :
         return list
     }
 
-    fun clear() : Boolean
+    fun clear(): Boolean
     {
         val db = this.writableDatabase
         db.execSQL("DELETE FROM $COLORS_TABLE_NAME")

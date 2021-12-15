@@ -13,21 +13,21 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.EasyCalculator">
         <activity
-            android:name="com.gmail.mukatdisovilyas.easycalculator.GraphActivity"
+            android:name=".GraphActivity"
             android:exported="false"
             android:windowSoftInputMode="stateHidden" />
         <activity
-            android:name="com.gmail.mukatdisovilyas.easycalculator.CustomizationActivity"
+            android:name=".CustomizationActivity"
             android:exported="false"
             android:windowSoftInputMode="stateHidden" />
         <activity
-            android:name="com.gmail.mukatdisovilyas.easycalculator.WebViewActivity"
+            android:name=".WebViewActivity"
             android:exported="false" />
         <activity
-            android:name="com.gmail.mukatdisovilyas.easycalculator.HistoryActivity"
+            android:name=".HistoryActivity"
             android:exported="false" />
         <activity
-            android:name="com.gmail.mukatdisovilyas.easycalculator.MainActivity"
+            android:name=".MainActivity"
             android:exported="true"
             android:windowSoftInputMode="stateHidden">
             <intent-filter>
