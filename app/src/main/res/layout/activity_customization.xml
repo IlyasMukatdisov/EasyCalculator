@@ -275,7 +275,8 @@
                 android:layout_weight="0.2"
                 android:background="@drawable/buttons_round"
                 android:backgroundTint="@color/light_gray"
-                style="?android:attr/borderlessButtonStyle"/>
+                style="?android:attr/borderlessButtonStyle"
+                android:contentDescription="@string/background_image" />
 
             <TextView
                 android:id="@+id/tv_background"

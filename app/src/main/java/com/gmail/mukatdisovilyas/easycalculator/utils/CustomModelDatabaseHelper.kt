@@ -30,7 +30,7 @@ class CustomModelDatabaseHelper(context: Context) :
     {
         val db: SQLiteDatabase
         val cv = ContentValues()
-        var result: Long = -1
+        var result: Long
         if (!isCustomizationEmpty())
         {
             db = this.writableDatabase
