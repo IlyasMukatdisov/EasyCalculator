@@ -1,31 +1,26 @@
 package com.gmail.mukatdisovilyas.easycalculator
 
 import android.annotation.SuppressLint
-import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.content.res.ColorStateList
 import android.content.res.Configuration
 import android.content.res.Configuration.UI_MODE_NIGHT_YES
 import android.graphics.Color
-import android.graphics.drawable.Drawable
-import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.view.MotionEvent
 import android.view.View
 import android.widget.*
-import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.content.res.AppCompatResources
 import androidx.core.content.ContextCompat
 import com.azeesoft.lib.colorpicker.ColorPickerDialog
-import com.gmail.mukatdisovilyas.easycalculator.utils.*
-import java.io.File
-import java.io.FileOutputStream
-import java.io.InputStream
-import java.io.OutputStream
+import com.gmail.mukatdisovilyas.easycalculator.utils.CustomModelDatabaseHelper
+import com.gmail.mukatdisovilyas.easycalculator.utils.SHAPE_CIRCLE
+import com.gmail.mukatdisovilyas.easycalculator.utils.SHAPE_RECTANGLE
+import com.gmail.mukatdisovilyas.easycalculator.utils.SHAPE_ROUNDED
 
 
 class CustomizationActivity : AppCompatActivity(), View.OnClickListener, View.OnTouchListener
@@ -42,9 +37,6 @@ class CustomizationActivity : AppCompatActivity(), View.OnClickListener, View.On
 
     private lateinit var btnSave: Button
     private lateinit var btnMenu: ImageButton
-
-    private lateinit var btnBackground: ImageButton
-    private lateinit var tvBackground: TextView
 
 
     private lateinit var btnRounded: Button
@@ -85,32 +77,32 @@ class CustomizationActivity : AppCompatActivity(), View.OnClickListener, View.On
     private var shape: String = ""
     private var shapePicked = false
 
-    private var textSize = 0f
+    /*private var textSize = 0f*/
 
-  /*  private val singleImageResultLauncher =
-        registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
-            if (result.resultCode == Activity.RESULT_OK)
-            {
-                // There are no request codes
-                val data: Intent? = result.data
-                val selectedImageUri: Uri? = data?.data
-                if (null != selectedImageUri)
-                {
-                    val str = selectedImageUri.toString()
-                    var dotIndex = 0
+    /*  private val singleImageResultLauncher =
+          registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+              if (result.resultCode == Activity.RESULT_OK)
+              {
+                  // There are no request codes
+                  val data: Intent? = result.data
+                  val selectedImageUri: Uri? = data?.data
+                  if (null != selectedImageUri)
+                  {
+                      val str = selectedImageUri.toString()
+                      var dotIndex = 0
 
-                    for (i in 0..str.lastIndex)
-                    {
-                        if (str[i] == '.')
-                        {
-                            dotIndex = i
-                        }
-                    }
-                    val ext = str.substring(dotIndex)
+                      for (i in 0..str.lastIndex)
+                      {
+                          if (str[i] == '.')
+                          {
+                              dotIndex = i
+                          }
+                      }
+                      val ext = str.substring(dotIndex)
 
 
-                    // Get the path from the Uri
-                    *//* val path = getPathFromURI(selectedImageUri)*//*
+                      // Get the path from the Uri
+                      *//* val path = getPathFromURI(selectedImageUri)*//*
                     btnBackground.setImageURI(selectedImageUri)
 
                     val inputStream: InputStream? = contentResolver
@@ -156,14 +148,14 @@ class CustomizationActivity : AppCompatActivity(), View.OnClickListener, View.On
 
         }
 
-        if (intent.hasExtra(MAIN_TEXT_SIZE))
+        /*if (intent.hasExtra(MAIN_TEXT_SIZE))
         {
             textSize = intent.getFloatExtra(MAIN_TEXT_SIZE, 0f) - 8f
 
             setTextSizes(textSize)
 
 
-        }
+        }*/
 
         customization()
 
@@ -189,14 +181,6 @@ class CustomizationActivity : AppCompatActivity(), View.OnClickListener, View.On
         tvEqual.setTextColor(ColorStateList.valueOf(ContextCompat.getColor(this, R.color.white)))
         tvTextColor.setTextColor(
             ColorStateList.valueOf(ContextCompat.getColor(this, R.color.white))
-        )
-        tvBackground.setTextColor(
-            ColorStateList.valueOf(
-                ContextCompat.getColor(
-                    this,
-                    R.color.white
-                )
-            )
         )
     }
 
@@ -251,31 +235,31 @@ class CustomizationActivity : AppCompatActivity(), View.OnClickListener, View.On
     }
 
 
-    private fun setTextSizes(textSize: Float)
-    {
-        btnNumbersColor.textSize = textSize
-        btnActionsColor.textSize = textSize
-        btnAcColor.textSize = textSize
-        btnEqualColor.textSize = textSize
-        btnSave.textSize = textSize
-        btnTextColor.textSize = textSize
+    /* private fun setTextSizes(textSize: Float)
+     {
+         btnNumbersColor.textSize = textSize
+         btnActionsColor.textSize = textSize
+         btnAcColor.textSize = textSize
+         btnEqualColor.textSize = textSize
+         btnSave.textSize = textSize
+         btnTextColor.textSize = textSize
 
-        val tvTextSize = textSize * 3 / 2
+         val tvTextSize = textSize * 3 / 2
 
 
-        tvNumbers.textSize = tvTextSize
-        tvActions.textSize = tvTextSize
-        tvAc.textSize = tvTextSize
-        tvEqual.textSize = tvTextSize
-        tvTextColor.textSize = tvTextSize
-        tvTitle.textSize = tvTextSize
-        tvBackground.textSize = tvTextSize
+         tvNumbers.textSize = tvTextSize
+         tvActions.textSize = tvTextSize
+         tvAc.textSize = tvTextSize
+         tvEqual.textSize = tvTextSize
+         tvTextColor.textSize = tvTextSize
+         tvTitle.textSize = tvTextSize
+         tvBackground.textSize = tvTextSize
 
-        btnRounded.textSize = textSize
-        btnRectangle.textSize = textSize
-        btnCircle.textSize = textSize
+         btnRounded.textSize = textSize
+         btnRectangle.textSize = textSize
+         btnCircle.textSize = textSize
 
-    }
+     }*/
 
     private fun customization()
     {
@@ -477,7 +461,7 @@ class CustomizationActivity : AppCompatActivity(), View.OnClickListener, View.On
         btnSave = findViewById(R.id.btn_save)
         btnMenu = findViewById(R.id.btn_menu)
         btnTextColor = findViewById(R.id.btn_text_color)
-        btnBackground = findViewById(R.id.btn_background)
+
 
         btnRounded = findViewById(R.id.btn_rounded)
         btnRectangle = findViewById(R.id.btn_rectangle)
@@ -490,7 +474,7 @@ class CustomizationActivity : AppCompatActivity(), View.OnClickListener, View.On
         tvEqual = findViewById(R.id.tv_cc_equal_color)
         radioGroup = findViewById(R.id.radio_group_shapes)
         tvTextColor = findViewById(R.id.tv_buttons_text_color)
-        tvBackground = findViewById(R.id.tv_background)
+
 
         radioRounded = findViewById(R.id.radio_rounded)
         radioRectangle = findViewById(R.id.radio_rectangle)
@@ -507,9 +491,6 @@ class CustomizationActivity : AppCompatActivity(), View.OnClickListener, View.On
         btnRounded.setOnClickListener(this)
         btnRectangle.setOnClickListener(this)
         btnCircle.setOnClickListener(this)
-        btnBackground.setOnClickListener(this)
-
-
 
         radioGroup.setOnCheckedChangeListener { _, checkedId ->
             when (checkedId)
@@ -650,17 +631,16 @@ class CustomizationActivity : AppCompatActivity(), View.OnClickListener, View.On
                 radioCircle.isChecked = true
             }
 
-            R.id.btn_background ->
+           /* R.id.btn_background ->
             {
-                /*
+
                 val intent = Intent()
                 intent.type = "image/*"
                 intent.action = Intent.ACTION_GET_CONTENT
                 intent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, false)
                 singleImageResultLauncher.launch(Intent.createChooser(intent, "Select Picture"))
-                */
-                 */
-            }
+
+            }*/*/
 
         }
     }
@@ -739,7 +719,6 @@ class CustomizationActivity : AppCompatActivity(), View.OnClickListener, View.On
             popupMenu.show()
         }
     }
-
 
 
     private fun isSomethingPicked(): Boolean

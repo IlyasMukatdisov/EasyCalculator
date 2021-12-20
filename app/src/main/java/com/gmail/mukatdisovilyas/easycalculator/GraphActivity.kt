@@ -168,7 +168,7 @@ class GraphActivity : AppCompatActivity(), View.OnClickListener, View.OnTouchLis
             this.doubleBackToExitPressedOnce = true
             Toast.makeText(this, "Please click BACK again to exit", Toast.LENGTH_SHORT).show()
 
-            Handler(Looper.getMainLooper()).postDelayed(Runnable { doubleBackToExitPressedOnce = false }, 2000)
+            Handler(Looper.getMainLooper()).postDelayed({ doubleBackToExitPressedOnce = false }, 2000)
         }
     }
 
@@ -405,7 +405,7 @@ class GraphActivity : AppCompatActivity(), View.OnClickListener, View.OnTouchLis
         btnDotKeyboard.textSize = viewsTextSize * 3 / 2
         btnBackspaceKeyboard.textSize = viewsTextSize * 3 / 2
 
-        btnBuild.textSize=viewsTextSize
+       /* btnBuild.textSize=viewsTextSize*/
 
 
         tvFx.textSize = viewsTextSize

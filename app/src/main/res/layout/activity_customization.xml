@@ -45,7 +45,6 @@
             android:gravity="center">
 
             <androidx.appcompat.widget.AppCompatTextView
-                app:autoSizeTextType="uniform"
                 android:id="@+id/tv_cc_title"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -85,7 +84,7 @@
                 android:gravity="center_vertical"
                 android:text="@string/number_buttons_color"
                 android:textColor="@color/black"
-                android:textSize="16sp" />
+                android:textSize="18sp" />
 
 
         </LinearLayout>
@@ -122,7 +121,7 @@
                     android:gravity="center_vertical"
                     android:text="@string/action_buttons_color"
                     android:textColor="@color/black"
-                    android:textSize="16sp" />
+                    android:textSize="18sp" />
 
 
         </LinearLayout>
@@ -163,7 +162,7 @@
                 android:gravity="start|center_vertical"
                 android:text="@string/ac_button_color"
                 android:textColor="@color/black"
-                android:textSize="16sp"
+                android:textSize="18sp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/tv_cc_actions_color" />
 
@@ -205,7 +204,7 @@
                     android:gravity="start|center_vertical"
                     android:text="@string/equal_button_color"
                     android:textColor="@color/black"
-                    android:textSize="16sp"
+                    android:textSize="18sp"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/tv_cc_ac_color" />
 
@@ -253,41 +252,9 @@
                 android:gravity="start|center_vertical"
                 android:text="@string/buttons_text_color"
                 android:textColor="@color/black"
-                android:textSize="16sp" />
+                android:textSize="18sp" />
 
 
-
-        </LinearLayout>
-
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            android:layout_marginStart="20dp"
-            android:layout_marginEnd="20dp"
-            android:layout_marginTop="20dp">
-            <ImageButton
-                android:scaleType="centerCrop"
-                android:id="@+id/btn_background"
-                android:layout_height="match_parent"
-                android:layout_width="0dp"
-                android:layout_weight="0.2"
-                android:background="@drawable/buttons_round"
-                android:backgroundTint="@color/light_gray"
-                style="?android:attr/borderlessButtonStyle"
-                android:contentDescription="@string/background_image" />
-
-            <TextView
-                android:id="@+id/tv_background"
-                android:layout_marginStart="20dp"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="0.8"
-                android:textSize="16sp"
-                android:textColor="@color/black"
-                android:gravity="start|center_vertical"
-                android:text="@string/background_image"/>
 
         </LinearLayout>
 
@@ -316,6 +283,7 @@
                 android:layout_weight="0.2"
                 android:background="@drawable/buttons_round"
                 android:clickable="false"
+                android:textSize="18sp"
                 android:text="@string/btn_zero"
                 android:textColor="@color/black" />
 
@@ -333,6 +301,7 @@
                 android:layout_weight="0.2"
                 android:background="@drawable/buttons_rectangle"
                 android:clickable="false"
+                android:textSize="18sp"
                 android:text="@string/btn_zero"
                 android:textColor="@color/black" />
 
@@ -343,6 +312,7 @@
                 android:layout_marginStart="10dp"/>
 
             <Button
+                android:textSize="18sp"
                 android:id="@+id/btn_circle"
                 style="?android:attr/borderlessButtonStyle"
                 android:layout_width="0dp"
@@ -360,15 +330,14 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
+            android:layout_height="wrap_content"
             android:layout_margin="20dp">
 
             <Button
                 android:id="@+id/btn_save"
+                style="?android:attr/borderlessButtonStyle"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                style="?android:attr/borderlessButtonStyle"
                 android:alpha="0.5"
                 android:background="@drawable/buttons_round"
                 android:enabled="false"
