@@ -138,6 +138,7 @@ class CustomizationActivity : AppCompatActivity(), View.OnClickListener, View.On
     override fun onCreate(savedInstanceState: Bundle?)
     {
         super.onCreate(savedInstanceState)
+        setTheme(R.style.Theme_EasyCalculator)
         setContentView(R.layout.activity_customization)
 
         initViews()

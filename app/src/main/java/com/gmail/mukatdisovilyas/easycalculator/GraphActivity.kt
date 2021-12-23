@@ -119,6 +119,7 @@ class GraphActivity : AppCompatActivity(), View.OnClickListener, View.OnTouchLis
     {
 
         super.onCreate(savedInstanceState)
+        setTheme(R.style.Theme_EasyCalculator)
         setContentView(R.layout.activity_graph)
 
 

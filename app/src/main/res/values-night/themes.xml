@@ -33,4 +33,9 @@
         <item name="cornerSizeBottomLeft">30dp</item>
     </style>
 
+    <style name="SplashScreenTheme" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <item name="android:windowBackground">@drawable/splash_screen_black</item>
+        <item name="android:statusBarColor">@color/black</item>
+    </style>
+
 </resources>

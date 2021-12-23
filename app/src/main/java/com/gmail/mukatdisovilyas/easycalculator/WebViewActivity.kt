@@ -11,6 +11,7 @@ class WebViewActivity : AppCompatActivity()
     override fun onCreate(savedInstanceState: Bundle?)
     {
         super.onCreate(savedInstanceState)
+        setTheme(R.style.Theme_EasyCalculator)
         setContentView(R.layout.activity_web_view)
 
         webView = findViewById(R.id.webView)

@@ -38,6 +38,7 @@ class HistoryActivity : AppCompatActivity(), View.OnTouchListener
     override fun onCreate(savedInstanceState: Bundle?)
     {
         super.onCreate(savedInstanceState)
+        setTheme(R.style.Theme_EasyCalculator)
         setContentView(R.layout.activity_history)
 
         initViews()

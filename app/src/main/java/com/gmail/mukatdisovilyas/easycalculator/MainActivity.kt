@@ -108,6 +108,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, View.OnTouchList
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        setTheme(R.style.Theme_EasyCalculator)
         setContentView(R.layout.activity_main)
 
         getRealDeviceSizeInPixels()
