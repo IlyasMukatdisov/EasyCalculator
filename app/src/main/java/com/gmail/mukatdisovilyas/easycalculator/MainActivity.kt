@@ -123,7 +123,8 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, View.OnTouchList
         if (!isEmptyCustomization())
         {
             customization()
-        } else
+        }
+        else
         {
             setDefaultNumberColors()
             setDefaultTextColor()
@@ -166,7 +167,8 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, View.OnTouchList
             edtSecond.setTextColor(
                 ColorStateList.valueOf(ContextCompat.getColor(this, R.color.white))
             )
-        } else
+        }
+        else
         {
             edtMain.backgroundTintList =
                 ColorStateList.valueOf(ContextCompat.getColor(this, R.color.light_gray))
@@ -266,7 +268,8 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, View.OnTouchList
             btnNine.backgroundTintList = ColorStateList.valueOf(Color.parseColor(numbersColor))
             btnDot.backgroundTintList = ColorStateList.valueOf(Color.parseColor(numbersColor))
             btnBackSpace.backgroundTintList = ColorStateList.valueOf(Color.parseColor(numbersColor))
-        } else setDefaultNumberColors()
+        }
+        else setDefaultNumberColors()
 
         if (actionsColor.isNotEmpty())
         {
@@ -290,7 +293,8 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, View.OnTouchList
             btnLn.backgroundTintList = ColorStateList.valueOf(Color.parseColor(actionsColor))
             btnLog2.backgroundTintList = ColorStateList.valueOf(Color.parseColor(actionsColor))
             btnRad.backgroundTintList = ColorStateList.valueOf(Color.parseColor(actionsColor))
-        } else setDefaultActionsColor()
+        }
+        else setDefaultActionsColor()
 
 
         if (acColor.isNotEmpty()) btnAc.backgroundTintList =
@@ -309,7 +313,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, View.OnTouchList
         {
             when (shape)
             {
-                SHAPE_ROUNDED ->
+                SHAPE_ROUNDED   ->
                 {
                     setButtonsRounded()
                 }
@@ -317,13 +321,14 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, View.OnTouchList
                 {
                     setButtonsRectangle()
                 }
-                SHAPE_CIRCLE ->
+                SHAPE_CIRCLE    ->
                 {
                     setButtonsCircle()
                 }
             }
 
-        } else setButtonsRounded()
+        }
+        else setButtonsRounded()
 
     }
 
@@ -362,7 +367,8 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, View.OnTouchList
             )
 
 
-        } else
+        }
+        else
         {
             btnZero.setTextColor(
                 ColorStateList.valueOf(ContextCompat.getColor(this, R.color.black))
@@ -487,7 +493,8 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, View.OnTouchList
             edtSecond.backgroundTintList =
                 ColorStateList.valueOf(ContextCompat.getColor(this, R.color.dark_gray))
 
-        } else
+        }
+        else
         {
             btnZero.backgroundTintList =
                 ColorStateList.valueOf(ContextCompat.getColor(this, R.color.light_gray))
@@ -684,12 +691,12 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, View.OnTouchList
         popupMenu2.setOnMenuItemClickListener {
             when (it.itemId)
             {
-                R.id.menu_to_history ->
+                R.id.menu_to_history      ->
                 {
                     val intent = Intent(this, HistoryActivity::class.java)
                     startActivity(intent)
                 }
-                R.id.menu_to_about ->
+                R.id.menu_to_about        ->
                 {
                     val cdd = CustomDialog(this)
                     val lp = WindowManager.LayoutParams()
@@ -718,7 +725,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, View.OnTouchList
                     intent.putExtra(MAIN_TEXT_SIZE, btnTextSize)
                     startActivity(intent)
                 }
-                R.id.menu_to_graph ->
+                R.id.menu_to_graph        ->
                 {
                     val intent = Intent(this, GraphActivity::class.java)
                     intent.putExtra(MAIN_TEXT_SIZE, btnTextSize)
@@ -731,7 +738,8 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, View.OnTouchList
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q)
         {
             popupMenu2.setForceShowIcon(true)
-        } else
+        }
+        else
         {
             try
             {
@@ -775,7 +783,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, View.OnTouchList
                         else btnMenu.backgroundTintList =
                             ColorStateList.valueOf(ContextCompat.getColor(this, R.color.semi_gray))
                     }
-                    MotionEvent.ACTION_UP ->
+                    MotionEvent.ACTION_UP   ->
                     {
                         if (isDarkThemeOn()) btnMenu.backgroundTintList =
                             ColorStateList.valueOf(ContextCompat.getColor(this, R.color.dark_gray))
@@ -786,7 +794,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, View.OnTouchList
                 }
             }
 
-            R.id.ll_menu ->
+            R.id.ll_menu  ->
             {
                 when (motionEvent.action)
                 {
@@ -797,7 +805,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, View.OnTouchList
                         else btnMenu.backgroundTintList =
                             ColorStateList.valueOf(ContextCompat.getColor(this, R.color.semi_gray))
                     }
-                    MotionEvent.ACTION_UP ->
+                    MotionEvent.ACTION_UP   ->
                     {
                         if (isDarkThemeOn()) btnMenu.backgroundTintList =
                             ColorStateList.valueOf(ContextCompat.getColor(this, R.color.dark_gray))
@@ -841,109 +849,70 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, View.OnTouchList
 
     private fun setTextSizes()
     {
-        val dm = DisplayMetrics()
+        /*val dm = DisplayMetrics()
         windowManager.defaultDisplay.getMetrics(dm)
         val x = (mWidthPixels / dm.xdpi).toDouble().pow(2.0)
         val y = (mHeightPixels / dm.ydpi).toDouble().pow(2.0)
-        val screenInches = sqrt(x + y)
+        val screenInches = sqrt(x + y)*/
 
 
-        resources.displayMetrics.density
-
-        if (screenInches < 5.0)
+        btnTextSize = when (resources.displayMetrics.density)
         {
-            if (resources.configuration.orientation == Configuration.ORIENTATION_LANDSCAPE)
-            {
-                if (mWidthPixels in 0..480) btnTextSize = 14 * resources.displayMetrics.density
-                if (mWidthPixels in 481..720) btnTextSize = 12 * resources.displayMetrics.density
-                if (mWidthPixels in 721..1080) btnTextSize = 10 * resources.displayMetrics.density
-            } else
-            {
-                if (mWidthPixels in 0..480) btnTextSize = 12 * resources.displayMetrics.density
-                if (mWidthPixels in 481..720) btnTextSize = 10 * resources.displayMetrics.density
-                if (mWidthPixels in 721..1080) btnTextSize = 8 * resources.displayMetrics.density
-            }
+            in 0.0..0.5 -> 40f
+            in 0.51..1.0 -> 38f
+            in 1.01..1.5 -> 35f
+            in 1.51..2.0 -> 32f
+            in 2.01..2.5 -> 29f
+            in 2.51..3.0 -> 26f
+            in 3.01..3.5 -> 24f
+            else -> 22f
         }
 
-        if (screenInches in 5.0..7.0)
-        {
-            if (resources.configuration.orientation == Configuration.ORIENTATION_LANDSCAPE)
-            {
-                if (mWidthPixels in 0..480) btnTextSize = 28 * resources.displayMetrics.density
-                if (mWidthPixels in 481..720) btnTextSize = 20 * resources.displayMetrics.density
-                if (mWidthPixels in 721..1080) btnTextSize = 12 * resources.displayMetrics.density
-                if (mWidthPixels in 1081..1600) btnTextSize = 10 * resources.displayMetrics.density
-                if (mWidthPixels in 1601..2560) btnTextSize = 9 * resources.displayMetrics.density
-            } else
-            {
-                if (mWidthPixels in 0..480) btnTextSize = 24 * resources.displayMetrics.density
-                if (mWidthPixels in 481..720) btnTextSize = 14 * resources.displayMetrics.density
-                if (mWidthPixels in 721..1080) btnTextSize = 9 * resources.displayMetrics.density
-                if (mWidthPixels in 1081..1600) btnTextSize = 7 * resources.displayMetrics.density
-                if (mWidthPixels in 1601..2560) btnTextSize = 5 * resources.displayMetrics.density
-            }
-        }
+        if  (resources.configuration.orientation == Configuration.ORIENTATION_LANDSCAPE) btnTextSize-=5f
 
-        if (screenInches > 7.0)
-        {
-            if (resources.configuration.orientation == Configuration.ORIENTATION_LANDSCAPE)
-            {
-                if (mWidthPixels in 0..480) btnTextSize = 28 * resources.displayMetrics.density
-                if (mWidthPixels in 481..720) btnTextSize = 22 * resources.displayMetrics.density
-                if (mWidthPixels in 721..1080) btnTextSize = 19 * resources.displayMetrics.density
-                if (mWidthPixels in 1081..1600) btnTextSize = 18 * resources.displayMetrics.density
-                if (mWidthPixels in 1601..2160) btnTextSize = 15 * resources.displayMetrics.density
-                if (mWidthPixels in 2560..4000) btnTextSize = 12 * resources.displayMetrics.density
-            } else
-            {
-                if (mWidthPixels in 0..480) btnTextSize = 24 * resources.displayMetrics.density
-                if (mWidthPixels in 481..720) btnTextSize = 20 * resources.displayMetrics.density
-                if (mWidthPixels in 721..1080) btnTextSize = 16 * resources.displayMetrics.density
-                if (mWidthPixels in 1081..1600) btnTextSize = 15 * resources.displayMetrics.density
-                if (mWidthPixels in 1601..2160) btnTextSize = 13 * resources.displayMetrics.density
-                if (mWidthPixels in 2560..4000) btnTextSize = 11 * resources.displayMetrics.density
-            }
-        }
 
-        btnZero.textSize = btnTextSize
-        btnOne.textSize = btnTextSize
-        btnTwo.textSize = btnTextSize
-        btnThree.textSize = btnTextSize
-        btnFour.textSize = btnTextSize
-        btnFive.textSize = btnTextSize
-        btnSix.textSize = btnTextSize
-        btnSeven.textSize = btnTextSize
-        btnEight.textSize = btnTextSize
-        btnNine.textSize = btnTextSize
-        btnMore.textSize = btnTextSize
-        btnPlus.textSize = btnTextSize
-        btnMinus.textSize = btnTextSize
-        btnMulti.textSize = btnTextSize
-        btnDivision.textSize = btnTextSize
-        btnPercent.textSize = btnTextSize
-        btnDot.textSize = btnTextSize
-        btnAc.textSize = btnTextSize
-        btnBrackets.textSize = btnTextSize
-        btnBackSpace.textSize = btnTextSize
-        btnEqual.textSize = btnTextSize
-        btnSquareRoot.textSize = btnTextSize
-        btnExp.textSize = btnTextSize
-        btnPi.textSize = btnTextSize
-        btnFact.textSize = btnTextSize
-        btnSin.textSize = btnTextSize
-        btnCos.textSize = btnTextSize
-        btnTan.textSize = btnTextSize
-        btnE.textSize = btnTextSize
-        btnLog2.textSize = btnTextSize
-        btnLg.textSize = btnTextSize
-        btnLn.textSize = btnTextSize
-        btnRad.textSize = btnTextSize
-        if (resources.configuration.orientation == Configuration.ORIENTATION_LANDSCAPE) {
-            edtMain.textSize = btnTextSize * 13 / 8
-            edtSecond.textSize = btnTextSize * 4 / 3
-        } else {
-            edtMain.textSize = btnTextSize * 5 / 2
-            edtSecond.textSize = btnTextSize * 3 / 2
+        btnZero.setTextSize(TypedValue.COMPLEX_UNIT_SP,btnTextSize)
+        btnOne.setTextSize(TypedValue.COMPLEX_UNIT_SP,btnTextSize)
+        btnTwo.setTextSize(TypedValue.COMPLEX_UNIT_SP,btnTextSize)
+        btnThree.setTextSize(TypedValue.COMPLEX_UNIT_SP,btnTextSize)
+        btnFour.setTextSize(TypedValue.COMPLEX_UNIT_SP,btnTextSize)
+        btnFive.setTextSize(TypedValue.COMPLEX_UNIT_SP,btnTextSize)
+        btnSix.setTextSize(TypedValue.COMPLEX_UNIT_SP,btnTextSize)
+        btnSeven.setTextSize(TypedValue.COMPLEX_UNIT_SP,btnTextSize)
+        btnEight.setTextSize(TypedValue.COMPLEX_UNIT_SP,btnTextSize)
+        btnNine.setTextSize(TypedValue.COMPLEX_UNIT_SP,btnTextSize)
+        btnMore.setTextSize(TypedValue.COMPLEX_UNIT_SP,btnTextSize)
+        btnPlus.setTextSize(TypedValue.COMPLEX_UNIT_SP,btnTextSize)
+        btnMinus.setTextSize(TypedValue.COMPLEX_UNIT_SP,btnTextSize)
+        btnMulti.setTextSize(TypedValue.COMPLEX_UNIT_SP,btnTextSize)
+        btnDivision.setTextSize(TypedValue.COMPLEX_UNIT_SP,btnTextSize)
+        btnPercent.setTextSize(TypedValue.COMPLEX_UNIT_SP,btnTextSize)
+        btnDot.setTextSize(TypedValue.COMPLEX_UNIT_SP,btnTextSize)
+        btnAc.setTextSize(TypedValue.COMPLEX_UNIT_SP,btnTextSize)
+        btnBrackets.setTextSize(TypedValue.COMPLEX_UNIT_SP,btnTextSize)
+        btnBackSpace.setTextSize(TypedValue.COMPLEX_UNIT_SP,btnTextSize)
+        btnEqual.setTextSize(TypedValue.COMPLEX_UNIT_SP,btnTextSize)
+        btnSquareRoot.setTextSize(TypedValue.COMPLEX_UNIT_SP,btnTextSize)
+        btnExp.setTextSize(TypedValue.COMPLEX_UNIT_SP,btnTextSize)
+        btnPi.setTextSize(TypedValue.COMPLEX_UNIT_SP,btnTextSize)
+        btnFact.setTextSize(TypedValue.COMPLEX_UNIT_SP,btnTextSize)
+        btnSin.setTextSize(TypedValue.COMPLEX_UNIT_SP,btnTextSize)
+        btnCos.setTextSize(TypedValue.COMPLEX_UNIT_SP,btnTextSize)
+        btnTan.setTextSize(TypedValue.COMPLEX_UNIT_SP,btnTextSize)
+        btnE.setTextSize(TypedValue.COMPLEX_UNIT_SP,btnTextSize)
+        btnLog2.setTextSize(TypedValue.COMPLEX_UNIT_SP,btnTextSize)
+        btnLg.setTextSize(TypedValue.COMPLEX_UNIT_SP,btnTextSize)
+        btnLn.setTextSize(TypedValue.COMPLEX_UNIT_SP,btnTextSize)
+        btnRad.setTextSize(TypedValue.COMPLEX_UNIT_SP,btnTextSize)
+        if (resources.configuration.orientation == Configuration.ORIENTATION_LANDSCAPE)
+        {
+            edtMain.setTextSize(TypedValue.COMPLEX_UNIT_SP,btnTextSize * 13 / 8)
+            edtSecond.setTextSize(TypedValue.COMPLEX_UNIT_SP,btnTextSize * 4 / 3)
+        }
+        else
+        {
+            edtMain.setTextSize(TypedValue.COMPLEX_UNIT_SP,btnTextSize * 5 / 2)
+            edtSecond.setTextSize(TypedValue.COMPLEX_UNIT_SP,btnTextSize * 3 / 2)
         }
 
     }
@@ -1082,7 +1051,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, View.OnTouchList
     {
         when (v?.id)
         {
-            R.id.btn_zero ->
+            R.id.btn_zero        ->
             {
                 if (isPrevEqual) clear()
                 if (updateEdtMain("0")) isAvailableToCalculate("0")
@@ -1090,7 +1059,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, View.OnTouchList
                 currentNumDigits++
             }
 
-            R.id.btn_one ->
+            R.id.btn_one         ->
             {
                 if (isPrevEqual) clear()
                 if (updateEdtMain("1")) isAvailableToCalculate("1")
@@ -1098,7 +1067,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, View.OnTouchList
                 currentNumDigits++
             }
 
-            R.id.btn_two ->
+            R.id.btn_two         ->
             {
                 if (isPrevEqual) clear()
                 if (updateEdtMain("2")) isAvailableToCalculate("2")
@@ -1106,7 +1075,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, View.OnTouchList
                 currentNumDigits++
             }
 
-            R.id.btn_three ->
+            R.id.btn_three       ->
             {
                 if (isPrevEqual) clear()
                 if (updateEdtMain("3")) isAvailableToCalculate("3")
@@ -1114,7 +1083,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, View.OnTouchList
                 currentNumDigits++
             }
 
-            R.id.btn_four ->
+            R.id.btn_four        ->
             {
                 if (isPrevEqual) clear()
                 if (updateEdtMain("4")) isAvailableToCalculate("4")
@@ -1122,7 +1091,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, View.OnTouchList
                 currentNumDigits++
             }
 
-            R.id.btn_five ->
+            R.id.btn_five        ->
             {
                 if (isPrevEqual) clear()
                 if (updateEdtMain("5")) isAvailableToCalculate("5")
@@ -1130,7 +1099,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, View.OnTouchList
                 currentNumDigits++
             }
 
-            R.id.btn_six ->
+            R.id.btn_six         ->
             {
                 if (isPrevEqual) clear()
                 if (updateEdtMain("6")) isAvailableToCalculate("6")
@@ -1138,7 +1107,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, View.OnTouchList
                 currentNumDigits++
             }
 
-            R.id.btn_seven ->
+            R.id.btn_seven       ->
             {
                 if (isPrevEqual) clear()
                 if (updateEdtMain("7")) isAvailableToCalculate("7")
@@ -1146,7 +1115,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, View.OnTouchList
                 currentNumDigits++
             }
 
-            R.id.btn_eight ->
+            R.id.btn_eight       ->
             {
                 if (isPrevEqual) clear()
                 if (updateEdtMain("8")) isAvailableToCalculate("8")
@@ -1154,7 +1123,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, View.OnTouchList
                 currentNumDigits++
             }
 
-            R.id.btn_nine ->
+            R.id.btn_nine        ->
             {
                 if (isPrevEqual) clear()
                 if (updateEdtMain("9")) isAvailableToCalculate("9")
@@ -1162,7 +1131,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, View.OnTouchList
                 currentNumDigits++
             }
 
-            R.id.btn_percent ->
+            R.id.btn_percent     ->
             {
                 if (checkForOperator()) backspaceFun()
                 if (updateEdtMain("%")) isAvailableToCalculate("%")
@@ -1171,7 +1140,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, View.OnTouchList
                 currentNumDigits = 0
             }
 
-            R.id.btn_division ->
+            R.id.btn_division    ->
             {
                 if (checkForOperator()) backspaceFun()
                 if (updateEdtMain("÷")) isAvailableToCalculate("÷")
@@ -1181,7 +1150,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, View.OnTouchList
                 currentNumDigits = 0
             }
 
-            R.id.btn_multi ->
+            R.id.btn_multi       ->
             {
                 if (checkForOperator()) backspaceFun()
                 if (updateEdtMain("×")) isAvailableToCalculate("×")
@@ -1191,7 +1160,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, View.OnTouchList
                 currentNumDigits = 0
             }
 
-            R.id.btn_plus ->
+            R.id.btn_plus        ->
             {
                 if (checkForOperator()) backspaceFun()
                 if (updateEdtMain("+")) isAvailableToCalculate("+")
@@ -1201,7 +1170,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, View.OnTouchList
                 currentNumDigits = 0
             }
 
-            R.id.btn_minus ->
+            R.id.btn_minus       ->
             {
                 if (checkForOperator()) backspaceFun()
                 if (updateEdtMain("-")) isAvailableToCalculate("-")
@@ -1211,14 +1180,14 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, View.OnTouchList
                 currentNumDigits = 0
             }
 
-            R.id.btn_dot ->
+            R.id.btn_dot         ->
             {
                 if (isDotInsertable()) if (updateEdtMain(".")) isAvailableToCalculate(".")
                 isPrevEqual = false
             }
 
 
-            R.id.btn_ac ->
+            R.id.btn_ac          ->
             {
                 clear()
                 isPrevEqual = false
@@ -1226,13 +1195,13 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, View.OnTouchList
                 currentNumDigits = 0
             }
 
-            R.id.btn_backspace ->
+            R.id.btn_backspace   ->
             {
                 backspaceFun()
                 isPrevEqual = false
             }
 
-            R.id.btn_brackets ->
+            R.id.btn_brackets    ->
             {
                 if (isPrevEqual) clear()
                 if (addBrackets()) isAvailableToCalculate("{")
@@ -1240,7 +1209,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, View.OnTouchList
                 currentNumDigits = 0
             }
 
-            R.id.btn_equal ->
+            R.id.btn_equal       ->
             {
                 if (!isPrevEqual)
                 {
@@ -1256,7 +1225,8 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, View.OnTouchList
                     catch (e: Exception)
                     {
                     }
-                } else
+                }
+                else
                 {
                     if (isPrevEqual && prevOperator != "")
                     {
@@ -1302,7 +1272,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, View.OnTouchList
                 currentNumDigits = 0
             }
 
-            R.id.btn_exp ->
+            R.id.btn_exp         ->
             {
                 if (checkForOperator())
                 {
@@ -1314,7 +1284,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, View.OnTouchList
                 currentNumDigits = 0
             }
 
-            R.id.btn_pi ->
+            R.id.btn_pi          ->
             {
                 if (isPrevEqual) clear()
                 if (edtMain.text.isNotEmpty())
@@ -1326,7 +1296,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, View.OnTouchList
                 currentNumDigits = 0
             }
 
-            R.id.btn_fact ->
+            R.id.btn_fact        ->
             {
                 if (checkForOperator())
                 {
@@ -1338,14 +1308,14 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, View.OnTouchList
                 currentNumDigits = 0
             }
 
-            R.id.btn_more ->
+            R.id.btn_more        ->
             {
                 isExpanded = !isExpanded
                 expand()
                 isPrevEqual = false
 
             }
-            R.id.btn_sin ->
+            R.id.btn_sin         ->
             {
                 if (isPrevEqual) clear()
                 if (updateEdtMain("sin(")) isAvailableToCalculate("sin(")
@@ -1354,7 +1324,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, View.OnTouchList
                 currentNumDigits = 0
             }
 
-            R.id.btn_cos ->
+            R.id.btn_cos         ->
             {
                 if (isPrevEqual) clear()
                 if (updateEdtMain("cos(")) isAvailableToCalculate("cos(")
@@ -1363,7 +1333,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, View.OnTouchList
                 currentNumDigits = 0
             }
 
-            R.id.btn_tan ->
+            R.id.btn_tan         ->
             {
                 if (isPrevEqual) clear()
                 if (updateEdtMain("tan(")) isAvailableToCalculate("tan(")
@@ -1372,7 +1342,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, View.OnTouchList
                 currentNumDigits = 0
             }
 
-            R.id.btn_e ->
+            R.id.btn_e           ->
             {
                 if (isPrevEqual) clear()
 
@@ -1385,7 +1355,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, View.OnTouchList
                 currentNumDigits = 0
             }
 
-            R.id.btn_log2 ->
+            R.id.btn_log2        ->
             {
                 if (isPrevEqual) clear()
                 if (updateEdtMain("log2(")) isAvailableToCalculate("log2(")
@@ -1394,7 +1364,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, View.OnTouchList
                 currentNumDigits = 0
             }
 
-            R.id.btn_log10 ->
+            R.id.btn_log10       ->
             {
                 if (isPrevEqual) clear()
                 if (updateEdtMain("log10(")) isAvailableToCalculate("log10(")
@@ -1403,7 +1373,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, View.OnTouchList
                 currentNumDigits = 0
             }
 
-            R.id.btn_ln ->
+            R.id.btn_ln          ->
             {
                 if (isPrevEqual) clear()
                 if (updateEdtMain("ln(")) isAvailableToCalculate("ln(")
@@ -1412,7 +1382,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, View.OnTouchList
                 currentNumDigits = 0
             }
 
-            R.id.btn_rad ->
+            R.id.btn_rad         ->
             {
                 if (isPrevEqual) clear()
                 if (updateEdtMain("rad(")) isAvailableToCalculate("rad(")
@@ -1441,7 +1411,8 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, View.OnTouchList
             TransitionManager.beginDelayedTransition(llMain)
             sinLinLay.visibility = View.VISIBLE
             logLinLay.visibility = View.VISIBLE
-        } else
+        }
+        else
         {
             btnMore.text = getString(R.string.btn_more_not_expanded)
             TransitionManager.beginDelayedTransition(llMain)
@@ -1674,7 +1645,8 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, View.OnTouchList
         )
         {
             if (updateEdtMain("(")) edtMain.setSelection(cursorPos + 1)
-        } else if (closeBracketCount < openBracketCount && edtMain.text.toString()
+        }
+        else if (closeBracketCount < openBracketCount && edtMain.text.toString()
                 .substring(textLength - 1, textLength) != "("
         )
         {

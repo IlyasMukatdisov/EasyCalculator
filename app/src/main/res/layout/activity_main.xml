@@ -120,6 +120,7 @@
 
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/btn_square_root"
+                style="?android:attr/borderlessButtonStyle"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_marginStart="10dp"
@@ -128,7 +129,6 @@
                 android:background="@drawable/buttons_round"
                 android:gravity="center"
                 android:text="@string/btn_square_root"
-                style="?android:attr/borderlessButtonStyle"
                 android:textColor="@color/black"
                 android:textSize="@dimen/btn_text_size"
                 app:backgroundTint="@color/light_blue" />

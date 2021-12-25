@@ -12,6 +12,7 @@ import android.os.Handler
 import android.os.Looper
 import android.text.SpannableStringBuilder
 import android.transition.TransitionManager
+import android.util.TypedValue
 import android.view.MotionEvent
 import android.view.View
 import android.widget.*
@@ -134,7 +135,7 @@ class GraphActivity : AppCompatActivity(), View.OnClickListener, View.OnTouchLis
 
         if (intent.hasExtra(MAIN_TEXT_SIZE))
         {
-            viewsTextSize = intent.getFloatExtra(MAIN_TEXT_SIZE, 0f) / 6 * 5
+            viewsTextSize = intent.getFloatExtra(MAIN_TEXT_SIZE, 0f) - 6f
             setTextSizes()
         }
 
@@ -382,59 +383,60 @@ class GraphActivity : AppCompatActivity(), View.OnClickListener, View.OnTouchLis
 
     private fun setTextSizes()
     {
-        btnZero.textSize = viewsTextSize
-        btnOne.textSize = viewsTextSize
-        btnTwo.textSize = viewsTextSize
-        btnThree.textSize = viewsTextSize
-        btnFour.textSize = viewsTextSize
-        btnFive.textSize = viewsTextSize
-        btnSix.textSize = viewsTextSize
-        btnSeven.textSize = viewsTextSize
-        btnEight.textSize = viewsTextSize
-        btnNine.textSize = viewsTextSize
-        btnPlus.textSize = viewsTextSize
-        btnMinus.textSize = viewsTextSize
-        btnMulti.textSize = viewsTextSize
-        btnDivision.textSize = viewsTextSize
-        btnDot.textSize = viewsTextSize
-        btnBrackets.textSize = viewsTextSize
-        btnBackSpace.textSize = viewsTextSize
-        btnSquareRoot.textSize = viewsTextSize
-        btnExp.textSize = viewsTextSize
-        btnPi.textSize = viewsTextSize
-        btnSin.textSize = viewsTextSize
-        btnCos.textSize = viewsTextSize
-        btnTan.textSize = viewsTextSize
-        btnE.textSize = viewsTextSize
-        btnLog2.textSize = viewsTextSize
-        btnLg.textSize = viewsTextSize
-        btnLn.textSize = viewsTextSize
-        btnX.textSize = viewsTextSize
-        btnZeroKeyboard.textSize = viewsTextSize * 3 / 2
-        btnOneKeyboard.textSize = viewsTextSize * 3 / 2
-        btnTwoKeyboard.textSize = viewsTextSize * 3 / 2
-        btnThreeKeyboard.textSize = viewsTextSize * 3 / 2
-        btnFourKeyboard.textSize = viewsTextSize * 3 / 2
-        btnFiveKeyboard.textSize = viewsTextSize * 3 / 2
-        btnSixKeyboard.textSize = viewsTextSize * 3 / 2
-        btnSevenKeyboard.textSize = viewsTextSize * 3 / 2
-        btnEightKeyboard.textSize = viewsTextSize * 3 / 2
-        btnNineKeyboard.textSize = viewsTextSize * 3 / 2
-        btnDotKeyboard.textSize = viewsTextSize * 3 / 2
-        btnBackspaceKeyboard.textSize = viewsTextSize * 3 / 2
+        btnBuild.setTextSize(TypedValue.COMPLEX_UNIT_SP, viewsTextSize - 4f)
+        btnZero.setTextSize(TypedValue.COMPLEX_UNIT_SP, viewsTextSize)
+        btnOne.setTextSize(TypedValue.COMPLEX_UNIT_SP, viewsTextSize)
+        btnTwo.setTextSize(TypedValue.COMPLEX_UNIT_SP, viewsTextSize)
+        btnThree.setTextSize(TypedValue.COMPLEX_UNIT_SP, viewsTextSize)
+        btnFour.setTextSize(TypedValue.COMPLEX_UNIT_SP, viewsTextSize)
+        btnFive.setTextSize(TypedValue.COMPLEX_UNIT_SP, viewsTextSize)
+        btnSix.setTextSize(TypedValue.COMPLEX_UNIT_SP, viewsTextSize)
+        btnSeven.setTextSize(TypedValue.COMPLEX_UNIT_SP, viewsTextSize)
+        btnEight.setTextSize(TypedValue.COMPLEX_UNIT_SP, viewsTextSize)
+        btnNine.setTextSize(TypedValue.COMPLEX_UNIT_SP, viewsTextSize)
+        btnPlus.setTextSize(TypedValue.COMPLEX_UNIT_SP, viewsTextSize)
+        btnMinus.setTextSize(TypedValue.COMPLEX_UNIT_SP, viewsTextSize)
+        btnMulti.setTextSize(TypedValue.COMPLEX_UNIT_SP, viewsTextSize)
+        btnDivision.setTextSize(TypedValue.COMPLEX_UNIT_SP, viewsTextSize)
+        btnDot.setTextSize(TypedValue.COMPLEX_UNIT_SP, viewsTextSize)
+        btnBrackets.setTextSize(TypedValue.COMPLEX_UNIT_SP, viewsTextSize)
+        btnBackSpace.setTextSize(TypedValue.COMPLEX_UNIT_SP, viewsTextSize)
+        btnSquareRoot.setTextSize(TypedValue.COMPLEX_UNIT_SP, viewsTextSize)
+        btnExp.setTextSize(TypedValue.COMPLEX_UNIT_SP, viewsTextSize)
+        btnPi.setTextSize(TypedValue.COMPLEX_UNIT_SP, viewsTextSize)
+        btnSin.setTextSize(TypedValue.COMPLEX_UNIT_SP, viewsTextSize)
+        btnCos.setTextSize(TypedValue.COMPLEX_UNIT_SP, viewsTextSize)
+        btnTan.setTextSize(TypedValue.COMPLEX_UNIT_SP, viewsTextSize)
+        btnE.setTextSize(TypedValue.COMPLEX_UNIT_SP, viewsTextSize)
+        btnLog2.setTextSize(TypedValue.COMPLEX_UNIT_SP, viewsTextSize)
+        btnLg.setTextSize(TypedValue.COMPLEX_UNIT_SP, viewsTextSize)
+        btnLn.setTextSize(TypedValue.COMPLEX_UNIT_SP, viewsTextSize)
+        btnX.setTextSize(TypedValue.COMPLEX_UNIT_SP, viewsTextSize)
+        btnZeroKeyboard.setTextSize(TypedValue.COMPLEX_UNIT_SP, viewsTextSize + 4f)
+        btnOneKeyboard.setTextSize(TypedValue.COMPLEX_UNIT_SP, viewsTextSize + 4f)
+        btnTwoKeyboard.setTextSize(TypedValue.COMPLEX_UNIT_SP, viewsTextSize + 4f)
+        btnThreeKeyboard.setTextSize(TypedValue.COMPLEX_UNIT_SP, viewsTextSize + 4f)
+        btnFourKeyboard.setTextSize(TypedValue.COMPLEX_UNIT_SP, viewsTextSize + 4f)
+        btnFiveKeyboard.setTextSize(TypedValue.COMPLEX_UNIT_SP, viewsTextSize + 4f)
+        btnSixKeyboard.setTextSize(TypedValue.COMPLEX_UNIT_SP, viewsTextSize + 4f)
+        btnSevenKeyboard.setTextSize(TypedValue.COMPLEX_UNIT_SP, viewsTextSize + 4f)
+        btnEightKeyboard.setTextSize(TypedValue.COMPLEX_UNIT_SP, viewsTextSize + 4f)
+        btnNineKeyboard.setTextSize(TypedValue.COMPLEX_UNIT_SP, viewsTextSize + 4f)
+        btnDotKeyboard.setTextSize(TypedValue.COMPLEX_UNIT_SP, viewsTextSize + 4f)
+        btnBackspaceKeyboard.setTextSize(TypedValue.COMPLEX_UNIT_SP, viewsTextSize + 4f)
 
         /* btnBuild.textSize=viewsTextSize*/
 
 
-        tvFx.textSize = viewsTextSize
-        tvXValues.textSize = viewsTextSize
-        tvSemicolon.textSize = viewsTextSize
-        tvXStep.textSize = viewsTextSize
+        tvFx.setTextSize(TypedValue.COMPLEX_UNIT_SP, viewsTextSize)
+        tvXValues.setTextSize(TypedValue.COMPLEX_UNIT_SP, viewsTextSize)
+        tvSemicolon.setTextSize(TypedValue.COMPLEX_UNIT_SP, viewsTextSize)
+        tvXStep.setTextSize(TypedValue.COMPLEX_UNIT_SP, viewsTextSize)
 
-        edtExp.textSize = viewsTextSize
-        edtXStart.textSize = viewsTextSize
-        edtXEnd.textSize = viewsTextSize
-        edtXStep.textSize = viewsTextSize
+        edtExp.setTextSize(TypedValue.COMPLEX_UNIT_SP, viewsTextSize)
+        edtXStart.setTextSize(TypedValue.COMPLEX_UNIT_SP, viewsTextSize)
+        edtXEnd.setTextSize(TypedValue.COMPLEX_UNIT_SP, viewsTextSize)
+        edtXStep.setTextSize(TypedValue.COMPLEX_UNIT_SP, viewsTextSize)
 
 
     }
