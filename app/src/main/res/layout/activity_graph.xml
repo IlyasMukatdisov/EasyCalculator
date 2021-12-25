@@ -2,41 +2,40 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/ll_parent"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".GraphActivity"
-    android:id="@+id/ll_parent">
+    tools:context=".GraphActivity">
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/cc_content"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="0.5"
-        android:id="@+id/cc_content">
+        android:layout_weight="0.5">
 
         <LinearLayout
             android:id="@+id/ll_menu"
             android:layout_width="50dp"
             android:layout_height="50dp"
+            android:gravity="end"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            android:gravity="end">
+            app:layout_constraintTop_toTopOf="parent">
 
             <ImageButton
                 android:id="@+id/btn_menu"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                android:src="@drawable/ic_more_vert_black"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="10dp"
                 android:background="@drawable/buttons_round"
                 android:backgroundTint="@color/white"
                 android:contentDescription="@string/btn_menu"
-                android:layout_marginEnd="10dp"
-                android:layout_marginTop="10dp"/>
+                android:src="@drawable/ic_more_vert_black"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
         </LinearLayout>
-
 
 
         <com.github.mikephil.charting.charts.LineChart
@@ -54,8 +53,8 @@
         android:id="@+id/ll_expression"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="center"
-        android:layout_marginBottom="5dp">
+        android:layout_marginBottom="5dp"
+        android:gravity="center">
 
         <TextView
             android:id="@+id/tv_fx"
@@ -74,12 +73,11 @@
             android:ems="10"
             android:gravity="center_vertical"
             android:hint="@string/cos_x"
+            android:importantForAutofill="no"
             android:inputType="textNoSuggestions"
             android:maxLines="1"
             android:scrollHorizontally="true"
-            android:textSize="24sp"
-            android:importantForAutofill="no" />
-
+            android:textSize="24sp" />
 
 
         <androidx.appcompat.widget.AppCompatButton
@@ -88,98 +86,92 @@
             android:layout_height="match_parent"
             android:layout_marginEnd="10dp"
             android:layout_weight="0.2"
-            android:text="@string/btn_build"
             android:background="@drawable/buttons_round"
-            app:backgroundTint="@color/light_green"
+            android:text="@string/btn_build"
             android:textAllCaps="false"
-            android:textSize="16sp" />
+            android:textSize="16sp"
+            app:backgroundTint="@color/light_green" />
 
     </LinearLayout>
 
     <LinearLayout
+        android:id="@+id/ll_parameters"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="start"
-        android:layout_marginBottom="10dp">
+        android:layout_marginBottom="10dp"
+        android:baselineAligned="false"
+        android:gravity="start">
 
-        <LinearLayout
+        <TextView
+            android:id="@+id/tv_x_values"
             android:layout_width="0dp"
-            android:layout_weight="0.8"
             android:layout_height="match_parent"
-            >
-            <TextView
-                android:id="@+id/tv_x_values"
-                android:layout_width="0dp"
-                android:layout_weight="0.1"
-                android:layout_height="match_parent"
-                android:layout_marginStart="10dp"
-                android:gravity="center"
-                android:text="@string/x_values_start"
-                android:textSize="24sp" />
+            android:layout_marginStart="10dp"
+            android:layout_weight="0.1"
+            android:gravity="center"
+            android:text="@string/x_values_start"
+            android:textSize="24sp" />
 
-            <EditText
-                android:id="@+id/edt_x_begin"
-                android:layout_width="0dp"
-                android:layout_weight="0.2"
-                android:layout_height="wrap_content"
-                android:ems="10"
-                android:gravity="center"
-                android:hint="@string/hint_start_range"
-                android:inputType="textNoSuggestions"
-                android:maxLines="1"
-                android:scrollHorizontally="true"
-                android:textSize="24sp"
-                android:importantForAutofill="no" />
+        <EditText
+            android:id="@+id/edt_x_begin"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.2"
+            android:ems="10"
+            android:gravity="center"
+            android:hint="@string/hint_start_range"
+            android:importantForAutofill="no"
+            android:inputType="textNoSuggestions"
+            android:maxLines="1"
+            android:scrollHorizontally="true"
+            android:textSize="24sp" />
 
-            <TextView
-                android:id="@+id/tv_semicolon"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="0.05"
-                android:gravity="center"
-                android:text="@string/semicolon"
-                android:textSize="24sp" />
+        <TextView
+            android:id="@+id/tv_semicolon"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="0.05"
+            android:gravity="center"
+            android:text="@string/semicolon"
+            android:textSize="24sp" />
 
-            <EditText
-                android:id="@+id/edt_x_end"
-                android:layout_width="0dp"
-                android:layout_weight="0.2"
-                android:layout_height="wrap_content"
-                android:ems="10"
-                android:gravity="center"
-                android:hint="@string/hint_x_end"
-                android:inputType="textNoSuggestions"
-                android:maxLines="1"
-                android:scrollHorizontally="true"
-                android:textSize="24sp"
-                android:importantForAutofill="no" />
+        <EditText
+            android:id="@+id/edt_x_end"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.2"
+            android:ems="10"
+            android:gravity="center"
+            android:hint="@string/hint_x_end"
+            android:importantForAutofill="no"
+            android:inputType="textNoSuggestions"
+            android:maxLines="1"
+            android:scrollHorizontally="true"
+            android:textSize="24sp" />
 
-            <TextView
-                android:id="@+id/tv_x_step"
-                android:layout_width="0dp"
-                android:layout_weight="0.15"
-                android:layout_height="match_parent"
-                android:gravity="center"
-                android:text="@string/tv_x_step"
-                android:textSize="24sp" />
+        <TextView
+            android:id="@+id/tv_x_step"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="0.15"
+            android:gravity="center"
+            android:text="@string/tv_x_step"
+            android:textSize="24sp" />
 
-            <EditText
-                android:id="@+id/edt_x_step"
-                android:layout_width="0dp"
-                android:layout_weight="0.2"
-                android:layout_height="wrap_content"
-                android:ems="10"
-                android:gravity="center"
-                android:hint="@string/hint_x_step"
-                android:inputType="textNoSuggestions"
-                android:maxLines="1"
-                android:scrollHorizontally="true"
-                android:textSize="24sp"
-                android:importantForAutofill="no"
-                android:layout_marginEnd="10dp"/>
-
-        </LinearLayout>
-
+        <EditText
+            android:id="@+id/edt_x_step"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="10dp"
+            android:layout_weight="0.2"
+            android:ems="10"
+            android:gravity="center"
+            android:hint="@string/hint_x_step"
+            android:importantForAutofill="no"
+            android:inputType="textNoSuggestions"
+            android:maxLines="1"
+            android:scrollHorizontally="true"
+            android:textSize="24sp" />
 
 
     </LinearLayout>
@@ -189,9 +181,9 @@
         android:id="@+id/ll_keyboard"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:visibility="gone"
         android:layout_weight="0.4"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:visibility="gone">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -246,7 +238,6 @@
                 app:backgroundTint="@color/light_gray" />
 
 
-
         </LinearLayout>
 
         <LinearLayout
@@ -298,7 +289,6 @@
                 android:textColor="@color/black"
                 android:textSize="@dimen/btn_text_size"
                 app:backgroundTint="@color/light_gray" />
-
 
 
         </LinearLayout>
@@ -360,7 +350,6 @@
                 app:backgroundTint="@color/light_gray" />
 
 
-
         </LinearLayout>
 
         <LinearLayout
@@ -402,7 +391,6 @@
                 app:backgroundTint="@color/light_gray" />
 
 
-
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/btn_backspace_keyboard"
                 android:layout_width="wrap_content"
@@ -417,13 +405,9 @@
                 app:backgroundTint="@color/light_gray" />
 
 
-
-
         </LinearLayout>
 
     </LinearLayout>
-
-
 
 
     <LinearLayout

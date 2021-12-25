@@ -161,7 +161,8 @@ class GraphActivity : AppCompatActivity(), View.OnClickListener, View.OnTouchLis
         }
         else
         {
-            if (doubleBackToExitPressedOnce) {
+            if (doubleBackToExitPressedOnce)
+            {
                 val intent = Intent(this, MainActivity::class.java)
                 startActivity(intent)
             }
@@ -169,7 +170,10 @@ class GraphActivity : AppCompatActivity(), View.OnClickListener, View.OnTouchLis
             this.doubleBackToExitPressedOnce = true
             Toast.makeText(this, "Please click BACK again to exit", Toast.LENGTH_SHORT).show()
 
-            Handler(Looper.getMainLooper()).postDelayed({ doubleBackToExitPressedOnce = false }, 2000)
+            Handler(Looper.getMainLooper()).postDelayed(
+                { doubleBackToExitPressedOnce = false },
+                2000
+            )
         }
     }
 
@@ -237,7 +241,8 @@ class GraphActivity : AppCompatActivity(), View.OnClickListener, View.OnTouchLis
         btnNine.setTextColor(ColorStateList.valueOf(ContextCompat.getColor(this, R.color.white)))
         btnDot.setTextColor(ColorStateList.valueOf(ContextCompat.getColor(this, R.color.white)))
         btnBackSpace.setTextColor(
-            ColorStateList.valueOf(ContextCompat.getColor(this, R.color.white)))
+            ColorStateList.valueOf(ContextCompat.getColor(this, R.color.white))
+        )
 
 
 
@@ -268,29 +273,41 @@ class GraphActivity : AppCompatActivity(), View.OnClickListener, View.OnTouchLis
 
 
         btnZeroKeyboard.setTextColor(
-            ColorStateList.valueOf(ContextCompat.getColor(this, R.color.white)))
+            ColorStateList.valueOf(ContextCompat.getColor(this, R.color.white))
+        )
         btnOneKeyboard.setTextColor(
-            ColorStateList.valueOf(ContextCompat.getColor(this, R.color.white)))
+            ColorStateList.valueOf(ContextCompat.getColor(this, R.color.white))
+        )
         btnTwoKeyboard.setTextColor(
-            ColorStateList.valueOf(ContextCompat.getColor(this, R.color.white)))
+            ColorStateList.valueOf(ContextCompat.getColor(this, R.color.white))
+        )
         btnThreeKeyboard.setTextColor(
-            ColorStateList.valueOf(ContextCompat.getColor(this, R.color.white)))
+            ColorStateList.valueOf(ContextCompat.getColor(this, R.color.white))
+        )
         btnFourKeyboard.setTextColor(
-            ColorStateList.valueOf(ContextCompat.getColor(this, R.color.white)))
+            ColorStateList.valueOf(ContextCompat.getColor(this, R.color.white))
+        )
         btnFiveKeyboard.setTextColor(
-            ColorStateList.valueOf(ContextCompat.getColor(this, R.color.white)))
+            ColorStateList.valueOf(ContextCompat.getColor(this, R.color.white))
+        )
         btnSixKeyboard.setTextColor(
-            ColorStateList.valueOf(ContextCompat.getColor(this, R.color.white)))
+            ColorStateList.valueOf(ContextCompat.getColor(this, R.color.white))
+        )
         btnSevenKeyboard.setTextColor(
-            ColorStateList.valueOf(ContextCompat.getColor(this, R.color.white)))
+            ColorStateList.valueOf(ContextCompat.getColor(this, R.color.white))
+        )
         btnEightKeyboard.setTextColor(
-            ColorStateList.valueOf(ContextCompat.getColor(this, R.color.white)))
+            ColorStateList.valueOf(ContextCompat.getColor(this, R.color.white))
+        )
         btnNineKeyboard.setTextColor(
-            ColorStateList.valueOf(ContextCompat.getColor(this, R.color.white)))
+            ColorStateList.valueOf(ContextCompat.getColor(this, R.color.white))
+        )
         btnDotKeyboard.setTextColor(
-            ColorStateList.valueOf(ContextCompat.getColor(this, R.color.white)))
+            ColorStateList.valueOf(ContextCompat.getColor(this, R.color.white))
+        )
         btnBackspaceKeyboard.setTextColor(
-            ColorStateList.valueOf(ContextCompat.getColor(this, R.color.white)))
+            ColorStateList.valueOf(ContextCompat.getColor(this, R.color.white))
+        )
     }
 
 
@@ -406,7 +423,7 @@ class GraphActivity : AppCompatActivity(), View.OnClickListener, View.OnTouchLis
         btnDotKeyboard.textSize = viewsTextSize * 3 / 2
         btnBackspaceKeyboard.textSize = viewsTextSize * 3 / 2
 
-       /* btnBuild.textSize=viewsTextSize*/
+        /* btnBuild.textSize=viewsTextSize*/
 
 
         tvFx.textSize = viewsTextSize
@@ -668,8 +685,10 @@ class GraphActivity : AppCompatActivity(), View.OnClickListener, View.OnTouchLis
 
         if (xStart >= xEnd)
         {
-            Snackbar.make(llParent, "End value must be bigger than Start value!",
-                Snackbar.LENGTH_SHORT).show()
+            Snackbar.make(
+                llParent, "End value must be bigger than Start value!",
+                Snackbar.LENGTH_SHORT
+            ).show()
             return false
         }
 
@@ -1577,7 +1596,8 @@ class GraphActivity : AppCompatActivity(), View.OnClickListener, View.OnTouchLis
                 if (edt.length() >= 4 && pos - 2 >= 0 && pos + 2 <= lastIndex + 1)
                 {
                     if (edt.text.substring(pos - 2, pos + 2) == "tan(" || edt.text.substring(
-                            pos - 2, pos + 2) == "rad("
+                            pos - 2, pos + 2
+                        ) == "rad("
                     )
                     {
                         edt.text.replace(pos - 2, pos + 2, "")
@@ -1720,9 +1740,13 @@ class GraphActivity : AppCompatActivity(), View.OnClickListener, View.OnTouchLis
                 }
                 if (edt.length() >= 4 && pos - 4 >= 0 && pos <= lastIndex + 1)
                 {
-                    if (edt.text.substring(pos - 4, pos) == "sin(" || edt.text.substring(pos - 4,
-                            pos) == "cos(" || edt.text.substring(pos - 4,
-                            pos) == "tan(" || edt.text.substring(pos - 4, pos) == "rad("
+                    if (edt.text.substring(pos - 4, pos) == "sin(" || edt.text.substring(
+                            pos - 4,
+                            pos
+                        ) == "cos(" || edt.text.substring(
+                            pos - 4,
+                            pos
+                        ) == "tan(" || edt.text.substring(pos - 4, pos) == "rad("
                     )
                     {
                         edt.text.replace(pos - 4, pos, "")
@@ -1740,7 +1764,8 @@ class GraphActivity : AppCompatActivity(), View.OnClickListener, View.OnTouchLis
                     }
                 }
                 if (edt.length() >= 6 && pos - 6 >= 0 && pos <= lastIndex + 1) if (edt.text.substring(
-                        pos - 6, pos) == "log10("
+                        pos - 6, pos
+                    ) == "log10("
                 )
                 {
                     edt.text.replace(pos - 6, pos, "")
@@ -2034,7 +2059,8 @@ class GraphActivity : AppCompatActivity(), View.OnClickListener, View.OnTouchLis
             btnNineKeyboard.setTextColor(AppCompatResources.getColorStateList(this, R.color.white))
             btnDotKeyboard.setTextColor(AppCompatResources.getColorStateList(this, R.color.white))
             btnBackspaceKeyboard.setTextColor(
-                AppCompatResources.getColorStateList(this, R.color.white))
+                AppCompatResources.getColorStateList(this, R.color.white)
+            )
         }
         else
         {
@@ -2063,7 +2089,8 @@ class GraphActivity : AppCompatActivity(), View.OnClickListener, View.OnTouchLis
             btnNineKeyboard.setTextColor(AppCompatResources.getColorStateList(this, R.color.black))
             btnDotKeyboard.setTextColor(AppCompatResources.getColorStateList(this, R.color.black))
             btnBackspaceKeyboard.setTextColor(
-                AppCompatResources.getColorStateList(this, R.color.black))
+                AppCompatResources.getColorStateList(this, R.color.black)
+            )
         }
 
 

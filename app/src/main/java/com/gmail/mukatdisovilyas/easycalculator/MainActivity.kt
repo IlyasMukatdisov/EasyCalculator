@@ -7,7 +7,6 @@ import android.content.res.ColorStateList
 import android.content.res.Configuration
 import android.graphics.Color
 import android.graphics.Point
-import android.graphics.drawable.Drawable
 import android.os.Build
 import android.os.Bundle
 import android.text.SpannableStringBuilder
@@ -33,7 +32,8 @@ import kotlin.math.pow
 import kotlin.math.sqrt
 
 
-class MainActivity : AppCompatActivity(), View.OnClickListener, View.OnTouchListener {
+class MainActivity : AppCompatActivity(), View.OnClickListener, View.OnTouchListener
+{
 
     /*companion object
     {
@@ -106,7 +106,8 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, View.OnTouchList
     private var lastNumber: Double = 0.0
     private var multipleEqualExp = ""
 
-    override fun onCreate(savedInstanceState: Bundle?) {
+    override fun onCreate(savedInstanceState: Bundle?)
+    {
         super.onCreate(savedInstanceState)
         setTheme(R.style.Theme_EasyCalculator)
         setContentView(R.layout.activity_main)
@@ -119,9 +120,11 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, View.OnTouchList
         setTextSizes()
         initPopUpMenu()
 
-        if (!isEmptyCustomization()) {
+        if (!isEmptyCustomization())
+        {
             customization()
-        } else {
+        } else
+        {
             setDefaultNumberColors()
             setDefaultTextColor()
         }
@@ -135,8 +138,10 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, View.OnTouchList
 
     }
 
-    private fun setDefaultTheme() {
-        if (isDarkThemeOn()) {
+    private fun setDefaultTheme()
+    {
+        if (isDarkThemeOn())
+        {
             edtMain.backgroundTintList =
                 ColorStateList.valueOf(ContextCompat.getColor(this, R.color.dark_gray))
             edtSecond.backgroundTintList =
@@ -161,7 +166,8 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, View.OnTouchList
             edtSecond.setTextColor(
                 ColorStateList.valueOf(ContextCompat.getColor(this, R.color.white))
             )
-        } else {
+        } else
+        {
             edtMain.backgroundTintList =
                 ColorStateList.valueOf(ContextCompat.getColor(this, R.color.light_gray))
             edtSecond.backgroundTintList =
@@ -190,27 +196,33 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, View.OnTouchList
 
     }
 
-    override fun onBackPressed() {
+    override fun onBackPressed()
+    {
         moveTaskToBack(true)
     }
 
-    private fun changeEdtSecondTextSize(strToAdd: String) {
+    private fun changeEdtSecondTextSize(strToAdd: String)
+    {
         var textSize = edtSecond.textSize / resources.displayMetrics.scaledDensity
 
 
-        if (edtSecond.textSize * edtSecond.text.length >= cardView.width && textSize > 30.0) {
-            for (i in 0..strToAdd.length) {
+        if (edtSecond.textSize * edtSecond.text.length >= cardView.width && textSize > 30.0)
+        {
+            for (i in 0..strToAdd.length)
+            {
                 textSize -= if (resources.configuration.orientation == Configuration.ORIENTATION_PORTRAIT) 2
                 else 1
                 edtSecond.setTextSize(TypedValue.COMPLEX_UNIT_SP, textSize)
-                if (textSize < 30.0) {
+                if (textSize < 30.0)
+                {
                     break
                 }
             }
         }
     }
 
-    private fun isAvailableToCalculate(strToAdd: String): Boolean {
+    private fun isAvailableToCalculate(strToAdd: String): Boolean
+    {
         val temp = calculateFun(edtMain.text.toString())
 
         edtSecond.setText(temp)
@@ -223,12 +235,14 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, View.OnTouchList
         return true
     }
 
-    private fun isEmptyCustomization(): Boolean {
+    private fun isEmptyCustomization(): Boolean
+    {
         val dbHelper = CustomModelDatabaseHelper(this)
         return dbHelper.isCustomizationEmpty()
     }
 
-    private fun customization() {
+    private fun customization()
+    {
         val list = CustomModelDatabaseHelper(this).getAll()
         val numbersColor = list[0].numberButtonsColor
         val actionsColor = list[0].actionButtonsColor
@@ -238,7 +252,8 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, View.OnTouchList
         val shape = list[0].shape
 
 
-        if (numbersColor.isNotEmpty()) {
+        if (numbersColor.isNotEmpty())
+        {
             btnZero.backgroundTintList = ColorStateList.valueOf(Color.parseColor(numbersColor))
             btnOne.backgroundTintList = ColorStateList.valueOf(Color.parseColor(numbersColor))
             btnTwo.backgroundTintList = ColorStateList.valueOf(Color.parseColor(numbersColor))
@@ -253,7 +268,8 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, View.OnTouchList
             btnBackSpace.backgroundTintList = ColorStateList.valueOf(Color.parseColor(numbersColor))
         } else setDefaultNumberColors()
 
-        if (actionsColor.isNotEmpty()) {
+        if (actionsColor.isNotEmpty())
+        {
             btnPlus.backgroundTintList = ColorStateList.valueOf(Color.parseColor(actionsColor))
             btnMinus.backgroundTintList = ColorStateList.valueOf(Color.parseColor(actionsColor))
             btnMulti.backgroundTintList = ColorStateList.valueOf(Color.parseColor(actionsColor))
@@ -289,15 +305,20 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, View.OnTouchList
         if (textColor.isNotEmpty()) setButtonsTextColor(textColor)
         else setDefaultTextColor()
 
-        if (shape.isNotEmpty()) {
-            when (shape) {
-                SHAPE_ROUNDED -> {
+        if (shape.isNotEmpty())
+        {
+            when (shape)
+            {
+                SHAPE_ROUNDED ->
+                {
                     setButtonsRounded()
                 }
-                SHAPE_RECTANGLE -> {
+                SHAPE_RECTANGLE ->
+                {
                     setButtonsRectangle()
                 }
-                SHAPE_CIRCLE -> {
+                SHAPE_CIRCLE ->
+                {
                     setButtonsCircle()
                 }
             }
@@ -306,8 +327,10 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, View.OnTouchList
 
     }
 
-    private fun setDefaultTextColor() {
-        if (isDarkThemeOn()) {
+    private fun setDefaultTextColor()
+    {
+        if (isDarkThemeOn())
+        {
 
             btnZero.setTextColor(
                 ColorStateList.valueOf(ContextCompat.getColor(this, R.color.white))
@@ -339,7 +362,8 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, View.OnTouchList
             )
 
 
-        } else {
+        } else
+        {
             btnZero.setTextColor(
                 ColorStateList.valueOf(ContextCompat.getColor(this, R.color.black))
             )
@@ -402,7 +426,8 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, View.OnTouchList
 
     }
 
-    private fun setDefaultActionsColor() {
+    private fun setDefaultActionsColor()
+    {
         btnPlus.backgroundTintList = AppCompatResources.getColorStateList(this, R.color.light_blue)
         btnMinus.backgroundTintList = AppCompatResources.getColorStateList(this, R.color.light_blue)
         btnMulti.backgroundTintList = AppCompatResources.getColorStateList(this, R.color.light_blue)
@@ -428,8 +453,10 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, View.OnTouchList
         btnRad.backgroundTintList = AppCompatResources.getColorStateList(this, R.color.light_blue)
     }
 
-    private fun setDefaultNumberColors() {
-        if (isDarkThemeOn()) {
+    private fun setDefaultNumberColors()
+    {
+        if (isDarkThemeOn())
+        {
 
             btnZero.backgroundTintList =
                 ColorStateList.valueOf(ContextCompat.getColor(this, R.color.dark_gray))
@@ -460,7 +487,8 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, View.OnTouchList
             edtSecond.backgroundTintList =
                 ColorStateList.valueOf(ContextCompat.getColor(this, R.color.dark_gray))
 
-        } else {
+        } else
+        {
             btnZero.backgroundTintList =
                 ColorStateList.valueOf(ContextCompat.getColor(this, R.color.light_gray))
             btnOne.backgroundTintList =
@@ -492,7 +520,8 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, View.OnTouchList
         }
     }
 
-    private fun setButtonsTextColor(textColor: String) {
+    private fun setButtonsTextColor(textColor: String)
+    {
         btnZero.setTextColor(ColorStateList.valueOf(Color.parseColor(textColor)))
         btnOne.setTextColor(ColorStateList.valueOf(Color.parseColor(textColor)))
         btnTwo.setTextColor(ColorStateList.valueOf(Color.parseColor(textColor)))
@@ -531,7 +560,8 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, View.OnTouchList
 
     }
 
-    private fun setButtonsCircle() {
+    private fun setButtonsCircle()
+    {
         btnZero.background = ContextCompat.getDrawable(this, R.drawable.buttons_circle)
         btnOne.background = ContextCompat.getDrawable(this, R.drawable.buttons_circle)
         btnTwo.background = ContextCompat.getDrawable(this, R.drawable.buttons_circle)
@@ -568,7 +598,8 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, View.OnTouchList
         btnEqual.background = ContextCompat.getDrawable(this, R.drawable.buttons_circle)
     }
 
-    private fun setButtonsRectangle() {
+    private fun setButtonsRectangle()
+    {
         btnZero.background = ContextCompat.getDrawable(this, R.drawable.buttons_rectangle)
         btnOne.background = ContextCompat.getDrawable(this, R.drawable.buttons_rectangle)
         btnTwo.background = ContextCompat.getDrawable(this, R.drawable.buttons_rectangle)
@@ -605,7 +636,8 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, View.OnTouchList
         btnEqual.background = ContextCompat.getDrawable(this, R.drawable.buttons_rectangle)
     }
 
-    private fun setButtonsRounded() {
+    private fun setButtonsRounded()
+    {
         btnZero.background = ContextCompat.getDrawable(this, R.drawable.buttons_round)
         btnOne.background = ContextCompat.getDrawable(this, R.drawable.buttons_round)
         btnTwo.background = ContextCompat.getDrawable(this, R.drawable.buttons_round)
@@ -644,17 +676,21 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, View.OnTouchList
     }
 
     @SuppressLint("DiscouragedPrivateApi", "ClickableViewAccessibility")
-    private fun initPopUpMenu() {
+    private fun initPopUpMenu()
+    {
         val popupMenu2 = PopupMenu(this, btnMenu)
         popupMenu2.inflate(R.menu.menu_main)
 
         popupMenu2.setOnMenuItemClickListener {
-            when (it.itemId) {
-                R.id.menu_to_history -> {
+            when (it.itemId)
+            {
+                R.id.menu_to_history ->
+                {
                     val intent = Intent(this, HistoryActivity::class.java)
                     startActivity(intent)
                 }
-                R.id.menu_to_about -> {
+                R.id.menu_to_about ->
+                {
                     val cdd = CustomDialog(this)
                     val lp = WindowManager.LayoutParams()
                     lp.copyFrom(cdd.window?.attributes)
@@ -676,12 +712,14 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, View.OnTouchList
                          getString(R.string.btn_close)
                      ) { _, _ -> }.show()*/
                 }
-                R.id.menu_to_custom_color -> {
+                R.id.menu_to_custom_color ->
+                {
                     val intent = Intent(this, CustomizationActivity::class.java)
                     intent.putExtra(MAIN_TEXT_SIZE, btnTextSize)
                     startActivity(intent)
                 }
-                R.id.menu_to_graph -> {
+                R.id.menu_to_graph ->
+                {
                     val intent = Intent(this, GraphActivity::class.java)
                     intent.putExtra(MAIN_TEXT_SIZE, btnTextSize)
                     startActivity(intent)
@@ -690,16 +728,21 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, View.OnTouchList
             false
         }
 
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q)
+        {
             popupMenu2.setForceShowIcon(true)
-        } else {
-            try {
+        } else
+        {
+            try
+            {
                 val popup = PopupMenu::class.java.getDeclaredField("mPopup")
                 popup.isAccessible = true
                 val menu = popup.get(popupMenu2)
                 menu.javaClass.getDeclaredMethod("setForceShowIcon", Boolean::class.java)
                     .invoke(menu, true)
-            } catch (e: Exception) {
+            }
+            catch (e: Exception)
+            {
 
             }
         }
@@ -717,17 +760,23 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, View.OnTouchList
     }
 
 
-    override fun onTouch(view: View, motionEvent: MotionEvent): Boolean {
-        when (view.id) {
-            R.id.btn_menu -> {
-                when (motionEvent.action) {
-                    MotionEvent.ACTION_DOWN -> {
+    override fun onTouch(view: View, motionEvent: MotionEvent): Boolean
+    {
+        when (view.id)
+        {
+            R.id.btn_menu ->
+            {
+                when (motionEvent.action)
+                {
+                    MotionEvent.ACTION_DOWN ->
+                    {
                         if (isDarkThemeOn()) btnMenu.backgroundTintList =
                             ColorStateList.valueOf(ContextCompat.getColor(this, R.color.alpha))
                         else btnMenu.backgroundTintList =
                             ColorStateList.valueOf(ContextCompat.getColor(this, R.color.semi_gray))
                     }
-                    MotionEvent.ACTION_UP -> {
+                    MotionEvent.ACTION_UP ->
+                    {
                         if (isDarkThemeOn()) btnMenu.backgroundTintList =
                             ColorStateList.valueOf(ContextCompat.getColor(this, R.color.dark_gray))
                         else btnMenu.backgroundTintList =
@@ -737,15 +786,19 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, View.OnTouchList
                 }
             }
 
-            R.id.ll_menu -> {
-                when (motionEvent.action) {
-                    MotionEvent.ACTION_DOWN -> {
+            R.id.ll_menu ->
+            {
+                when (motionEvent.action)
+                {
+                    MotionEvent.ACTION_DOWN ->
+                    {
                         if (isDarkThemeOn()) btnMenu.backgroundTintList =
                             ColorStateList.valueOf(ContextCompat.getColor(this, R.color.alpha))
                         else btnMenu.backgroundTintList =
                             ColorStateList.valueOf(ContextCompat.getColor(this, R.color.semi_gray))
                     }
-                    MotionEvent.ACTION_UP -> {
+                    MotionEvent.ACTION_UP ->
+                    {
                         if (isDarkThemeOn()) btnMenu.backgroundTintList =
                             ColorStateList.valueOf(ContextCompat.getColor(this, R.color.dark_gray))
                         else btnMenu.backgroundTintList =
@@ -759,7 +812,8 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, View.OnTouchList
         return true
     }
 
-    private fun getPrevTextSize() {
+    private fun getPrevTextSize()
+    {
         edtMainTextSize = edtMain.textSize / resources.displayMetrics.scaledDensity
         edtSecondTextSize = edtSecond.textSize / resources.displayMetrics.scaledDensity
     }
@@ -785,33 +839,43 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, View.OnTouchList
                 or View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY)
     }*/
 
-    private fun setTextSizes() {
+    private fun setTextSizes()
+    {
         val dm = DisplayMetrics()
         windowManager.defaultDisplay.getMetrics(dm)
         val x = (mWidthPixels / dm.xdpi).toDouble().pow(2.0)
         val y = (mHeightPixels / dm.ydpi).toDouble().pow(2.0)
         val screenInches = sqrt(x + y)
 
-        if (screenInches < 5.0) {
-            if (resources.configuration.orientation == Configuration.ORIENTATION_LANDSCAPE) {
+
+        resources.displayMetrics.density
+
+        if (screenInches < 5.0)
+        {
+            if (resources.configuration.orientation == Configuration.ORIENTATION_LANDSCAPE)
+            {
                 if (mWidthPixels in 0..480) btnTextSize = 14 * resources.displayMetrics.density
                 if (mWidthPixels in 481..720) btnTextSize = 12 * resources.displayMetrics.density
                 if (mWidthPixels in 721..1080) btnTextSize = 10 * resources.displayMetrics.density
-            } else {
+            } else
+            {
                 if (mWidthPixels in 0..480) btnTextSize = 12 * resources.displayMetrics.density
                 if (mWidthPixels in 481..720) btnTextSize = 10 * resources.displayMetrics.density
                 if (mWidthPixels in 721..1080) btnTextSize = 8 * resources.displayMetrics.density
             }
         }
 
-        if (screenInches in 5.0..7.0) {
-            if (resources.configuration.orientation == Configuration.ORIENTATION_LANDSCAPE) {
+        if (screenInches in 5.0..7.0)
+        {
+            if (resources.configuration.orientation == Configuration.ORIENTATION_LANDSCAPE)
+            {
                 if (mWidthPixels in 0..480) btnTextSize = 28 * resources.displayMetrics.density
                 if (mWidthPixels in 481..720) btnTextSize = 20 * resources.displayMetrics.density
                 if (mWidthPixels in 721..1080) btnTextSize = 12 * resources.displayMetrics.density
                 if (mWidthPixels in 1081..1600) btnTextSize = 10 * resources.displayMetrics.density
                 if (mWidthPixels in 1601..2560) btnTextSize = 9 * resources.displayMetrics.density
-            } else {
+            } else
+            {
                 if (mWidthPixels in 0..480) btnTextSize = 24 * resources.displayMetrics.density
                 if (mWidthPixels in 481..720) btnTextSize = 14 * resources.displayMetrics.density
                 if (mWidthPixels in 721..1080) btnTextSize = 9 * resources.displayMetrics.density
@@ -820,15 +884,18 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, View.OnTouchList
             }
         }
 
-        if (screenInches > 7.0) {
-            if (resources.configuration.orientation == Configuration.ORIENTATION_LANDSCAPE) {
+        if (screenInches > 7.0)
+        {
+            if (resources.configuration.orientation == Configuration.ORIENTATION_LANDSCAPE)
+            {
                 if (mWidthPixels in 0..480) btnTextSize = 28 * resources.displayMetrics.density
                 if (mWidthPixels in 481..720) btnTextSize = 22 * resources.displayMetrics.density
                 if (mWidthPixels in 721..1080) btnTextSize = 19 * resources.displayMetrics.density
                 if (mWidthPixels in 1081..1600) btnTextSize = 18 * resources.displayMetrics.density
                 if (mWidthPixels in 1601..2160) btnTextSize = 15 * resources.displayMetrics.density
                 if (mWidthPixels in 2560..4000) btnTextSize = 12 * resources.displayMetrics.density
-            } else {
+            } else
+            {
                 if (mWidthPixels in 0..480) btnTextSize = 24 * resources.displayMetrics.density
                 if (mWidthPixels in 481..720) btnTextSize = 20 * resources.displayMetrics.density
                 if (mWidthPixels in 721..1080) btnTextSize = 16 * resources.displayMetrics.density
@@ -881,7 +948,8 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, View.OnTouchList
 
     }
 
-    private fun initViews() {
+    private fun initViews()
+    {
 
         llMenu = findViewById(R.id.ll_menu)
 
@@ -931,7 +999,8 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, View.OnTouchList
         llButtons = findViewById(R.id.ll_buttons)
     }
 
-    private fun setOnClickListeners() {
+    private fun setOnClickListeners()
+    {
         btnZero.setOnClickListener(this)
         btnOne.setOnClickListener(this)
         btnTwo.setOnClickListener(this)
@@ -972,7 +1041,8 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, View.OnTouchList
     }
 
 
-    private fun getRealDeviceSizeInPixels() {
+    private fun getRealDeviceSizeInPixels()
+    {
         val windowManager: WindowManager = windowManager
         val display: Display = windowManager.defaultDisplay
         val displayMetrics = DisplayMetrics()
@@ -984,97 +1054,116 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, View.OnTouchList
         mHeightPixels = displayMetrics.heightPixels
 
         // includes window decorations (statusBar bar/menu bar)
-        try {
+        try
+        {
             mWidthPixels = Display::class.java.getMethod("getRawWidth").invoke(display) as Int
             mHeightPixels = Display::class.java.getMethod("getRawHeight").invoke(display) as Int
-        } catch (ignored: java.lang.Exception) {
+        }
+        catch (ignored: java.lang.Exception)
+        {
         }
 
         // includes window decorations (statusBar bar/menu bar)
-        try {
+        try
+        {
             val realSize = Point()
             Display::class.java.getMethod("getRealSize", Point::class.java)
                 .invoke(display, realSize)
             mWidthPixels = realSize.x
             mHeightPixels = realSize.y
-        } catch (ignored: java.lang.Exception) {
+        }
+        catch (ignored: java.lang.Exception)
+        {
         }
     }
 
 
-    override fun onClick(v: View?) {
-        when (v?.id) {
-            R.id.btn_zero -> {
+    override fun onClick(v: View?)
+    {
+        when (v?.id)
+        {
+            R.id.btn_zero ->
+            {
                 if (isPrevEqual) clear()
                 if (updateEdtMain("0")) isAvailableToCalculate("0")
                 isPrevEqual = false
                 currentNumDigits++
             }
 
-            R.id.btn_one -> {
+            R.id.btn_one ->
+            {
                 if (isPrevEqual) clear()
                 if (updateEdtMain("1")) isAvailableToCalculate("1")
                 isPrevEqual = false
                 currentNumDigits++
             }
 
-            R.id.btn_two -> {
+            R.id.btn_two ->
+            {
                 if (isPrevEqual) clear()
                 if (updateEdtMain("2")) isAvailableToCalculate("2")
                 isPrevEqual = false
                 currentNumDigits++
             }
 
-            R.id.btn_three -> {
+            R.id.btn_three ->
+            {
                 if (isPrevEqual) clear()
                 if (updateEdtMain("3")) isAvailableToCalculate("3")
                 isPrevEqual = false
                 currentNumDigits++
             }
 
-            R.id.btn_four -> {
+            R.id.btn_four ->
+            {
                 if (isPrevEqual) clear()
                 if (updateEdtMain("4")) isAvailableToCalculate("4")
                 isPrevEqual = false
                 currentNumDigits++
             }
 
-            R.id.btn_five -> {
+            R.id.btn_five ->
+            {
                 if (isPrevEqual) clear()
                 if (updateEdtMain("5")) isAvailableToCalculate("5")
                 isPrevEqual = false
                 currentNumDigits++
             }
 
-            R.id.btn_six -> {
+            R.id.btn_six ->
+            {
                 if (isPrevEqual) clear()
                 if (updateEdtMain("6")) isAvailableToCalculate("6")
                 isPrevEqual = false
                 currentNumDigits++
             }
 
-            R.id.btn_seven -> {
+            R.id.btn_seven ->
+            {
                 if (isPrevEqual) clear()
                 if (updateEdtMain("7")) isAvailableToCalculate("7")
                 isPrevEqual = false
                 currentNumDigits++
             }
 
-            R.id.btn_eight -> {
+            R.id.btn_eight ->
+            {
                 if (isPrevEqual) clear()
                 if (updateEdtMain("8")) isAvailableToCalculate("8")
                 isPrevEqual = false
                 currentNumDigits++
             }
 
-            R.id.btn_nine -> {
+            R.id.btn_nine ->
+            {
                 if (isPrevEqual) clear()
                 if (updateEdtMain("9")) isAvailableToCalculate("9")
                 isPrevEqual = false
                 currentNumDigits++
             }
 
-            R.id.btn_percent -> {
+            R.id.btn_percent ->
+            {
                 if (checkForOperator()) backspaceFun()
                 if (updateEdtMain("%")) isAvailableToCalculate("%")
                 prevOperator = ""
@@ -1082,7 +1171,8 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, View.OnTouchList
                 currentNumDigits = 0
             }
 
-            R.id.btn_division -> {
+            R.id.btn_division ->
+            {
                 if (checkForOperator()) backspaceFun()
                 if (updateEdtMain("÷")) isAvailableToCalculate("÷")
                 prevOperator = "÷"
@@ -1091,7 +1181,8 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, View.OnTouchList
                 currentNumDigits = 0
             }
 
-            R.id.btn_multi -> {
+            R.id.btn_multi ->
+            {
                 if (checkForOperator()) backspaceFun()
                 if (updateEdtMain("×")) isAvailableToCalculate("×")
                 prevOperator = "×"
@@ -1100,7 +1191,8 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, View.OnTouchList
                 currentNumDigits = 0
             }
 
-            R.id.btn_plus -> {
+            R.id.btn_plus ->
+            {
                 if (checkForOperator()) backspaceFun()
                 if (updateEdtMain("+")) isAvailableToCalculate("+")
                 prevOperator = "+"
@@ -1109,7 +1201,8 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, View.OnTouchList
                 currentNumDigits = 0
             }
 
-            R.id.btn_minus -> {
+            R.id.btn_minus ->
+            {
                 if (checkForOperator()) backspaceFun()
                 if (updateEdtMain("-")) isAvailableToCalculate("-")
                 prevOperator = "-"
@@ -1118,44 +1211,55 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, View.OnTouchList
                 currentNumDigits = 0
             }
 
-            R.id.btn_dot -> {
+            R.id.btn_dot ->
+            {
                 if (isDotInsertable()) if (updateEdtMain(".")) isAvailableToCalculate(".")
                 isPrevEqual = false
             }
 
 
-            R.id.btn_ac -> {
+            R.id.btn_ac ->
+            {
                 clear()
                 isPrevEqual = false
                 prevOperator = ""
                 currentNumDigits = 0
             }
 
-            R.id.btn_backspace -> {
+            R.id.btn_backspace ->
+            {
                 backspaceFun()
                 isPrevEqual = false
             }
 
-            R.id.btn_brackets -> {
+            R.id.btn_brackets ->
+            {
                 if (isPrevEqual) clear()
                 if (addBrackets()) isAvailableToCalculate("{")
                 isPrevEqual = false
                 currentNumDigits = 0
             }
 
-            R.id.btn_equal -> {
-                if (!isPrevEqual) {
+            R.id.btn_equal ->
+            {
+                if (!isPrevEqual)
+                {
                     multipleEqualExp = edtMain.text.toString()
-                    try {
+                    try
+                    {
                         if (edtMain.text.isNotEmpty() && prevOperator != "" && !checkForOperator(
                                 edtMain.text[edtMain.text.lastIndex]
                             )
                         ) lastNumber =
                             edtMain.text.toString().substring(prevOperatorIndex + 1).toDouble()
-                    } catch (e: Exception) {
                     }
-                } else {
-                    if (isPrevEqual && prevOperator != "") {
+                    catch (e: Exception)
+                    {
+                    }
+                } else
+                {
+                    if (isPrevEqual && prevOperator != "")
+                    {
                         multipleEqualExp =
                             if (lastNumber % 1 == 0.0) "$multipleEqualExp$prevOperator${lastNumber.toInt()}"
                             else "$multipleEqualExp$prevOperator$lastNumber"
@@ -1188,7 +1292,8 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, View.OnTouchList
                 isPrevEqual = true
             }
 
-            R.id.btn_square_root -> {
+            R.id.btn_square_root ->
+            {
                 if (isPrevEqual) clear()
                 if (updateEdtMain("√(")) isAvailableToCalculate("√(")
                 prevOperator = ""
@@ -1197,8 +1302,10 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, View.OnTouchList
                 currentNumDigits = 0
             }
 
-            R.id.btn_exp -> {
-                if (checkForOperator()) {
+            R.id.btn_exp ->
+            {
+                if (checkForOperator())
+                {
                     backspaceFun()
                 }
                 if (updateEdtMain("^")) isAvailableToCalculate("^")
@@ -1207,9 +1314,11 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, View.OnTouchList
                 currentNumDigits = 0
             }
 
-            R.id.btn_pi -> {
+            R.id.btn_pi ->
+            {
                 if (isPrevEqual) clear()
-                if (edtMain.text.isNotEmpty()) {
+                if (edtMain.text.isNotEmpty())
+                {
                     if (edtMain.text[edtMain.text.toString().length - 1] == 'e' || edtMain.text[edtMain.text.toString().length - 1] == 'π') return
                 }
                 if (updateEdtMain("π")) isAvailableToCalculate("π")
@@ -1217,8 +1326,10 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, View.OnTouchList
                 currentNumDigits = 0
             }
 
-            R.id.btn_fact -> {
-                if (checkForOperator()) {
+            R.id.btn_fact ->
+            {
+                if (checkForOperator())
+                {
                     backspaceFun()
                 }
                 if (updateEdtMain("!")) isAvailableToCalculate("!")
@@ -1227,13 +1338,15 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, View.OnTouchList
                 currentNumDigits = 0
             }
 
-            R.id.btn_more -> {
+            R.id.btn_more ->
+            {
                 isExpanded = !isExpanded
                 expand()
                 isPrevEqual = false
 
             }
-            R.id.btn_sin -> {
+            R.id.btn_sin ->
+            {
                 if (isPrevEqual) clear()
                 if (updateEdtMain("sin(")) isAvailableToCalculate("sin(")
                 prevOperator = ""
@@ -1241,7 +1354,8 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, View.OnTouchList
                 currentNumDigits = 0
             }
 
-            R.id.btn_cos -> {
+            R.id.btn_cos ->
+            {
                 if (isPrevEqual) clear()
                 if (updateEdtMain("cos(")) isAvailableToCalculate("cos(")
                 prevOperator = ""
@@ -1249,7 +1363,8 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, View.OnTouchList
                 currentNumDigits = 0
             }
 
-            R.id.btn_tan -> {
+            R.id.btn_tan ->
+            {
                 if (isPrevEqual) clear()
                 if (updateEdtMain("tan(")) isAvailableToCalculate("tan(")
                 prevOperator = ""
@@ -1257,10 +1372,12 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, View.OnTouchList
                 currentNumDigits = 0
             }
 
-            R.id.btn_e -> {
+            R.id.btn_e ->
+            {
                 if (isPrevEqual) clear()
 
-                if (edtMain.text.isNotEmpty()) {
+                if (edtMain.text.isNotEmpty())
+                {
                     if (edtMain.text[edtMain.text.toString().length - 1] == 'e' || edtMain.text[edtMain.text.toString().length - 1] == 'π') return
                 }
                 if (updateEdtMain("e")) isAvailableToCalculate("e")
@@ -1268,7 +1385,8 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, View.OnTouchList
                 currentNumDigits = 0
             }
 
-            R.id.btn_log2 -> {
+            R.id.btn_log2 ->
+            {
                 if (isPrevEqual) clear()
                 if (updateEdtMain("log2(")) isAvailableToCalculate("log2(")
                 prevOperator = ""
@@ -1276,7 +1394,8 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, View.OnTouchList
                 currentNumDigits = 0
             }
 
-            R.id.btn_log10 -> {
+            R.id.btn_log10 ->
+            {
                 if (isPrevEqual) clear()
                 if (updateEdtMain("log10(")) isAvailableToCalculate("log10(")
                 prevOperator = ""
@@ -1284,7 +1403,8 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, View.OnTouchList
                 currentNumDigits = 0
             }
 
-            R.id.btn_ln -> {
+            R.id.btn_ln ->
+            {
                 if (isPrevEqual) clear()
                 if (updateEdtMain("ln(")) isAvailableToCalculate("ln(")
                 prevOperator = ""
@@ -1292,7 +1412,8 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, View.OnTouchList
                 currentNumDigits = 0
             }
 
-            R.id.btn_rad -> {
+            R.id.btn_rad ->
+            {
                 if (isPrevEqual) clear()
                 if (updateEdtMain("rad(")) isAvailableToCalculate("rad(")
                 prevOperator = ""
@@ -1303,7 +1424,8 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, View.OnTouchList
         }
     }
 
-    private fun clear() {
+    private fun clear()
+    {
         edtMain.setText("")
         edtSecond.setText("")
         edtMain.setTextSize(TypedValue.COMPLEX_UNIT_SP, edtMainTextSize)
@@ -1311,13 +1433,16 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, View.OnTouchList
     }
 
 
-    private fun expand() {
-        if (isExpanded) {
+    private fun expand()
+    {
+        if (isExpanded)
+        {
             btnMore.text = getString(R.string.btn_more_expanded)
             TransitionManager.beginDelayedTransition(llMain)
             sinLinLay.visibility = View.VISIBLE
             logLinLay.visibility = View.VISIBLE
-        } else {
+        } else
+        {
             btnMore.text = getString(R.string.btn_more_not_expanded)
             TransitionManager.beginDelayedTransition(llMain)
             sinLinLay.visibility = View.GONE
@@ -1325,7 +1450,8 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, View.OnTouchList
         }
     }
 
-    private fun calculateFun(exp: String): String {
+    private fun calculateFun(exp: String): String
+    {
         var userExp = checkForClosedBrackets(exp)
         val dbExp = userExp
         val dbHelper = HistoryDatabaseHelper(this)
@@ -1341,21 +1467,27 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, View.OnTouchList
 
         var result = value.toString()
 
-        try {
-            if (BigDecimal.valueOf(value).scale() > 8) {
+        try
+        {
+            if (BigDecimal.valueOf(value).scale() > 8)
+            {
                 result = String.format("%.7f", value)
             }
-        } catch (e: Exception) {
+        }
+        catch (e: Exception)
+        {
 
         }
 
-        if (result[result.length - 1] == '0' && result[result.length - 2] == '.') {
+        if (result[result.length - 1] == '0' && result[result.length - 2] == '.')
+        {
             result = result.removeRange(result.length - 2, result.length)
         }
 
         prevEqualIndex = edtMain.text.lastIndex
 
-        if (result != "Infinity" && result != "NaN") {
+        if (result != "Infinity" && result != "NaN")
+        {
             val sdf = SimpleDateFormat("yyyy-MM-dd", Locale.US)
             val date: String = sdf.format(Date())
             dbHelper.addOne(dbExp, result, date)
@@ -1363,20 +1495,25 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, View.OnTouchList
         return result
     }
 
-    private fun checkForClosedBrackets(s: String): String {
+    private fun checkForClosedBrackets(s: String): String
+    {
         var exp = s
         val textLength = exp.length
         var openBracketCount = 0
         var closeBracketCount = 0
-        for (i in 0 until textLength) {
-            if (edtMain.text.toString().substring(i, i + 1) == "(") {
+        for (i in 0 until textLength)
+        {
+            if (edtMain.text.toString().substring(i, i + 1) == "(")
+            {
                 openBracketCount++
             }
-            if (edtMain.text.toString().substring(i, i + 1) == ")") {
+            if (edtMain.text.toString().substring(i, i + 1) == ")")
+            {
                 closeBracketCount++
             }
         }
-        while (openBracketCount > closeBracketCount) {
+        while (openBracketCount > closeBracketCount)
+        {
             exp = "$exp)"
             closeBracketCount++
         }
@@ -1384,21 +1521,24 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, View.OnTouchList
     }
 
 
-    private fun isDotInsertable(): Boolean {
+    private fun isDotInsertable(): Boolean
+    {
         if (edtMain.text.isEmpty()) return false
 
         val cursor = edtMain.selectionStart
         var i: Int = if (cursor == 0) cursor
         else cursor - 1
         var number = ""
-        while (i >= 0) {
+        while (i >= 0)
+        {
             if (!(checkForDigit(edtMain.text[i]) || edtMain.text[i] == '.')) break
             number = "${edtMain.text[i]}$number"
             i--
         }
         i = if (cursor == edtMain.text.lastIndex) cursor - 1
         else cursor
-        while (i <= edtMain.text.lastIndex) {
+        while (i <= edtMain.text.lastIndex)
+        {
             if (!(checkForDigit(edtMain.text[i]) || edtMain.text[i] == '.')) break
             number = "$number${edtMain.text[i]}"
             i++
@@ -1407,8 +1547,10 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, View.OnTouchList
         return !isStringHasDot(number)
     }
 
-    private fun checkForDigit(c: Char): Boolean {
-        when (c) {
+    private fun checkForDigit(c: Char): Boolean
+    {
+        when (c)
+        {
             '0' -> return true
             '1' -> return true
             '2' -> return true
@@ -1423,8 +1565,10 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, View.OnTouchList
         return false
     }
 
-    private fun checkForNumber(c: Char): Boolean {
-        when (c) {
+    private fun checkForNumber(c: Char): Boolean
+    {
+        when (c)
+        {
             '0' -> return true
             '1' -> return true
             '2' -> return true
@@ -1441,21 +1585,26 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, View.OnTouchList
     }
 
 
-    private fun isStringHasDot(s: String): Boolean {
-        for (element in s) {
+    private fun isStringHasDot(s: String): Boolean
+    {
+        for (element in s)
+        {
             if (element == '.') return true
         }
         return false
     }
 
 
-    private fun checkForOperator(): Boolean {
+    private fun checkForOperator(): Boolean
+    {
         val cursor = edtMain.selectionStart
-        if (cursor == 0) {
+        if (cursor == 0)
+        {
             return false
         }
         var needToChange = false
-        when (edtMain.text.toString()[cursor - 1]) {
+        when (edtMain.text.toString()[cursor - 1])
+        {
             '+' -> needToChange = true
             '-' -> needToChange = true
             '×' -> needToChange = true
@@ -1467,8 +1616,10 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, View.OnTouchList
         return needToChange
     }
 
-    private fun checkForOperator(c: Char): Boolean {
-        when (c) {
+    private fun checkForOperator(c: Char): Boolean
+    {
+        when (c)
+        {
             '+' -> return true
             '-' -> return true
             '×' -> return true
@@ -1485,55 +1636,66 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, View.OnTouchList
         return false
     }
 
-    private fun addBrackets(): Boolean {
+    private fun addBrackets(): Boolean
+    {
         val cursorPos = edtMain.selectionStart
         val textLength = edtMain.text.length
         var openBracketCount = 0
         var closeBracketCount = 0
 
-        if (textLength == 0) {
+        if (textLength == 0)
+        {
             updateEdtMain("(")
             edtMain.setSelection(cursorPos + 1)
             return true
         }
 
-        if (edtMain.text.toString()[cursorPos - 1] == '+' || edtMain.text.toString()[cursorPos - 1] == '-' || edtMain.text.toString()[cursorPos - 1] == '×' || edtMain.text.toString()[cursorPos - 1] == '÷' || edtMain.text.toString()[cursorPos - 1] == '^' || edtMain.text.toString()[cursorPos - 1] == '!' || edtMain.text.toString()[cursorPos - 1] == '√') {
+        if (edtMain.text.toString()[cursorPos - 1] == '+' || edtMain.text.toString()[cursorPos - 1] == '-' || edtMain.text.toString()[cursorPos - 1] == '×' || edtMain.text.toString()[cursorPos - 1] == '÷' || edtMain.text.toString()[cursorPos - 1] == '^' || edtMain.text.toString()[cursorPos - 1] == '!' || edtMain.text.toString()[cursorPos - 1] == '√')
+        {
             updateEdtMain("(")
             edtMain.setSelection(cursorPos + 1)
             return true
         }
 
-        for (i in 0 until cursorPos) {
-            if (edtMain.text.toString().substring(i, i + 1) == "(") {
+        for (i in 0 until cursorPos)
+        {
+            if (edtMain.text.toString().substring(i, i + 1) == "(")
+            {
                 openBracketCount++
             }
-            if (edtMain.text.toString().substring(i, i + 1) == ")") {
+            if (edtMain.text.toString().substring(i, i + 1) == ")")
+            {
                 closeBracketCount++
             }
         }
 
         if (openBracketCount == closeBracketCount || edtMain.text.toString()
                 .substring(textLength - 1, textLength) == "("
-        ) {
+        )
+        {
             if (updateEdtMain("(")) edtMain.setSelection(cursorPos + 1)
         } else if (closeBracketCount < openBracketCount && edtMain.text.toString()
                 .substring(textLength - 1, textLength) != "("
-        ) {
+        )
+        {
             if (updateEdtMain(")")) edtMain.setSelection(cursorPos + 1)
         }
         return false
     }
 
 
-    private fun digitLimit(): Int {
+    private fun digitLimit(): Int
+    {
         var currentNumDigits = 0
         if (edtMain.text.isEmpty()) return currentNumDigits
         val position = edtMain.selectionStart
         var i = if (position == 0) position
         else position - 1
 
-        while (checkForNumber(edtMain.text[i]) || edtMain.text[i] == ',') {
-            if (edtMain.text[i] == ',') {
+        while (checkForNumber(edtMain.text[i]) || edtMain.text[i] == ',')
+        {
+            if (edtMain.text[i] == ',')
+            {
                 i--
                 if (i < 0) break
                 continue
@@ -1546,8 +1708,10 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, View.OnTouchList
         i = if (position == edtMain.text.length) position - 1
         else position
 
-        while (checkForNumber(edtMain.text[i]) || edtMain.text[i] == ',') {
-            if (edtMain.text[i] == ',') {
+        while (checkForNumber(edtMain.text[i]) || edtMain.text[i] == ',')
+        {
+            if (edtMain.text[i] == ',')
+            {
                 i++
                 if (i > edtMain.text.lastIndex) break
                 continue
@@ -1561,16 +1725,19 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, View.OnTouchList
         return currentNumDigits
     }
 
-    private fun updateEdtMain(strToAdd: String): Boolean {
+    private fun updateEdtMain(strToAdd: String): Boolean
+    {
 
-        if (strToAdd.length == 1 && !checkForOperator(strToAdd[0]) && digitLimit() >= MAX_DIGITS) {
+        if (strToAdd.length == 1 && !checkForOperator(strToAdd[0]) && digitLimit() >= MAX_DIGITS)
+        {
             return false
         }
 
 
         var prevString = edtMain.text.toString()
 
-        if (prevString == "NaN" || prevString == "Infinity") {
+        if (prevString == "NaN" || prevString == "Infinity")
+        {
             prevString = ""
             clear()
         }
@@ -1586,26 +1753,33 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, View.OnTouchList
         return true
     }
 
-    private fun changeEdtMainTextSize(strToAdd: String) {
+    private fun changeEdtMainTextSize(strToAdd: String)
+    {
         var textSize = edtMain.textSize / resources.displayMetrics.scaledDensity
 
-        if (edtMain.textSize * edtMain.text.length >= cardView.width && textSize > 40.0) {
-            for (i in 0..strToAdd.length) {
+        if (edtMain.textSize * edtMain.text.length >= cardView.width && textSize > 40.0)
+        {
+            for (i in 0..strToAdd.length)
+            {
                 textSize -= if (resources.configuration.orientation == Configuration.ORIENTATION_PORTRAIT) 2
                 else 1
                 edtMain.setTextSize(TypedValue.COMPLEX_UNIT_SP, textSize)
-                if (textSize < 40.0) {
+                if (textSize < 40.0)
+                {
                     break
                 }
             }
         }
     }
 
-    private fun increaseEdtMainTextSize(countDeletedChars: Int) {
+    private fun increaseEdtMainTextSize(countDeletedChars: Int)
+    {
         var edtResTextSize = edtMain.textSize / resources.displayMetrics.scaledDensity
 
-        if (edtResTextSize < edtMainTextSize) {
-            for (i in 0..countDeletedChars) {
+        if (edtResTextSize < edtMainTextSize)
+        {
+            for (i in 0..countDeletedChars)
+            {
                 if (edtResTextSize >= edtMainTextSize) break
                 edtResTextSize += if (resources.configuration.orientation == Configuration.ORIENTATION_PORTRAIT) 2
                 else 1
@@ -1614,11 +1788,14 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, View.OnTouchList
         }
     }
 
-    private fun changeLastOperator() {
+    private fun changeLastOperator()
+    {
         var i = edtMain.text.lastIndex
 
-        while (i >= 0) {
-            if (edtMain.text[i] == '+' || edtMain.text[i] == '-' || edtMain.text[i] == '×' || edtMain.text[i] == '÷') {
+        while (i >= 0)
+        {
+            if (edtMain.text[i] == '+' || edtMain.text[i] == '-' || edtMain.text[i] == '×' || edtMain.text[i] == '÷')
+            {
                 prevOperator = edtMain.text[i].toString()
                 prevOperatorIndex = i
             }
@@ -1627,17 +1804,21 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, View.OnTouchList
     }
 
 
-    private fun backspaceFun() {
-        if (edtMain.length() == 0 || edtMain.selectionStart == 0 || digitLimit() >= MAX_DIGITS) {
+    private fun backspaceFun()
+    {
+        if (edtMain.length() == 0 || edtMain.selectionStart == 0 || digitLimit() >= MAX_DIGITS)
+        {
             return
         }
 
-        if (edtMain.text.toString() == "NaN" || edtMain.text.toString() == "Infinity") {
+        if (edtMain.text.toString() == "NaN" || edtMain.text.toString() == "Infinity")
+        {
             clear()
             return
         }
 
-        if (edtMain.length() >= 3) if (mathFunDelete()) {
+        if (edtMain.length() >= 3) if (mathFunDelete())
+        {
             changeLastOperator()
             isAvailableToCalculate("")
             return
@@ -1647,7 +1828,8 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, View.OnTouchList
         val cursorPos = edtMain.selectionStart
         val textLength = edtMain.text.length
 
-        if (cursorPos != 0 && textLength != 0) {
+        if (cursorPos != 0 && textLength != 0)
+        {
             deleteLast(edtMain)
             increaseEdtMainTextSize(1)
         }
@@ -1658,7 +1840,8 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, View.OnTouchList
 
     }
 
-    private fun deleteLast(edt: EditText) {
+    private fun deleteLast(edt: EditText)
+    {
         val cursorPos = edt.selectionStart
         val selection: SpannableStringBuilder = edt.text as SpannableStringBuilder
         selection.replace(cursorPos - 1, cursorPos, "")
@@ -1666,21 +1849,28 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, View.OnTouchList
         edt.setSelection(cursorPos - 1)
     }
 
-    private fun mathFunDelete(): Boolean {
+    private fun mathFunDelete(): Boolean
+    {
         val pos = edtMain.selectionStart
         val lastIndex = edtMain.text.lastIndex
 
-        when (edtMain.text[pos - 1]) {
-            's' -> {
-                if (edtMain.length() >= 4 && pos - 1 >= 0 && pos + 3 <= lastIndex + 1) {
-                    if (edtMain.text.substring(pos - 1, pos + 3) == "sin(") {
+        when (edtMain.text[pos - 1])
+        {
+            's' ->
+            {
+                if (edtMain.length() >= 4 && pos - 1 >= 0 && pos + 3 <= lastIndex + 1)
+                {
+                    if (edtMain.text.substring(pos - 1, pos + 3) == "sin(")
+                    {
                         edtMain.text.replace(pos - 1, pos + 3, "")
                         increaseEdtMainTextSize(4)
                         return true
                     }
                 }
-                if (edtMain.length() >= 4 && pos - 3 >= 0 && pos + 1 <= lastIndex + 1) {
-                    if (edtMain.text.substring(pos - 3, pos + 1) == "cos(") {
+                if (edtMain.length() >= 4 && pos - 3 >= 0 && pos + 1 <= lastIndex + 1)
+                {
+                    if (edtMain.text.substring(pos - 3, pos + 1) == "cos(")
+                    {
                         edtMain.text.replace(pos - 3, pos + 1, "")
                         increaseEdtMainTextSize(4)
                         return true
@@ -1689,9 +1879,12 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, View.OnTouchList
 
             }
 
-            'i' -> {
-                if (edtMain.length() >= 4 && pos - 2 >= 0 && pos + 2 <= lastIndex + 1) {
-                    if (edtMain.text.substring(pos - 2, pos + 2) == "sin(") {
+            'i' ->
+            {
+                if (edtMain.length() >= 4 && pos - 2 >= 0 && pos + 2 <= lastIndex + 1)
+                {
+                    if (edtMain.text.substring(pos - 2, pos + 2) == "sin(")
+                    {
                         edtMain.text.replace(pos - 2, pos + 2, "")
                         increaseEdtMainTextSize(4)
                         return true
@@ -1699,21 +1892,27 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, View.OnTouchList
                 }
             }
 
-            'n' -> {
-                if (edtMain.length() >= 4 && pos - 3 >= 0 && pos + 1 <= lastIndex + 1) {
-                    if (edtMain.text.substring(pos - 3, pos + 1) == "sin(") {
+            'n' ->
+            {
+                if (edtMain.length() >= 4 && pos - 3 >= 0 && pos + 1 <= lastIndex + 1)
+                {
+                    if (edtMain.text.substring(pos - 3, pos + 1) == "sin(")
+                    {
                         edtMain.text.replace(pos - 3, pos + 1, "")
                         increaseEdtMainTextSize(4)
                         return true
                     }
-                    if (edtMain.text.substring(pos - 3, pos + 1) == "tan(") {
+                    if (edtMain.text.substring(pos - 3, pos + 1) == "tan(")
+                    {
                         edtMain.text.replace(pos - 3, pos + 1, "")
                         increaseEdtMainTextSize(4)
                         return true
                     }
                 }
-                if (pos - 2 >= 0 && pos + 1 <= lastIndex + 1) {
-                    if (edtMain.text.substring(pos - 2, pos + 1) == "ln(") {
+                if (pos - 2 >= 0 && pos + 1 <= lastIndex + 1)
+                {
+                    if (edtMain.text.substring(pos - 2, pos + 1) == "ln(")
+                    {
                         edtMain.text.replace(pos - 2, pos + 1, "")
                         increaseEdtMainTextSize(3)
                         return true
@@ -1721,9 +1920,12 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, View.OnTouchList
                 }
             }
 
-            'c' -> {
-                if (edtMain.length() >= 4 && pos - 1 >= 0 && pos + 3 <= lastIndex + 1) {
-                    if (edtMain.text.substring(pos - 1, pos + 3) == "cos(") {
+            'c' ->
+            {
+                if (edtMain.length() >= 4 && pos - 1 >= 0 && pos + 3 <= lastIndex + 1)
+                {
+                    if (edtMain.text.substring(pos - 1, pos + 3) == "cos(")
+                    {
                         edtMain.text.replace(pos - 1, pos + 3, "")
                         increaseEdtMainTextSize(4)
                         return true
@@ -1731,23 +1933,30 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, View.OnTouchList
                 }
             }
 
-            'o' -> {
-                if (edtMain.length() >= 4 && pos - 2 >= 0 && pos + 2 <= lastIndex + 1) {
-                    if (edtMain.text.substring(pos - 2, pos + 2) == "cos(") {
+            'o' ->
+            {
+                if (edtMain.length() >= 4 && pos - 2 >= 0 && pos + 2 <= lastIndex + 1)
+                {
+                    if (edtMain.text.substring(pos - 2, pos + 2) == "cos(")
+                    {
                         edtMain.text.replace(pos - 2, pos + 2, "")
                         increaseEdtMainTextSize(4)
                         return true
                     }
                 }
-                if (edtMain.length() >= 5 && pos - 2 >= 0 && pos + 3 <= lastIndex + 1) {
-                    if (edtMain.text.substring(pos - 2, pos + 3) == "log2(") {
+                if (edtMain.length() >= 5 && pos - 2 >= 0 && pos + 3 <= lastIndex + 1)
+                {
+                    if (edtMain.text.substring(pos - 2, pos + 3) == "log2(")
+                    {
                         edtMain.text.replace(pos - 2, pos + 3, "")
                         increaseEdtMainTextSize(5)
                         return true
                     }
                 }
-                if (edtMain.length() >= 6 && pos - 2 >= 0 && pos + 4 <= lastIndex + 1) {
-                    if (edtMain.text.substring(pos - 2, pos + 4) == "log10(") {
+                if (edtMain.length() >= 6 && pos - 2 >= 0 && pos + 4 <= lastIndex + 1)
+                {
+                    if (edtMain.text.substring(pos - 2, pos + 4) == "log10(")
+                    {
                         edtMain.text.replace(pos - 2, pos + 4, "")
                         increaseEdtMainTextSize(6)
                         return true
@@ -1755,9 +1964,12 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, View.OnTouchList
                 }
             }
 
-            't' -> {
-                if (edtMain.length() >= 4 && pos - 1 >= 0 && pos + 3 <= lastIndex + 1) {
-                    if (edtMain.text.substring(pos - 1, pos + 3) == "tan(") {
+            't' ->
+            {
+                if (edtMain.length() >= 4 && pos - 1 >= 0 && pos + 3 <= lastIndex + 1)
+                {
+                    if (edtMain.text.substring(pos - 1, pos + 3) == "tan(")
+                    {
                         edtMain.text.replace(pos - 1, pos + 3, "")
                         increaseEdtMainTextSize(4)
                         return true
@@ -1765,13 +1977,16 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, View.OnTouchList
                 }
             }
 
-            'a' -> {
-                if (edtMain.length() >= 4 && pos - 2 >= 0 && pos + 2 <= lastIndex + 1) {
+            'a' ->
+            {
+                if (edtMain.length() >= 4 && pos - 2 >= 0 && pos + 2 <= lastIndex + 1)
+                {
                     if (edtMain.text.substring(
                             pos - 2,
                             pos + 2
                         ) == "tan(" || edtMain.text.substring(pos - 2, pos + 2) == "rad("
-                    ) {
+                    )
+                    {
                         edtMain.text.replace(pos - 2, pos + 2, "")
                         increaseEdtMainTextSize(4)
                         return true
@@ -1779,23 +1994,30 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, View.OnTouchList
                 }
             }
 
-            'l' -> {
-                if (pos - 1 >= 0 && pos + 2 <= lastIndex + 1) {
-                    if (edtMain.text.substring(pos - 1, pos + 2) == "ln(") {
+            'l' ->
+            {
+                if (pos - 1 >= 0 && pos + 2 <= lastIndex + 1)
+                {
+                    if (edtMain.text.substring(pos - 1, pos + 2) == "ln(")
+                    {
                         edtMain.text.replace(pos - 1, pos + 2, "")
                         increaseEdtMainTextSize(3)
                         return true
                     }
                 }
-                if (edtMain.length() >= 5 && pos - 1 >= 0 && pos + 4 <= lastIndex + 1) {
-                    if (edtMain.text.substring(pos - 1, pos + 4) == "log2(") {
+                if (edtMain.length() >= 5 && pos - 1 >= 0 && pos + 4 <= lastIndex + 1)
+                {
+                    if (edtMain.text.substring(pos - 1, pos + 4) == "log2(")
+                    {
                         edtMain.text.replace(pos - 1, pos + 4, "")
                         increaseEdtMainTextSize(5)
                         return true
                     }
                 }
-                if (edtMain.length() >= 6 && pos - 1 >= 0 && pos + 5 <= lastIndex + 1) {
-                    if (edtMain.text.substring(pos - 1, pos + 5) == "log10(") {
+                if (edtMain.length() >= 6 && pos - 1 >= 0 && pos + 5 <= lastIndex + 1)
+                {
+                    if (edtMain.text.substring(pos - 1, pos + 5) == "log10(")
+                    {
                         edtMain.text.replace(pos - 1, pos + 5, "")
                         increaseEdtMainTextSize(6)
                         return true
@@ -1803,16 +2025,21 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, View.OnTouchList
                 }
             }
 
-            'g' -> {
-                if (edtMain.length() >= 5 && pos - 3 >= 0 && pos + 2 <= lastIndex + 1) {
-                    if (edtMain.text.substring(pos - 3, pos + 2) == "log2(") {
+            'g' ->
+            {
+                if (edtMain.length() >= 5 && pos - 3 >= 0 && pos + 2 <= lastIndex + 1)
+                {
+                    if (edtMain.text.substring(pos - 3, pos + 2) == "log2(")
+                    {
                         edtMain.text.replace(pos - 3, pos + 2, "")
                         increaseEdtMainTextSize(5)
                         return true
                     }
                 }
-                if (edtMain.length() >= 6 && pos - 3 >= 0 && pos + 3 <= lastIndex + 1) {
-                    if (edtMain.text.substring(pos - 3, pos + 3) == "log10(") {
+                if (edtMain.length() >= 6 && pos - 3 >= 0 && pos + 3 <= lastIndex + 1)
+                {
+                    if (edtMain.text.substring(pos - 3, pos + 3) == "log10(")
+                    {
                         edtMain.text.replace(pos - 3, pos + 3, "")
                         increaseEdtMainTextSize(5)
                         return true
@@ -1820,9 +2047,12 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, View.OnTouchList
                 }
             }
 
-            '1' -> {
-                if (edtMain.length() >= 6 && pos - 4 >= 0 && pos + 2 <= lastIndex + 1) {
-                    if (edtMain.text.substring(pos - 4, pos + 2) == "log10(") {
+            '1' ->
+            {
+                if (edtMain.length() >= 6 && pos - 4 >= 0 && pos + 2 <= lastIndex + 1)
+                {
+                    if (edtMain.text.substring(pos - 4, pos + 2) == "log10(")
+                    {
                         edtMain.text.replace(pos - 4, pos + 2, "")
                         increaseEdtMainTextSize(6)
                         return true
@@ -1830,10 +2060,13 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, View.OnTouchList
                 }
             }
 
-            '0' -> {
-                if (edtMain.length() >= 6 && pos - 5 >= 0 && pos + 1 <= lastIndex + 1) {
+            '0' ->
+            {
+                if (edtMain.length() >= 6 && pos - 5 >= 0 && pos + 1 <= lastIndex + 1)
+                {
 
-                    if (edtMain.text.substring(pos - 5, pos + 1) == "log10(") {
+                    if (edtMain.text.substring(pos - 5, pos + 1) == "log10(")
+                    {
                         edtMain.text.replace(pos - 5, pos + 1, "")
                         increaseEdtMainTextSize(6)
                         return true
@@ -1841,9 +2074,12 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, View.OnTouchList
                 }
             }
 
-            '2' -> {
-                if (edtMain.length() >= 5 && pos - 4 >= 0 && pos + 1 <= lastIndex + 1) {
-                    if (edtMain.text.substring(pos - 4, pos + 1) == "log2(") {
+            '2' ->
+            {
+                if (edtMain.length() >= 5 && pos - 4 >= 0 && pos + 1 <= lastIndex + 1)
+                {
+                    if (edtMain.text.substring(pos - 4, pos + 1) == "log2(")
+                    {
                         edtMain.text.replace(pos - 4, pos + 1, "")
                         increaseEdtMainTextSize(5)
                         return true
@@ -1851,9 +2087,12 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, View.OnTouchList
                 }
             }
 
-            'r' -> {
-                if (edtMain.length() >= 4 && pos - 1 >= 0 && pos + 3 <= lastIndex + 1) {
-                    if (edtMain.text.substring(pos - 1, pos + 3) == "rad(") {
+            'r' ->
+            {
+                if (edtMain.length() >= 4 && pos - 1 >= 0 && pos + 3 <= lastIndex + 1)
+                {
+                    if (edtMain.text.substring(pos - 1, pos + 3) == "rad(")
+                    {
                         edtMain.text.replace(pos - 1, pos + 3, "")
                         increaseEdtMainTextSize(4)
                         return true
@@ -1861,9 +2100,12 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, View.OnTouchList
                 }
             }
 
-            'd' -> {
-                if (edtMain.length() >= 4 && pos - 3 >= 0 && pos + 1 <= lastIndex + 1) {
-                    if (edtMain.text.substring(pos - 3, pos + 1) == "rad(") {
+            'd' ->
+            {
+                if (edtMain.length() >= 4 && pos - 3 >= 0 && pos + 1 <= lastIndex + 1)
+                {
+                    if (edtMain.text.substring(pos - 3, pos + 1) == "rad(")
+                    {
                         edtMain.text.replace(pos - 3, pos + 1, "")
                         increaseEdtMainTextSize(4)
                         return true
@@ -1871,30 +2113,37 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, View.OnTouchList
                 }
             }
 
-            '(' -> {
+            '(' ->
+            {
 
-                if (pos - 3 >= 0 && pos <= lastIndex + 1) {
-                    if (edtMain.text.substring(pos - 3, pos) == "ln(") {
+                if (pos - 3 >= 0 && pos <= lastIndex + 1)
+                {
+                    if (edtMain.text.substring(pos - 3, pos) == "ln(")
+                    {
                         edtMain.text.replace(pos - 3, pos, "")
                         increaseEdtMainTextSize(3)
                         return true
                     }
                 }
-                if (edtMain.length() >= 4 && pos - 4 >= 0 && pos <= lastIndex + 1) {
+                if (edtMain.length() >= 4 && pos - 4 >= 0 && pos <= lastIndex + 1)
+                {
                     if (edtMain.text.substring(pos - 4, pos) == "sin(" || edtMain.text.substring(
                             pos - 4, pos
                         ) == "cos(" || edtMain.text.substring(
                             pos - 4,
                             pos
                         ) == "tan(" || edtMain.text.substring(pos - 4, pos) == "rad("
-                    ) {
+                    )
+                    {
                         edtMain.text.replace(pos - 4, pos, "")
                         increaseEdtMainTextSize(4)
                         return true
                     }
                 }
-                if (edtMain.length() >= 5 && pos - 5 >= 0 && pos <= lastIndex + 1 + 1) {
-                    if (edtMain.text.substring(pos - 5, pos) == "log2(") {
+                if (edtMain.length() >= 5 && pos - 5 >= 0 && pos <= lastIndex + 1 + 1)
+                {
+                    if (edtMain.text.substring(pos - 5, pos) == "log2(")
+                    {
                         edtMain.text.replace(pos - 5, pos, "")
                         increaseEdtMainTextSize(5)
                         return true
@@ -1903,7 +2152,8 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, View.OnTouchList
                 if (edtMain.length() >= 6 && pos - 6 >= 0 && pos <= lastIndex + 1) if (edtMain.text.substring(
                         pos - 6, pos
                     ) == "log10("
-                ) {
+                )
+                {
                     edtMain.text.replace(pos - 6, pos, "")
                     increaseEdtMainTextSize(6)
                     return true
@@ -1916,7 +2166,8 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, View.OnTouchList
     }
 
 
-    private fun Context.isDarkThemeOn(): Boolean {
+    private fun Context.isDarkThemeOn(): Boolean
+    {
         return resources.configuration.uiMode and Configuration.UI_MODE_NIGHT_MASK == Configuration.UI_MODE_NIGHT_YES
     }
 
